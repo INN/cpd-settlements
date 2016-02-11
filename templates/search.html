@@ -1,0 +1,45 @@
+{% extends "templates/_base.html" %}
+
+{% block library_css %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='css/search.css') }}" />
+{% endblock library_css %}
+
+{% block content %}
+<div class="container">
+  <div class="search row">
+    <div class="col-xs-12">
+    <h1>Search for cases</h1>
+    <form>
+      <div class="form-group">
+        <label for="keywords">Keywords</label>
+        <div>
+          <input type="text" class="form-control typeahead" id="keywords" placeholder="Start typing...">
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+  {#
+  <div class="results row">
+    <div class="col-xs-12">
+      <h1>Results</h1>
+      <div class="results-inner">
+      </div>
+    </div>
+  </div>
+  #}
+</div>
+
+<script type="template/javascript" id="search-result-tmpl">
+  <div class="search-result">
+    
+  </div>
+</script>
+{% endblock content %}
+
+{% block library_scripts %}
+{{ super() }}
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/typeahead.js/dist/typeahead.bundle.min.js') }}"></script>
+<script src="{{ url_for('cpd_settlements.static', filename='js/search.js') }}"></script>
+{% endblock %}

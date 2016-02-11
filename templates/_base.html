@@ -1,0 +1,8 @@
+{% extends '_base.html' %}
+
+{% block library_scripts %}
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/underscore/underscore-min.js') }}"></script>
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/backbone/backbone-min.js') }}"></script>
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{% endblock library_scripts %}

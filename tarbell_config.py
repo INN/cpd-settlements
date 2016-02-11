@@ -5,7 +5,7 @@ Tarbell project configuration
 """
 
 # Google spreadsheet key
-#SPREADSHEET_KEY = "None"
+# SPREADSHEET_KEY = "None"
 
 # Exclude these files from publication
 EXCLUDES = ["*.md", "requirements.txt"]
@@ -21,12 +21,6 @@ EXCLUDES = ["*.md", "requirements.txt"]
 # used.
 # CONTEXT_SOURCE_FILE = ""
 
-# EXPERIMENTAL: Path to a credentials file to authenticate with Google Drive.
-# This is useful for for automated deployment. This option may be replaced by
-# command line flag or environment variable. Take care not to commit or publish
-# your credentials file.
-# CREDENTIALS_PATH = ""
-
 # S3 bucket configuration
 S3_BUCKETS = {
     # Provide target -> s3 url pairs, such as:
@@ -35,3 +29,9 @@ S3_BUCKETS = {
     "production": "apps.inn.org/cpd-settlements",
     "staging": "stage-apps.inn.org/cpd-settlements",
 }
+
+import sys
+from tarbell.settings import Settings
+sys.path.append(Settings().config.get('projects_path'))
+
+from cpd_settlements import blueprint

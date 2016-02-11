@@ -34,6 +34,9 @@ class ModelList(list):
             raise RuntimeError('Found multiple models matching specified filter')
         return result[0]
 
+    def to_json(self):
+        return json.dumps([item.to_struct() for item in self])
+
     def _load_json(self):
         with open(self.source) as f:
             return json.loads(f.read())
