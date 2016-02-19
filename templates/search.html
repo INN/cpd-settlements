@@ -9,7 +9,7 @@
 <div class="container">
   <div class="search row">
     <div class="col-xs-12">
-    <h1>Search for cases</h1>
+    <h1>Search payments</h1>
     <form>
       <div class="form-group">
         <label for="keywords">Keywords</label>
@@ -20,15 +20,16 @@
     </form>
     </div>
   </div>
-  {#
   <div class="results row">
     <div class="col-xs-12">
-      <h1>Results</h1>
+      <h1>Payments</h1>
       <div class="results-inner">
+        {% for payment in payments %}
+          {% include 'templates/_payment.html' %}
+        {% endfor %}
       </div>
     </div>
   </div>
-  #}
 </div>
 
 <script type="template/javascript" id="search-result-tmpl">

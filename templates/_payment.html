@@ -1,0 +1,8 @@
+<div class="payment" data-case_number="{{ payment.case_number }}">
+   <h3>Payout amount: {{ format_currency(payment.payment) }}</h3>
+   <p><strong>Case number:</strong> {{ payment.case_number }}</p>
+   <p><strong>Paid on:</strong> {{ payment.date_paid }}</p>
+   <p><strong>Paid to:</strong> {{ payment.payee }}</p>
+   <p><strong>Disposition:</strong> {{ payment.disposition }}</p>
+   <p><a href="/payment/{{ payment.case_number }}">Payment detail</a></p>
+</div>

@@ -18,7 +18,9 @@
 }
 
 .tt-menu {
-  width: 422px;
+  left: -999999px !important;
+  display: none !important;
+  width: 600px;
   margin: 12px 0;
   padding: 8px 0;
   background-color: #fff;
@@ -46,4 +48,9 @@
 
 .th-header {
   margin-left: 10px;
+}
+
+/* Search */
+div.payment {
+  margin: 2em 0;
 }

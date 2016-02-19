@@ -115,6 +115,10 @@ class Payment(BaseModel):
                 return int(value)
         return value
 
+    @staticmethod
+    def sorted_payments():
+        return sorted(Payment.objects, lambda x, y: cmp(y.payment, x.payment))
+
 
 class Officer(BaseModel):
 

@@ -21,11 +21,10 @@ class ModelList(list):
 
     def filter(self, *args, **kwargs):
         def func(model):
-            ret = True
             for key, val in kwargs.items():
                 if getattr(model, key) != val:
-                    ret = False
-            return ret
+                    return False
+            return True
         return filter(func, self)
 
     def get(self, *args, **kwargs):

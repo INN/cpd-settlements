@@ -1,0 +1,21 @@
+{% extends "templates/_base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="search row">
+    <div class="col-xs-12">
+    <h1>Payments for case: {{ case_number }}</h1>
+    {% for payment in payments %}
+      {% include 'templates/_payment.html' %}
+    {% endfor %}
+
+    <h2>Officers involved:</h2>
+    {% for officer in officers %}
+      <div class="officer" data-case_number="{{ officer.case_number }}">
+         <h3>Badge number: {{ officer.badge_number }}</h3>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
