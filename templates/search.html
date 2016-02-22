@@ -7,14 +7,16 @@
 
 {% block content %}
 <div class="container">
+  <div class="jumbotron">
+    <h1>Cases</h1>
+    <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} of legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
+  </div>
   <div class="search row">
     <div class="col-xs-12">
-      <h1>Search</h1>
     </div>
   </div>
   <div class="results row">
     <div class="col-xs-12">
-      <h1>Cases</h1>
       <div class="results-inner">
         {% for case in cases %}
           {% include 'templates/_case.html' %}

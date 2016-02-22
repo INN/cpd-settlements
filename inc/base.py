@@ -2,6 +2,9 @@ import json
 
 from jsonmodels import models
 
+from GenericCache import GenericCache
+#from GenericCache.decorators import cached
+
 
 class ModelList(list):
     """
@@ -54,6 +57,8 @@ class ModelList(list):
 
 
 class BaseModel(models.Base):
+    type = 'base'
+
     """
     Map of Model fields and their corresponding headers/keys in the source file
     """
@@ -65,7 +70,15 @@ class BaseModel(models.Base):
     """
     objects = ModelList()
 
+    cache = GenericCache()
+
     def get_related(self, model=None, attribute='case_number'):
+        key = hash('%s-%s-%s' % (self.__hash__(), model.type, attribute))
+        cached = self.cache.fetch(key)
+
+        if cached:
+            return cached
+
         """
         Lookup other Models with the same case_number attribute
         """
@@ -74,7 +87,9 @@ class BaseModel(models.Base):
         getattr(self, attribute)
         getattr(model.objects[0], attribute)
 
-        return model.objects.filter(**{attribute: getattr(self, attribute)})
+        result = model.objects.filter(**{attribute: getattr(self, attribute)})
+        self.cache.insert(key, result)
+        return result
 
     @staticmethod
     def process_field(field, value):

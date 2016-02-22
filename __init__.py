@@ -70,6 +70,7 @@ def search():
         case.victims = case.get_related(Victims)
 
     context['cases'] = cases
+    context['payments'] = Payment.objects
     return render_template('templates/search.html', **context)
 
 
@@ -91,7 +92,20 @@ def utility_processor():
         if not amount:
             amount = '0'
         return '${:,.2f}'.format(int(amount))
-    return dict(format_currency=format_currency)
+
+    def total_for_payments(payments):
+        total = 0
+        for payment in payments:
+            if payment.payment:
+                total += payment.payment
+            else:
+                print 'No payment data for case number: %s' % payment.case_number
+        return format_currency(total)
+
+    return {
+        'format_currency': format_currency,
+        'total_for_payments': total_for_payments
+    }
 
 
 def get_context(route):
