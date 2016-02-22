@@ -9,34 +9,20 @@
 <div class="container">
   <div class="search row">
     <div class="col-xs-12">
-    <h1>Search payments</h1>
-    <form>
-      <div class="form-group">
-        <label for="keywords">Keywords</label>
-        <div>
-          <input type="text" class="form-control typeahead" id="keywords" placeholder="Start typing...">
-        </div>
-      </div>
-    </form>
+      <h1>Search</h1>
     </div>
   </div>
   <div class="results row">
     <div class="col-xs-12">
-      <h1>Payments</h1>
+      <h1>Cases</h1>
       <div class="results-inner">
-        {% for payment in payments %}
-          {% include 'templates/_payment.html' %}
+        {% for case in cases %}
+          {% include 'templates/_case.html' %}
         {% endfor %}
       </div>
     </div>
   </div>
 </div>
-
-<script type="template/javascript" id="search-result-tmpl">
-  <div class="search-result">
-    
-  </div>
-</script>
 {% endblock content %}
 
 {% block library_scripts %}

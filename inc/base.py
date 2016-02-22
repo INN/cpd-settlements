@@ -69,7 +69,12 @@ class BaseModel(models.Base):
         """
         Lookup other Models with the same case_number attribute
         """
-        return model.objects.filter(lambda x: getattr(x, attribute) == getattr(self, attribute))
+        # Make sure both objects have the attribute we're looking for.
+        # Raises an exception if one model is missing the attribute we're looking to match on.
+        getattr(self, attribute)
+        getattr(model.objects[0], attribute)
+
+        return model.objects.filter(**{attribute: getattr(self, attribute)})
 
     @staticmethod
     def process_field(field, value):

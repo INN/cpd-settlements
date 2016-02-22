@@ -15,6 +15,11 @@ def cases():
     return render_template('templates/cases.html', **context)
 
 
+@blueprint.route('/case/<case_number>')
+def case(case_number):
+    return 'Nothing here yet.'
+
+
 @blueprint.route('/officers/')
 def officers():
     context = get_context('officers')
@@ -56,7 +61,15 @@ def victims():
 @blueprint.route('/search/')
 def search():
     context = get_context('search')
-    context['payments'] = Payment.sorted_payments()
+
+    cases = Case.objects
+
+    for case in cases:
+        case.payments = case.get_related(Payment)
+        case.officers = case.get_related(Officer)
+        case.victims = case.get_related(Victims)
+
+    context['cases'] = cases
     return render_template('templates/search.html', **context)
 
 
