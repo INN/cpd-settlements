@@ -13,6 +13,7 @@
   </div>
   <div class="search row">
     <div class="col-xs-12">
+      {% include 'templates/_search_form.html' %}
     </div>
   </div>
   <div class="results row">
@@ -28,7 +29,10 @@
 {% endblock content %}
 
 {% block library_scripts %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
+
 {{ super() }}
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/typeahead.js/dist/typeahead.bundle.min.js') }}"></script>
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='js/search.js') }}"></script>
 {% endblock %}
