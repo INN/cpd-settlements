@@ -4,6 +4,24 @@ from base import BaseModel, ModelList
 from jsonmodels import fields
 
 
+class NonMappedModelList(ModelList):
+    def __init__(self, source=None, klass=None):
+        self.klass = klass
+        self.source = source
+        if source and klass:
+            self._load_models()
+
+    def _load_models(self):
+        data = self._load_json()
+
+        models = []
+        for d in data:
+            print d
+            models.append(self.klass(**d))
+
+        self.extend(models)
+
+
 class Case(BaseModel):
 
     type = 'cases'
@@ -42,6 +60,16 @@ class Case(BaseModel):
     address = fields.StringField()
     causes = fields.StringField()
     tags = fields.StringField()
+
+    # Address/location/geo fields
+    neighborhood = fields.StringField()
+    neighborhood_id = fields.StringField()
+
+    community_area = fields.StringField()
+    community_area_id = fields.StringField()
+
+    latitude = fields.FloatField()
+    longitude = fields.FloatField()
 
 
 class Victims(BaseModel):
@@ -151,7 +179,7 @@ class Officer(BaseModel):
 
 # Add a ModelList to each model
 to_load = {
-    'cases.json': Case,
+    'cases.geocoded.boundaries.json': Case,
     'victims.json': Victims,
     'payments.json': Payment,
     'officers.json': Officer
@@ -159,4 +187,11 @@ to_load = {
 
 for filename, model in to_load.items():
     filepath = os.path.abspath(os.path.join(os.path.dirname(__file__), '../data/%s' % filename))
-    model.objects = ModelList(filepath, model, model.field_map)
+
+    print filepath
+    print filename
+    if filename == 'cases.geocoded.boundaries.json':
+        print 'pewpewpewpew'
+        model.objects = NonMappedModelList(filepath, model)
+    else:
+        model.objects = ModelList(filepath, model, model.field_map)
