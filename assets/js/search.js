@@ -37,7 +37,7 @@
 
     render: function() {
       var self = this,
-          content;
+          content = '';
 
       this.$el.html('');
       this.cases.each(function(model) {
@@ -73,6 +73,9 @@
         var ret = true;
 
         _.each(filterData, function(value, name) {
+          if (value == '')
+            return;
+
           if (['neighborhood', 'victim_1_race'].indexOf(name) >= 0) {
             if (model.get(name) !== value) {
               ret = false;
@@ -146,6 +149,9 @@
 
     populateMenu: function(name, values) {
       var input = this.$el.find('[name="' + name + '"]');
+
+      input.append('<option value="">Any</option>');
+
       _.each(values, function(val, idx) {
         var el = $('<option />');
         el.attr('value', val);
