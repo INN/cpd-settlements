@@ -98,8 +98,6 @@ def utility_processor():
         for payment in payments:
             if payment.payment:
                 total += payment.payment
-            else:
-                print 'No payment data for case number: %s' % payment.case_number
         return format_currency(total)
 
     return {
