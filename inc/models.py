@@ -16,7 +16,6 @@ class NonMappedModelList(ModelList):
 
         models = []
         for d in data:
-            print d
             models.append(self.klass(**d))
 
         self.extend(models)
@@ -188,10 +187,7 @@ to_load = {
 for filename, model in to_load.items():
     filepath = os.path.abspath(os.path.join(os.path.dirname(__file__), '../data/%s' % filename))
 
-    print filepath
-    print filename
     if filename == 'cases.geocoded.boundaries.json':
-        print 'pewpewpewpew'
         model.objects = NonMappedModelList(filepath, model)
     else:
         model.objects = ModelList(filepath, model, model.field_map)
