@@ -1,3 +1,4 @@
 *.pyc
 node_modules
 assets/vendor
+data/
