@@ -1,5 +1,8 @@
+import json
+
 from flask import Blueprint, render_template, g
 from cpd_settlements.inc.models import Case, Victims, Officer, Payment
+from cpd_settlements.inc.helpers import format_currency, total_for_payments
 
 blueprint = Blueprint(
     'cpd_settlements',
@@ -27,37 +30,6 @@ def officers():
     return render_template('templates/officers.html', **context)
 
 
-@blueprint.route('/payments/')
-def payments():
-    context = get_context('payment')
-    context['payments'] = Payment.objects
-    return render_template('templates/payments.html', **context)
-
-
-@blueprint.route('/payment/<case_number>')
-def payment(case_number):
-    context = get_context('payment')
-    context['payments'] = Payment.objects.filter(case_number=case_number)
-    context['case_number'] = case_number
-
-    officers = []
-
-    for payment in context['payments']:
-        temp = filter(lambda x: x.case_number == case_number, Officer.objects)
-        if temp:
-            officers.extend(temp)
-
-    context['officers'] = officers
-    return render_template('templates/payment.html', **context)
-
-
-@blueprint.route('/victims/')
-def victims():
-    context = get_context('victims')
-    context['victims'] = Victims.objects
-    return render_template('templates/victims.html', **context)
-
-
 @blueprint.route('/search/')
 def search():
     context = get_context('search')
@@ -74,32 +46,28 @@ def search():
     return render_template('templates/search.html', **context)
 
 
-@blueprint.route('/data/<filename>.json')
-def data(filename):
-    if filename == 'cases':
-        return Case.objects.to_json()
-    if filename == 'victims':
-        return Victims.objects.to_json()
-    if filename == 'officers':
-        return Officer.objects.to_json()
-    if filename == 'payments':
-        return Payment.objects.to_json()
+@blueprint.route('/data/cases.json')
+def cases_json():
+    cases = []
+    for case in Case.objects:
+        case_dict = case.to_struct()
+
+        # Total of all payments for the case
+        case_dict['total_payments'] = total_for_payments(case.get_related(Payment), False)
+
+        # Grab the race of the first victim named
+        case_dict['victim_1_race'] = None
+        victims = case.get_related(Victims)
+        if victims and victims[0].victim_1_race:
+            case_dict['victim_1_race'] = victims[0].victim_1_race
+
+        cases.append(case_dict)
+
+    return json.dumps(cases)
 
 
 @blueprint.context_processor
 def utility_processor():
-    def format_currency(amount):
-        if not amount:
-            amount = '0'
-        return '${:,.2f}'.format(int(amount))
-
-    def total_for_payments(payments):
-        total = 0
-        for payment in payments:
-            if payment.payment:
-                total += payment.payment
-        return format_currency(total)
-
     return {
         'format_currency': format_currency,
         'total_for_payments': total_for_payments
