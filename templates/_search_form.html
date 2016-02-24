@@ -3,17 +3,17 @@
     <ul class="tabs">
       <li>Filter cases</li>
     </ul>
-    <form>
+    <form id="search-form">
       <div class="form-group">
         <label>Neighborhood</label>
-        <select name="neighborhood">
+        <select name="neighborhood" class="chosen">
           <!-- Stuff goes here -->
         </select>
       </div>
 
       <div class="form-group">
         <label>Race of victim</label>
-        <select name="victim_race">
+        <select name="victim_1_race" class="chosen">
           <!-- Stuff goes here -->
         </select>
       </div>
@@ -21,14 +21,14 @@
       <div class="form-group">
         <label>Payment amount</label>
 
-        <input class="slider" data-slider-id='paymentAmount'
-          type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="[7,14]"/>
+        <input name="total_payments" class="slider payment" data-slider-id='paymentAmount'
+          type="text" data-slider-min="0" data-slider-max="15000000" data-slider-step="10000" data-slider-value="[2000000,8000000]"/>
       </div>
 
       <div class="form-group">
         <label>Incident date</label>
 
-        <input class="slider" data-slider-id='incidentDate'
+        <input name="date_of_incident" class="slider date" data-slider-id='incidentDate'
           type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="[7,14]"/>
       </div>
 

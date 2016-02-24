@@ -16,9 +16,9 @@
       {% include 'templates/_search_form.html' %}
     </div>
   </div>
-  <div class="results row">
+  <div class="case-list row">
     <div class="col-xs-12">
-      <div class="results-inner">
+      <div class="case-list-inner" id="case-list-view">
         {% for case in cases %}
           {% include 'templates/_case.html' %}
         {% endfor %}
@@ -30,9 +30,35 @@
 
 {% block library_scripts %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.css') }}" />
 
 {{ super() }}
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.jquery.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/typeahead.js/dist/typeahead.bundle.min.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
+<script src="{{ url_for('cpd_settlements.static', filename='vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='js/search.js') }}"></script>
+
+<script type="text/template" id="case-tmpl">
+  <div class="case" data-case_number="<%= model.case_number %>">
+
+    <h2>$<%= Number(model.total_payments).formatMoney() %> for <%= model.causes %></h2>
+
+    <h3>Victim(s):</h3>
+     <% _.each(model.victims, function(victim) { %>
+      <p><%= victim.victim_1 %></p>
+     <% }) %>
+
+    <h3>Officers involved:</h3>
+     <% _.each(model.officers, function(officer) { %>
+      <p><%= officer.first %> <%= officer.last %> <% if (officer.badge_number) { %>(badge: <%= officer.badge_number %>)<% } %></p>
+     <% }) %>
+
+     <ul class="case-details">
+       <li>Case number: <%= model.case_number %></li>
+       <li>Incident date: <%= model.date_of_incident %></li>
+       <li>Location: <%= model.address %></li>
+     </ul>
+  </div>
+</script>
 {% endblock %}
