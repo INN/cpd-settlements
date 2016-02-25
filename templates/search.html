@@ -2,14 +2,18 @@
 
 {% block library_css %}
 {{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='css/search.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='css/style.css') }}" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
 {% endblock library_css %}
 
 {% block content %}
 <div class="container">
   <div class="jumbotron">
     <h1>Cases</h1>
-    <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} of legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
+    <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
   </div>
   <div class="search row">
     <div class="col-xs-12" id="tabs">
@@ -40,8 +44,6 @@
 {% endblock content %}
 
 {% block library_scripts %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.css') }}" />
 
 {{ super() }}
 

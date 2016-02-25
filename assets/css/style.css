@@ -1,0 +1,217 @@
+/* ==========================================================================
+Variables
+========================================================================== */
+/* ==========================================================================
+Base Styles               
+========================================================================== */
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+h1,
+h2,
+h3 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  color: #484848;
+}
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #aaaaaa;
+}
+a {
+  color: #3d9999;
+  text-decoration: none;
+}
+a:hover {
+  color: #3d9999;
+  text-decoration: underline;
+}
+/* ==========================================================================
+Navigation               
+========================================================================== */
+.navbar {
+  background-color: #000000;
+  border: none;
+  border-radius: 0;
+}
+.navbar a {
+  color: #ffffff;
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-transform: uppercase;
+}
+.navbar a:hover {
+  color: #aaaaaa;
+}
+/* ==========================================================================
+Search Screen               
+========================================================================== */
+.container {
+  max-width: 1100px;
+}
+.container .jumbotron {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin: 3em 0 4em;
+}
+.container .jumbotron h1 {
+  display: none;
+}
+.container .jumbotron h2 {
+  font-size: 2.75em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.333;
+}
+/* ==========================================================================
+Filters
+========================================================================== */
+ul.tab-selector {
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none;
+  border-bottom: 1px solid #d0d0d0;
+  position: relative;
+  z-index: 2;
+}
+ul.tab-selector li {
+  display: inline-block;
+  background-color: #484848;
+  position: relative;
+  margin-bottom: -1px;
+}
+ul.tab-selector li a {
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: -1px;
+  text-transform: uppercase;
+  color: #aaaaaa;
+}
+ul.tab-selector li a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+.tab-containers {
+  background-color: #eaeaea;
+  border: 1px solid #d0d0d0;
+  border-top: none;
+  padding: 8px 0 8px 8px;
+  margin-bottom: 2em;
+}
+.tab-containers .form-group {
+  display: inline-block;
+  width: 24%;
+  padding: 8px 2% 0 8px;
+}
+.tab-containers .form-group label {
+  text-transform: uppercase;
+  font-size: .8em;
+  display: block;
+}
+/* ==========================================================================
+Form Elements
+========================================================================== */
+.slider.slider-horizontal {
+  width: 100%;
+  height: 0px;
+}
+.slider.slider-horizontal .slider-track {
+  height: 20px;
+  width: 100%;
+  margin-top: -10px;
+  top: 50%;
+  background-color: #484848;
+  border-radius: 10px;
+}
+.slider.slider-horizontal .slider-handle {
+  margin: 0%;
+  background-color: #3d9999;
+  background-image: none;
+}
+.slider.slider-horizontal .min-slider-handle {
+  margin-left: 0%;
+}
+.slider.slider-horizontal .max-slider-handle {
+  margin-left: -20px;
+}
+.slider.slider-horizontal .slider-selection {
+  background-color: #87cfcf;
+  background-image: none;
+  border-radius: 10px;
+}
+.slider.slider-horizontal .tooltip.bottom {
+  margin-bottom: -8px;
+}
+.typeahead {
+  background-color: #fff;
+  width: 400px;
+}
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+.tt-hint {
+  color: #999999;
+}
+.tt-menu {
+  left: -999999px !important;
+  display: none !important;
+  width: 600px;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.tt-suggestion {
+  padding: 3px 16px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-suggestion:hover {
+  cursor: pointer;
+  background: #343434;
+  color: white;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+.th-header {
+  margin-left: 10px;
+}
+.chosen-container {
+  width: 100%!important;
+}
+/* ==========================================================================
+Results
+========================================================================== */
+.case {
+  border: 1px solid #eaeaea;
+  padding: 16px;
+  margin: 0 0 2em;
+}
+.case h2 {
+  margin-top: 0;
+  text-transform: lowercase;
+}
+.case h3 {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+.case-details {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+.case-details li {
+  display: inline-block;
+  color: #aaaaaa;
+  margin: 16px 16px 0 0;
+  font-size: .8em;
+  text-transform: uppercase;
+}

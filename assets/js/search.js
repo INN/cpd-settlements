@@ -165,7 +165,8 @@
       $('.slider.payment').slider({
         formatter: function(values) {
           return '$' + Number(values[0]).formatMoney() + ' - $' + Number(values[1]).formatMoney();
-        }
+        },
+        tooltip_position: 'bottom'
       });
     },
 
