@@ -72,6 +72,14 @@
     comparator: 'neighborhood'
   });
 
+  // Officer model
+  var Officer = Backbone.Model.extend({});
+
+  // Officer collection
+  var Officers = Backbone.Collection.extend({
+    model: Officer
+  });
+
   // CaseList view
   var CaseList = Backbone.View.extend({
 
@@ -94,6 +102,58 @@
       });
       this.$el.html(content);
       return this;
+    }
+  });
+
+  // OfficerSearchForm view
+  var OfficerSearchForm = Backbone.View.extend({
+
+    initialize: function(options) {
+      Backbone.View.prototype.initialize.apply(this, arguments);
+      this.cases = options.cases;
+      this.caseList = options.caseList;
+      this.officers = this.getOfficersCollection();
+      this.initTypeahead();
+      return this;
+    },
+
+    getOfficersCollection: function() {
+      var officersForCases = this.cases.map(function(model) {return model.get('officers'); }),
+          officers = _.flatten(officersForCases, 1),
+          uniqueOfficers = {};
+
+      _.each(officers, function(val, key) {
+        var sig = val.prefix + val.first + val.last + val.badge_number;
+        if (typeof uniqueOfficers[sig] == 'undefined') {
+          uniqueOfficers[sig] = val;
+        }
+      });
+
+      return new Officers(_.values(uniqueOfficers));
+    },
+
+    initTypeahead: function() {
+      var self = this;
+
+      var source = new Bloodhound({
+        local: this.officers.toJSON(),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace([
+            'first', 'last', 'prefix', 'badge_number'
+        ])
+      });
+
+      this.$el.find('.typeahead').typeahead({
+        minLength: 3,
+        highlight: true
+      },
+      {
+        name: 'officers',
+        display: function(obj) {
+          return obj.prefix + ' ' + obj.first + ' ' + obj.last + ' (badge: ' + obj.badge_number + ')';
+        },
+        source: source
+      });
     }
   });
 
@@ -136,8 +196,14 @@
             return;
 
           if (['neighborhood', 'victim_1_race'].indexOf(name) >= 0) {
-            if (model.get(name) !== value) {
+            if (name =='neighborhood' && model.get(name) !== value) {
               ret = false;
+            }
+            if (name =='victim_1_race' && typeof model.get('victims') !== 'undefined') {
+              var victims = model.get('victims');
+              if (victims.length && victims[0].victim_1_race !== value) {
+                ret = false;
+              }
             }
           }
 
@@ -197,19 +263,26 @@
       }
 
       this.$el.find('.tab-containers > .tab-container').hide();
-      this.$el.find('[data-tab-id="' + tabId + '"]').show();
+      this.$el.find('[data-tab-id="' + fragment + '"]').show();
 
-      if (tabId == 'cases') {
+      if (fragment == 'cases') {
         if (typeof this.caseForm == 'undefined') {
           this.caseForm = new CaseSearchForm({
             cases: this.cases,
-            el: '#search-form',
+            el: '#case-search-form',
             caseList: this.caseList
           });
         }
         this.caseForm.filterCases();
       } else {
-        this.caseList.cases.reset(this.cases.models);
+        if (typeof this.officerForm == 'undefined') {
+          this.officerForm = new OfficerSearchForm({
+            cases: this.cases,
+            el: '#officer-search-form',
+            caseList: this.caseList
+          })
+        }
+        //this.officerForm.filterCases();
       }
 
       Backbone.history.navigate(fragment, { trigger: true });
@@ -232,7 +305,7 @@
   };
 
   $(document).ready(function() {
-    new SearchRouter();
+    window.router = new SearchRouter();
     Backbone.history.start({
       pushState: true,
       root: '/search/'

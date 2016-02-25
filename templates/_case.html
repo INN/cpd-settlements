@@ -2,7 +2,7 @@
 
   <h2>{{ total_for_payments(case.payments) }} for {{ case.causes }}</h2>
 
-  <h3>Victim(s):</h3>
+  <h3>Victim:</h3>
    {% for victim in case.victims %}
     <p>{{ victim.victim_1 }}</p>
    {% endfor %}

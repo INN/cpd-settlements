@@ -98,11 +98,19 @@ def cases_json():
         # Total of all payments for the case
         case_dict['total_payments'] = total_for_payments(case.get_related(Payment), False)
 
-        # Grab the race of the first victim named
-        case_dict['victim_1_race'] = None
-        victims = case.get_related(Victims)
-        if victims and victims[0].victim_1_race:
-            case_dict['victim_1_race'] = victims[0].victim_1_race
+        # Grab the victim data
+        case_dict['victims'] = [{
+            'victim_1': victim.victim_1,
+            'victim_1_race': victim.victim_1_race
+        } for victim in case.get_related(Victims)]
+
+        # Grab officers involved
+        case_dict['officers'] = [{
+            'first': officer.first,
+            'last': officer.last,
+            'prefix': officer.prefix,
+            'badge_number': officer.badge_number
+        } for officer in case.get_related(Officer)]
 
         cases.append(case_dict)
 
