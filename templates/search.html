@@ -12,8 +12,19 @@
     <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} of legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
   </div>
   <div class="search row">
-    <div class="col-xs-12">
-      {% include 'templates/_search_form.html' %}
+    <div class="col-xs-12" id="tabs">
+      <ul id="search-selector" class="tab-selector">
+        <li><a href="/search/cases">Filter cases</a></li>
+        <li><a href="/search/officers">Officer search</a></li>
+      </ul>
+      <div class="tab-containers">
+        <div data-tab-id="cases" class="tab-container case-tab">
+          {% include 'templates/_search_form.html' %}
+        </div>
+        <div data-tab-id="officers" class="tab-container officer-tab">
+          <p>Officer search TKTK</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="case-list row">

@@ -1,6 +1,45 @@
 (function() {
   var $ = jQuery;
 
+  // Router
+  var SearchRouter = Backbone.Router.extend({
+    routes: {
+      '': 'cases',
+      'officers': 'officers',
+      'cases': 'cases'
+    },
+
+    initialize: function() {
+      // The collection of all cases
+      this.cases = new Cases(cases_json);
+
+      // The list of cases/search results view
+      this.caseList = new CaseList({
+        el: '#case-list-view'
+      });
+
+      // The search tab selector view
+      this.searchSelector = new SearchSelector({
+        el: '#tabs',
+        cases: this.cases,
+        caseList: this.caseList
+      });
+
+      Backbone.Router.prototype.initialize.apply(this, arguments);
+      return this;
+    },
+
+    officers: function() {
+      this.searchSelector.goToTab('officers');
+      return false;
+    },
+
+    cases: function() {
+      this.searchSelector.goToTab('cases');
+      return false;
+    }
+  });
+
   // Case model
   var Case = Backbone.Model.extend({});
 
@@ -58,8 +97,8 @@
     }
   });
 
-  // SearchForm view
-  var SearchForm = Backbone.View.extend({
+  // CaseSearchForm view
+  var CaseSearchForm = Backbone.View.extend({
 
     events: {
       'change :input': 'handleChange'
@@ -68,17 +107,16 @@
     initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
       this.cases = options.cases;
+      this.caseList = options.caseList
+
       this.initChosen();
       this.initSliders();
-      this.caseList = new CaseList({
-        el: '#case-list-view'
-      });
       return this;
     },
 
     handleChange: _.debounce(function() {
       this.filterData = this.$el.serializeObject();
-      //this.updateStatement();
+      this.updateStatement();
       this.filterCases();
     }, 500),
 
@@ -137,12 +175,48 @@
 
   });
 
-  var initSearchForm = function(data) {
-    new SearchForm({
-      cases: new Cases(data),
-      el: '#search-form'
-    });
-  };
+  var SearchSelector = Backbone.View.extend({
+    events: {
+      'click .tab-selector a': 'goToTab'
+    },
+
+    initialize: function(options) {
+      this.cases = options.cases;
+      this.caseList = options.caseList;
+      Backbone.View.prototype.initialize.apply(this, arguments);
+      return this;
+    },
+
+    goToTab: function(tabId) {
+      var fragment;
+
+      if (typeof tabId == 'string') {
+        fragment = tabId;
+      } else {
+        fragment = $(tabId.currentTarget).attr('href').replace(Backbone.history.root, '');
+      }
+
+      this.$el.find('.tab-containers > .tab-container').hide();
+      this.$el.find('[data-tab-id="' + tabId + '"]').show();
+
+      if (tabId == 'cases') {
+        if (typeof this.caseForm == 'undefined') {
+          this.caseForm = new CaseSearchForm({
+            cases: this.cases,
+            el: '#search-form',
+            caseList: this.caseList
+          });
+        }
+        this.caseForm.filterCases();
+      } else {
+        this.caseList.cases.reset(this.cases.models);
+      }
+
+      Backbone.history.navigate(fragment, { trigger: true });
+      return false;
+    }
+
+  });
 
   Number.prototype.formatMoney = function(c, d, t){
     var n = this,
@@ -158,7 +232,11 @@
   };
 
   $(document).ready(function() {
-    initSearchForm(cases_json);
+    new SearchRouter();
+    Backbone.history.start({
+      pushState: true,
+      root: '/search/'
+    });
   });
 
 })();

@@ -62,7 +62,34 @@ def search():
     return render_template('templates/search.html', **context)
 
 
-@blueprint.route('/data/cases.json')
+@blueprint.route('/search/cases')
+def search_cases():
+    return search()
+
+
+@blueprint.route('/search/officers')
+def search_officers():
+    return search()
+
+
+# Utility functions
+@blueprint.context_processor
+def utility_processor():
+    return {
+        'format_currency': format_currency,
+        'total_for_payments': total_for_payments
+    }
+
+
+def get_context(route):
+    site = g.current_site
+    context = site.get_context()
+    context.update({
+        'PATH': route
+    })
+    return context
+
+
 def cases_json():
     cases = []
     for case in Case.objects:
@@ -80,20 +107,3 @@ def cases_json():
         cases.append(case_dict)
 
     return json.dumps(cases)
-
-
-@blueprint.context_processor
-def utility_processor():
-    return {
-        'format_currency': format_currency,
-        'total_for_payments': total_for_payments
-    }
-
-
-def get_context(route):
-    site = g.current_site
-    context = site.get_context()
-    context.update({
-        'PATH': route
-    })
-    return context
