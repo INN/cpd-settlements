@@ -8,6 +8,16 @@
   var Cases = Backbone.Collection.extend({
     model: Case,
 
+    comparator: function(x, y) {
+      var x_total = Number(x.get('total_payments')),
+          y_total = Number(y.get('total_payments'))
+      if (x_total < y_total)
+        return 1;
+      if (x_total > y_total)
+        return -1;
+      return 0;
+    },
+
     getUniqueValuesForAttr: function(attribute) {
       return _.compact(_.uniq(this.map(function(x) { return x.get(attribute); })));
     }
@@ -52,27 +62,38 @@
   var SearchForm = Backbone.View.extend({
 
     events: {
-      'change :input': 'filterCases'
+      'change :input': 'handleChange'
     },
 
     initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
       this.cases = options.cases;
-      this.populateFormFields();
+      this.initChosen();
+      this.initSliders();
       this.caseList = new CaseList({
         el: '#case-list-view'
       });
       return this;
     },
 
+    handleChange: _.debounce(function() {
+      this.filterData = this.$el.serializeObject();
+      //this.updateStatement();
+      this.filterCases();
+    }, 500),
+
+    updateStatement: function() {
+      //console.log('updateStatement');
+    },
+
     filterCases: function() {
-      var filterData = this.$el.serializeObject(),
+      var self = this,
           filteredCases = [];
 
       this.cases.each(function(model) {
         var ret = true;
 
-        _.each(filterData, function(value, name) {
+        _.each(self.filterData, function(value, name) {
           if (value == '')
             return;
 
@@ -102,8 +123,6 @@
       this.caseList.cases.reset(filteredCases);
     },
 
-    bindFormEvents: function() {},
-
     initSliders: function() {
       $('.slider.payment').slider({
         formatter: function(values) {
@@ -112,68 +131,15 @@
       });
     },
 
-    getNeighborhoodCollection: function(cases) {
-      var neighborhoods = {};
-
-      cases.each(function(x) {
-        if (typeof x.get('neighborhood') !== 'undefined') {
-          if (typeof neighborhoods[x.get('neighborhood_id')] == 'undefined') {
-            neighborhoods[x.get('neighborhood_id')] =  {
-              neighborhood: x.get('neighborhood'),
-              neighborhood_id: x.get('neighborhood_id')
-            };
-          }
-        }
-      });
-
-      return new Neighborhoods(_.values(neighborhoods));
-    },
-
-    populateFormFields: function() {
-      this.races = this.cases.getUniqueValuesForAttr('victim_1_race');
-      this.populateMenu('victim_1_race', this.races);
-
-      this.neighborhoods = this.getNeighborhoodCollection(this.cases);
-      this.populateMenu('neighborhood', this.neighborhoods.map(function(x) {
-        return x.get('neighborhood');
-      }));
-
-      this.initChosen();
-      this.initSliders();
-      this.bindFormEvents();
-    },
-
     initChosen: function() {
       this.$el.find('select.chosen').chosen();
-    },
-
-    populateMenu: function(name, values) {
-      var input = this.$el.find('[name="' + name + '"]');
-
-      input.append('<option value="">Any</option>');
-
-      _.each(values, function(val, idx) {
-        var el = $('<option />');
-        el.attr('value', val);
-        el.html(val);
-        input.append(el);
-      });
     }
+
   });
 
-  var fetchData = function() {
-    $.ajax({
-      url: '/data/cases.json',
-      dataType: 'json',
-      success: initSearchForm
-    })
-  };
-
   var initSearchForm = function(data) {
-    var cases = new Cases(data);
-
     new SearchForm({
-      cases: cases,
+      cases: new Cases(data),
       el: '#search-form'
     });
   };
@@ -192,7 +158,7 @@
   };
 
   $(document).ready(function() {
-    fetchData();
+    initSearchForm(cases_json);
   });
 
 })();

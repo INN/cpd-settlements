@@ -33,10 +33,16 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.css') }}" />
 
 {{ super() }}
+
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.jquery.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/typeahead.js/dist/typeahead.bundle.min.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
 <script src="{{ url_for('cpd_settlements.static', filename='vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js') }}"></script>
+
+<script type="text/javascript">
+  var cases_json = {{ cases_json|safe }};
+</script>
+
 <script src="{{ url_for('cpd_settlements.static', filename='js/search.js') }}"></script>
 
 <script type="text/template" id="case-tmpl">

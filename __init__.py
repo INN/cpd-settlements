@@ -35,14 +35,30 @@ def search():
     context = get_context('search')
 
     cases = Case.objects
+    neighborhoods = {}
+    races = []
 
     for case in cases:
         case.payments = case.get_related(Payment)
         case.officers = case.get_related(Officer)
         case.victims = case.get_related(Victims)
 
-    context['cases'] = cases
+        if not neighborhoods.get(case.neighborhood_id, None) and case.neighborhood and case.neighborhood.strip() != '':
+            neighborhoods[case.neighborhood_id] = {
+                'neighborhood': case.neighborhood,
+                'neighborhood_id': case.neighborhood_id
+            }
+
+            if case.victims[0] and case.victims[0].victim_1_race:
+                races.append(case.victims[0].victim_1_race)
+
+    context['cases'] = sorted(
+        cases, key=lambda x: total_for_payments(x.payments, False), reverse=True)
     context['payments'] = Payment.objects
+    context['cases_json'] = cases_json()
+    context['races'] = sorted(list(set(races)))
+    context['neighborhoods'] = sorted(
+        neighborhoods.values(), key=lambda x: x.get('neighborhood'))
     return render_template('templates/search.html', **context)
 
 

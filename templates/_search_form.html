@@ -7,18 +7,24 @@
       <div class="form-group">
         <label>Neighborhood</label>
         <select name="neighborhood" class="chosen">
-          <!-- Stuff goes here -->
+          <option value="">Any</option>
+          {% for neighborhood in neighborhoods %}
+            <option value="{{ neighborhood.neighborhood }}">{{ neighborhood.neighborhood }}</option>
+          {% endfor %}
         </select>
       </div>
 
       <div class="form-group">
         <label>Race of victim</label>
         <select name="victim_1_race" class="chosen">
-          <!-- Stuff goes here -->
+          <option value="">Any</option>
+          {% for race in races %}
+            <option value="{{ race }}">{{ race }}</option>
+          {% endfor %}
         </select>
       </div>
 
-      <div class="form-group" style="float:right;">
+      <div class="form-group">
         <label>Payment amount</label>
 
         <input name="total_payments" class="slider payment" data-slider-id='paymentAmount'
