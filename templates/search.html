@@ -23,10 +23,10 @@
       </ul>
       <div class="tab-containers">
         <div data-tab-id="cases" class="tab-container case-tab">
-          {% include 'templates/_search_form.html' %}
+          {% include 'templates/_case_search_form.html' %}
         </div>
         <div data-tab-id="officers" class="tab-container officer-tab">
-          <p>Officer search TKTK</p>
+          {% include 'templates/_officer_search_form.html' %}
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
 
     <h2>$<%= Number(model.total_payments).formatMoney() %> for <%= model.causes %></h2>
 
-    <h3>Victim(s):</h3>
+    <h3>Victim:</h3>
      <% _.each(model.victims, function(victim) { %>
       <p><%= victim.victim_1 %></p>
      <% }) %>
