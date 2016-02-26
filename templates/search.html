@@ -84,9 +84,12 @@
 </script>
 <script type="text/tmpl" id="case-search-statement-tmpl">
   <span class="clickable"><%= incidents %></span>
-  incidents near
+  incidents
+  <% if ( neighborhood !== "" ) { %>
+  near
   <span class="clickable"><%= neighborhood %></span>
   from
+  <% } %>
   <span class="clickable"><%= date_of_incident %></span>
   resulted in payments totalling
   <span class="clickable">$<%= payments.formatMoney() %></span>
