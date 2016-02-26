@@ -184,6 +184,33 @@
     }
   });
 
+  var CaseSearchStatement = Backbone.View.extend({
+
+    initialize: function(options) {
+      Backbone.View.prototype.initialize.apply(this, arguments);
+      this.filterData = options.filterData;
+      this.template = _.template($('#case-search-statement-tmpl').html());
+      this.caseList = options.caseList;
+      return this;
+    },
+    render: function() {
+      if ( typeof this.filterData == 'undefined' ) {
+        return false;
+      }
+      console.log(this.filterData);
+      var context = _.extend(this.filterData, {
+        incidents: this.caseList.cases.length,
+        payments: this.caseList.cases.reduce( function(memo, model) {
+          return memo + model.get('total_payments');
+        }, 0),
+      });
+
+      // how to handle empties
+      var content = this.template(context);
+      this.$el.html(content);
+    }
+  });
+
   // CaseSearchForm view
   var CaseSearchForm = Backbone.View.extend({
 
@@ -193,6 +220,7 @@
 
     initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
+      this.filterData = this.$el.serializeObject();
       this.cases = options.cases;
       this.caseList = options.caseList
 
@@ -203,12 +231,20 @@
 
     handleChange: _.debounce(function() {
       this.filterData = this.$el.serializeObject();
-      this.updateStatement();
       this.filterCases();
+      this.updateStatement();
     }, 500),
 
     updateStatement: function() {
-      //console.log('updateStatement');
+      if (typeof this.caseSearchStatement == "undefined") {
+        this.caseSearchStatement = new CaseSearchStatement({
+          filterdata: this.filterData,
+          el : '#case-search-statement',
+          caseList : this.caseList,
+        });
+      }
+      this.caseSearchStatement.filterData = this.filterData;
+      this.caseSearchStatement.render();
     },
 
     filterCases: function() {

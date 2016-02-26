@@ -82,4 +82,17 @@
      </ul>
   </div>
 </script>
+<script type="text/tmpl" id="case-search-statement-tmpl">
+  <span class="clickable"><%= incidents %></span>
+  incidents near
+  <span class="clickable"><%= neighborhood %></span>
+  from
+  <span class="clickable"><%= date_of_incident %></span>
+  resulted in payments totalling
+  <span class="clickable">$<%= payments.formatMoney() %></span>
+  <% if ( victim_1_race !== "" ) { %>
+  where the victim's race was
+  <span class="clickable"><%= victim_1_race %></span>
+  <% } %>
+</script>
 {% endblock %}
