@@ -159,8 +159,6 @@ Form Elements
   color: #999999;
 }
 .tt-menu {
-  left: -999999px !important;
-  display: none !important;
   width: 600px;
   margin: 12px 0;
   padding: 8px 0;
