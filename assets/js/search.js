@@ -118,7 +118,13 @@
     },
 
     getOfficersCollection: function() {
-      var officersForCases = this.cases.map(function(model) {return model.get('officers'); }),
+      var officersForCases = this.cases.map(function(model) {
+            var ret = model.get('officers');
+            _.each(ret, function(off) {
+              off.case_numbers = [model.get('case_number')];
+            });
+            return ret;
+          }),
           officers = _.flatten(officersForCases, 1),
           uniqueOfficers = {};
 
@@ -126,6 +132,10 @@
         var sig = val.prefix + val.first + val.last + val.badge_number;
         if (typeof uniqueOfficers[sig] == 'undefined') {
           uniqueOfficers[sig] = val;
+        } else {
+          _.each(val.case_numbers, function(case_number, idx) {
+            uniqueOfficers[sig].case_numbers.push(case_number);
+          });
         }
       });
 
@@ -150,10 +160,27 @@
       {
         name: 'officers',
         display: function(obj) {
-          return obj.prefix + ' ' + obj.first + ' ' + obj.last + ' (badge: ' + obj.badge_number + ')';
+          var display = obj.prefix + ' ' + obj.first + ' ' + obj.last;
+          if (obj.badge_number) {
+            display += ' (badge: ' + obj.badge_number + ')';
+          }
+          return display;
         },
         source: source
       });
+
+      this.$el.find('.typeahead').on('typeahead:select', this.filterCases.bind(this));
+    },
+
+    filterCases: function(event, selection) {
+      var case_numbers = selection.case_numbers,
+          filteredCases = this.cases.filter(function(model) {
+            if (case_numbers.indexOf(model.get('case_number')) >= 0) {
+              return model;
+            }
+          });
+
+      this.caseList.cases.reset(filteredCases);
     }
   });
 
