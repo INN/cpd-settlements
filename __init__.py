@@ -31,7 +31,7 @@ def officers():
 
 
 @blueprint.route('/search/')
-def search():
+def search(init_view='cases'):
     context = get_context('search')
 
     cases = Case.objects
@@ -52,6 +52,7 @@ def search():
             if case.victims[0] and case.victims[0].victim_1_race:
                 races.append(case.victims[0].victim_1_race)
 
+    context['init_view'] = init_view
     context['cases'] = sorted(
         cases, key=lambda x: total_for_payments(x.payments, False), reverse=True)
     context['payments'] = Payment.objects
@@ -69,7 +70,7 @@ def search_cases():
 
 @blueprint.route('/search/officers')
 def search_officers():
-    return search()
+    return search('officers')
 
 
 # Utility functions

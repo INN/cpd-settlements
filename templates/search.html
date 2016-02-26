@@ -1,5 +1,7 @@
 {% extends "templates/_base.html" %}
 
+{% block bodyattrs %}class="page-{{ PATH[:-5] }} {{ init_view }}"{% endblock bodyattrs %}
+
 {% block library_css %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
