@@ -35,6 +35,13 @@
   </div>
   <div class="case-list row">
     <div class="col-xs-12">
+      <h3>Results</h3>
+      <select id="case-list-sort" class="chosen" style="float: right">
+        <option value="payment-high-low">Payment, high to low</option>
+        <option value="payment-low-high">Payment, low to high</option>
+      </select>
+    </div>
+    <div class="col-xs-12">
       <div class="case-list-inner" id="case-list-view">
         {% for case in cases %}
           {% include 'templates/_case.html' %}

@@ -48,12 +48,26 @@
     model: Case,
 
     comparator: function(x, y) {
+     return this.hightolow(x,y);
+    },
+
+    hightolow: function(x, y) {
       var x_total = Number(x.get('total_payments')),
           y_total = Number(y.get('total_payments'))
       if (x_total < y_total)
         return 1;
       if (x_total > y_total)
         return -1;
+      return 0;
+    },
+
+    lowtohigh: function(x, y) {
+      var x_total = Number(x.get('total_payments')),
+          y_total = Number(y.get('total_payments'))
+      if (x_total < y_total)
+        return -1;
+      if (x_total > y_total)
+        return 1;
       return 0;
     },
 
@@ -89,6 +103,10 @@
       Backbone.View.prototype.initialize.apply(this, arguments);
       this.template = _.template($('#case-tmpl').html());
       this.cases.on('reset', this.render.bind(this));
+      this.listSorter = new CaseListSort({
+        caseList: this,
+        el: '#case-list-sort',
+      });
       return this;
     },
 
@@ -303,6 +321,42 @@
       this.$el.find('select.chosen').chosen();
     }
 
+  });
+
+  var CaseListSort = Backbone.View.extend({
+    initialize: function(options) {
+      this.$el.chosen({ disable_search : true});
+      this.caseList = options.caseList;
+      this.caseList.cases.on(
+        'sort', this.caseList.render.bind(
+          this.caseList
+        )
+      );
+      Backbone.View.prototype.initialize.apply(this, arguments);
+      return this;
+    },
+
+    events: {
+      'change': 'sortCaseList'
+    },
+
+    sortCaseList: function(event) {
+      console.log("pew");
+      var option = $(event.currentTarget).val();
+      switch (option) {
+        case 'payment-low-high':
+          this.caseList.cases.comparator = this.caseList.cases.lowtohigh;
+          break;
+        case 'payment-high-low':
+          this.caseList.cases.comparator = this.caseList.cases.hightolow;
+          break;
+        default:
+          this.caseList.cases.comparator = this.caseList.cases.hightolow;
+          break;
+
+      }
+        this.caseList.cases.sort();
+    },
   });
 
   var SearchSelector = Backbone.View.extend({
