@@ -90,7 +90,7 @@
      <ul class="case-details">
        <li>Case number: <%= model.case_number %></li>
        <li>Incident date: <%= model.date_of_incident %></li>
-       <li>Location: <%= model.address %></li>
+       <li>Location: <% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
      </ul>
   </div>
 </script>
