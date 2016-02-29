@@ -5,6 +5,7 @@
         <label>Neighborhood</label>
         <select name="neighborhood" class="chosen">
           <option value="">Any</option>
+          <option value="unknown">Unknown</option>
           {% for neighborhood in neighborhoods %}
             <option value="{{ neighborhood.neighborhood }}">{{ neighborhood.neighborhood }}</option>
           {% endfor %}
@@ -25,7 +26,7 @@
         <label>Payment amount</label>
 
         <input name="total_payments" class="slider payment" data-slider-id='paymentAmount'
-          type="text" data-slider-min="0" data-slider-max="15000000" data-slider-step="10000" data-slider-value="[0,15000000]"/>
+          type="text" data-slider-min="0" data-slider-max="15000000" data-slider-step="100000" data-slider-value="[0,15000000]"/>
       </div>
 
       <div class="form-group">
