@@ -41,8 +41,11 @@ class ModelList(list):
         return json.dumps([item.to_struct() for item in self])
 
     def _load_json(self):
-        with open(self.source) as f:
-            return json.loads(f.read())
+        try:
+            with open(self.source) as f:
+                return json.loads(f.read())
+        except IOError:
+            return []
 
     def _load_models(self):
         data = self._load_json()

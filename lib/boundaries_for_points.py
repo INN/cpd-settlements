@@ -5,6 +5,10 @@ import time
 
 
 def main():
+    boundaries_for_points()
+
+
+def boundaries_for_points():
     with open('data/cases.geocoded.json', 'r') as f:
         cases = json.loads(f.read())
 

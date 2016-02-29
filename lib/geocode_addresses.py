@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from geopy.geocoders import GoogleV3
+from inc.base import ModelList
 from inc.models import Case
 
 import time
@@ -7,7 +8,11 @@ import json
 
 
 def main():
-    cases = Case.objects
+    geocode_addresses()
+
+
+def geocode_addresses():
+    cases = ModelList('data/cases.json', Case, Case.field_map)
     cases_dicts = [case.to_struct() for case in cases]
 
     geocoder = GoogleV3()
@@ -21,9 +26,10 @@ def main():
                 case['longitude'] = result.longitude
             else:
                 print 'Could not geocode address: %s' % case.get('address')
-            time.sleep(0.5)
         else:
             print "No address for case: %s" % case.get('case_number')
+
+        time.sleep(1)
 
     with open('data/cases.geocoded.json', 'wb') as f:
         f.write(json.dumps(cases_dicts))
