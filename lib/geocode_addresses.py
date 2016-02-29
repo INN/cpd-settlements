@@ -15,17 +15,17 @@ def geocode_addresses():
     cases = ModelList('data/cases.json', Case, Case.field_map)
     cases_dicts = [case.to_struct() for case in cases]
 
-    geocoder = GoogleV3()
+    geocoder = GoogleV3(timeout=30)
 
     for case in cases_dicts:
         if case.get('address', None):
-            print 'Trying to geocode address: ', case.get('address')
+            print 'Trying to geocode address:', case.get('address')
             result = geocoder.geocode('%s Chicago, IL' % case.get('address'))
             if result:
                 case['latitude'] = result.latitude
                 case['longitude'] = result.longitude
             else:
-                print 'Could not geocode address: %s' % case.get('address')
+                print 'Could not geocode address:', case.get('address')
         else:
             print "No address for case: %s" % case.get('case_number')
 

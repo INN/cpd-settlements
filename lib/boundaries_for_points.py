@@ -38,6 +38,7 @@ def boundary_lookup(lat, lng):
     ret = {}
     if result.status_code == 200:
         for bound in data.get('objects'):
+            # TODO: also get police beat and district
             if bound.get('kind') == 'Community Area':
                 ret.update({
                     u'community_area': bound.get('name'),
