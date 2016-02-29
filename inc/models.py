@@ -120,7 +120,7 @@ class Payment(BaseModel):
         'payee': "payee",
         'payment': "payment",
         'fees': "fees_costs",
-        'primary_case': "primary_case",
+        'primary_cause': "primary_case",
         'disposition': "disposition",
         'date_paid': "date_paid"
     }
@@ -129,7 +129,7 @@ class Payment(BaseModel):
     payee = fields.StringField()
     payment = fields.IntField()
     fees = fields.StringField()
-    primary_case = fields.StringField()
+    primary_cause = fields.StringField()
     disposition = fields.StringField()
     date_paid = fields.StringField()
 

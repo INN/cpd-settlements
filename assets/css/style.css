@@ -213,3 +213,7 @@ Results
   font-size: .8em;
   text-transform: uppercase;
 }
+.case-list-sort-container {
+  width: 200px;
+  margin: 16px 0;
+}

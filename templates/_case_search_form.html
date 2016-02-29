@@ -37,6 +37,12 @@
 
       <div class="form-group">
         <label>Primary cause</label>
+        <select multiple data-placeholder="Select primary causes" name="primary_causes[]" class="chosen">
+          <option value="">Any</option>
+          {% for cause in primary_causes %}
+            <option value="{{ cause }}">{{ cause }}</option>
+          {% endfor %}
+        </select>
       </div>
     </form>
   </div>

@@ -1,6 +1,6 @@
 <div class="case" data-case_number="{{ case.case_number }}">
 
-  <h2>{{ total_for_payments(case.payments) }} for {{ case.causes }}</h2>
+  <h2>{{ total_for_payments(case.payments) }} for {{ case.primary_cause }}</h2>
 
   <h3>Victim:</h3>
    {% for victim in case.victims %}

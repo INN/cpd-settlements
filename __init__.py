@@ -25,6 +25,7 @@ def search(init_view='cases'):
     cases = Case.objects
     neighborhoods = {}
     races = []
+    primary_causes = []
 
     for case in cases:
         case.payments = case.get_related(Payment)
@@ -37,8 +38,16 @@ def search(init_view='cases'):
                 'neighborhood_id': case.neighborhood_id
             }
 
-            if case.victims[0] and case.victims[0].victim_1_race:
-                races.append(case.victims[0].victim_1_race)
+        try:
+            races.append(case.victims[0].victim_1_race)
+        except IndexError:
+            pass
+
+        try:
+            case.primary_cause = case.payments[0].primary_cause
+            primary_causes.append(case.payments[0].primary_cause)
+        except IndexError:
+            pass
 
     context['init_view'] = init_view
     context['cases'] = sorted(
@@ -48,6 +57,7 @@ def search(init_view='cases'):
     context['races'] = sorted(list(set(races)))
     context['neighborhoods'] = sorted(
         neighborhoods.values(), key=lambda x: x.get('neighborhood'))
+    context['primary_causes'] = sorted(list(set(primary_causes)))
     return render_template('templates/search.html', **context)
 
 
@@ -80,6 +90,10 @@ def cases_json():
 
         # Total of all payments for the case
         case_dict['total_payments'] = total_for_payments(case.get_related(Payment), False)
+
+        # Get primary cause
+        if case.get_related(Payment):
+            case_dict['primary_cause'] = case.get_related(Payment)[0].primary_cause
 
         # Grab the victim data
         case_dict['victims'] = [{

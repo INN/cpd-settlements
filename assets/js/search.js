@@ -217,7 +217,7 @@
       if ( typeof this.filterData == 'undefined' ) {
         return false;
       }
-      console.log(this.filterData);
+
       var context = _.extend(this.filterData, {
         incidents: this.caseList.cases.length,
         payments: this.caseList.cases.reduce( function(memo, model) {
@@ -227,7 +227,7 @@
 
       // how to handle empties
       var content = this.template(context);
-      this.$el.html(content);
+      this.$el.html(content.trim() + '.');
     }
   });
 
@@ -300,6 +300,12 @@
               ret = false;
             }
           }
+
+          if (name == 'primary_causes') {
+            if (value.indexOf(model.get('primary_cause')) < 0) {
+              ret = false;
+            }
+          }
         });
 
         if (ret) {
@@ -327,7 +333,7 @@
 
   var CaseListSort = Backbone.View.extend({
     initialize: function(options) {
-      this.$el.chosen({ disable_search : true});
+      this.$el.chosen({ width: '200px', disable_search : true});
       this.caseList = options.caseList;
       this.caseList.cases.on(
         'sort', this.caseList.render.bind(
@@ -343,7 +349,6 @@
     },
 
     sortCaseList: function(event) {
-      console.log("pew");
       var option = $(event.currentTarget).val();
       switch (option) {
         case 'payment-low-high':
@@ -355,9 +360,8 @@
         default:
           this.caseList.cases.comparator = this.caseList.cases.hightolow;
           break;
-
       }
-        this.caseList.cases.sort();
+      this.caseList.cases.sort();
     },
   });
 

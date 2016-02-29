@@ -39,10 +39,12 @@
   <div class="case-list row">
     <div class="col-xs-12">
       <h3>Results</h3>
-      <select id="case-list-sort" class="chosen" style="float: right">
-        <option value="payment-high-low">Payment, high to low</option>
-        <option value="payment-low-high">Payment, low to high</option>
-      </select>
+      <div class="case-list-sort-container">
+        <select id="case-list-sort" class="chosen" style="float: right">
+          <option value="payment-high-low">Payment, high to low</option>
+          <option value="payment-low-high">Payment, low to high</option>
+        </select>
+      </div>
     </div>
     <div class="col-xs-12">
       <div class="case-list-inner" id="case-list-view">
@@ -73,7 +75,7 @@
 <script type="text/template" id="case-tmpl">
   <div class="case" data-case_number="<%= model.case_number %>">
 
-    <h2>$<%= Number(model.total_payments).formatMoney() %> for <%= model.causes %></h2>
+    <h2>$<%= Number(model.total_payments).formatMoney() %> for <%= model.primary_cause %></h2>
 
     <h3>Victim:</h3>
      <% _.each(model.victims, function(victim) { %>
@@ -92,20 +94,11 @@
      </ul>
   </div>
 </script>
+
 <script type="text/tmpl" id="case-search-statement-tmpl">
-  <span class="clickable"><%= incidents %></span>
-  incidents
-  <% if ( neighborhood !== "" ) { %>
-  near
-  <span class="clickable"><%= neighborhood %></span>
-  from
-  <% } %>
-  <span class="clickable"><%= date_of_incident %></span>
-  resulted in payments totalling
-  <span class="clickable">$<%= payments.formatMoney() %></span>
-  <% if ( victim_1_race !== "" ) { %>
-  where the victim's race was
-  <span class="clickable"><%= victim_1_race %></span>
-  <% } %>
+<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %>
+<% if (date_of_incident !== "") { %>from <span class="clickable"><%= date_of_incident %></span><% } %>
+resulted in payments totalling <span class="clickable">$<%= payments.formatMoney() %></span>
+<% if ( victim_1_race !== "" ) { %> where the victim's race was <span class="clickable"><%= victim_1_race %></span><% } %>
 </script>
 {% endblock %}
