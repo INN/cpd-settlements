@@ -1,35 +1,23 @@
+# -*- coding: utf-8 -*-
 import json
 
 from flask import Blueprint, render_template, g
-from cpd_settlements.inc.models import Case, Victims, Officer, Payment
-from cpd_settlements.inc.helpers import format_currency, total_for_payments
+
+from .inc.models import Case, Victims, Officer, Payment
+from .inc.helpers import (
+    format_currency, total_for_payments, JavascriptIncluder, CSSIncluder)
 
 blueprint = Blueprint(
-    'cpd_settlements',
+    __name__,
     __name__,
     static_folder='assets',
-    static_url_path='/assets'
+    static_url_path='/assets/%s' % __name__
 )
 
-@blueprint.route('/cases/')
-def cases():
-    context = get_context('cases')
-    context['cases'] = Case.objects
-    return render_template('templates/cases.html', **context)
 
-
-@blueprint.route('/case/<case_number>')
-def case(case_number):
-    return 'Nothing here yet.'
-
-
-@blueprint.route('/officers/')
-def officers():
-    context = get_context('officers')
-    context['officers'] = Officer.objects
-    return render_template('templates/officers.html', **context)
-
-
+"""
+ROUTES
+"""
 @blueprint.route('/search/')
 def search(init_view='cases'):
     context = get_context('search')
@@ -63,25 +51,19 @@ def search(init_view='cases'):
     return render_template('templates/search.html', **context)
 
 
-@blueprint.route('/search/cases')
+@blueprint.route('/search/cases/')
 def search_cases():
     return search()
 
 
-@blueprint.route('/search/officers')
+@blueprint.route('/search/officers/')
 def search_officers():
     return search('officers')
 
 
-# Utility functions
-@blueprint.context_processor
-def utility_processor():
-    return {
-        'format_currency': format_currency,
-        'total_for_payments': total_for_payments
-    }
-
-
+"""
+Utility functions
+"""
 def get_context(route):
     site = g.current_site
     context = site.get_context()
@@ -116,3 +98,17 @@ def cases_json():
         cases.append(case_dict)
 
     return json.dumps(cases)
+
+
+@blueprint.app_context_processor
+def context_processor():
+    """
+    Add helper functions to context for all projects.
+    """
+    return {
+        'JS': JavascriptIncluder(blueprint=blueprint),
+        'CSS': CSSIncluder(blueprint=blueprint),
+        'enumerate': enumerate,
+        'format_currency': format_currency,
+        'total_for_payments': total_for_payments
+    }

@@ -4,9 +4,12 @@
 
 {% block library_css %}
 {{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('cpd_settlements.static', filename='css/style.css') }}" />
+
+{{ CSS.push('vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}
+{{ CSS.push('vendor/chosen/chosen.css') }}
+{{ CSS.push('css/style.css') }}
+{{ CSS.render('css/style.min.css') }}
+
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
 {% endblock library_css %}
@@ -56,16 +59,16 @@
 
 {{ super() }}
 
-<script src="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.jquery.js') }}"></script>
-<script src="{{ url_for('cpd_settlements.static', filename='vendor/typeahead.js/dist/typeahead.bundle.min.js') }}"></script>
-<script src="{{ url_for('cpd_settlements.static', filename='vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
-<script src="{{ url_for('cpd_settlements.static', filename='vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js') }}"></script>
-
 <script type="text/javascript">
   var cases_json = {{ cases_json|safe }};
 </script>
 
-<script src="{{ url_for('cpd_settlements.static', filename='js/search.js') }}"></script>
+{{ JS.push('vendor/chosen/chosen.jquery.js') }}
+{{ JS.push('vendor/typeahead.js/dist/typeahead.bundle.js') }}
+{{ JS.push('vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.js') }}
+{{ JS.push('vendor/jquery-serialize-object/jquery.serialize-object.js') }}
+{{ JS.push('js/search.js') }}
+{{ JS.render('js/search.min.js') }}
 
 <script type="text/template" id="case-tmpl">
   <div class="case" data-case_number="<%= model.case_number %>">

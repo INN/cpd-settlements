@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from geopy.geocoders import GoogleV3
 from inc.models import Case
 

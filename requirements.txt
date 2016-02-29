@@ -11,6 +11,7 @@ appnope==0.1.0
 args==0.1.0
 boto==2.38.0
 clint==0.4.1
+cssmin==0.2.0
 csvkit==0.9.1
 dbf==0.94.003
 decorator==4.0.9
@@ -29,6 +30,7 @@ openpyxl==2.2.0-b1
 path.py==8.1.2
 pexpect==4.0.1
 pickleshare==0.6
+ply==3.4
 ptyprocess==0.5.1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
@@ -39,6 +41,7 @@ sh==1.09
 simplegeneric==0.8.1
 simplejson==3.8.1
 six==1.10.0
+slimit==0.8.1
 tarbell==1.0.4
 traitlets==4.1.0
 uritemplate==0.6

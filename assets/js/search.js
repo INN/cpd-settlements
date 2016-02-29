@@ -6,7 +6,9 @@
     routes: {
       '': 'cases',
       'officers': 'officers',
-      'cases': 'cases'
+      'cases': 'cases',
+      'officers/': 'officers',
+      'cases/': 'cases'
     },
 
     initialize: function() {

@@ -8,7 +8,16 @@ Tarbell project configuration
 # SPREADSHEET_KEY = "None"
 
 # Exclude these files from publication
-EXCLUDES = ["*.md", "requirements.txt"]
+EXCLUDES = [
+    "*.md",
+    "requirements.txt",
+    "bower.json",
+    "node_modules",
+    "Gruntfile.js",
+    "package.json",
+    ".bowerrc",
+    ".git*"
+]
 
 # Spreadsheet cache lifetime in seconds. (Default: 4)
 # SPREADSHEET_CACHE_TTL = 4
