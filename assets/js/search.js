@@ -249,11 +249,11 @@
       return this;
     },
 
-    handleChange: _.debounce(function() {
+    handleChange: function() {
       this.filterData = this.$el.serializeObject();
       this.filterCases();
       this.updateStatement();
-    }, 500),
+    },
 
     updateStatement: function() {
       if (typeof this.caseSearchStatement == "undefined") {
