@@ -38,7 +38,6 @@ def boundary_lookup(lat, lng):
     ret = {}
     if result.status_code == 200:
         for bound in data.get('objects'):
-            # TODO: also get police beat and district
             if bound.get('kind') == 'Community Area':
                 ret.update({
                     u'community_area': bound.get('name'),
@@ -48,6 +47,16 @@ def boundary_lookup(lat, lng):
                 ret.update({
                     u'neighborhood': bound.get('name'),
                     u'neighborhood_id': bound.get('external_id'),
+                })
+            if bound.get('kind') == 'Police Beat':
+                ret.update({
+                    'police_beat': bound.get('name'),
+                    'police_beat_id': bound.get('external_id')
+                })
+            if bound.get('kind') == 'Police District':
+                ret.update({
+                    'police_district': bound.get('name'),
+                    'police_district_id': bound.get('external_id')
                 })
     else:
         print "Couldn't retrieve boundaries for: %s,%s" % (lat, lng)
