@@ -194,7 +194,7 @@ Form Elements
 .th-header {
   margin-left: 10px;
 }
-.chosen-container {
+.search-form .chosen-container {
   width: 100%!important;
 }
 /* ==========================================================================
@@ -226,6 +226,10 @@ Results
   text-transform: uppercase;
 }
 .case-list-sort-container {
-  width: 200px;
   margin: 16px 0;
+}
+.case-list-sort-container label {
+  vertical-align: middle;
+  line-height: 26px;
+  margin-bottom: 0;
 }
