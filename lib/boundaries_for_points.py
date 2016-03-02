@@ -3,6 +3,11 @@ import requests
 import json
 import time
 
+"""
+HOST_PORT = 'boundaries.tribapps.com'
+"""
+HOST_PORT = 'localhost:8000'
+
 
 def main():
     boundaries_for_points()
@@ -22,7 +27,8 @@ def boundaries_for_points():
                 if boundary_data:
                     case.update(boundary_data)
 
-                time.sleep(1)
+                if HOST_PORT == 'boundaries.tribapps.com':
+                    time.sleep(1)
             else:
                 print 'Skipping: missing lat or lng for %s' % case.get('case_number')
 
@@ -31,8 +37,8 @@ def boundaries_for_points():
 
 
 def boundary_lookup(lat, lng):
-    url = 'http://boundaries.tribapps.com/1.0/boundary/' + \
-        '?contains=%s,%s&sets=community-areas,neighborhoods' % (lat, lng)
+    url = 'http://%s/1.0/boundary/?contains=%s,%s' % (HOST_PORT, lat, lng) + \
+        '&sets=community-areas,neighborhoods,police-beats,police-districts'
     result = requests.get(url)
     data = json.loads(result.content)
     ret = {}
