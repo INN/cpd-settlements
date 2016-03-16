@@ -16,19 +16,14 @@ EXCLUDES = [
     "Gruntfile.js",
     "package.json",
     ".bowerrc",
-    ".git*"
+    ".git*",
+    "templates",
+    "assets",
+    "data",
+    "inc",
+    "lib",
+    "less"
 ]
-
-# Spreadsheet cache lifetime in seconds. (Default: 4)
-# SPREADSHEET_CACHE_TTL = 4
-
-# Create JSON data at ./data.json, disabled by default
-# CREATE_JSON = True
-
-# Get context from a local file or URL. This file can be a CSV or Excel
-# spreadsheet file. Relative, absolute, and remote (http/https) paths can be
-# used.
-# CONTEXT_SOURCE_FILE = ""
 
 # S3 bucket configuration
 S3_BUCKETS = {
@@ -41,6 +36,13 @@ S3_BUCKETS = {
 
 import sys
 from tarbell.settings import Settings
+from tarbell.hooks import register_hook
+
 sys.path.append(Settings().config.get('projects_path'))
 
 from cpd_settlements import blueprint
+
+@register_hook('generate')
+def app_setup(site, output_root, extra_context):
+    if site.app.config.get('BUILD_PATH', False) and extra_context:
+        site.app.config['FREEZER_BASE_URL'] = 'http://%s/' % extra_context.get('ROOT_URL')
