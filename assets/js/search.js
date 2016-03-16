@@ -438,7 +438,7 @@
     window.router = new SearchRouter();
     Backbone.history.start({
       pushState: true,
-      root: '/search/'
+      root: site_path + 'search/'
     });
   });
 
