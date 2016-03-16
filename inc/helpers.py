@@ -58,6 +58,7 @@ class Includer(object):
                 static_folder = self.blueprint.static_folder
                 fullpath = os.path.join(
                     config.get('BUILD_PATH'), os.path.basename(static_folder), path)
+                localpath = os.path.join(os.path.basename(static_folder), path)
                 url_for_asset = url_for('%s.static' % self.blueprint.name, filename=path)
             else:
                 fullpath = os.path.join(config.get('BUILD_PATH'), path)
@@ -66,6 +67,13 @@ class Includer(object):
             ensure_directory(fullpath)
             with codecs.open(fullpath, 'w', encoding='utf-8') as f:
                 f.write(self._compress())
+
+            # If we're using a blueprint static folder, we need to have a copy of the file
+            # in the project path (not build path) in order for frozen flask to work properly.
+            if localpath:
+                ensure_directory(localpath)
+                with codecs.open(localpath, 'w', encoding='utf-8') as f:
+                    f.write(self._compress())
 
             response = self.tag_string.format(url_for_asset)
         else:
