@@ -2,6 +2,7 @@
 import json
 
 from flask import Blueprint, render_template, g
+from urlparse import urlparse
 
 from .inc.models import Case, Victims, Officer, Payment
 from .inc.helpers import (
@@ -49,15 +50,19 @@ def search(init_view='cases'):
         except IndexError:
             pass
 
-    context['init_view'] = init_view
-    context['cases'] = sorted(
-        cases, key=lambda x: total_for_payments(x.payments, False), reverse=True)
-    context['payments'] = Payment.objects
-    context['cases_json'] = cases_json()
-    context['races'] = sorted(list(set(races)))
-    context['neighborhoods'] = sorted(
-        neighborhoods.values(), key=lambda x: x.get('neighborhood'))
-    context['primary_causes'] = sorted(list(set(primary_causes)))
+    context.update({
+        'init_view': init_view,
+        'cases': sorted(
+            cases, key=lambda x: total_for_payments(x.payments, False), reverse=True),
+        'cases_json': cases_json(),
+        'neighborhoods': sorted(
+            neighborhoods.values(), key=lambda x: x.get('neighborhood')),
+        'payments': Payment.objects,
+        'primary_causes': sorted(list(set(primary_causes))),
+        'races': sorted(list(set(races))),
+        'site_path': get_site_path()
+    })
+
     return render_template('templates/search.html', **context)
 
 
@@ -81,6 +86,10 @@ def get_context(route):
         'PATH': route
     })
     return context
+
+
+def get_site_path():
+    return urlparse(g.current_site.app.config.get('FREEZER_BASE_URL')).path
 
 
 def cases_json():
