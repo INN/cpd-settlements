@@ -21,7 +21,7 @@
 	<div id="cpd-header">
 		<div id="cpd-headwrap">
 			<div id="cpd-logo">
-				<a href="http://chicagoreporter.com/"><img src="assets/images/cr-icon.jpg" width="60px" alt="Chicago Reporter"/></a>
+				<a href="http://chicagoreporter.com/"><img src="{{ url_for('cpd_settlements.static', filename='images/cr-icon.jpg') }}" width="60px" alt="Chicago Reporter"/></a>
 			</div>
 			<div id="cpd-title">Settling for too much</div>
 		</div>
@@ -60,14 +60,11 @@
 
 {{ super() }}
 
-<script src="assets/vendor/greensock/TweenMax.min.js"></script>
-<script src="assets/vendor/scrollmagic/minified/ScrollMagic.min.js"></script>
-<script src="assets/vendor/scrollmagic/minified/plugins/debug.addIndicators.min.js"></script>
-<script src="assets/vendor/scrollmagic/minified/plugins/animation.gsap.min.js"></script>
-
-
-
-
+{{ JS.push('vendor/greensock/TweenMax.min.js') }}
+{{ JS.push('vendor/scrollmagic/minified/ScrollMagic.min.js') }}
+{{ JS.push('vendor/scrollmagic/minified/plugins/debug.addIndicators.min.js') }}
+{{ JS.push('vendor/scrollmagic/minified/plugins/animation.gsap.min.js') }}
+{{ JS.render('js/homepage-libs.min.js') }}
  
 <script>
 
