@@ -22,6 +22,8 @@
     "typeahead.js": "^0.11.1",
     "seiyria-bootstrap-slider": "^6.0.17",
     "chosen": "^1.5.1",
-    "jquery-serialize-object": "^2.5.0"
+    "jquery-serialize-object": "^2.5.0",
+    "gsap": "^1.18.2",
+    "scrollmagic": "^2.0.5"
   }
 }
