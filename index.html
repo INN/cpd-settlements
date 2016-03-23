@@ -21,6 +21,7 @@
 	<div id="cpd-header">
 		<div id="cpd-headwrap">
 			<div id="cpd-logo">
+				<!-- <a href="http://chicagoreporter.com/"><img src="{{ url_for('cpd_settlements.static', filename='images/cr-icon.jpg') }}" width="60px" alt="Chicago Reporter"/></a> -->
 				<a href="http://chicagoreporter.com/"><img src="{{ url_for('cpd_settlements.static', filename='images/cr-icon.jpg') }}" width="60px" alt="Chicago Reporter"/></a>
 			</div>
 			<div id="cpd-title">Settling for too much</div>
@@ -120,13 +121,13 @@
 						.addTo(controller);
 
 		// introimg
-		var scene_introimg = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: '160%', offset: main_offset})
+		var scene_introimg = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: '200%', offset: main_offset})
 						.setPin("#slide-intro .img.fixed")
 						.addTo(controller);
 
 		// slide 1
 		var tween_slide1 = TweenMax.to("#slide-1", 0, {opacity: 1});
-		var scene_slide1 = new ScrollMagic.Scene({triggerElement: "#trigger-1", duration: '60%', offset: 200})
+		var scene_slide1 = new ScrollMagic.Scene({triggerElement: "#trigger-1", duration: '60%', offset: -200})
 						.setTween(tween_slide1)
 						.setPin("#slide-1 .block h3")
 						.addTo(controller);
