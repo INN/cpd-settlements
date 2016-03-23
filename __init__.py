@@ -54,6 +54,7 @@ def search(init_view='cases'):
 
     for officer in officers:
         officer.total_payments = total_for_payments(officer.get_related(Payment), False)
+        officer.slug = officer.get_slug()
 
     context.update({
         'init_view': init_view,
@@ -81,6 +82,18 @@ def search_cases():
 @blueprint.route('/search/officers/')
 def search_officers():
     return search('officers')
+
+
+@blueprint.route('/officers/<slug>')
+def officer(slug):
+    context = get_context('officers')
+
+    try:
+        context['officer'] = filter(lambda x: x.get_slug() == slug, Officer.objects)[0]
+    except IndexError:
+        context['officer'] = False
+
+    return render_template('templates/officer.html', **context)
 
 
 """
@@ -137,6 +150,9 @@ def officers_json():
 
         # Total of all payments for the officer
         officer_dict['total_payments'] = total_for_payments(officer.get_related(Payment), False)
+
+        # Add the slug
+        officer_dict['slug'] = officer.get_slug()
 
         officers.append(officer_dict)
 

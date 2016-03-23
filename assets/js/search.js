@@ -4,11 +4,14 @@
   // Router
   var SearchRouter = Backbone.Router.extend({
     routes: {
-      '': 'cases',
-      'officers': 'officers',
-      'cases': 'cases',
-      'officers/': 'officers',
-      'cases/': 'cases'
+      'search': 'cases',
+      'search/': 'cases',
+
+      'search/officers': 'officers',
+      'search/cases': 'cases',
+
+      'search/officers/': 'officers',
+      'search/cases/': 'cases'
     },
 
     initialize: function() {
@@ -418,15 +421,15 @@
       var fragment;
 
       if (typeof tabId == 'string') {
-        fragment = tabId;
+        fragment = 'search/' + tabId;
       } else {
         fragment = $(tabId.currentTarget).attr('href').replace(Backbone.history.root, '');
       }
 
       this.$el.find('.tab-containers > .tab-container').hide();
-      this.$el.find('[data-tab-id="' + fragment + '"]').show();
+      this.$el.find('[data-tab-id="' + tabId + '"]').show();
 
-      if (fragment == 'cases') {
+      if (tabId == 'cases') {
         if (typeof this.caseForm == 'undefined') {
           this.caseForm = new CaseSearchForm({
             el: '#case-search-form',
@@ -468,7 +471,7 @@
     window.router = new SearchRouter();
     Backbone.history.start({
       pushState: true,
-      root: site_path + 'search/'
+      root: site_path
     });
   });
 

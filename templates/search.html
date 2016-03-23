@@ -114,7 +114,7 @@
 
 <script type="text/template" id="officer-tmpl">
   <div class="officer" data-case_number="<%= model.case_number %>">
-    <h2><%= model.prefix %> <%= model.first %> <%= model.last %></h2>
+    <h2><a href="<%= site_path %>officers/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
     <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
     <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
   </div>
