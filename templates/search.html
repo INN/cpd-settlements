@@ -92,7 +92,7 @@
 <script type="text/template" id="case-tmpl">
   <div class="case" data-case_number="<%= model.case_number %>">
 
-    <h2>$<%= Number(model.total_payments).formatMoney() %> for <%= model.primary_cause %></h2>
+    <h2><a href="<%= site_path %>case/<%= model.slug %>">$<%= Number(model.total_payments).formatMoney() %> for <%= model.primary_cause %></a></h2>
 
     <h3>Victim:</h3>
      <% _.each(model.victims, function(victim) { %>
@@ -101,7 +101,7 @@
 
     <h3>Officers involved:</h3>
      <% _.each(model.officers, function(officer) { %>
-      <p><%= officer.first %> <%= officer.last %> <% if (officer.badge_number) { %>(badge: <%= officer.badge_number %>)<% } %></p>
+      <p><a href="<%= site_path %>officer/<%= officer.slug %>"><%= officer.first %> <%= officer.last %> <% if (officer.badge_number) { %>(badge: <%= officer.badge_number %>)<% } %></a></p>
      <% }) %>
 
      <ul class="case-details">
@@ -114,7 +114,7 @@
 
 <script type="text/template" id="officer-tmpl">
   <div class="officer" data-case_number="<%= model.case_number %>">
-    <h2><a href="<%= site_path %>officers/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
+    <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
     <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
     <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
   </div>

@@ -32,6 +32,7 @@ def search(init_view='cases'):
         case.payments = case.get_related(Payment)
         case.officers = case.get_related(Officer)
         case.victims = case.get_related(Victims)
+        case.slug = case.get_slug()
 
         if not neighborhoods.get(case.neighborhood_id, None) and case.neighborhood and case.neighborhood.strip() != '':
             neighborhoods[case.neighborhood_id] = {
@@ -84,9 +85,9 @@ def search_officers():
     return search('officers')
 
 
-@blueprint.route('/officers/<slug>')
+@blueprint.route('/officer/<slug>')
 def officer(slug):
-    context = get_context('officers')
+    context = get_context('officer')
 
     try:
         context['officer'] = filter(lambda x: x.get_slug() == slug, Officer.objects)[0]
@@ -94,6 +95,18 @@ def officer(slug):
         context['officer'] = False
 
     return render_template('templates/officer.html', **context)
+
+
+@blueprint.route('/case/<slug>')
+def case(slug):
+    context = get_context('case')
+
+    try:
+        context['case'] = filter(lambda x: x.get_slug() == slug, Case.objects)[0]
+    except IndexError:
+        context['case'] = False
+
+    return render_template('templates/case.html', **context)
 
 
 """
@@ -117,6 +130,9 @@ def cases_json():
     for case in Case.objects:
         case_dict = case.to_struct()
 
+        # Get the slug
+        case_dict['slug'] = case.get_slug()
+
         # Total of all payments for the case
         case_dict['total_payments'] = total_for_payments(case.get_related(Payment), False)
 
@@ -135,7 +151,8 @@ def cases_json():
             'first': officer.first,
             'last': officer.last,
             'prefix': officer.prefix,
-            'badge_number': officer.badge_number
+            'badge_number': officer.badge_number,
+            'slug': officer.get_slug()
         } for officer in case.get_related(Officer)]
 
         cases.append(case_dict)

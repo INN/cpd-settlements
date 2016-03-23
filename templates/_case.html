@@ -1,6 +1,6 @@
 <div class="case" data-case_number="{{ case.case_number }}">
 
-  <h2>{{ total_for_payments(case.payments) }} for {{ case.primary_cause }}</h2>
+  <h2><a href="{{ url_for('cpd_settlements.case', slug=case.slug) }}">{{ total_for_payments(case.payments) }} for {{ case.primary_cause }}</a></h2>
 
   <h3>Victim:</h3>
    {% for victim in case.victims %}
@@ -9,7 +9,7 @@
 
   <h3>Officers involved:</h3>
    {% for officer in case.officers %}
-    <p>{{ officer.first }} {{ officer.last }} {% if officer.badge_number %}(badge: {{ officer.badge_number }}){% endif %}</p>
+    <p><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.first }} {{ officer.last }} {% if officer.badge_number %}(badge: {{ officer.badge_number }}){% endif %}</a></p>
    {% endfor %}
 
    <ul class="case-details">

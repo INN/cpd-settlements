@@ -72,6 +72,9 @@ class Case(BaseModel):
     latitude = fields.FloatField()
     longitude = fields.FloatField()
 
+    def get_slug(self):
+        return urlify("%s" % self.case_number)
+
 
 class Victims(BaseModel):
 
