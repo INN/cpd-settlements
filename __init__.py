@@ -32,6 +32,7 @@ def search(init_view='cases'):
         case.payments = case.get_related(Payment)
         case.officers = case.get_related(Officer)
         case.victims = case.get_related(Victims)
+        case.slug = case.get_slug()
 
         if not neighborhoods.get(case.neighborhood_id, None) and case.neighborhood and case.neighborhood.strip() != '':
             neighborhoods[case.neighborhood_id] = {
@@ -50,6 +51,12 @@ def search(init_view='cases'):
         except IndexError:
             pass
 
+    officers = Officer.objects
+
+    for officer in officers:
+        officer.total_payments = total_for_payments(officer.get_related(Payment), False)
+        officer.slug = officer.get_slug()
+
     context.update({
         'init_view': init_view,
         'cases': sorted(
@@ -57,6 +64,8 @@ def search(init_view='cases'):
         'cases_json': cases_json(),
         'neighborhoods': sorted(
             neighborhoods.values(), key=lambda x: x.get('neighborhood')),
+        'officers': officers,
+        'officers_json': officers_json(),
         'payments': Payment.objects,
         'primary_causes': sorted(list(set(primary_causes))),
         'races': sorted(list(set(races))),
@@ -74,6 +83,30 @@ def search_cases():
 @blueprint.route('/search/officers/')
 def search_officers():
     return search('officers')
+
+
+@blueprint.route('/officer/<slug>')
+def officer(slug):
+    context = get_context('officer')
+
+    try:
+        context['officer'] = filter(lambda x: x.get_slug() == slug, Officer.objects)[0]
+    except IndexError:
+        context['officer'] = False
+
+    return render_template('templates/officer.html', **context)
+
+
+@blueprint.route('/case/<slug>')
+def case(slug):
+    context = get_context('case')
+
+    try:
+        context['case'] = filter(lambda x: x.get_slug() == slug, Case.objects)[0]
+    except IndexError:
+        context['case'] = False
+
+    return render_template('templates/case.html', **context)
 
 
 """
@@ -97,6 +130,9 @@ def cases_json():
     for case in Case.objects:
         case_dict = case.to_struct()
 
+        # Get the slug
+        case_dict['slug'] = case.get_slug()
+
         # Total of all payments for the case
         case_dict['total_payments'] = total_for_payments(case.get_related(Payment), False)
 
@@ -115,12 +151,30 @@ def cases_json():
             'first': officer.first,
             'last': officer.last,
             'prefix': officer.prefix,
-            'badge_number': officer.badge_number
+            'badge_number': officer.badge_number,
+            'slug': officer.get_slug()
         } for officer in case.get_related(Officer)]
 
         cases.append(case_dict)
 
     return json.dumps(cases)
+
+
+def officers_json():
+    officers = []
+    for officer in Officer.objects:
+        officer_dict = officer.to_struct()
+
+        # Total of all payments for the officer
+        officer_dict['total_payments'] = total_for_payments(officer.get_related(Payment), False)
+
+        # Add the slug
+        officer_dict['slug'] = officer.get_slug()
+
+        officers.append(officer_dict)
+
+    return json.dumps(sorted(
+        officers, lambda x, y: cmp(x.get('last'), y.get('last'))))
 
 
 @blueprint.app_context_processor

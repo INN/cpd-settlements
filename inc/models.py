@@ -3,6 +3,7 @@ import os
 
 from base import BaseModel, ModelList
 from jsonmodels import fields
+from webhelpers.text import urlify
 
 
 class NonMappedModelList(ModelList):
@@ -70,6 +71,9 @@ class Case(BaseModel):
 
     latitude = fields.FloatField()
     longitude = fields.FloatField()
+
+    def get_slug(self):
+        return urlify("%s" % self.case_number)
 
 
 class Victims(BaseModel):
@@ -175,6 +179,10 @@ class Officer(BaseModel):
     attorney = fields.StringField()
     attorney_firm = fields.StringField()
     entered_by = fields.StringField()
+
+    def get_slug(self):
+        return urlify(
+            "%s %s %s %s %s" % (self.prefix, self.first, self.middle, self.last, self.case_number))
 
 
 # Add a ModelList to each model
