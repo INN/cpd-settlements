@@ -102,7 +102,9 @@ body.officers {
 Filters
 ========================================================================== */
 .search {
-
+  h2 {
+    margin-bottom:1em;
+  }
 }
 
 ul.tab-selector {
@@ -135,17 +137,109 @@ ul.tab-selector {
   background-color:lighten(@cr-light,25%);
   border:1px solid lighten(@cr-light,15%);
   border-top:none;
-  padding:8px 0 8px 8px;
   margin-bottom:2em;
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  #tag-toggle {
+    background-color:lighten(@cr-dark,50%);
+    padding:4px 16px;
+    font-size:.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:hover {
+      cursor:pointer;
+    background-color:lighten(@cr-dark,52%);
+    }
+
+    &.expanded {
+      span:after {
+        content: "Hide tags";
+      }
+    }
+    span:after {
+      content: "Show tags";
+    }
+  }
+  #tag-group {
+    display:none;
+    background-color: @cr-lightest;
+  }
   .form-group {
-    display:inline-block;
-    width:24%;
-    padding:8px 2% 0 8px;
+    display:inline-block;   
+    vertical-align:top;
+    width:32%;
+    padding:16px;
+    margin-bottom:10px;
+
+    &.tags {
+      width:48%;
+
+      label:not(.option) {
+        margin-top:.75em;
+      }
+    }
+    
     label {
       text-transform: uppercase;
       font-size:.8em;
       display:block;
+
+      &.option {
+        display: inline-block;
+        text-transform: lowercase;
+        font-weight: normal;
+        padding: 4px 6px;
+        background-color:lighten(@cr-light,25%);
+        border:1px solid lighten(@cr-dark,50%);;
+        border-radius: 5px;
+        line-height: 1;
+        font-size:1em;
+
+        &:hover {
+          cursor:pointer;
+          /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f5f5f5+100 */
+          background: #ffffff; /* Old browsers */
+          background: -moz-linear-gradient(top,  #ffffff 0%, #f5f5f5 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top,  #ffffff 0%,#f5f5f5 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom,  #ffffff 0%,#f5f5f5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f5f5f5',GradientType=0 ); /* IE6-9 */
+        }
+
+        i {
+          opacity:.7;
+          font-size:.8em;
+        }
+      }
     }
+    input[type=checkbox] {
+      position:absolute;
+      left:-10000px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    input[type=checkbox]:checked + .option {
+      background-color: @cr-highlight;
+      color:@cr-lightest;
+      border:1px solid #019999;
+
+      &:hover {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#44aaaa+0,018087+100 */
+        background: #44aaaa; /* Old browsers */
+        background: -moz-linear-gradient(top,  #44aaaa 0%, #018087 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top,  #44aaaa 0%,#018087 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,  #44aaaa 0%,#018087 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#44aaaa', endColorstr='#018087',GradientType=0 ); /* IE6-9 */
+
+      }
+    }
+
   }
 }
 
@@ -256,6 +350,17 @@ Results
   h3 {
     font-size:1em;
     text-transform:uppercase;
+  }
+
+  span.officer {
+    display:inline-block;
+  
+    &:after {
+      content: ', ';
+    }
+    &:last-of-type:after{
+      content: '';
+    }
   }
 }
 
@@ -491,11 +596,19 @@ Results
     //background-image: url("../images/IMG_9158.jpg");
     background-size: cover;
     background-position: center center;
+    opacity:0;
+  }
+  section#slide-2 {
+    opacity:0;
   }
   section#slide-2 .img{
     background-image: url("../images/02-IMG_9158.jpg");
     background-size: cover;
     background-position: center center;
+    height: 100vh;
+    width: 100%;
+    position:absolute;
+    opacity:0;
   }
   section#slide-3 .block{
 

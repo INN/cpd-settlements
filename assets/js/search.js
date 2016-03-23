@@ -246,6 +246,7 @@
 
       this.initChosen();
       this.initSliders();
+      this.initTags();
       return this;
     },
 
@@ -278,24 +279,24 @@
           if (value == '')
             return;
 
-          if (['neighborhood', 'victim_1_race'].indexOf(name) >= 0) {
-            if (name == 'neighborhood') {
-              if (value == 'unknown') {
-                if (typeof model.get(name) !== 'undefined') {
-                  ret = false;
-                }
-              } else if (model.get(name) !== value) {
-                ret = false;
-              }
-            }
+          // if (['neighborhood', 'victim_1_race'].indexOf(name) >= 0) {
+          //   if (name == 'neighborhood') {
+          //     if (value == 'unknown') {
+          //       if (typeof model.get(name) !== 'undefined') {
+          //         ret = false;
+          //       }
+          //     } else if (model.get(name) !== value) {
+          //       ret = false;
+          //     }
+          //   }
 
-            if (name =='victim_1_race' && typeof model.get('victims') !== 'undefined') {
-              var victims = model.get('victims');
-              if (victims.length && victims[0].victim_1_race !== value) {
-                ret = false;
-              }
-            }
-          }
+          //   if (name =='victim_1_race' && typeof model.get('victims') !== 'undefined') {
+          //     var victims = model.get('victims');
+          //     if (victims.length && victims[0].victim_1_race !== value) {
+          //       ret = false;
+          //     }
+          //   }
+          // }
 
           if (name == 'total_payments') {
             var paymentRange = value.split(','),
@@ -334,6 +335,13 @@
 
     initChosen: function() {
       this.$el.find('select.chosen').chosen();
+    },
+
+    initTags: function() {
+      $('#tag-toggle').click(function(){
+        $(this).toggleClass('expanded');
+        $('#tag-group').slideToggle();
+      })
     }
 
   });

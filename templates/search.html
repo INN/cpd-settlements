@@ -16,12 +16,13 @@
 
 {% block content %}
 <div class="container">
-  <div class="jumbotron">
+  <!-- <div class="jumbotron">
     <h1>Cases</h1>
     <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
-  </div>
+  </div> -->
   <div class="search row">
     <div class="col-xs-12" id="tabs">
+    <h2>Search the settlement database</h2>
       <ul id="search-selector" class="tab-selector">
         <li><a href="/search/cases">Filter cases</a></li>
         <li><a href="/search/officers">Officer search</a></li>
@@ -34,6 +35,7 @@
           {% include 'templates/_officer_search_form.html' %}
         </div>
       </div>
+      <div id="case-search-statement"></div>
     </div>
   </div>
   <div class="case-list row">
@@ -86,7 +88,7 @@
 
     <h3>Officers involved:</h3>
      <% _.each(model.officers, function(officer) { %>
-      <p><%= officer.first %> <%= officer.last %> <% if (officer.badge_number) { %>(badge: <%= officer.badge_number %>)<% } %></p>
+      <span class="officer"><%= officer.first %> <%= officer.last %><% if (officer.badge_number) { %> (badge: <%= officer.badge_number %>)<% } %></span> 
      <% }) %>
 
      <ul class="case-details">
@@ -98,9 +100,7 @@
 </script>
 
 <script type="text/tmpl" id="case-search-statement-tmpl">
-<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %>
-<% if (date_of_incident !== "") { %>from <span class="clickable"><%= date_of_incident %></span><% } %>
-resulted in payments totalling <span class="clickable">$<%= payments.formatMoney() %></span>
-<% if ( victim_1_race !== "" ) { %> where the victim's race was <span class="clickable"><%= victim_1_race %></span><% } %>
+<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %> resulted in payments totalling <span class="clickable">$<%= payments.formatMoney() %></span>
+
 </script>
 {% endblock %}
