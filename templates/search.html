@@ -36,6 +36,7 @@
       </div>
     </div>
   </div>
+
   <div class="case-list row">
     <div class="col-xs-12">
       <h3>Results</h3>
@@ -55,6 +56,19 @@
       </div>
     </div>
   </div>
+
+  <div class="officer-list row">
+    <div class="col-xs-12">
+      <h3>Officers</h3>
+    </div>
+    <div class="col-xs-12">
+      <div class="officer-list-inner" id="officer-list-view">
+        {% for officer in officers %}
+          {% include 'templates/_officer.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
 
@@ -65,6 +79,7 @@
 <script type="text/javascript">
   var site_path = '{{ site_path }}';
   var cases_json = {{ cases_json|safe }};
+  var officers_json = {{ officers_json|safe }};
 </script>
 
 {{ JS.push('vendor/chosen/chosen.jquery.js') }}
@@ -94,6 +109,14 @@
        <li>Incident date: <%= model.date_of_incident %></li>
        <li>Location: <% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
      </ul>
+  </div>
+</script>
+
+<script type="text/template" id="officer-tmpl">
+  <div class="officer" data-case_number="<%= model.case_number %>">
+    <h2><%= model.prefix %> <%= model.first %> <%= model.last %></h2>
+    <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
+    <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
   </div>
 </script>
 

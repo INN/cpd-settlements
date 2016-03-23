@@ -50,6 +50,11 @@ def search(init_view='cases'):
         except IndexError:
             pass
 
+    officers = Officer.objects
+
+    for officer in officers:
+        officer.total_payments = total_for_payments(officer.get_related(Payment), False)
+
     context.update({
         'init_view': init_view,
         'cases': sorted(
@@ -57,6 +62,8 @@ def search(init_view='cases'):
         'cases_json': cases_json(),
         'neighborhoods': sorted(
             neighborhoods.values(), key=lambda x: x.get('neighborhood')),
+        'officers': officers,
+        'officers_json': officers_json(),
         'payments': Payment.objects,
         'primary_causes': sorted(list(set(primary_causes))),
         'races': sorted(list(set(races))),
@@ -121,6 +128,20 @@ def cases_json():
         cases.append(case_dict)
 
     return json.dumps(cases)
+
+
+def officers_json():
+    officers = []
+    for officer in Officer.objects:
+        officer_dict = officer.to_struct()
+
+        # Total of all payments for the officer
+        officer_dict['total_payments'] = total_for_payments(officer.get_related(Payment), False)
+
+        officers.append(officer_dict)
+
+    return json.dumps(sorted(
+        officers, lambda x, y: cmp(x.get('last'), y.get('last'))))
 
 
 @blueprint.app_context_processor

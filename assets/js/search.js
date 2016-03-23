@@ -13,18 +13,30 @@
 
     initialize: function() {
       // The collection of all cases
-      this.cases = new Cases(cases_json);
+      this.caseCollection = new Cases(cases_json);
 
       // The list of cases/search results view
       this.caseList = new CaseList({
         el: '#case-list-view'
       });
 
+      // The collections of all officers
+      this.officerCollection = new Officers(officers_json);
+
+      // Officer list view
+      this.officerList = new OfficerList({
+        el: '#officer-list-view'
+      });
+
       // The search tab selector view
       this.searchSelector = new SearchSelector({
         el: '#tabs',
-        cases: this.cases,
-        caseList: this.caseList
+
+        cases: this.caseCollection,
+        caseList: this.caseList,
+
+        officers: this.officerCollection,
+        officerList: this.officerList
       });
 
       Backbone.Router.prototype.initialize.apply(this, arguments);
@@ -32,12 +44,16 @@
     },
 
     officers: function() {
+      $('.case-list').hide();
       this.searchSelector.goToTab('officers');
+      $('.officer-list').show();
       return false;
     },
 
     cases: function() {
+      $('.officer-list').hide();
       this.searchSelector.goToTab('cases');
+      $('.case-list').show();
       return false;
     }
   });
@@ -76,6 +92,15 @@
     getUniqueValuesForAttr: function(attribute) {
       return _.compact(_.uniq(this.map(function(x) { return x.get(attribute); })));
     }
+  });
+
+  // Officer model
+  var Officer = Backbone.Model.extend({});
+
+  // Officers collection
+  var Officers = Backbone.Collection.extend({
+    model: Officer,
+    comparator: 'last'
   });
 
   // Neighborhood
@@ -125,41 +150,39 @@
     }
   });
 
+  // OfficerList view
+  var OfficerList = Backbone.View.extend({
+    officers: new Officers(),
+
+    initialize: function() {
+      Backbone.View.prototype.initialize.apply(this, arguments);
+      this.template = _.template($('#officer-tmpl').html());
+      this.officers.on('reset', this.render.bind(this));
+      return this;
+    },
+
+    render: function() {
+      var self = this,
+          content = '';
+
+      this.$el.html('');
+      this.officers.each(function(model) {
+        content += self.template({ model: model.toJSON() });
+      });
+      this.$el.html(content);
+      return this;
+    }
+  });
+
   // OfficerSearchForm view
   var OfficerSearchForm = Backbone.View.extend({
 
     initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
-      this.cases = options.cases;
-      this.caseList = options.caseList;
-      this.officers = this.getOfficersCollection();
+      this.officerList = options.officerList;
+      this.officers = options.officers;
       this.initTypeahead();
       return this;
-    },
-
-    getOfficersCollection: function() {
-      var officersForCases = this.cases.map(function(model) {
-            var ret = model.get('officers');
-            _.each(ret, function(off) {
-              off.case_numbers = [model.get('case_number')];
-            });
-            return ret;
-          }),
-          officers = _.flatten(officersForCases, 1),
-          uniqueOfficers = {};
-
-      _.each(officers, function(val, key) {
-        var sig = val.prefix + val.first + val.last + val.badge_number;
-        if (typeof uniqueOfficers[sig] == 'undefined') {
-          uniqueOfficers[sig] = val;
-        } else {
-          _.each(val.case_numbers, function(case_number, idx) {
-            uniqueOfficers[sig].case_numbers.push(case_number);
-          });
-        }
-      });
-
-      return new Officers(_.values(uniqueOfficers));
     },
 
     initTypeahead: function() {
@@ -189,7 +212,12 @@
         source: source
       });
 
-      this.$el.find('.typeahead').on('typeahead:select', this.filterCases.bind(this));
+      this.$el.find('.typeahead').on('typeahead:select', this.filterOfficers.bind(this));
+    },
+
+    filterOfficers: function(event, selection) {
+      var officer = this.officers.findWhere(selection);
+      this.officerList.officers.reset([officer]);
     },
 
     filterCases: function(event, selection) {
@@ -380,6 +408,8 @@
     initialize: function(options) {
       this.cases = options.cases;
       this.caseList = options.caseList;
+      this.officers = options.officers;
+      this.officerList = options.officerList;
       Backbone.View.prototype.initialize.apply(this, arguments);
       return this;
     },
@@ -399,8 +429,8 @@
       if (fragment == 'cases') {
         if (typeof this.caseForm == 'undefined') {
           this.caseForm = new CaseSearchForm({
-            cases: this.cases,
             el: '#case-search-form',
+            cases: this.cases,
             caseList: this.caseList
           });
         }
@@ -408,9 +438,9 @@
       } else {
         if (typeof this.officerForm == 'undefined') {
           this.officerForm = new OfficerSearchForm({
-            cases: this.cases,
             el: '#officer-search-form',
-            caseList: this.caseList
+            officers: this.officers,
+            officerList: this.officerList
           })
         }
       }
