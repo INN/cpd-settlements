@@ -430,9 +430,14 @@
 
       if (typeof tabId == 'string') {
         fragment = 'search/' + tabId;
+        this.$el.find('.tab-selector li').removeClass('active');
+        this.$el.find('.tab-selector li.' + tabId).addClass('active');
       } else {
         fragment = $(tabId.currentTarget).attr('href').replace(Backbone.history.root, '');
+        $(tabId.currentTarget).siblings().removeClass('active');
+        $(tabId.currentTarget).addClass('active');
       }
+
 
       this.$el.find('.tab-containers > .tab-container').hide();
       this.$el.find('[data-tab-id="' + tabId + '"]').show();

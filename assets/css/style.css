@@ -112,6 +112,12 @@ ul.tab-selector li a:hover {
   text-decoration: none;
   color: #ffffff;
 }
+ul.tab-selector li.active {
+  background-color: #3d9999;
+}
+ul.tab-selector li.active a {
+  color: #ffffff;
+}
 .tab-containers {
   background-color: #eaeaea;
   border: 1px solid #d0d0d0;

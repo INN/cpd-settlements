@@ -24,8 +24,8 @@
     <div class="col-xs-12" id="tabs">
     <h2>Search the settlement database</h2>
       <ul id="search-selector" class="tab-selector">
-        <li><a href="/search/cases">Filter cases</a></li>
-        <li><a href="/search/officers">Officer search</a></li>
+        <li class="cases {% if init_view == 'cases' %}active{% endif %}"><a href="/search/cases">Filter cases</a></li>
+        <li class="officers {% if init_view == 'officers' %}active{% endif %}"><a href="/search/officers">Officer search</a></li>
       </ul>
       <div class="tab-containers">
         <div data-tab-id="cases" class="tab-container case-tab">

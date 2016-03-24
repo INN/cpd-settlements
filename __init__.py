@@ -85,7 +85,7 @@ def search_officers():
     return search('officers')
 
 
-@blueprint.route('/officer/<slug>')
+@blueprint.route('/officer/<slug>/')
 def officer(slug):
     context = get_context('officer')
 
@@ -97,7 +97,7 @@ def officer(slug):
     return render_template('templates/officer.html', **context)
 
 
-@blueprint.route('/case/<slug>')
+@blueprint.route('/case/<slug>/')
 def case(slug):
     context = get_context('case')
 

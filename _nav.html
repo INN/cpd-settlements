@@ -14,7 +14,8 @@
     {# Collect the nav links, forms, and other content for toggling #}
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ url_for('preview') }}">Home</a></li>
+        <li class=""><a href="{{ url_for('preview') }}">Home</a></li>
+        <li {% if PATH.find('search') >= 0 %}class="active"{% endif %}><a href="{{ url_for('cpd_settlements.search') }}">search</a></li>
       </ul>
 
       <ul class="social-menu nav navbar-nav navbar-right">
