@@ -1,5 +1,18 @@
 {% extends '_base.html' %}
 
+
+{% block library_css %}
+{{ super() }}
+
+{{ CSS.push('vendor/chosen/chosen.css') }}
+{{ CSS.push('css/style.css') }}
+{{ CSS.render('css/style.min.css') }}
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+{% endblock library_css %}
+
+
 {% block library_scripts %}
 {{ JS.push('vendor/jquery/dist/jquery.js') }}
 {{ JS.push('vendor/underscore/underscore.js') }}
