@@ -472,7 +472,7 @@ Results
   min-width: 100%;
 }
 #home #cpd-progress rect {
-  height: 16px;
+  height: 24px;
   fill: #bd261d;
   /*fill:#000;*/
 }
@@ -489,7 +489,7 @@ Results
   font-size: 6em;
   text-transform: uppercase;
   line-height: 1;
-  margin-top: 2em;
+  margin-top: 15vh;
   margin-bottom: 0;
   text-shadow: 0px 0px 30px #000000;
 }
@@ -533,12 +533,17 @@ Results
   min-height: 100vh;
   max-height: 100vh;
   position: relative;
+  opacity: 0;
+  z-index: 3;
 }
 #home section.slide .fixed {
   width: 100%;
   height: 100vh;
   position: absolute;
   top: 0;
+}
+#home section#slide-intro {
+  opacity: 1;
 }
 #home section#slide-intro .img {
   background-image: url("../images/01-112414_FergusonReaction-2.jpg");
@@ -548,19 +553,6 @@ Results
 #home section#slide-1 {
   background-size: cover;
   background-position: center center;
-  opacity: 0;
-}
-#home section#slide-2 {
-  opacity: 0;
-}
-#home section#slide-2 .img {
-  background-image: url("../images/02-IMG_9158.jpg");
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-  width: 100%;
-  position: absolute;
-  opacity: 0;
 }
 #home section#slide-3 .img {
   background-image: url("../images/02-jg_closures_protest_15.jpg");
@@ -571,23 +563,56 @@ Results
   position: absolute;
   opacity: 0;
 }
-#home section#slide-4 {
+#home .bgimg {
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  opacity: 0;
+}
+#home #bg-1 {
+  background-image: url("../images/02-jg_closures_protest_15.jpg");
+}
+#home #bg-2 {
+  background-image: url("../images/11-srupolo_cpd-board-meeting-22.jpg");
+}
+#home #bg-3 {
   background-image: url("../images/02-112414_EricGarnerProtestDay2-50.jpg");
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
 }
-#home section#slide-5 {
-  background-image: url("../images/06-LE0A1948.jpg");
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
+#home #bg-4 {
+  background-image: url("../images/08-052015CityCouncilFirstMeetingwithNewMembers53.jpg");
 }
-#home section#slide-6 {
+#home #bg-5 {
+  background-image: url("../images/10-052015CityCouncilFirstMeetingwithNewMembers49.jpg");
+}
+#home #bg-6 {
   background-image: url("../images/07-120915_NoonLoopMarch_MH_01---Copy.jpg");
-  background-size: cover;
-  background-position: center center;
+}
+#home #bg-7 {
+  background-image: url("../images/07-121314_MillionsMarchChi-4.jpg");
+}
+#home #bg-8 {
+  background-image: url("../images/06-091714_RallyForRoshad_IMG_1909.jpg");
+}
+#home #bg-9 {
+  background-image: url("../images/06-121314_MillionsMarchChi-53.jpg");
+}
+#home #bg-10 {
+  background-image: url("../images/06-LE0A1948.jpg");
+}
+#home #bg-11 {
+  background-image: url("../images/02-IMG_9158.jpg");
+}
+#home #bg-11-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  width: 100%;
   height: 100vh;
+  bottom: 0;
+  z-index: 3;
+  opacity: 0;
 }
 #home .overlay {
   background-color: #000;
@@ -641,6 +666,12 @@ Results
 }
 #home .spacer.s10 {
   min-height: 1000px;
+}
+#home .spacer.vh1 {
+  min-height: 100vh;
+}
+#home .spacer.vh1.half {
+  min-height: 50vh;
 }
 @media screen and (max-width: 760px) {
   #home .block h3 {

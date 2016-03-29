@@ -50,134 +50,244 @@ function initScroll(){
 					.addTo(controller);
 
 	// introimg
-	var scene_introimg = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: '200%', offset: main_offset})
+	var scene_introimg = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: '300%', offset: main_offset})
 					.setPin("#slide-intro .img.fixed")
 					.addTo(controller);
 
 	// slide 1
-	var scene_slide1 = new ScrollMagic.Scene({triggerElement: "#trigger-1", duration: '100%', offset: main_offset})
+	var scene_slide1 = new ScrollMagic.Scene({triggerElement: "#trigger-1", duration: '200%', offset: main_offset})
 					.addTo(controller)
 					.setPin("#slide-1 .block h3")
 					.on('enter', function(e){
-						TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:0}, {opacity:1});
+						//TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:0}, {opacity:1});
+						TweenMax.to('#slide-1', 1, {opacity:1});
 					})
 					.on('leave', function(e){
-						TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:1}, {opacity:0});
+						//TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:1}, {opacity:0});
+						TweenMax.to('#slide-1', 1, {opacity:0});
 					})
 
 	// slide 2
-	var scene_slide2 = new ScrollMagic.Scene({triggerElement: "#trigger-2", duration: '100%', offset: main_offset})
+	var scene_slide2 = new ScrollMagic.Scene({triggerElement: "#trigger-2", duration: '515%', offset: 200})
 					.addTo(controller)
 					.setPin("#slide-2 .block h3")
 					.on('enter', function(e){
-						TweenMax.fromTo(['#slide-2', '#slide-2'], 1, {opacity:0}, {opacity:1});
+						TweenMax.to('#slide-2', 1, {opacity:1});
 					})
 					.on('leave', function(e){
-						TweenMax.fromTo(['#slide-2', '#slide-2'], 1, {opacity:1}, {opacity:0});
+						TweenMax.to('#slide-2', 2, {opacity:0});
+					});
+
+	// slide 2 background images
+	var bg1 = new ScrollMagic.Scene({triggerElement: "#trigger-bg1", duration: '100%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-1', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-1', 1, {opacity:0});
+					})
+					.addTo(controller);
+	// slide 2 background images
+	var bg2 = new ScrollMagic.Scene({triggerElement: "#trigger-bg2", duration: '200%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-2', 2, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-2', 1, {opacity:0});
+					})
+					.addTo(controller);
+	// slide 2 background images
+	var bg3 = new ScrollMagic.Scene({triggerElement: "#trigger-bg3", duration: '300%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-3', 3, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-3', 1, {opacity:0});
+					})
+					.addTo(controller);
+
+	// slide 3
+	var scene_slide3 = new ScrollMagic.Scene({triggerElement: "#trigger-3", duration: '100%', offset: 200})
+					.addTo(controller)
+					.setPin("#slide-3 .block h3")
+					.on('enter', function(e){
+						TweenMax.to('#slide-3', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-3', 2, {opacity:0});
 					});
 
 
-	// slide 2 image fade in
-	var scene_slide2img = new ScrollMagic.Scene({triggerElement: "#trigger-2", duration: '120%', offset: main_offset})
-					.setPin("#slide-2 .img")
+	// slide 2 background images
+	var bg4 = new ScrollMagic.Scene({triggerElement: "#trigger-bg4", duration: '700%', offset: main_offset})
 					.on('enter', function(e){
-						TweenMax.fromTo(['#slide-2 .img', '#slide-2 .img'], 1, {opacity:0}, {opacity:1});
+						TweenMax.to('#bg-4', 1, {opacity:1});
 					})
 					.on('leave', function(e){
-						TweenMax.fromTo(['#slide-2 .img', '#slide-2 .img'], 1, {opacity:1}, {opacity:0});
+						TweenMax.to('#bg-4', 1, {opacity:0});
+						TweenMax.to('#slide-5', 1, {opacity:0});
 					})
 					.addTo(controller);
+	// slide 2 background images
+	// var bg5 = new ScrollMagic.Scene({triggerElement: "#trigger-bg5", duration: '800%', offset: main_offset})
+	// 				.on('enter', function(e){
+	// 					TweenMax.to('#bg-5', 1, {opacity:1});
+	// 				})
+	// 				.on('leave', function(e){
+	// 					TweenMax.to('#bg-5', 1, {opacity:0});
+	// 				})
+	// 				.addTo(controller);
 
-	// slide 3
-	var tween_slide3 = TweenMax.to("#slide-3 .block", 0, {opacity: 1});
-	var scene_slide3 = new ScrollMagic.Scene({triggerElement: "#trigger-3", duration: '100%', offset: 200})
-					.setTween(tween_slide3)
-					.setPin("#slide-3 .block h3")
-					.addTo(controller);
 
-	// slide 3 image fade in
-	var tween_slide3img = TweenMax.fromTo("#slide-3 .img", 3, {opacity: 0}, {opacity: 1});
-	var scene_slide3img = new ScrollMagic.Scene({triggerElement: "#trigger-3", duration: '120%', offset: main_offset})
-					.setTween(tween_slide3img)
-					.setPin("#slide-3 .img")
-					.addTo(controller);
-
-	//slide 4
-	var tween_slide4 = TweenMax.to("#slide-4 .block", 0, {opacity: 1});
-	var scene_slide4 = new ScrollMagic.Scene({triggerElement: "#trigger-4", duration: '100%', offset: 200})
-					.setTween(tween_slide4)
+	// slide 4
+	var scene_slide4 = new ScrollMagic.Scene({triggerElement: "#trigger-4", duration: '220%', offset: 200})
+					.addTo(controller)
 					.setPin("#slide-4 .block h3")
-					.addTo(controller);
-
-	// slide 4 image fade in
-	var tween_slide4img = TweenMax.fromTo("#slide-4 .img", 3, {opacity: 0}, {opacity: 1});
-	var scene_slide4img = new ScrollMagic.Scene({triggerElement: "#trigger-4", duration: '120%', offset: main_offset})
-					.setTween(tween_slide4img)
-					.setPin("#slide-4 .img")
-					.addTo(controller);
+					.on('enter', function(e){
+						TweenMax.to('#slide-4', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-4', 1, {opacity:0});
+					});
 
 	// slide 5
-	var tween_slide5 = TweenMax.to("#slide-5 .block", 0, {opacity: 1});
-	var scene_slide5 = new ScrollMagic.Scene({triggerElement: "#trigger-5", duration: '100%', offset: 200})
-					.setTween(tween_slide5)
+	var scene_slide5 = new ScrollMagic.Scene({triggerElement: "#trigger-5", duration: '220%', offset: 200})
+					.addTo(controller)
 					.setPin("#slide-5 .block h3")
-					.addTo(controller);
-
+					.on('enter', function(e){
+						TweenMax.to('#slide-5', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						// bg-4
+					});
 	// slide 6
-	var tween_slide6 = TweenMax.to("#slide-6 .block", 0, {opacity: 1});
-	var scene_slide6 = new ScrollMagic.Scene({triggerElement: "#trigger-6", duration: '100%', offset: 200})
-					.setTween(tween_slide6)
+	var scene_slide6 = new ScrollMagic.Scene({triggerElement: "#trigger-6", duration: '300%', offset: 200})
+					.addTo(controller)
 					.setPin("#slide-6 .block h3")
+					.on('enter', function(e){
+						TweenMax.to('#slide-6', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-6', 1, {opacity:0});
+					});
+
+
+	// slide 2 background images
+	var bg6 = new ScrollMagic.Scene({triggerElement: "#trigger-bg6", duration: '200%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-6', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-6', 1, {opacity:0});
+					})
+					.addTo(controller);
+	// slide 2 background images
+	var bg7 = new ScrollMagic.Scene({triggerElement: "#trigger-bg7", duration: '200%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-7', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-7', 1, {opacity:0});
+					})
+					.addTo(controller);
+	// slide 2 background images
+	var bg8 = new ScrollMagic.Scene({triggerElement: "#trigger-bg8", duration: '200%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-8', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-8', 1, {opacity:0});
+					})
+					.addTo(controller);
+	// slide 2 background images
+	var bg9 = new ScrollMagic.Scene({triggerElement: "#trigger-bg9", duration: '200%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-9', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-9', 1, {opacity:0});
+					})
+					.addTo(controller);
+	// slide 2 background images
+	var bg10 = new ScrollMagic.Scene({triggerElement: "#trigger-bg10", duration: '200%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-10', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-10', 1, {opacity:0});
+					})
 					.addTo(controller);
 
 	// slide 7
-	var tween_slide7 = TweenMax.to("#slide-7 .block", 0, {opacity: 1});
-	var scene_slide7 = new ScrollMagic.Scene({triggerElement: "#trigger-7", duration: '100%', offset: 200})
-					.setTween(tween_slide7)
+	var scene_slide7 = new ScrollMagic.Scene({triggerElement: "#trigger-7", duration: '300%', offset: 200})
+					.addTo(controller)
 					.setPin("#slide-7 .block h3")
+					.on('enter', function(e){
+						TweenMax.to('#slide-7', 1, {opacity:1});
+						TweenMax.to('#bg-11-overlay', 0, {opacity:0});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-7', 1, {opacity:0});
+					});
+
+	// slide 2 background images
+	var bg11 = new ScrollMagic.Scene({triggerElement: "#trigger-bg11", duration: '1250%', offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-11', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-11', 1, {opacity:0});
+					})
 					.addTo(controller);
 
 	// slide 8
-	var tween_slide8 = TweenMax.to("#slide-8 .block", 0, {opacity: 1});
-	var scene_slide8 = new ScrollMagic.Scene({triggerElement: "#trigger-8", duration: '100%', offset: 200})
-					.setTween(tween_slide8)
+	var scene_slide8 = new ScrollMagic.Scene({triggerElement: "#trigger-8", duration: '200%', offset: 250})
+					.addTo(controller)
 					.setPin("#slide-8 .block h3")
-					.addTo(controller);
+					.on('enter', function(e){
+						TweenMax.to('#slide-8', 1, {opacity:1});
+						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-8', 1, {opacity:0});
+						var direction = e.target.controller().info("scrollDirection").toLowerCase();
+						if (direction !=='forward'){
+							TweenMax.to('#bg-11', 1, {opacity:0});
+						}
+					});
 
-	// slide 3
-	var tween_slide9 = TweenMax.to("#slide-9 .block", 0, {opacity: 1});
-	var scene_slide9 = new ScrollMagic.Scene({triggerElement: "#trigger-9", duration: '100%', offset: 200})
-					.setTween(tween_slide9)
+	// slide 9
+	var scene_slide9 = new ScrollMagic.Scene({triggerElement: "#trigger-9", duration: '200%', offset: 300})
+					.addTo(controller)
 					.setPin("#slide-9 .block h3")
-					.addTo(controller);
+					.on('enter', function(e){
+						TweenMax.to('#slide-9', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-9', 1, {opacity:0});
+					});
 
-	// slide 3
-	var tween_slide10 = TweenMax.to("#slide-10 .block", 0, {opacity: 1});
-	var scene_slide10 = new ScrollMagic.Scene({triggerElement: "#trigger-10", duration: '100%', offset: 200})
-					.setTween(tween_slide10)
+	// slide 10
+	var scene_slide10 = new ScrollMagic.Scene({triggerElement: "#trigger-10", duration: '200%', offset: 350})
+					.addTo(controller)
 					.setPin("#slide-10 .block h3")
-					.addTo(controller);
+					.on('enter', function(e){
+						TweenMax.to('#slide-10', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-10', 1, {opacity:0});
+					});
 
-	// slide 3
-	var tween_slide11 = TweenMax.to("#slide-11 .block", 0, {opacity: 1});
-	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: '100%', offset: 200})
-					.setTween(tween_slide11)
+	// slide 11
+	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: '100%', offset: 350})
+					.addTo(controller)
 					.setPin("#slide-11 .block h3")
-					.addTo(controller);
-
-	// slide 3
-	var tween_slide12 = TweenMax.to("#slide-12 .block", 0, {opacity: 1});
-	var scene_slide12 = new ScrollMagic.Scene({triggerElement: "#trigger-12", duration: '100%', offset: 200})
-					.setTween(tween_slide12)
-					.setPin("#slide-12 .block h3")
-					.addTo(controller);
-
-	// slide 3
-	var tween_slide13 = TweenMax.to("#slide-13 .block", 0, {opacity: 1});
-	var scene_slide13 = new ScrollMagic.Scene({triggerElement: "#trigger-13", duration: '100%', offset: 200})
-					.setTween(tween_slide13)
-					.setPin("#slide-13 .block h3")
-					.addTo(controller);
+					.on('enter', function(e){
+						TweenMax.to('#slide-11', 1, {opacity:1});
+					})
+					.on('leave', function(e){
+						//TweenMax.to('#slide-11', 1, {opacity:0});
+					});
 
 	// init tween, then scene
 	var duration_bar = $('#cpd-scrolling').height() - main_offset;
@@ -188,11 +298,14 @@ function initScroll(){
 
 	// // add indicators (requires plugin)
 	scene_bar.addIndicators();	
-	//scene_introimg.addIndicators();	
-	//scene_introtext.addIndicators();	
+	scene_introimg.addIndicators();	
+	scene_introtext.addIndicators();	
 	scene_slide2.addIndicators();		
+	bg1.addIndicators();		
+	bg2.addIndicators();		
+	bg3.addIndicators();		
 	scene_slide3.addIndicators();		
-	scene_slide3img.addIndicators();		
-	scene_slide5.addIndicators();		
-	scene_slide6.addIndicators();	
+	// scene_slide3img.addIndicators();		
+	// scene_slide5.addIndicators();		
+	// scene_slide6.addIndicators();	
 }
