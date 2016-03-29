@@ -34,6 +34,8 @@ S3_BUCKETS = {
     "staging": "stage-apps.inn.org/cpd-settlements",
 }
 
+FREEZER_BASE_URL = 'localhost:5000'
+
 import sys
 from tarbell.settings import Settings
 from tarbell.hooks import register_hook
@@ -44,5 +46,6 @@ from cpd_settlements import blueprint
 
 @register_hook('generate')
 def app_setup(site, output_root, extra_context):
+    site.app.config['FREEZER_IGNORE_404_NOT_FOUND'] = True
     if site.app.config.get('BUILD_PATH', False) and extra_context:
         site.app.config['FREEZER_BASE_URL'] = 'http://%s/' % extra_context.get('ROOT_URL')
