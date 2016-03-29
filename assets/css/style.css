@@ -709,6 +709,12 @@ Results
   #home .block h3 {
     font-size: 2em;
   }
+  #home .spacer.vh1 {
+    min-height: 50vh;
+  }
+  #home .spacer.vh1.half {
+    min-height: 25vh;
+  }
   ul.tab-selector {
     font-size: .8em;
   }
