@@ -113,10 +113,16 @@ ul.tab-selector li a:hover {
   color: #ffffff;
 }
 ul.tab-selector li.active {
-  background-color: #3d9999;
+  background-color: #eaeaea;
+  border: 1px solid #d0d0d0;
+  border-bottom: none;
 }
 ul.tab-selector li.active a {
-  color: #ffffff;
+  color: #484848;
+  text-decoration: none;
+}
+ul.tab-selector li.active a:hover {
+  color: #000000;
 }
 .tab-containers {
   background-color: #eaeaea;
