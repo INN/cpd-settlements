@@ -297,14 +297,14 @@ function initScroll(){
 					.addTo(controller);
 
 	// // add indicators (requires plugin)
-	scene_bar.addIndicators();	
-	scene_introimg.addIndicators();	
-	scene_introtext.addIndicators();	
-	scene_slide2.addIndicators();		
-	bg1.addIndicators();		
-	bg2.addIndicators();		
-	bg3.addIndicators();		
-	scene_slide3.addIndicators();		
+	// scene_bar.addIndicators();	
+	// scene_introimg.addIndicators();	
+	// scene_introtext.addIndicators();	
+	// scene_slide2.addIndicators();		
+	// bg1.addIndicators();		
+	// bg2.addIndicators();		
+	// bg3.addIndicators();		
+	// scene_slide3.addIndicators();		
 	// scene_slide3img.addIndicators();		
 	// scene_slide5.addIndicators();		
 	// scene_slide6.addIndicators();	
