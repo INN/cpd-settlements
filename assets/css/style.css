@@ -229,6 +229,15 @@ ul.tab-selector li.active a:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44aaaa', endColorstr='#018087', GradientType=0);
   /* IE6-9 */
 }
+.tab-containers #officer-search-form .form-group {
+  width: 100%;
+}
+.tab-containers #officer-search-form .form-group .twitter-typeahead {
+  min-width: 100%;
+}
+.tab-containers #officer-search-form .form-group .typeahead {
+  width: 100%;
+}
 /* ==========================================================================
 Form Elements
 ========================================================================== */
@@ -699,5 +708,19 @@ Results
   }
   #home .block h3 {
     font-size: 2em;
+  }
+  ul.tab-selector {
+    font-size: .8em;
+  }
+  .tab-containers .form-group {
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .tab-containers .form-group:last-of-type {
+    padding-bottom: 16px;
+  }
+  .tab-containers #tag-toggle {
+    margin-top: 16px;
   }
 }
