@@ -528,13 +528,24 @@ Results
   padding: 0 20%;
   text-shadow: 0px 0px 30px #000000;
 }
+#home .block h3 img {
+  max-width: 20px;
+  display: block;
+  margin: 10px auto;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+#home .block h3 img:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
 #home section.slide {
   width: 100%;
   min-height: 100vh;
   max-height: 100vh;
   position: relative;
   opacity: 0;
-  z-index: 3;
+  z-index: 9;
 }
 #home section.slide .fixed {
   width: 100%;
