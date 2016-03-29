@@ -311,7 +311,7 @@ function initScroll(){
 					});
 
 	// slide 11
-	var dur_slide11 = stringDuration(100);
+	var dur_slide11 = stringDuration(200);
 	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: dur_slide11, offset: 350})
 					.addTo(controller)
 					.setPin("#slide-11 .block h3")
@@ -319,7 +319,7 @@ function initScroll(){
 						TweenMax.to('#slide-11', 1, {opacity:1});
 					})
 					.on('leave', function(e){
-						//TweenMax.to('#slide-11', 1, {opacity:0});
+						TweenMax.to('#slide-11', 1, {opacity:0});
 					});
 
 	// init tween, then scene
