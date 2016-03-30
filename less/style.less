@@ -514,13 +514,17 @@ Results
   }
   #cpd-logo {
     display:inline-block;
+    background-image: url("../images/cr-icon.jpg");
+    background-size: contain;
     border-right:1px solid rgba(122,122,122,.5);
     margin-right:1em;
-      line-height: 0;
-  }
-  #cpd-logo img {
-    display:block;
     line-height: 0;
+
+    a {
+      display:inline-block;
+      width:60px;
+      height:60px;
+    }
   }
   #cpd-title {
     font-family: 'Open Sans Condensed', sans-serif;
@@ -739,7 +743,10 @@ Results
     padding-top: .45em;
     border-radius: 1em;
     margin:.5em;
-    //opacity:.8;
+    transition: background-color .25s ease-in-out;
+    -moz-transition: background-color .25s ease-in-out;
+    -webkit-transition: background-color .25s ease-in-out;
+
     &:hover {
       background-color: @cr-lightest;
     }
