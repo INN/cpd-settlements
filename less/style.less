@@ -11,6 +11,11 @@ Variables
 @cr-condensed: 'Open Sans Condensed', sans-serif;
 @cr-regular: 'Open Sans', sans-serif;
 
+@font-face {
+    font-family: "fontello";
+    src: url("http://chicagoreporter.wpengine.netdna-cdn.com/wp-content/themes/largo-dev/fonts/fontello/font/fontello.woff") format('woff');
+}
+
 /* ==========================================================================
 Base Styles               
 ========================================================================== */
@@ -446,7 +451,7 @@ Results
   }
   a, a:visited {
     text-decoration: none;
-    color: #2e639e;
+    color: @cr-highlight;
   }
   a:hover {
     text-decoration: underline;
@@ -598,10 +603,10 @@ Results
 
   .block h3 {
     font-size: 3.5em;
-    line-height: 1;
+    line-height: 1.15;
     margin-top:2em;
     margin-bottom:0;
-    padding:0 15%;
+    padding:0 20%;
     text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
 
       img {
@@ -718,6 +723,54 @@ Results
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+  }
+
+  .social-icons {
+    display:block;
+    margin-top:1em;
+    font-size:.333em;
+  }
+  .share {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    background-color: fade(@cr-highlight,30%);
+    text-align: center;
+    padding-top: .45em;
+    border-radius: 1em;
+    margin:.5em;
+    //opacity:.8;
+    &:hover {
+      background-color: @cr-lightest;
+    }
+  }
+  .icon-twitter:before {
+    content: '\68';
+    text-shadow:none;
+  }
+  .icon-facebook:before {
+    content: '\70';
+    padding-left:.25em;
+    text-shadow:none;
+  }
+  .icon-mail:before {
+    content: '\75';
+    padding-left:.1em;
+    text-shadow:none;
+  }
+
+  [class*=" icon-"]:before, [class^=icon-]:before {
+    font-family: fontello;
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    opacity: 1;
+    text-transform: none!important;
   }
 
   /*

@@ -1,6 +1,10 @@
 /* ==========================================================================
 Variables
 ========================================================================== */
+@font-face {
+  font-family: "fontello";
+  src: url("http://chicagoreporter.wpengine.netdna-cdn.com/wp-content/themes/largo-dev/fonts/fontello/font/fontello.woff") format('woff');
+}
 /* ==========================================================================
 Base Styles               
 ========================================================================== */
@@ -402,7 +406,7 @@ Results
 #home a,
 #home a:visited {
   text-decoration: none;
-  color: #2e639e;
+  color: #3d9999;
 }
 #home a:hover {
   text-decoration: underline;
@@ -537,10 +541,10 @@ Results
 }
 #home .block h3 {
   font-size: 3.5em;
-  line-height: 1;
+  line-height: 1.15;
   margin-top: 2em;
   margin-bottom: 0;
-  padding: 0 15%;
+  padding: 0 20%;
   text-shadow: 0px 0px 30px #000000;
 }
 #home .block h3 img {
@@ -655,6 +659,52 @@ Results
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#000000', GradientType=0);
   /* IE6-9 */
+}
+#home .social-icons {
+  display: block;
+  margin-top: 1em;
+  font-size: .333em;
+}
+#home .share {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  background-color: rgba(61, 153, 153, 0.3);
+  text-align: center;
+  padding-top: .45em;
+  border-radius: 1em;
+  margin: .5em;
+}
+#home .share:hover {
+  background-color: #ffffff;
+}
+#home .icon-twitter:before {
+  content: '\68';
+  text-shadow: none;
+}
+#home .icon-facebook:before {
+  content: '\70';
+  padding-left: .25em;
+  text-shadow: none;
+}
+#home .icon-mail:before {
+  content: '\75';
+  padding-left: .1em;
+  text-shadow: none;
+}
+#home [class*=" icon-"]:before,
+#home [class^=icon-]:before {
+  font-family: fontello;
+  font-style: normal;
+  font-weight: 400;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  opacity: 1;
+  text-transform: none!important;
 }
 #home .spacer {
   text-align: center;
