@@ -18,23 +18,23 @@ function loadText(){
 			var slide_num = index+1;
 			var html = '<div class="block"><h3>' + col1;
 			var links = '<span class="social-icons">';
-			var a1  = '<a target="_blank" href="' + col2 + '" onclick="window.open(';
-				a1 += "'" + col2;
-				a1 += "', 'newwindow', 'width=600, height=400'); return false;";
-				a1 += '"><span class="share icon-twitter"></span></a>';
-			var a2  = '<a target="_blank" href="' + col3 + '" onclick="window.open(';
-				a2 += "'" + col3;
-				a2 += "', 'newwindow', 'width=600, height=400'); return false;";
-				a2 += '"><span class="share icon-facebook"></span></a>';
-			var a3  = '<a target="_blank" href="mailto:?subject=A Chicago Reporter Investigation&amp;body=' + col4 + '"><span class="share icon-mail"></span></a>';
-
+			
 			if (col2){
+				var a1  = '<a target="_blank" href="' + col2 + '" onclick="window.open(';
+					a1 += "'" + col2;
+					a1 += "', 'newwindow', 'width=600, height=400'); return false;";
+					a1 += '"><span class="share icon-twitter"></span></a>';
 				links += a1;
 			}
 			if (col3){
+				var a2  = '<a target="_blank" href="' + col3 + '" onclick="window.open(';
+					a2 += "'" + col3;
+					a2 += "', 'newwindow', 'width=600, height=400'); return false;";
+					a2 += '"><span class="share icon-facebook"></span></a>';
 				links += a2;
 			}
 			if (col4){
+				var a3  = '<a target="_blank" href="mailto:?subject=A Chicago Reporter Investigation&amp;body=' + col4 + '"><span class="share icon-mail"></span></a>';
 				links += a3;
 			}
 				html += links;
