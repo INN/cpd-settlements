@@ -57,6 +57,7 @@ Search Screen
 ========================================================================== */
 .container {
   max-width: 1100px;
+  padding: 80px 0;
 }
 .container .jumbotron {
   background-color: transparent;
@@ -362,14 +363,93 @@ Results
   line-height: 26px;
   margin-bottom: 0;
 }
+/* 
+  Nav
+*/
+#cpd-header {
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+}
+#cpd-headwrap {
+  background-color: #000000;
+  color: #fff;
+  border-bottom: 1px solid rgba(122, 122, 122, 0.5);
+  line-height: 0;
+}
+#cpd-logo {
+  display: inline-block;
+  background-image: url("../images/cr-icon.jpg");
+  background-size: contain;
+  border-right: 1px solid rgba(122, 122, 122, 0.5);
+  margin-right: 1em;
+  line-height: 0;
+}
+#cpd-logo a {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+}
+a.cpd-title,
+a.cpd-title:visited {
+  color: #ffffff;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  line-height: 0;
+  font-weight: bold;
+  font-size: 1.35em;
+  vertical-align: top;
+  padding: 1.6em 0 0 0;
+}
+a.cpd-title:hover,
+a.cpd-title:visited:hover {
+  cursor: pointer;
+  text-decoration: none;
+  opacity: .9;
+}
+.cpd-links {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.cpd-links a {
+  padding: 0 1em;
+  border-right: 1px solid white;
+}
+.cpd-links a:hover {
+  color: #50b9b9;
+  text-decoration: none;
+}
+.cpd-links ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.cpd-links li {
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 4.5;
+}
+.cpd-links li:last-of-type a {
+  border-right: none;
+}
+a,
+a:visited {
+  text-decoration: none;
+  color: #3d9999;
+}
+a:hover {
+  text-decoration: underline;
+}
 /* ==========================================================================
 Results
 ========================================================================== */
 #home {
   background-color: #000;
-  /* 
-    Nav
-  */
   /*
     Containers
   */
@@ -379,6 +459,9 @@ Results
   /*
     Elements
   */
+}
+#home #cpd-headwrap {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 #home h1,
 #home h2,
@@ -402,14 +485,6 @@ Results
 }
 #home h2 {
   font-size: 20px;
-}
-#home a,
-#home a:visited {
-  text-decoration: none;
-  color: #3d9999;
-}
-#home a:hover {
-  text-decoration: underline;
 }
 #home .touchonly {
   display: none;
@@ -447,41 +522,6 @@ Results
 }
 #home * html .clearfix {
   height: 1%;
-}
-#home #cpd-header {
-  position: fixed;
-  width: 100%;
-  z-index: 99999;
-}
-#home #cpd-headwrap {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border-bottom: 1px solid rgba(122, 122, 122, 0.5);
-  line-height: 0;
-}
-#home #cpd-logo {
-  display: inline-block;
-  background-image: url("../images/cr-icon.jpg");
-  background-size: contain;
-  border-right: 1px solid rgba(122, 122, 122, 0.5);
-  margin-right: 1em;
-  line-height: 0;
-}
-#home #cpd-logo a {
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-}
-#home #cpd-title {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  display: inline-block;
-  line-height: 0;
-  font-weight: bold;
-  font-size: 1.35em;
-  vertical-align: top;
-  padding: 1.6em 0 0 0;
 }
 #home #cpd-progress {
   width: 100%;
@@ -672,7 +712,7 @@ Results
   display: inline-block;
   width: 2em;
   height: 2em;
-  background-color: rgba(61, 153, 153, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
   text-align: center;
   padding-top: .45em;
   border-radius: 1em;

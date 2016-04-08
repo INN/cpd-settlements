@@ -12,12 +12,36 @@ function loadText(){
 		$(entry).each(function(index){
 			// Column names
 			var col1 = this.gsx$slidetext.$t;
-			var col2 = encodeURIComponent(this.gsx$twittertext.$t);
+			var col2 = this.gsx$twitterurl.$t;
+			var col3 = this.gsx$facebookurl.$t;
+			var col4 = this.gsx$shortlink.$t;
 			var slide_num = index+1;
-			var html = '<div class="spacer s7"></div><section id="slide-' + slide_num + '" class="slide"><div class="img fixed"></div><div id="trigger-' + slide_num + '" ></div><div class="block"><h3>';
-			html += col1;
-			html += '</h3></div><div class="twitter-icon"></div><div class="spacer s7"></div></section>';
-			$('#cpd-scrolling').append(html);
+			var html = '<div class="block"><h3>' + col1;
+			var links = '<span class="social-icons">';
+			var a1  = '<a target="_blank" href="' + col2 + '" onclick="window.open(';
+				a1 += "'" + col2;
+				a1 += "', 'newwindow', 'width=600, height=400'); return false;";
+				a1 += '"><span class="share icon-twitter"></span></a>';
+			var a2  = '<a target="_blank" href="' + col3 + '" onclick="window.open(';
+				a2 += "'" + col3;
+				a2 += "', 'newwindow', 'width=600, height=400'); return false;";
+				a2 += '"><span class="share icon-facebook"></span></a>';
+			var a3  = '<a target="_blank" href="mailto:?subject=A Chicago Reporter Investigation&amp;body=' + col4 + '"><span class="share icon-mail"></span></a>';
+
+			if (col2){
+				links += a1;
+			}
+			if (col3){
+				links += a2;
+			}
+			if (col4){
+				links += a3;
+			}
+				html += links;
+				html += '</span></h3></div>';
+
+			$('#slide-' + slide_num).append(html);
+			//$('#cpd-scrolling').append(html);
 
 			if (entry.length == slide_num){
 				initScroll();
