@@ -1,20 +1,35 @@
-<div class="case" data-case_number="{{ case.case_number }}">
+<a href="{{ url_for('cpd_settlements.case', slug=case.slug) }}">
+  <div class="case" data-case_number="{{ case.case_number }}">
 
-  <h2><a href="{{ url_for('cpd_settlements.case', slug=case.slug) }}">{{ total_for_payments(case.payments) }} for {{ case.primary_cause }}</a></h2>
+    <div class="case-payment">
+      <h2>{{ total_for_payments(case.payments) }}</h2>
+      <h3>{{ case.primary_cause }}</h3>
+    </div>
 
-  <h3>Victim:</h3>
-   {% for victim in case.victims %}
-    <p>{{ victim.victim_1 }}</p>
-   {% endfor %}
+    <div class="case-description">
+      <h4>Case {{ case.case_number }}</h4>
 
-  <h3>Officers involved:</h3>
-   {% for officer in case.officers %}
-    <p><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.first }} {{ officer.last }} {% if officer.badge_number %}(badge: {{ officer.badge_number }}){% endif %}</a></p>
-   {% endfor %}
+       <p>In facilisis scelerisque dui vel dignissim. Sed nunc orci, ultricies congue vehicula quis, facilisis a orci. In aliquet facilisis condimentum. Donec at orci orci, a dictum justo.  Donec at orci orci, a dictum justo.</p>
 
-   <ul class="case-details">
-     <li>Case number: {{ case.case_number }}</li>
-     <li>Incident date: {{ case.date_of_incident }}</li>
-     <li>Location: {{ case.address }}</li>
-   </ul>
-</div>
+       <ul class="case-details">
+         <li>Case number: {{ case.case_number }}</li>
+         <li>
+           <span>Plaintiff: </span>
+           {% for victim in case.victims %}
+             {{ victim.victim_1 }}
+           {% endfor %}
+         </li>
+         <li><span>Incident date: </span>{{ case.date_of_incident }}</li>
+         <li><span>Location: </span>{{ case.address }}</li>
+       </ul>
+    </div>
+
+    <div class="case-officers">
+      <h5>Officers involved:</h5>
+       {% for officer in case.officers %}
+        <a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}" class="police-icon" data-firstname="{{ officer.first }}" data-lastname="{{ officer.last }}" {% if officer.badge_number %}(data-badge="{{ officer.badge_number }}"){% endif %}>  </a>
+       {% endfor %}
+    </div>
+
+  </div>
+</a>

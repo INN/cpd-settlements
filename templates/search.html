@@ -9,14 +9,14 @@
 {% endblock library_css %}
 
 {% block content %}
+<div id="bg-12" class="bgimg"></div>
 <div class="container">
   <!-- <div class="jumbotron">
     <h1>Cases</h1>
     <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
   </div> -->
-  <div class="search row">
-    <div class="col-xs-12" id="tabs">
-    <h2>Search the settlement database</h2>
+  <div class="search">
+    <div id="tabs">
       <ul id="search-selector" class="tab-selector">
         <li class="cases {% if init_view == 'cases' %}active{% endif %}"><a href="/search/cases">Filter cases</a></li>
         <li class="officers {% if init_view == 'officers' %}active{% endif %}"><a href="/search/officers">Officer search</a></li>
@@ -29,42 +29,45 @@
           {% include 'templates/_officer_search_form.html' %}
         </div>
       </div>
-      <div id="case-search-statement"></div>
     </div>
   </div>
 
-  <div class="case-list row">
-    <div class="col-xs-12">
-      <h3>Results</h3>
-      <div class="case-list-sort-container">
-        <label for="case-list-sort">Sort by:</label>
-        <select id="case-list-sort" class="chosen" style="float: right">
-          <option value="payment-high-low">Payment, high to low</option>
-          <option value="payment-low-high">Payment, low to high</option>
-        </select>
+  <div id="results-wrapper">
+    <h2>Search the settlement database</h2>
+    <div id="case-search-statement"></div>
+    <div class="case-list row">
+      <div class="col-xs-12">
+        <h3>Results</h3>
+        <div class="case-list-sort-container">
+          <label for="case-list-sort">Sort by:</label>
+          <select id="case-list-sort" class="chosen" style="float: right">
+            <option value="payment-high-low">Payment, high to low</option>
+            <option value="payment-low-high">Payment, low to high</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="case-list-inner" id="case-list-view">
+          {% for case in cases %}
+            {% include 'templates/_case.html' %}
+          {% endfor %}
+        </div>
       </div>
     </div>
-    <div class="col-xs-12">
-      <div class="case-list-inner" id="case-list-view">
-        {% for case in cases %}
-          {% include 'templates/_case.html' %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
 
-  <div class="officer-list row">
-    <div class="col-xs-12">
-      <h3>Officers</h3>
-    </div>
-    <div class="col-xs-12">
-      <div class="officer-list-inner" id="officer-list-view">
-        {% for officer in officers %}
-          {% include 'templates/_officer.html' %}
-        {% endfor %}
+    <div class="officer-list row">
+      <div class="col-xs-12">
+        <h3>Officers</h3>
+      </div>
+      <div class="col-xs-12">
+        <div class="officer-list-inner" id="officer-list-view">
+          {% for officer in officers %}
+            {% include 'templates/_officer.html' %}
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
+  </div> <!--end: results wrapper-->
 </div>
 {% endblock content %}
 
@@ -86,27 +89,55 @@
 {{ JS.render('js/search.min.js') }}
 
 <script type="text/template" id="case-tmpl">
-  <div class="case" data-case_number="<%= model.case_number %>">
 
-    <h2><a href="<%= site_path %>case/<%= model.slug %>">$<%= Number(model.total_payments).formatMoney() %> for <%= model.primary_cause %></a></h2>
+  <a href="<%= site_path %>case/<%= model.slug %>">
+    <div class="case" data-case_number="<%= model.case_number %>">
 
-    <h3>Victim:</h3>
-     <% _.each(model.victims, function(victim) { %>
-      <p><%= victim.victim_1 %></p>
-     <% }) %>
+      <div class="case-payment">
+        <h2>$<%= Number(model.total_payments).formatMoney() %></h2>
+        <h3><%= model.primary_cause %></h3>
+      </div>
 
-    <h3>Officers involved:</h3>
-     <% _.each(model.officers, function(officer) { %>
-      <span class="officer"><a href="<%= site_path %>officer/<%= officer.slug %>"><%= officer.first %> <%= officer.last %></a></span>
-     <% }) %>
+      <div class="case-description">
+        <h4>Case <%= model.case_number %></h4>
 
-     <ul class="case-details">
-       <li>Case number: <%= model.case_number %></li>
-       <li>Incident date: <%= model.date_of_incident %></li>
-       <li>Location: <% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
-     </ul>
-  </div>
+         <p>In facilisis scelerisque dui vel dignissim. Sed nunc orci, ultricies congue vehicula quis, facilisis a orci. In aliquet facilisis condimentum. Donec at orci orci, a dictum justo.  Donec at orci orci, a dictum justo.</p>
+
+         <ul class="case-details">
+           <li>
+             <span>Plaintiff: </span>
+             <% _.each(model.victims, function(victim) { %>
+              <p><%= victim.victim_1 %></p>
+             <% }) %>
+           </li>
+           <li><span>Incident date: </span><%= model.date_of_incident %></li>
+           <li><span>Location: </span><% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
+         </ul>
+      </div>
+
+      <div class="case-officers">
+        <h5>Officers involved:</h5>
+          <% _.each(model.officers, function(officer) { %>
+          <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"></a>
+         <% }) %>
+      </div>
+
+    </div>
+  </a>
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
 
 <script type="text/template" id="officer-tmpl">
   <div class="officer" data-case_number="<%= model.case_number %>">

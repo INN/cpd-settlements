@@ -12,6 +12,7 @@ html,
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
+  color: #000000;
 }
 h1,
 h2,
@@ -56,7 +57,7 @@ Navigation
 Search Screen               
 ========================================================================== */
 .container {
-  max-width: 1100px;
+  max-width: 1600px;
   padding: 80px 0;
 }
 .container .jumbotron {
@@ -74,6 +75,20 @@ Search Screen
   font-weight: 400;
   line-height: 1.333;
 }
+.page-s .bgimg {
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+}
+.page-s #bg-12 {
+  background-image: url("../images/02-IMG_9158.jpg");
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+}
 body.cases .officer-tab {
   display: none;
 }
@@ -89,50 +104,74 @@ body.officers .case-tab {
 /* ==========================================================================
 Filters
 ========================================================================== */
+.search {
+  width: 30%;
+  float: left;
+}
 .search h2 {
   margin-bottom: 1em;
+}
+#results-wrapper {
+  width: 70%;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #000;
+  padding: 20px;
 }
 ul.tab-selector {
   padding: 0;
   margin-bottom: 0;
   list-style: none;
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid #3d9999;
   position: relative;
   z-index: 2;
 }
 ul.tab-selector li {
+  width: 50%;
+  float: left;
   display: inline-block;
-  background-color: #484848;
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-bottom: none;
   position: relative;
   margin-bottom: -1px;
+  text-align: center;
+}
+ul.tab-selector li.officers {
+  border-right: none;
 }
 ul.tab-selector li a {
   display: block;
-  padding: 8px 12px;
+  padding: 20px;
   margin-bottom: -1px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
   text-transform: uppercase;
-  color: #aaaaaa;
+  color: #3d9999;
+  transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -webkit-transition: color 0.1s ease-in-out;
 }
 ul.tab-selector li a:hover {
   text-decoration: none;
   color: #ffffff;
 }
 ul.tab-selector li.active {
-  background-color: #eaeaea;
-  border: 1px solid #d0d0d0;
-  border-bottom: none;
+  background-color: #3d9999;
 }
 ul.tab-selector li.active a {
-  color: #484848;
+  color: #ffffff;
   text-decoration: none;
 }
 ul.tab-selector li.active a:hover {
   color: #000000;
 }
 .tab-containers {
-  background-color: #eaeaea;
-  border: 1px solid #d0d0d0;
+  background-color: #3d9999;
+  border: 1px solid #000000;
   border-top: none;
+  border-right: none;
   margin-bottom: 2em;
 }
 .tab-containers:after {
@@ -146,6 +185,7 @@ ul.tab-selector li.active a:hover {
   font-size: .8em;
   font-weight: bold;
   text-transform: uppercase;
+  display: none;
 }
 .tab-containers #tag-toggle:hover {
   cursor: pointer;
@@ -157,19 +197,22 @@ ul.tab-selector li.active a:hover {
 .tab-containers #tag-toggle span:after {
   content: "Show tags";
 }
+.tab-containers .search-form {
+  float: left;
+  width: 100%;
+  padding: 30px 20px 20px;
+}
 .tab-containers #tag-group {
-  display: none;
-  background-color: #ffffff;
+  display: block;
 }
 .tab-containers .form-group {
   display: inline-block;
   vertical-align: top;
-  width: 32%;
-  padding: 16px;
+  width: 100%;
   margin-bottom: 10px;
 }
 .tab-containers .form-group.tags {
-  width: 48%;
+  width: 100%;
 }
 .tab-containers .form-group.tags label:not(.option) {
   margin-top: .75em;
@@ -184,25 +227,15 @@ ul.tab-selector li.active a:hover {
   text-transform: lowercase;
   font-weight: normal;
   padding: 4px 6px;
-  background-color: #eaeaea;
-  border: 1px solid #c8c8c8;
-  border-radius: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
   line-height: 1;
   font-size: 1em;
 }
 .tab-containers .form-group label.option:hover {
   cursor: pointer;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f5f5f5+100 */
-  background: #ffffff;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
-  /* IE6-9 */
+  border: 1px solid #000000;
 }
 .tab-containers .form-group label.option i {
   opacity: .7;
@@ -217,28 +250,40 @@ ul.tab-selector li.active a:hover {
   overflow: hidden;
 }
 .tab-containers .form-group input[type=checkbox]:checked + .option {
-  background-color: #3d9999;
+  background-color: #000000;
   color: #ffffff;
-  border: 1px solid #019999;
+  border: 1px solid #000000;
 }
 .tab-containers .form-group input[type=checkbox]:checked + .option:hover {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#44aaaa+0,018087+100 */
-  background: #44aaaa;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #44aaaa 0%, #018087 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #44aaaa 0%, #018087 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #44aaaa 0%, #018087 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44aaaa', endColorstr='#018087', GradientType=0);
-  /* IE6-9 */
+  border: 1px solid #ffffff;
+}
+.tab-containers .form-group .chosen-container-single .chosen-single {
+  border-radius: 0;
+  border: 1px solid #000000;
+  background: #ffffff;
+  padding: 8px 0 8px 8px;
+  height: auto;
+}
+.tab-containers .form-group .chosen-container-single .chosen-single div b {
+  background-position: 0px 10px;
+}
+.tab-containers .form-group .chosen-container-single .chosen-drop {
+  border-radius: 0;
+  border: 1px solid #000000;
+  border-top: 0;
+  background: #ffffff;
 }
 .tab-containers #officer-search-form .form-group {
   width: 100%;
 }
 .tab-containers #officer-search-form .form-group .twitter-typeahead {
   min-width: 100%;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+}
+.tab-containers #officer-search-form .form-group .twitter-typeahead .tt-input,
+.tab-containers #officer-search-form .form-group .twitter-typeahead .tt-hint {
+  padding: 8px;
 }
 .tab-containers #officer-search-form .form-group .typeahead {
   width: 100%;
@@ -289,11 +334,10 @@ Form Elements
 }
 .tt-menu {
   width: 600px;
-  margin: 12px 0;
-  padding: 8px 0;
+  margin: 0;
+  padding: 0;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #000000;
 }
 .tt-suggestion {
   padding: 3px 16px;
@@ -302,7 +346,7 @@ Form Elements
 }
 .tt-suggestion:hover {
   cursor: pointer;
-  background: #343434;
+  background: #3d9999;
   color: white;
 }
 .tt-suggestion p {
@@ -322,9 +366,43 @@ Results
   display: none;
 }
 .case {
-  border: 1px solid #eaeaea;
-  padding: 16px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
   margin: 0 0 2em;
+}
+.case .case-payment {
+  padding: 20px;
+  background-color: #000000;
+}
+.case .case-payment h2 {
+  color: #ffffff;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.case .case-payment h3 {
+  color: #bd261d;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.case .case-description {
+  padding: 20px;
+  color: #000000;
+}
+.case .case-description h4 {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.case .case-details {
+  padding: 20px;
+}
+.case .case-officers {
+  padding: 20px;
+  background-color: #3d9999;
+  color: #000000;
+}
+.case .case-officers .police-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("../images/police-icon.svg") center center no-repeat;
+  background-size: contain;
 }
 .case h2 {
   margin-top: 0;
@@ -374,14 +452,13 @@ Results
 #cpd-headwrap {
   background-color: #000000;
   color: #fff;
-  border-bottom: 1px solid rgba(122, 122, 122, 0.5);
   line-height: 0;
 }
 #cpd-logo {
   display: inline-block;
   background-image: url("../images/cr-icon.jpg");
   background-size: contain;
-  border-right: 1px solid rgba(122, 122, 122, 0.5);
+  border: 1px solid #000;
   margin-right: 1em;
   line-height: 0;
 }
@@ -409,34 +486,6 @@ a.cpd-title:visited:hover {
   text-decoration: none;
   opacity: .9;
 }
-.cpd-links {
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-.cpd-links a {
-  padding: 0 1em;
-  border-right: 1px solid white;
-}
-.cpd-links a:hover {
-  color: #50b9b9;
-  text-decoration: none;
-}
-.cpd-links ul {
-  margin: 0;
-  list-style: none;
-  padding: 0;
-}
-.cpd-links li {
-  text-transform: uppercase;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 4.5;
-}
-.cpd-links li:last-of-type a {
-  border-right: none;
-}
 a,
 a:visited {
   text-decoration: none;
@@ -445,11 +494,44 @@ a:visited {
 a:hover {
   text-decoration: underline;
 }
+.cpd-links {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.cpd-links a {
+  padding: 0 1em;
+  display: block;
+  min-width: 100px;
+  line-height: 60px;
+  border: 1px solid #000;
+  border-left: 0;
+  background-color: #3d9999;
+  color: #ffffff;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.cpd-links a:hover {
+  background-color: #50b9b9;
+  text-decoration: none;
+}
+.cpd-links ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.cpd-links li {
+  float: right;
+}
 /* ==========================================================================
 Results
 ========================================================================== */
 #home {
-  background-color: #000;
+  background-color: #000000;
   /*
     Containers
   */
@@ -460,24 +542,23 @@ Results
     Elements
   */
 }
-#home #cpd-headwrap {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 #home h1,
 #home h2,
 #home h3,
 #home h4,
 #home h5,
 #home h6 {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: 700;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   color: #fff;
-}
-#home #cpd-scrolling {
-  background-color: #000;
 }
 #home .navbar {
   display: none;
+}
+#home #the-app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 #home h1 {
   font-weight: bold;
@@ -535,7 +616,7 @@ Results
 }
 #home #cpd-progress rect {
   height: 24px;
-  fill: #bd261d;
+  fill: #3d9999;
   /*fill:#000;*/
 }
 #home #desc {
@@ -578,12 +659,12 @@ Results
 }
 #home .block {
   width: 100%;
-  text-align: center;
+  text-align: left;
   z-index: 2;
   position: absolute;
 }
 #home .block h3 {
-  font-size: 3.5em;
+  font-size: 3em;
   line-height: 1.15;
   margin-top: 2em;
   margin-bottom: 0;
@@ -677,6 +758,11 @@ Results
 }
 #home #bg-11 {
   background-image: url("../images/02-IMG_9158.jpg");
+}
+#home #bg-12 {
+  background-image: url("../images/02-IMG_9158.jpg");
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
 }
 #home #bg-11-overlay {
   background-color: rgba(0, 0, 0, 0.7);
@@ -810,19 +896,5 @@ Results
   }
   #home .spacer.vh1.half {
     min-height: 25vh;
-  }
-  ul.tab-selector {
-    font-size: .8em;
-  }
-  .tab-containers .form-group {
-    width: 100%;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-  .tab-containers .form-group:last-of-type {
-    padding-bottom: 16px;
-  }
-  .tab-containers #tag-toggle {
-    margin-top: 16px;
   }
 }

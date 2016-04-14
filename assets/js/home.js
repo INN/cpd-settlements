@@ -288,9 +288,9 @@ function initScroll(){
 					.on('enter', function(e){
 						TweenMax.to('#bg-11', 1, {opacity:1});
 					})
-					.on('leave', function(e){
-						TweenMax.to('#bg-11', 1, {opacity:0});
-					})
+					// .on('leave', function(e){
+					// 	TweenMax.to('#bg-11', 1, {opacity:0});
+					// })
 					.addTo(controller);
 
 	// slide 8
@@ -340,10 +340,17 @@ function initScroll(){
 					.addTo(controller)
 					.setPin("#slide-11 .block h3")
 					.on('enter', function(e){
+						TweenMax.to('#bg-12', 1, {opacity:0});
 						TweenMax.to('#slide-11', 1, {opacity:1});
+						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
 					})
 					.on('leave', function(e){
-						TweenMax.to('#slide-11', 1, {opacity:0});
+						var direction = e.target.controller().info("scrollDirection").toLowerCase();
+						if (direction =='forward'){
+							TweenMax.to('#slide-11', 1, {opacity:0});
+							TweenMax.to('#bg-11-overlay', 2, {opacity:0});
+							TweenMax.to('#bg-12', 1, {opacity:1});
+						}
 					});
 
 	// init tween, then scene
