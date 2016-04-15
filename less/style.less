@@ -233,99 +233,104 @@ ul.tab-selector {
   #tag-group {
     display:block;
   }
-  .form-group {
-    display:inline-block;   
-    vertical-align:top;
-    width:100%;
-    margin-bottom:10px;
+}
+label {
+  text-transform: uppercase;
+  font-size:.8em;
+  display:block;
 
-    &.tags {
-      width:100%;
+  &.option {
+    display: inline-block;
+    text-transform: lowercase;
+    font-weight: normal;
+    padding: 4px 6px;        
+    background-color: fade(@cr-lightest,75%);
+    color:@cr-darkest;
+    border:1px solid fade(@cr-lightest,75%);
+    line-height: 1;
+    font-size:1em;
 
-      label:not(.option) {
-        margin-top:.75em;
-      }
+    &:hover {
+      cursor:pointer;
+      background-color: @cr-lightest;
+      border:1px solid @cr-darkest;
     }
-    
-    label {
-      text-transform: uppercase;
+
+    i {
+      opacity:.7;
       font-size:.8em;
-      display:block;
-
-      &.option {
-        display: inline-block;
-        text-transform: lowercase;
-        font-weight: normal;
-        padding: 4px 6px;        
-        background-color: fade(@cr-lightest,75%);
-        color:@cr-darkest;
-        border:1px solid fade(@cr-lightest,75%);
-        line-height: 1;
-        font-size:1em;
-
-        &:hover {
-          cursor:pointer;
-          background-color: @cr-lightest;
-          border:1px solid @cr-darkest;
-        }
-
-        i {
-          opacity:.7;
-          font-size:.8em;
-        }
-      }
-    }
-    input[type=checkbox] {
-      position:absolute;
-      left:-10000px;
-      top:auto;
-      width:1px;
-      height:1px;
-      overflow:hidden;
-    }
-    input[type=checkbox]:checked + .option {
-      background-color:@cr-darkest;
-      color:@cr-lightest;
-      border:1px solid @cr-darkest;
-     
-      &:hover {
-        border:1px solid @cr-lightest;
-      }
-    }
-    .chosen-container-single .chosen-single {
-      border-radius:0;
-      border:1px solid @cr-darkest;
-      background:@cr-lightest;
-      padding:8px 0 8px 8px;
-      height:auto;
-    }
-    .chosen-container-single .chosen-single div b {
-      background-position:0px 10px;
-    }
-    .chosen-container-single .chosen-drop {
-      border-radius:0;
-      border:1px solid @cr-darkest;
-      border-top:0;
-      background:@cr-lightest;
     }
   }
-  #officer-search-form .form-group {
+}
+input[type=checkbox] {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+input[type=checkbox]:checked + .option {
+  background-color:@cr-darkest;
+  color:@cr-lightest;
+  border:1px solid @cr-darkest;
+ 
+  &:hover {
+    border:1px solid @cr-lightest;
+  }
+} 
+.chosen-container-single .chosen-single {
+  border-radius:0;
+  border:1px solid @cr-darkest;
+  background:@cr-lightest;
+  padding:8px 0 8px 8px;
+  height:auto;
+}
+.chosen-container-single .chosen-single div b {
+  background-position:0px 10px;
+}
+.chosen-container-single .chosen-drop {
+  border-radius:0;
+  border:1px solid @cr-darkest;
+  border-top:0;
+  background:@cr-lightest;
+}
+.chosen-container-single.chosen-container-active .chosen-single {
+  border:1px solid @cr-darkest;
+  background-image:none;
+  background-color:#fff;
+}
+.chosen-container-single.chosen-container-active .chosen-single div b {
+  background-position:-18px 10px
+}
+.twitter-typeahead {
+  min-width: 100%;
+  border:1px solid @cr-darkest;
+  background-color: @cr-lightest;
+
+  .tt-input, .tt-hint {
+    padding:8px;
+  }
+}
+.typeahead {
+  width:100%;
+}
+.form-group {
+  display:inline-block;   
+  vertical-align:top;
+  width:100%;
+  margin-bottom:10px;
+
+  &.tags {
     width:100%;
 
-    .twitter-typeahead {
-        min-width: 100%;
-        border:1px solid @cr-darkest;
-        background-color: @cr-lightest;
-
-        .tt-input, .tt-hint {
-          padding:8px;
-        }
+    label:not(.option) {
+      margin-top:.75em;
     }
-
-    .typeahead {
-      width:100%;
-    }
-  }
+  }    
+}
+#officer-search-form .form-group {
+  width:100%;    
 }
 
 
@@ -443,18 +448,26 @@ Results
     display:flex;
   }
 
-  .case-payment {
+  .case-payment-wrapper {
+    min-width:200px;
     padding:20px;
     background-color:@cr-darkest;
+    text-align:center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 
-    h2 {
-      color:@cr-lightest;
-      font-family:@cr-condensed;
-    }
+    .case-payment {
 
-    h3 {
-      color:@cr-alert;
-      font-family:@cr-condensed;
+      h2 {
+        color:@cr-lightest;
+        font-family:@cr-condensed;
+      }
+
+      h3 {
+        color:@cr-alert;
+        font-family:@cr-condensed;
+      }
     }
   }
 
@@ -472,13 +485,14 @@ Results
   .case-details {
     list-style-type: none;
     padding:0;
-    margin:20px 0 0 0;
+    margin:0;
     color:@cr-darkest;
     display:flex;
     justify-content:space-between;
+    flex-wrap:wrap;
     li {
       display:inline-block;
-      margin:0;
+      margin:20px 0 0 0;
       span {
         display:block;
       }
@@ -494,6 +508,7 @@ Results
     font-size:.8em;
     text-transform:uppercase;
     font-weight:700;
+    padding-right:10px;
   }
 
   .case-officers {
@@ -502,11 +517,16 @@ Results
     background-color:@cr-highlight;
     color:@cr-darkest;
     border-top:1px solid @cr-darkest;
+    display:flex;
 
     .card-label {
-      max-width: 70px;
-      display: inline-block;
+      width: 70px;
+      //display: inline-block;
       margin-right: 0px;
+    }
+
+    .officer-group {
+
     }
 
     .police-icon {

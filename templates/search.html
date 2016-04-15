@@ -94,9 +94,11 @@
     <div class="case" data-case_number="<%= model.case_number %>" onclick="location.href='<%= site_path %>case/<%= model.slug %>'">
 
       <div class="card-row">
-        <div class="case-payment">
-          <h2>$<%= Number(model.total_payments).formatMoney() %></h2>
-          <h3><%= model.primary_cause %></h3>
+        <div class="case-payment-wrapper">
+          <div class="case-payment">
+            <h2>$<%= Number(model.total_payments).formatMoney(0) %></h2>
+            <h3><%= model.primary_cause %></h3>
+          </div>
         </div>
 
         <div class="case-description">
@@ -108,7 +110,7 @@
              <li>
                <span class="card-label">Plaintiff: </span>
                <% _.each(model.victims, function(victim) { %>
-                <p><%= victim.victim_1 %></p>
+                <%= victim.victim_1 %>
                <% }) %>
              </li>
              <li><span class="card-label">Incident date: </span><%= model.date_of_incident %></li>
@@ -117,12 +119,16 @@
         </div>
       </div>
 
+      <% if ( model.officers.length > 0){ %>
       <div class="case-officers">
         <span class="card-label">Officers involved:</span>
+        <div class="officer-group">
           <% _.each(model.officers, function(officer) { %>
           <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"></a>
          <% }) %>
+         </div>
       </div>
+      <% } %>
 
     </div>
 

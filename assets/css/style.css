@@ -205,24 +205,12 @@ ul.tab-selector li.active a:hover {
 .tab-containers #tag-group {
   display: block;
 }
-.tab-containers .form-group {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-  margin-bottom: 10px;
-}
-.tab-containers .form-group.tags {
-  width: 100%;
-}
-.tab-containers .form-group.tags label:not(.option) {
-  margin-top: .75em;
-}
-.tab-containers .form-group label {
+label {
   text-transform: uppercase;
   font-size: .8em;
   display: block;
 }
-.tab-containers .form-group label.option {
+label.option {
   display: inline-block;
   text-transform: lowercase;
   font-weight: normal;
@@ -233,16 +221,16 @@ ul.tab-selector li.active a:hover {
   line-height: 1;
   font-size: 1em;
 }
-.tab-containers .form-group label.option:hover {
+label.option:hover {
   cursor: pointer;
   background-color: #ffffff;
   border: 1px solid #000000;
 }
-.tab-containers .form-group label.option i {
+label.option i {
   opacity: .7;
   font-size: .8em;
 }
-.tab-containers .form-group input[type=checkbox] {
+input[type=checkbox] {
   position: absolute;
   left: -10000px;
   top: auto;
@@ -250,43 +238,63 @@ ul.tab-selector li.active a:hover {
   height: 1px;
   overflow: hidden;
 }
-.tab-containers .form-group input[type=checkbox]:checked + .option {
+input[type=checkbox]:checked + .option {
   background-color: #000000;
   color: #ffffff;
   border: 1px solid #000000;
 }
-.tab-containers .form-group input[type=checkbox]:checked + .option:hover {
+input[type=checkbox]:checked + .option:hover {
   border: 1px solid #ffffff;
 }
-.tab-containers .form-group .chosen-container-single .chosen-single {
+.chosen-container-single .chosen-single {
   border-radius: 0;
   border: 1px solid #000000;
   background: #ffffff;
   padding: 8px 0 8px 8px;
   height: auto;
 }
-.tab-containers .form-group .chosen-container-single .chosen-single div b {
+.chosen-container-single .chosen-single div b {
   background-position: 0px 10px;
 }
-.tab-containers .form-group .chosen-container-single .chosen-drop {
+.chosen-container-single .chosen-drop {
   border-radius: 0;
   border: 1px solid #000000;
   border-top: 0;
   background: #ffffff;
 }
-.tab-containers #officer-search-form .form-group {
-  width: 100%;
+.chosen-container-single.chosen-container-active .chosen-single {
+  border: 1px solid #000000;
+  background-image: none;
+  background-color: #fff;
 }
-.tab-containers #officer-search-form .form-group .twitter-typeahead {
+.chosen-container-single.chosen-container-active .chosen-single div b {
+  background-position: -18px 10px;
+}
+.twitter-typeahead {
   min-width: 100%;
   border: 1px solid #000000;
   background-color: #ffffff;
 }
-.tab-containers #officer-search-form .form-group .twitter-typeahead .tt-input,
-.tab-containers #officer-search-form .form-group .twitter-typeahead .tt-hint {
+.twitter-typeahead .tt-input,
+.twitter-typeahead .tt-hint {
   padding: 8px;
 }
-.tab-containers #officer-search-form .form-group .typeahead {
+.typeahead {
+  width: 100%;
+}
+.form-group {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.form-group.tags {
+  width: 100%;
+}
+.form-group.tags label:not(.option) {
+  margin-top: .75em;
+}
+#officer-search-form .form-group {
   width: 100%;
 }
 /* ==========================================================================
@@ -380,15 +388,20 @@ Results
 .case .card-row {
   display: flex;
 }
-.case .case-payment {
+.case .case-payment-wrapper {
+  min-width: 200px;
   padding: 20px;
   background-color: #000000;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.case .case-payment h2 {
+.case .case-payment-wrapper .case-payment h2 {
   color: #ffffff;
   font-family: 'Open Sans Condensed', sans-serif;
 }
-.case .case-payment h3 {
+.case .case-payment-wrapper .case-payment h3 {
   color: #bd261d;
   font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -404,14 +417,15 @@ Results
 .case .case-details {
   list-style-type: none;
   padding: 0;
-  margin: 20px 0 0 0;
+  margin: 0;
   color: #000000;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .case .case-details li {
   display: inline-block;
-  margin: 0;
+  margin: 20px 0 0 0;
 }
 .case .case-details li span {
   display: block;
@@ -425,6 +439,7 @@ Results
   font-size: .8em;
   text-transform: uppercase;
   font-weight: 700;
+  padding-right: 10px;
 }
 .case .case-officers {
   width: 100%;
@@ -432,10 +447,10 @@ Results
   background-color: #3d9999;
   color: #000000;
   border-top: 1px solid #000000;
+  display: flex;
 }
 .case .case-officers .card-label {
-  max-width: 70px;
-  display: inline-block;
+  width: 70px;
   margin-right: 0px;
 }
 .case .case-officers .police-icon {
