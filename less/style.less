@@ -257,14 +257,15 @@ ul.tab-selector {
         text-transform: lowercase;
         font-weight: normal;
         padding: 4px 6px;        
-        background-color: @cr-lightest;
+        background-color: fade(@cr-lightest,75%);
         color:@cr-darkest;
-        border:1px solid @cr-lightest;
+        border:1px solid fade(@cr-lightest,75%);
         line-height: 1;
         font-size:1em;
 
         &:hover {
           cursor:pointer;
+          background-color: @cr-lightest;
           border:1px solid @cr-darkest;
         }
 
@@ -429,6 +430,18 @@ Results
   border:1px solid @cr-darkest;
   background-color: @cr-lightest;
   margin:0 0 2em;
+  display:flex;
+  flex-wrap:wrap;
+
+  &:hover {
+    box-shadow: 0px 0px 3px @cr-darkest;
+    //border-color:@cr-highlight;
+    cursor:pointer;
+  }
+
+  .card-row {
+    display:flex;
+  }
 
   .case-payment {
     padding:20px;
@@ -447,25 +460,60 @@ Results
 
   .case-description {
     padding:20px;
-    color:@cr-darkest;
+    color:lighten(@cr-darkest,20%);
 
     h4 {      
       font-family:@cr-condensed;
+      margin-top:0;
+      color:@cr-darkest;
     }
   }
 
   .case-details {
-    padding:20px;
+    list-style-type: none;
+    padding:0;
+    margin:20px 0 0 0;
+    color:@cr-darkest;
+    display:flex;
+    justify-content:space-between;
+    li {
+      display:inline-block;
+      margin:0;
+      span {
+        display:block;
+      }
+      p{
+        margin-bottom:0;
+        font-size:.8em;
+      }
+    }
   }
+
+  .card-label {
+    color:@cr-darkest;
+    font-size:.8em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+
   .case-officers {
+    width:100%;
     padding:20px;
     background-color:@cr-highlight;
     color:@cr-darkest;
+    border-top:1px solid @cr-darkest;
+
+    .card-label {
+      max-width: 70px;
+      display: inline-block;
+      margin-right: 0px;
+    }
 
     .police-icon {
       display:inline-block;
       width:30px;
       height:30px;
+      margin-bottom:-2px;
       background:url("../images/police-icon.svg") center center no-repeat;
       background-size:contain;
     }
@@ -490,19 +538,6 @@ Results
     &:last-of-type:after{
       content: '';
     }
-  }
-}
-
-.case-details {
-  list-style-type: none;
-  padding:0;
-  margin-bottom:0;
-  li {
-    display:inline-block;
-    color:@cr-light;
-    margin:16px 16px 0 0;
-    font-size:.8em;
-    text-transform:uppercase;
   }
 }
 

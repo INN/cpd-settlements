@@ -1,6 +1,7 @@
-<a href="{{ url_for('cpd_settlements.case', slug=case.slug) }}">
-  <div class="case" data-case_number="{{ case.case_number }}">
 
+<div class="case" data-case_number="{{ case.case_number }}">
+
+  <div class="card-row">
     <div class="case-payment">
       <h2>{{ total_for_payments(case.payments) }}</h2>
       <h3>{{ case.primary_cause }}</h3>
@@ -23,13 +24,13 @@
          <li><span>Location: </span>{{ case.address }}</li>
        </ul>
     </div>
-
-    <div class="case-officers">
-      <h5>Officers involved:</h5>
-       {% for officer in case.officers %}
-        <a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}" class="police-icon" data-firstname="{{ officer.first }}" data-lastname="{{ officer.last }}" {% if officer.badge_number %}(data-badge="{{ officer.badge_number }}"){% endif %}>  </a>
-       {% endfor %}
-    </div>
-
   </div>
-</a>
+
+  <div class="case-officers">
+    <h5>Officers involved:</h5>
+     {% for officer in case.officers %}
+      <a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}" class="police-icon" data-firstname="{{ officer.first }}" data-lastname="{{ officer.last }}" {% if officer.badge_number %}(data-badge="{{ officer.badge_number }}"){% endif %}>  </a>
+     {% endfor %}
+  </div>
+
+</div>

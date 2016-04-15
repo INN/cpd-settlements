@@ -90,40 +90,41 @@
 
 <script type="text/template" id="case-tmpl">
 
-  <a href="<%= site_path %>case/<%= model.slug %>">
-    <div class="case" data-case_number="<%= model.case_number %>">
 
-      <div class="case-payment">
-        <h2>$<%= Number(model.total_payments).formatMoney() %></h2>
-        <h3><%= model.primary_cause %></h3>
-      </div>
+    <div class="case" data-case_number="<%= model.case_number %>" onclick="location.href='<%= site_path %>case/<%= model.slug %>'">
 
-      <div class="case-description">
-        <h4>Case <%= model.case_number %></h4>
+      <div class="card-row">
+        <div class="case-payment">
+          <h2>$<%= Number(model.total_payments).formatMoney() %></h2>
+          <h3><%= model.primary_cause %></h3>
+        </div>
 
-         <p>In facilisis scelerisque dui vel dignissim. Sed nunc orci, ultricies congue vehicula quis, facilisis a orci. In aliquet facilisis condimentum. Donec at orci orci, a dictum justo.  Donec at orci orci, a dictum justo.</p>
+        <div class="case-description">
+          <h4>Case <%= model.case_number %></h4>
 
-         <ul class="case-details">
-           <li>
-             <span>Plaintiff: </span>
-             <% _.each(model.victims, function(victim) { %>
-              <p><%= victim.victim_1 %></p>
-             <% }) %>
-           </li>
-           <li><span>Incident date: </span><%= model.date_of_incident %></li>
-           <li><span>Location: </span><% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
-         </ul>
+           <p>In facilisis scelerisque dui vel dignissim. Sed nunc orci, ultricies congue vehicula quis, facilisis a orci. In aliquet facilisis condimentum. Donec at orci orci, a dictum justo.  Donec at orci orci, a dictum justo.</p>
+
+           <ul class="case-details">
+             <li>
+               <span class="card-label">Plaintiff: </span>
+               <% _.each(model.victims, function(victim) { %>
+                <p><%= victim.victim_1 %></p>
+               <% }) %>
+             </li>
+             <li><span class="card-label">Incident date: </span><%= model.date_of_incident %></li>
+             <li><span class="card-label">Location: </span><% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
+           </ul>
+        </div>
       </div>
 
       <div class="case-officers">
-        <h5>Officers involved:</h5>
+        <span class="card-label">Officers involved:</span>
           <% _.each(model.officers, function(officer) { %>
           <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"></a>
          <% }) %>
       </div>
 
     </div>
-  </a>
 
 
 

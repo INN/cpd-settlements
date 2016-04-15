@@ -227,14 +227,15 @@ ul.tab-selector li.active a:hover {
   text-transform: lowercase;
   font-weight: normal;
   padding: 4px 6px;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.75);
   color: #000000;
-  border: 1px solid #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.75);
   line-height: 1;
   font-size: 1em;
 }
 .tab-containers .form-group label.option:hover {
   cursor: pointer;
+  background-color: #ffffff;
   border: 1px solid #000000;
 }
 .tab-containers .form-group label.option i {
@@ -369,6 +370,15 @@ Results
   border: 1px solid #000000;
   background-color: #ffffff;
   margin: 0 0 2em;
+  display: flex;
+  flex-wrap: wrap;
+}
+.case:hover {
+  box-shadow: 0px 0px 3px #000000;
+  cursor: pointer;
+}
+.case .card-row {
+  display: flex;
 }
 .case .case-payment {
   padding: 20px;
@@ -384,23 +394,55 @@ Results
 }
 .case .case-description {
   padding: 20px;
-  color: #000000;
+  color: #333333;
 }
 .case .case-description h4 {
   font-family: 'Open Sans Condensed', sans-serif;
+  margin-top: 0;
+  color: #000000;
 }
 .case .case-details {
-  padding: 20px;
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+}
+.case .case-details li {
+  display: inline-block;
+  margin: 0;
+}
+.case .case-details li span {
+  display: block;
+}
+.case .case-details li p {
+  margin-bottom: 0;
+  font-size: .8em;
+}
+.case .card-label {
+  color: #000000;
+  font-size: .8em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 .case .case-officers {
+  width: 100%;
   padding: 20px;
   background-color: #3d9999;
   color: #000000;
+  border-top: 1px solid #000000;
+}
+.case .case-officers .card-label {
+  max-width: 70px;
+  display: inline-block;
+  margin-right: 0px;
 }
 .case .case-officers .police-icon {
   display: inline-block;
   width: 30px;
   height: 30px;
+  margin-bottom: -2px;
   background: url("../images/police-icon.svg") center center no-repeat;
   background-size: contain;
 }
@@ -420,18 +462,6 @@ Results
 }
 .case span.officer:last-of-type:after {
   content: '';
-}
-.case-details {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 0;
-}
-.case-details li {
-  display: inline-block;
-  color: #aaaaaa;
-  margin: 16px 16px 0 0;
-  font-size: .8em;
-  text-transform: uppercase;
 }
 .case-list-sort-container {
   margin: 16px 0;
