@@ -1,6 +1,8 @@
 (function() {
   var $ = jQuery;
 
+  var pymChild = new pym.Child({ id: 'the-app' });
+
   // Router
   var SearchRouter = Backbone.Router.extend({
     routes: {
@@ -285,6 +287,7 @@
       this.filterData = this.$el.serializeObject();
       this.filterCases();
       this.updateStatement();
+      pymChild.sendHeight();
     },
 
     updateStatement: function() {
@@ -486,6 +489,14 @@
       pushState: true,
       root: site_path
     });
+
+    if ( window.location !== window.parent.location ) {     
+      $('body').addClass('iframed');
+    } else {      
+      $('body').addClass('not-iframed');
+    }
+    
+      pymChild.sendHeight();
   });
 
 })();

@@ -174,13 +174,14 @@
 	</section>
 	<div class="spacer vh1"></div>
 	<div class="spacer vh1"></div>
-
-	<div id="bg-12" class="bgimg"></div>
 	
 </div>
 
-<div id="the-app">
-	
+<div id="bg-12" class="bgimg"></div>
+
+<div id="app-wrapper">
+	<div id="replay-intro">replay!</div>
+	<div id="the-app"></div>
 </div>
 
 
@@ -204,6 +205,14 @@
 	$(document).ready(function(){	
 		loadText(); //holding off on spreadsheets integration for now (until scrolling events are figured out)
 		//initScroll();
+		$('#replay-intro').click(function(){
+			$('#cpd-scrolling').show();	
+			$('.slide, .bgimg').css('opacity', '');
+			$('iframe').css('opacity', 0);
+			initScroll();
+		})
+		var pymParent = new pym.Parent('the-app', '/search/cases/', {});
+		//history.pushState('data', '', 'http://your-domain/path');
 	});
 </script>
 

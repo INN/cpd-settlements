@@ -87,6 +87,7 @@ Search Screen
 .page-s #bg-12 {
   background-image: url("../images/02-IMG_9158.jpg");
   -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
   filter: blur(10px);
 }
 body.cases .officer-tab {
@@ -333,7 +334,6 @@ Form Elements
 }
 .typeahead {
   background-color: #fff;
-  width: 400px;
 }
 .typeahead:focus {
   border: 2px solid #0097cf;
@@ -600,10 +600,16 @@ Results
 #home .navbar {
   display: none;
 }
+#home #replay-intro {
+  position: absolute;
+  top: 100px;
+  z-index: 5;
+}
 #home #the-app {
   width: 100%;
   min-height: 100vh;
-  background-color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 4;
 }
 #home h1 {
   font-weight: bold;
@@ -807,6 +813,7 @@ Results
 #home #bg-12 {
   background-image: url("../images/02-IMG_9158.jpg");
   -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
   filter: blur(5px);
 }
 #home #bg-11-overlay {
@@ -942,4 +949,22 @@ Results
   #home .spacer.vh1.half {
     min-height: 25vh;
   }
+}
+/* ==========================================================================
+Framed vs Not Framed
+========================================================================== */
+iframe {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+}
+body.iframed {
+  background-color: transparent;
+}
+.iframed #cpd-header {
+  display: none;
+}
+.iframed #bg-12 {
+  display: none;
 }

@@ -349,7 +349,19 @@ function initScroll(){
 						if (direction =='forward'){
 							TweenMax.to('#slide-11', 1, {opacity:0});
 							TweenMax.to('#bg-11-overlay', 2, {opacity:0});
-							TweenMax.to('#bg-12', 1, {opacity:1});
+							TweenMax.to('#bg-12', .5, {opacity:1});
+								
+							controller.destroy(true);
+							controller = null;
+							
+							$('body').css('overflow','hidden');
+							setTimeout(function(){
+								$('#cpd-scrolling').hide();				
+								$(window).scrollTop(0);
+								$('iframe').css('opacity', 1);
+								$('body').css('overflow','auto');
+							},1000);
+						
 						}
 					});
 
