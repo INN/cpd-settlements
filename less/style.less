@@ -23,6 +23,7 @@ html, body {
   font-family: @cr-regular;
   font-weight: 400;
   color:@cr-darkest;
+  background-color:transparent;
 }
 
 h1, h2, h3 {
@@ -87,7 +88,7 @@ Search Screen
     }
   }
 }
-.page-s .bgimg {
+:not(#home) .bgimg {
   background-size: cover;
   background-position: center center;
   height: 100vh;
@@ -96,7 +97,7 @@ Search Screen
   z-index: -1;
   top:0;
 }
-.page-s #bg-12 {
+#bg-static {
   background-image: url("../images/02-IMG_9158.jpg");
   -webkit-filter: blur(10px);
   -moz-filter: blur(10px);
@@ -134,10 +135,26 @@ Filters
 #results-wrapper {
   width:70%;
   float:left;
+}
+.results-wrapper-inner {
   background-color:rgba(0,0,0,.7);
   border:1px solid #000;
   padding:20px;
+  margin-bottom:1px;
+
+  label {
+    color:@cr-lightest;
+  }
 }
+#search-intro, #case-search-statement {
+  font-family:@cr-regular;
+  font-weight:300;
+  color:@cr-lightest;
+  text-align:center;
+  font-size:2em;
+}
+
+
 
 ul.tab-selector {
   padding:0;
@@ -561,12 +578,41 @@ Results
   }
 }
 
+label.results-label {
+  width:49.5%;
+  display:inline-block;
+  line-height: 26px;
+}
 .case-list-sort-container {
-  margin: 16px 0;
+  margin: 0 0 16px 0;
+  width: 50%;
+  text-align: right;
+  display:inline-block;
   label {
     vertical-align: middle;
     line-height: 26px;
-    margin-bottom: 0;
+    margin: 0 8px 0 0;
+    display:inline-block;
+  }
+  #case-list-sort, .chosen-container {
+    display:inline-block;
+    width:50%;
+    text-align: left;
+
+    .chosen-single {
+      background-color:rgba(0,0,0,.9);
+      box-shadow:none;
+      border:1px solid @cr-darkest;
+      color:@cr-lightest;
+    }
+    .chosen-drop {
+      background-color:rgba(0,0,0,.9);
+      border:1px solid @cr-darkest;
+      border-top:none;
+    }
+    .chosen-results {
+      color:@cr-lightest;
+    }
   }
 }
 
@@ -1083,6 +1129,6 @@ body.iframed {
 .iframed #cpd-header {
   display:none;
 }
-.iframed #bg-12 {
+.iframed #bg-static {
   display:none;
 }

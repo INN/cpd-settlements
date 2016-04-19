@@ -261,6 +261,7 @@
       // how to handle empties
       var content = this.template(context);
       this.$el.html(content.trim() + '.');
+      $('#search-intro').hide();
     }
   });
 
@@ -495,7 +496,7 @@
     } else {      
       $('body').addClass('not-iframed');
     }
-    
+
       pymChild.sendHeight();
   });
 

@@ -13,6 +13,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   color: #000000;
+  background-color: transparent;
 }
 h1,
 h2,
@@ -75,7 +76,7 @@ Search Screen
   font-weight: 400;
   line-height: 1.333;
 }
-.page-s .bgimg {
+:not(#home) .bgimg {
   background-size: cover;
   background-position: center center;
   height: 100vh;
@@ -84,7 +85,7 @@ Search Screen
   z-index: -1;
   top: 0;
 }
-.page-s #bg-12 {
+#bg-static {
   background-image: url("../images/02-IMG_9158.jpg");
   -webkit-filter: blur(10px);
   -moz-filter: blur(10px);
@@ -115,9 +116,23 @@ Filters
 #results-wrapper {
   width: 70%;
   float: left;
+}
+.results-wrapper-inner {
   background-color: rgba(0, 0, 0, 0.7);
   border: 1px solid #000;
   padding: 20px;
+  margin-bottom: 1px;
+}
+.results-wrapper-inner label {
+  color: #ffffff;
+}
+#search-intro,
+#case-search-statement {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2em;
 }
 ul.tab-selector {
   padding: 0;
@@ -478,13 +493,45 @@ Results
 .case span.officer:last-of-type:after {
   content: '';
 }
+label.results-label {
+  width: 49.5%;
+  display: inline-block;
+  line-height: 26px;
+}
 .case-list-sort-container {
-  margin: 16px 0;
+  margin: 0 0 16px 0;
+  width: 50%;
+  text-align: right;
+  display: inline-block;
 }
 .case-list-sort-container label {
   vertical-align: middle;
   line-height: 26px;
-  margin-bottom: 0;
+  margin: 0 8px 0 0;
+  display: inline-block;
+}
+.case-list-sort-container #case-list-sort,
+.case-list-sort-container .chosen-container {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+.case-list-sort-container #case-list-sort .chosen-single,
+.case-list-sort-container .chosen-container .chosen-single {
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: none;
+  border: 1px solid #000000;
+  color: #ffffff;
+}
+.case-list-sort-container #case-list-sort .chosen-drop,
+.case-list-sort-container .chosen-container .chosen-drop {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid #000000;
+  border-top: none;
+}
+.case-list-sort-container #case-list-sort .chosen-results,
+.case-list-sort-container .chosen-container .chosen-results {
+  color: #ffffff;
 }
 /* 
   Nav
@@ -965,6 +1012,6 @@ body.iframed {
 .iframed #cpd-header {
   display: none;
 }
-.iframed #bg-12 {
+.iframed #bg-static {
   display: none;
 }

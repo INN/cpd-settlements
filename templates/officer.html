@@ -2,6 +2,14 @@
 
 {% block content %}
 <div class="container">
-  {% include 'templates/_officer.html' %}
+	{% block search %}
+		{% include 'templates/_search.html' %}
+	{% endblock search %}
+
+	<div id="results-wrapper">
+		<div class="results-wrapper-inner">
+			{% include 'templates/_officer.html' %}
+		</div>
+	</div>
 </div>
 {% endblock content %}

@@ -8,67 +8,63 @@
 
 {% endblock library_css %}
 
+
+
+
+
 {% block content %}
-<div id="bg-12" class="bgimg"></div>
-<div class="container">
   <!-- <div class="jumbotron">
     <h1>Cases</h1>
     <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
   </div> -->
-  <div class="search">
-    <div id="tabs">
-      <ul id="search-selector" class="tab-selector">
-        <li class="cases {% if init_view == 'cases' %}active{% endif %}"><a href="/search/cases">Filter cases</a></li>
-        <li class="officers {% if init_view == 'officers' %}active{% endif %}"><a href="/search/officers">Officer search</a></li>
-      </ul>
-      <div class="tab-containers">
-        <div data-tab-id="cases" class="tab-container case-tab">
-          {% include 'templates/_case_search_form.html' %}
-        </div>
-        <div data-tab-id="officers" class="tab-container officer-tab">
-          {% include 'templates/_officer_search_form.html' %}
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="bg-static" class="bgimg"></div>
+  <div class="container">
+
+  {% block search %}
+    {% include 'templates/_search.html' %}
+  {% endblock search %}
 
   <div id="results-wrapper">
-    <h2>Search the settlement database</h2>
-    <div id="case-search-statement"></div>
-    <div class="case-list row">
-      <div class="col-xs-12">
-        <h3>Results</h3>
-        <div class="case-list-sort-container">
-          <label for="case-list-sort">Sort by:</label>
-          <select id="case-list-sort" class="chosen" style="float: right">
-            <option value="payment-high-low">Payment, high to low</option>
-            <option value="payment-low-high">Payment, low to high</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <div class="case-list-inner" id="case-list-view">
-          {% for case in cases %}
-            {% include 'templates/_case.html' %}
-          {% endfor %}
-        </div>
-      </div>
+    <div class="results-wrapper-inner">
+      <div id="search-intro">Search the settlement database</div>
+      <div id="case-search-statement"></div>
     </div>
+    <div class="results-wrapper-inner">
+      <div class="case-list row">
+        <div class="col-xs-12">
+          <label class="results-label">Results</label>
+          <div class="case-list-sort-container">
+            <label for="case-list-sort">Sort by</label>
+            <select id="case-list-sort" class="chosen">
+              <option value="payment-high-low">Payment, high to low</option>
+              <option value="payment-low-high">Payment, low to high</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="case-list-inner" id="case-list-view">
+            {% for case in cases %}
+              {% include 'templates/_case.html' %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
 
-    <div class="officer-list row">
-      <div class="col-xs-12">
-        <h3>Officers</h3>
-      </div>
-      <div class="col-xs-12">
-        <div class="officer-list-inner" id="officer-list-view">
-          {% for officer in officers %}
-            {% include 'templates/_officer.html' %}
-          {% endfor %}
+      <div class="officer-list row">
+        <div class="col-xs-12">
+          <h3>Officers</h3>
+        </div>
+        <div class="col-xs-12">
+          <div class="officer-list-inner" id="officer-list-view">
+            {% for officer in officers %}
+              {% include 'templates/_officer.html' %}
+            {% endfor %}
+          </div>
         </div>
       </div>
-    </div>
+    </div> <!--end: results wrapper inner-->
   </div> <!--end: results wrapper-->
-</div>
+</div><!--end: container-->
 {% endblock content %}
 
 {% block library_scripts %}
