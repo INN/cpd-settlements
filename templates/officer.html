@@ -1,14 +1,16 @@
 {% extends "templates/_base.html" %}
 
 {% block content %}
-<div class="container">
-	{% block search %}
-		{% include 'templates/_search.html' %}
-	{% endblock search %}
+<div class="container cpd-container">
+    <div class="cpd-container-inner">
+		{% block search %}
+			{% include 'templates/_search.html' %}
+		{% endblock search %}
 
-	<div id="results-wrapper">
-		<div class="results-wrapper-inner">
-			{% include 'templates/_officer.html' %}
+		<div id="results-wrapper">
+			<div class="results-wrapper-inner">
+				{% include 'templates/_officer.html' %}
+			</div>
 		</div>
 	</div>
 </div>

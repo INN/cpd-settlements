@@ -1,5 +1,8 @@
 <div class="officer" data-case_number="{{ officer.case_number }}">
-  <h2><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.prefix }} {{ officer.first }} {{ officer.last }}</a></h2>
-  <div class="badge-num"><span>Badge #:</span> {{ officer.badge_number }}</div>
-  <div class="total-payments-container"><span class="total-payments">{{ format_currency(officer.total_payments) }}</span> <span>total payments for all related cases</span></div>
+  	<div class="officer-logo"></div>
+	<div class="officer-text">
+	  <h2><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.prefix }} {{ officer.first }} {{ officer.last }}</a></h2>
+	  <div class="badge-num"><span>Badge #:</span> {{ officer.badge_number }}</div>
+	  <div class="total-payments-container"><span class="total-payments">{{ format_currency(officer.total_payments) }}</span> <span>total payments for all related cases</span></div>
+	</div>
 </div>

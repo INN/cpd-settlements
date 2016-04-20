@@ -57,20 +57,31 @@ Navigation
 /* ==========================================================================
 Search Screen               
 ========================================================================== */
-.container {
-  max-width: 1600px;
-  padding: 80px 0;
+.container.cpd-container {
+  width: 100%;
+  max-width: 1248px;
+  padding: 60px 0 20px 0;
 }
-.container .jumbotron {
+.container.cpd-container:before {
+  display: table;
+  content: " ";
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.container.cpd-container .cpd-container-inner {
+  margin: 20px;
+}
+.container.cpd-container .jumbotron {
   background-color: transparent;
   border-radius: 0;
   padding: 0;
   margin: 3em 0 4em;
 }
-.container .jumbotron h1 {
+.container.cpd-container .jumbotron h1 {
   display: none;
 }
-.container .jumbotron h2 {
+.container.cpd-container .jumbotron h2 {
   font-size: 2.75em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
@@ -90,6 +101,9 @@ Search Screen
   -webkit-filter: blur(10px);
   -moz-filter: blur(10px);
   filter: blur(10px);
+}
+#bg-solid {
+  background-color: #000000;
 }
 body.cases .officer-tab {
   display: none;
@@ -390,11 +404,15 @@ Results
   display: none;
 }
 .case {
+  width: 100%;
   border: 1px solid #000000;
   background-color: #ffffff;
-  margin: 0 0 2em;
+  margin: 0 0 20px;
   display: flex;
   flex-wrap: wrap;
+}
+.case:last-of-type {
+  margin-bottom: 0;
 }
 .case:hover {
   box-shadow: 0px 0px 3px #000000;
@@ -419,6 +437,7 @@ Results
 .case .case-payment-wrapper .case-payment h3 {
   color: #bd261d;
   font-family: 'Open Sans Condensed', sans-serif;
+  margin-top: 0;
 }
 .case .case-description {
   padding: 20px;
@@ -493,14 +512,47 @@ Results
 .case span.officer:last-of-type:after {
   content: '';
 }
+.case-detail {
+  background-color: #ffffff;
+  padding: 20px;
+}
+.case-detail h1 {
+  margin-top: 0;
+}
+.officer {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  margin-bottom: 20px;
+  position: relative;
+}
+.officer:last-of-type {
+  margin-bottom: 0;
+}
+.officer .officer-text {
+  padding-left: 140px;
+  background: url("../images/police-icon.svg") center left no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.officer .officer-text h2 {
+  margin-top: 0;
+}
+.officer .officer-logo {
+  width: 140px;
+  background-color: #000000;
+  min-height: 100%;
+  position: absolute;
+  margin: -20px 0 -20px -20px;
+}
 label.results-label {
-  width: 49.5%;
+  float: left;
   display: inline-block;
-  line-height: 26px;
+  line-height: 40px;
 }
 .case-list-sort-container {
+  float: right;
   margin: 0 0 16px 0;
-  width: 50%;
   text-align: right;
   display: inline-block;
 }
@@ -651,6 +703,7 @@ Results
   position: absolute;
   top: 100px;
   z-index: 5;
+  display: none;
 }
 #home #the-app {
   width: 100%;
@@ -768,6 +821,7 @@ Results
   margin-bottom: 0;
   padding: 0 18%;
   text-shadow: 0px 0px 30px #000000;
+  text-align: center;
 }
 #home .block h3 img {
   max-width: 20px;
@@ -1012,6 +1066,7 @@ body.iframed {
 .iframed #cpd-header {
   display: none;
 }
-.iframed #bg-static {
+.iframed #bg-static,
+.iframed #bg-solid {
   display: none;
 }

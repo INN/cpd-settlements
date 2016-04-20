@@ -4,52 +4,54 @@
 
 {% block content %}
   <div id="bg-static" class="bgimg"></div>
-  <div class="container">
+  <div class="container cpd-container">
+    <div class="cpd-container-inner">
 
-  {% block search %}
-    {% include 'templates/_search.html' %}
-  {% endblock search %}
+	  {% block search %}
+	    {% include 'templates/_search.html' %}
+	  {% endblock search %}
 
-  <div id="results-wrapper">
-    <div class="results-wrapper-inner">
-      {% include 'templates/_case.html' %}
-    </div>
-    <div class="results-wrapper-inner">
-      <div class="case-list row">
-        <div class="col-xs-12">
-          <label class="results-label">Results</label>
-          <div class="case-list-sort-container">
-            <label for="case-list-sort">Sort by</label>
-            <select id="case-list-sort" class="chosen">
-              <option value="payment-high-low">Payment, high to low</option>
-              <option value="payment-low-high">Payment, low to high</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-xs-12">
-          <div class="case-list-inner" id="case-list-view">
-            {% for case in cases %}
-              {% include 'templates/_case.html' %}
-            {% endfor %}
-          </div>
-        </div>
-      </div>
+	  <div id="results-wrapper">
+	    <div class="results-wrapper-inner">
+	      {% include 'templates/_case.html' %}
+	    </div>
+	    <div class="results-wrapper-inner">
+	      <div class="case-list row">
+	        <div class="col-xs-12">
+	          <label class="results-label">Results</label>
+	          <div class="case-list-sort-container">
+	            <label for="case-list-sort">Sort by</label>
+	            <select id="case-list-sort" class="chosen">
+	              <option value="payment-high-low">Payment, high to low</option>
+	              <option value="payment-low-high">Payment, low to high</option>
+	            </select>
+	          </div>
+	        </div>
+	        <div class="col-xs-12">
+	          <div class="case-list-inner" id="case-list-view">
+	            {% for case in cases %}
+	              {% include 'templates/_case.html' %}
+	            {% endfor %}
+	          </div>
+	        </div>
+	      </div>
 
-      <div class="officer-list row">
-        <div class="col-xs-12">
-          <h3>Officers</h3>
-        </div>
-        <div class="col-xs-12">
-          <div class="officer-list-inner" id="officer-list-view">
-            {% for officer in officers %}
-              {% include 'templates/_officer.html' %}
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div> <!--end: results wrapper inner-->
-  </div> <!--end: results wrapper-->
-</div><!--end: container-->
+	      <div class="officer-list row">
+	        <div class="col-xs-12">
+	          <h3>Officers</h3>
+	        </div>
+	        <div class="col-xs-12">
+	          <div class="officer-list-inner" id="officer-list-view">
+	            {% for officer in officers %}
+	              {% include 'templates/_officer.html' %}
+	            {% endfor %}
+	          </div>
+	        </div>
+	      </div>
+	    </div> <!--end: results wrapper inner-->
+	  </div> <!--end: results wrapper-->
+	</div><!--end: container-inner-->
+</div>
 {% endblock content %}
 
 {% block library_scripts %}
@@ -129,14 +131,17 @@
 
 <script type="text/template" id="officer-tmpl">
   <div class="officer" data-case_number="<%= model.case_number %>">
-    <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
-    <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
-    <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
+    <div class="officer-logo"></div>
+    <div class="officer-text">
+      <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
+      <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
+      <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
+    </div>
   </div>
 </script>
 
 <script type="text/tmpl" id="case-search-statement-tmpl">
-<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %> resulted in payments totalling <span class="clickable">$<%= payments.formatMoney() %></span>
+<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %> resulted in payments totalling <span class="clickable">$<%= payments.formatMoney(0) %></span>
 
 </script>
 {% endblock %}
