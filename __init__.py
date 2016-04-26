@@ -61,11 +61,9 @@ def search(init_view='cases'):
         'init_view': init_view,
         'cases': sorted(
             cases, key=lambda x: total_for_payments(x.payments, False), reverse=True),
-        'cases_json': cases_json(),
         'neighborhoods': sorted(
             neighborhoods.values(), key=lambda x: x.get('neighborhood')),
         'officers': officers,
-        'officers_json': officers_json(),
         'payments': Payment.objects,
         'primary_causes': sorted(list(set(primary_causes))),
         'races': sorted(list(set(races))),
@@ -190,5 +188,7 @@ def context_processor():
         'CSS': CSSIncluder(blueprint=blueprint),
         'enumerate': enumerate,
         'format_currency': format_currency,
-        'total_for_payments': total_for_payments
+        'total_for_payments': total_for_payments,
+        'cases_json': cases_json,
+        'officers_json': officers_json
     }

@@ -28,25 +28,23 @@ class Case(BaseModel):
     type = 'cases'
 
     field_map = {
-        'timestamp': 'Timestamp',
-        'case_number': 'Case Number',
-        'date_filed': 'Date Filed',
-        'date_closed': 'Date Closed',
+        'case_number': 'CaseNumber',
+        'date_filed': 'DateFiled',
+        'date_closed': 'DateClosed',
         'judge': 'Judge',
-        'plaintiff_attorney': "Plaintiff's Lead Attorney",
-        'plaintiff_attorney_firm': "Plaintiff's Attorney Law Firm",
-        'city_attorney': "City's Lead Attorney",
-        'city_attorney_firm': "City's Attorney Law Firm",
-        'magistrate_judge': "Magistrate Judge",
-        'date_of_incident': "Date of Incident",
-        'location': 'Location Listed',
-        'address': 'Street Address',
+        'plaintiff_attorney': "PlaintiffsLeadAttorney",
+        'plaintiff_attorney_firm': "PlaintiffsAttorneyLawFirm",
+        'city_attorney': "CitysLeadAttorney",
+        'city_attorney_firm': "CitysAttorneyLawFirm",
+        'magistrate_judge': "MagistrateJudge",
+        'date_of_incident': "DateofIncident",
+        'location': 'LocationListed',
+        'address': 'StreetAddress',
         'causes': 'Causes',
         'tags': 'Tags',
-        'entered_by': 'Entered By'
+        'entered_by': 'EnteredBy'
     }
 
-    timestamp = fields.StringField()
     case_number = fields.StringField()
     date_filed = fields.StringField()
     date_closed = fields.StringField()
