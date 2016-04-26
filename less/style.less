@@ -109,15 +109,6 @@ Search Screen
   z-index: -1;
   top:0;
 }
-#bg-static {
-  background-image: url("../images/02-IMG_9158.jpg");
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  filter: blur(10px);
-}
-#bg-solid {
-  background-color:@cr-darkest;
-}
 
 body.cases {
   .officer-tab {
@@ -151,7 +142,7 @@ Filters
   width:70%;
   float:left;
 }
-.results-wrapper-inner {
+.results-wrapper-inner, .detail-wrapper, .search-statement-wrapper {
   background-color:rgba(0,0,0,.7);
   border:1px solid #000;
   padding:20px;
@@ -1186,12 +1177,28 @@ iframe {
   -moz-transition: opacity .5s ease-in-out;
   -webkit-transition: opacity .5s ease-in-out;
 }
-body.iframed {
+body.nested {
   background-color:transparent;
+
+  #cpd-header {
+    display:none;
+  }
 }
-.iframed #cpd-header {
+body.not-nested {
+  background-color: #000;
+}
+#bg-static, #bg-solid {
   display:none;
 }
-.iframed #bg-static, .iframed #bg-solid {
-  display:none;
+
+.not-nested #bg-static {
+  background-image: url("../images/02-IMG_9158.jpg");
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  filter: blur(10px);
+  display:block;
+}
+.not-nested #bg-solid {
+  background-color:@cr-darkest;
+  display:block;
 }

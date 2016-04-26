@@ -1,0 +1,34 @@
+<div class="results-wrapper-inner">
+  <div class="case-list row">
+    <div class="col-xs-12">
+      <label class="results-label">Results</label>
+      <div class="case-list-sort-container">
+        <label for="case-list-sort">Sort by</label>
+        <select id="case-list-sort" class="chosen">
+          <option value="payment-high-low">Payment, high to low</option>
+          <option value="payment-low-high">Payment, low to high</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="case-list-inner" id="case-list-view">
+        {% for case in cases %}
+          {% include 'templates/_case.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="officer-list row">
+    <div class="col-xs-12">
+      <h3>Officers</h3>
+    </div>
+    <div class="col-xs-12">
+      <div class="officer-list-inner" id="officer-list-view">
+        {% for officer in officers %}
+          {% include 'templates/_officer.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div> <!--end: results wrapper inner-->

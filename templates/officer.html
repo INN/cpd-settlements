@@ -1,17 +1,29 @@
 {% extends "templates/_base.html" %}
 
 {% block content %}
-<div class="container cpd-container">
+  <div id="bg-static" class="bgimg"></div>
+  <div class="container cpd-container">
     <div class="cpd-container-inner">
-		{% block search %}
-			{% include 'templates/_search.html' %}
-		{% endblock search %}
 
-		<div id="results-wrapper">
-			<div class="results-wrapper-inner">
-				{% include 'templates/_officer.html' %}
-			</div>
-		</div>
-	</div>
+	  {% block search %}
+	    {% include 'templates/_search.html' %}
+	  {% endblock search %}
+
+	  <div id="results-wrapper">
+      	{% include 'templates/_statement.html' %}
+	    <div class="detail-wrapper">
+	      {% include 'templates/_officer.html' %}
+	    </div>
+	    {% include 'templates/_results.html' %}
+	  </div> <!--end: results wrapper-->
+	</div><!--end: container-inner-->
 </div>
 {% endblock content %}
+
+{% block library_scripts %}
+
+{{ super() }}
+
+{% include 'templates/_results_templates.html' %}
+
+{% endblock %}

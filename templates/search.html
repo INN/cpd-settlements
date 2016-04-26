@@ -13,143 +13,27 @@
 
 
 {% block content %}
-  <!-- <div class="jumbotron">
-    <h1>Cases</h1>
-    <h2>The City of Chicago paid {{ total_for_payments(payments) }} in {{ cases|length }} legal settlements in police misconduct cases between January 2012 and June 2015.</h2>
-  </div> -->
   <div id="bg-solid" class="bgimg"></div>
   <div id="bg-static" class="bgimg"></div>
   <div class="container cpd-container">
 
     <div class="cpd-container-inner">
-    {% block search %}
-      {% include 'templates/_search.html' %}
-    {% endblock search %}
+      {% block search %}
+        {% include 'templates/_search.html' %}
+      {% endblock search %}
 
-    <div id="results-wrapper">
-      <div class="results-wrapper-inner">
-        <div id="search-intro">Search the settlement database</div>
-        <div id="case-search-statement"></div>
-      </div>
-      <div class="results-wrapper-inner">
-        <div class="case-list">
-          <label class="results-label">Results</label>
-          <div class="case-list-sort-container">
-            <label for="case-list-sort">Sort by</label>
-            <select id="case-list-sort" class="chosen">
-              <option value="payment-high-low">Payment, high to low</option>
-              <option value="payment-low-high">Payment, low to high</option>
-            </select>
-          </div>
-          <div class="case-list-inner" id="case-list-view">
-            {% for case in cases %}
-              {% include 'templates/_case.html' %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="officer-list">
-          <label class="results-label">Officers</label>
-          <div class="officer-list-inner" id="officer-list-view">
-            {% for officer in officers %}
-              {% include 'templates/_officer.html' %}
-            {% endfor %}
-          </div>
-        </div>
-      </div> <!--end: results wrapper inner-->
-    </div> <!--end: results wrapper-->
-  </div><!--end: container-inner-->
-</div><!--end: container-->
+      <div id="results-wrapper">
+        {% include 'templates/_statement.html' %}
+        {% include 'templates/_results.html' %}
+      </div> <!--end: results wrapper-->
+    </div><!--end: container-inner-->
+  </div><!--end: container-->
 {% endblock content %}
 
 {% block library_scripts %}
 
 {{ super() }}
 
-<script type="text/javascript">
-  var site_path = '{{ site_path }}';
-  var cases_json = {{ cases_json|safe }};
-  var officers_json = {{ officers_json|safe }};
-</script>
+{% include 'templates/_results_templates.html' %}
 
-{{ JS.push('vendor/chosen/chosen.jquery.js') }}
-{{ JS.push('vendor/typeahead.js/dist/typeahead.bundle.js') }}
-{{ JS.push('vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.js') }}
-{{ JS.push('vendor/jquery-serialize-object/jquery.serialize-object.js') }}
-{{ JS.push('js/search.js') }}
-{{ JS.render('js/search.min.js') }}
-
-<script type="text/template" id="case-tmpl">
-
-
-    <div class="case" data-case_number="<%= model.case_number %>" onclick="location.href='<%= site_path %>case/<%= model.slug %>'">
-
-      <div class="card-row">
-        <div class="case-payment-wrapper">
-          <div class="case-payment">
-            <h2>$<%= Number(model.total_payments).formatMoney(0) %></h2>
-            <h3><%= model.primary_cause %></h3>
-          </div>
-        </div>
-
-        <div class="case-description">
-          <h4>Case <%= model.case_number %></h4>
-
-           <p>In facilisis scelerisque dui vel dignissim. Sed nunc orci, ultricies congue vehicula quis, facilisis a orci. In aliquet facilisis condimentum. Donec at orci orci, a dictum justo.  Donec at orci orci, a dictum justo.</p>
-
-           <ul class="case-details">
-             <li>
-               <span class="card-label">Plaintiff: </span>
-               <% _.each(model.victims, function(victim) { %>
-                <%= victim.victim_1 %>
-               <% }) %>
-             </li>
-             <li><span class="card-label">Incident date: </span><%= model.date_of_incident %></li>
-             <li><span class="card-label">Location: </span><% if (model.address !== '') { %><%= model.address %><% } else { %>Not specified<% } %></li>
-           </ul>
-        </div>
-      </div>
-
-      <% if ( model.officers.length > 0){ %>
-      <div class="case-officers">
-        <span class="card-label">Officers involved:</span>
-        <div class="officer-group">
-          <% _.each(model.officers, function(officer) { %>
-          <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"></a>
-         <% }) %>
-         </div>
-      </div>
-      <% } %>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-</script>
-
-
-
-<script type="text/template" id="officer-tmpl">
-  <div class="officer" data-case_number="<%= model.case_number %>">
-    <div class="officer-logo"></div>
-    <div class="officer-text">
-      <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
-      <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
-      <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
-    </div>
-  </div>
-</script>
-
-<script type="text/tmpl" id="case-search-statement-tmpl">
-<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %> resulted in payments totalling <span class="clickable">$<%= payments.formatMoney(0) %></span>
-
-</script>
 {% endblock %}

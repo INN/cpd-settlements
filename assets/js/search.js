@@ -13,7 +13,10 @@
       'search/cases': 'cases',
 
       'search/officers/': 'officers',
-      'search/cases/': 'cases'
+      'search/cases/': 'cases',
+
+      'case/*path': 'case_detail',
+      'officer/*path': 'officer_detail'
     },
 
     initialize: function() {
@@ -51,16 +54,35 @@
     officers: function() {
       $('.case-list').hide();
       this.searchSelector.goToTab('officers');
-      $('.officer-list').show();
+      $('.officer-list, .results-wrapper-inner').show();
+      $('.search-statement-wrapper').hide();
+      return false;
+    },
+
+    officer_detail: function() {
+      $('.case-list').hide();
+      this.searchSelector.goToTab('officers', true);
+      $('.officer-list, .results-wrapper-inner').hide();
+      $('.search-statement-wrapper').hide();
       return false;
     },
 
     cases: function() {
       $('.officer-list').hide();
       this.searchSelector.goToTab('cases');
-      $('.case-list').show();
+      $('.case-list, .results-wrapper-inner').show();
+      $('.search-statement-wrapper').show();
+      return false;
+    },
+
+    case_detail: function() {
+      $('.officer-list').hide();
+      this.searchSelector.goToTab('cases', true);
+      $('.case-list, .results-wrapper-inner').hide();
+      $('.search-statement-wrapper').hide();
       return false;
     }
+    
   });
 
   // Case model
@@ -288,7 +310,6 @@
       this.filterData = this.$el.serializeObject();
       this.filterCases();
       this.updateStatement();
-      pymChild.sendHeight();
     },
 
     updateStatement: function() {
@@ -429,7 +450,7 @@
       return this;
     },
 
-    goToTab: function(tabId) {
+    goToTab: function(tabId, detail) {
       var fragment;
 
       if (typeof tabId == 'string') {
@@ -465,8 +486,14 @@
         }
       }
 
-      Backbone.history.navigate(fragment, { trigger: true });
-      return false;
+      if (!detail){
+        $('.detail-wrapper').hide();
+        Backbone.history.navigate(fragment, { trigger: true });
+        return false;
+      } else {
+        $('.detail-wrapper').show();
+      }
+      pymChild.sendHeight();
     }
 
   });
@@ -492,9 +519,9 @@
     });
 
     if ( window.location !== window.parent.location ) {     
-      $('body').addClass('iframed');
+      $('body').addClass('nested');
     } else {      
-      $('body').addClass('not-iframed');
+      $('body').addClass('not-nested');
     }
 
       pymChild.sendHeight();
