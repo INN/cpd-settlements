@@ -358,7 +358,7 @@ function initScroll(){
 							setTimeout(function(){
 								$('#cpd-scrolling').hide();				
 								$(window).scrollTop(0);
-								$('iframe').css('opacity', 1);
+								$('.cpd-container').css('opacity', 1);
 								$('body').css('overflow','auto');
 							},1000);
 						

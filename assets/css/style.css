@@ -671,25 +671,6 @@ Results
 ========================================================================== */
 #home {
   background-color: #000000;
-  /*
-    Containers
-  */
-  /*#desc h1 .redtext { 
-    color:#bd261d;
-  }*/
-  /*
-    Elements
-  */
-}
-#home h1,
-#home h2,
-#home h3,
-#home h4,
-#home h5,
-#home h6 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  color: #fff;
 }
 #home .navbar {
   display: none;
@@ -706,164 +687,6 @@ Results
   position: relative;
   z-index: 4;
 }
-#home h1 {
-  font-weight: bold;
-  font-size: 40px;
-}
-#home h2 {
-  font-size: 20px;
-}
-#home .touchonly {
-  display: none;
-}
-#home html.touch .touchonly {
-  display: block;
-}
-#home .noselect * {
-  user-select: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-}
-#home .doselect * {
-  user-select: auto;
-  -webkit-user-select: auto;
-  -khtml-user-select: auto;
-  -moz-user-select: auto;
-  -o-user-select: auto;
-}
-#home .clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-#home .clearfix {
-  display: inline-block;
-}
-#home html[xmlns] .clearfix {
-  display: block;
-}
-#home * html .clearfix {
-  height: 1%;
-}
-#home #cpd-progress {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  z-index: 9999999;
-}
-#home #cpd-progress svg {
-  display: block;
-  min-width: 100%;
-}
-#home #cpd-progress rect {
-  height: 24px;
-  fill: #3d9999;
-  /*fill:#000;*/
-}
-#home #desc {
-  width: 100%;
-  margin-top: 61px;
-  /*height of header*/
-  padding: 0 20%;
-  text-align: center;
-  position: absolute;
-  z-index: 2;
-}
-#home #desc h1 {
-  font-size: 6em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-top: 15vh;
-  margin-bottom: 0;
-  text-shadow: 0px 0px 30px #000000;
-}
-#home #desc h1 .settling {
-  font-size: 1.25em;
-  letter-spacing: .03em;
-}
-#home #desc h1 .for {
-  display: block;
-  text-transform: lowercase;
-  font-weight: 300;
-  font-size: .5em;
-}
-#home #desc h1 .too {
-  font-size: 1.25em;
-}
-#home #desc h1 .much {
-  font-size: 1.25em;
-}
-#home #desc h2 {
-  font-weight: 300;
-  line-height: 1;
-  font-size: 2.25em;
-}
-#home .block {
-  width: 100%;
-  text-align: left;
-  z-index: 2;
-  position: absolute;
-}
-#home .block h3 {
-  font-size: 3em;
-  line-height: 1.15;
-  margin-top: 2em;
-  margin-bottom: 0;
-  padding: 0 18%;
-  text-shadow: 0px 0px 30px #000000;
-  text-align: center;
-}
-#home .block h3 img {
-  max-width: 20px;
-  display: block;
-  margin: 10px auto;
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
-}
-#home .block h3 img:hover {
-  -webkit-filter: grayscale(0);
-  filter: grayscale(0);
-}
-#home section.slide {
-  width: 100%;
-  min-height: 100vh;
-  max-height: 100vh;
-  position: relative;
-  opacity: 0;
-  z-index: 9;
-}
-#home section.slide .fixed {
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-}
-#home section#slide-intro {
-  opacity: 1;
-}
-#home section#slide-intro .img {
-  background-image: url("../images/01-112414_FergusonReaction-2.jpg");
-  background-size: cover;
-  background-position: center center;
-}
-#home section#slide-1 {
-  background-size: cover;
-  background-position: center center;
-}
-#home section#slide-3 .img {
-  background-image: url("../images/02-jg_closures_protest_15.jpg");
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-  width: 100%;
-  position: absolute;
-  opacity: 0;
-}
 #home .bgimg {
   background-size: cover;
   background-position: center center;
@@ -873,46 +696,225 @@ Results
   top: 0;
   opacity: 0;
 }
-#home #bg-1 {
-  background-image: url("../images/02-jg_closures_protest_15.jpg");
-}
-#home #bg-2 {
-  background-image: url("../images/11-srupolo_cpd-board-meeting-22.jpg");
-}
-#home #bg-3 {
-  background-image: url("../images/02-112414_EricGarnerProtestDay2-50.jpg");
-}
-#home #bg-4 {
-  background-image: url("../images/08-052015CityCouncilFirstMeetingwithNewMembers53.jpg");
-}
-#home #bg-5 {
-  background-image: url("../images/10-052015CityCouncilFirstMeetingwithNewMembers49.jpg");
-}
-#home #bg-6 {
-  background-image: url("../images/07-120915_NoonLoopMarch_MH_01---Copy.jpg");
-}
-#home #bg-7 {
-  background-image: url("../images/07-121314_MillionsMarchChi-4.jpg");
-}
-#home #bg-8 {
-  background-image: url("../images/06-091714_RallyForRoshad_IMG_1909.jpg");
-}
-#home #bg-9 {
-  background-image: url("../images/06-121314_MillionsMarchChi-53.jpg");
-}
-#home #bg-10 {
-  background-image: url("../images/06-LE0A1948.jpg");
-}
-#home #bg-11 {
-  background-image: url("../images/02-IMG_9158.jpg");
-}
 #home #bg-12 {
   background-image: url("../images/02-IMG_9158.jpg");
   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   filter: blur(5px);
 }
-#home #bg-11-overlay {
+#cpd-scrolling {
+  /*
+    Containers
+  */
+  /*#desc h1 .redtext { 
+    color:#bd261d;
+  }*/
+  /*
+    Elements
+  */
+}
+#cpd-scrolling h1,
+#cpd-scrolling h2,
+#cpd-scrolling h3,
+#cpd-scrolling h4,
+#cpd-scrolling h5,
+#cpd-scrolling h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #fff;
+}
+#cpd-scrolling h1 {
+  font-weight: bold;
+  font-size: 40px;
+}
+#cpd-scrolling h2 {
+  font-size: 20px;
+}
+#cpd-scrolling .touchonly {
+  display: none;
+}
+#cpd-scrolling html.touch .touchonly {
+  display: block;
+}
+#cpd-scrolling .noselect * {
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+}
+#cpd-scrolling .doselect * {
+  user-select: auto;
+  -webkit-user-select: auto;
+  -khtml-user-select: auto;
+  -moz-user-select: auto;
+  -o-user-select: auto;
+}
+#cpd-scrolling .clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#cpd-scrolling .clearfix {
+  display: inline-block;
+}
+#cpd-scrolling html[xmlns] .clearfix {
+  display: block;
+}
+#cpd-scrolling * html .clearfix {
+  height: 1%;
+}
+#cpd-scrolling #cpd-progress {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 9999999;
+}
+#cpd-scrolling #cpd-progress svg {
+  display: block;
+  min-width: 100%;
+}
+#cpd-scrolling #cpd-progress rect {
+  height: 24px;
+  fill: #3d9999;
+  /*fill:#000;*/
+}
+#cpd-scrolling #desc {
+  width: 100%;
+  margin-top: 61px;
+  /*height of header*/
+  padding: 0 20%;
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+}
+#cpd-scrolling #desc h1 {
+  font-size: 6em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 15vh;
+  margin-bottom: 0;
+  text-shadow: 0px 0px 30px #000000;
+}
+#cpd-scrolling #desc h1 .settling {
+  font-size: 1.25em;
+  letter-spacing: .03em;
+}
+#cpd-scrolling #desc h1 .for {
+  display: block;
+  text-transform: lowercase;
+  font-weight: 300;
+  font-size: .5em;
+}
+#cpd-scrolling #desc h1 .too {
+  font-size: 1.25em;
+}
+#cpd-scrolling #desc h1 .much {
+  font-size: 1.25em;
+}
+#cpd-scrolling #desc h2 {
+  font-weight: 300;
+  line-height: 1;
+  font-size: 2.25em;
+}
+#cpd-scrolling .block {
+  width: 100%;
+  text-align: left;
+  z-index: 2;
+  position: absolute;
+}
+#cpd-scrolling .block h3 {
+  font-size: 3em;
+  line-height: 1.15;
+  margin-top: 2em;
+  margin-bottom: 0;
+  padding: 0 18%;
+  text-shadow: 0px 0px 30px #000000;
+  text-align: center;
+}
+#cpd-scrolling .block h3 img {
+  max-width: 20px;
+  display: block;
+  margin: 10px auto;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+#cpd-scrolling .block h3 img:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+#cpd-scrolling section.slide {
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  opacity: 0;
+  z-index: 9;
+}
+#cpd-scrolling section.slide .fixed {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+}
+#cpd-scrolling section#slide-intro {
+  opacity: 1;
+}
+#cpd-scrolling section#slide-intro .img {
+  background-image: url("../images/01-112414_FergusonReaction-2.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+#cpd-scrolling section#slide-1 {
+  background-size: cover;
+  background-position: center center;
+}
+#cpd-scrolling section#slide-3 .img {
+  background-image: url("../images/02-jg_closures_protest_15.jpg");
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+}
+#cpd-scrolling #bg-1 {
+  background-image: url("../images/02-jg_closures_protest_15.jpg");
+}
+#cpd-scrolling #bg-2 {
+  background-image: url("../images/11-srupolo_cpd-board-meeting-22.jpg");
+}
+#cpd-scrolling #bg-3 {
+  background-image: url("../images/02-112414_EricGarnerProtestDay2-50.jpg");
+}
+#cpd-scrolling #bg-4 {
+  background-image: url("../images/08-052015CityCouncilFirstMeetingwithNewMembers53.jpg");
+}
+#cpd-scrolling #bg-5 {
+  background-image: url("../images/10-052015CityCouncilFirstMeetingwithNewMembers49.jpg");
+}
+#cpd-scrolling #bg-6 {
+  background-image: url("../images/07-120915_NoonLoopMarch_MH_01---Copy.jpg");
+}
+#cpd-scrolling #bg-7 {
+  background-image: url("../images/07-121314_MillionsMarchChi-4.jpg");
+}
+#cpd-scrolling #bg-8 {
+  background-image: url("../images/06-091714_RallyForRoshad_IMG_1909.jpg");
+}
+#cpd-scrolling #bg-9 {
+  background-image: url("../images/06-121314_MillionsMarchChi-53.jpg");
+}
+#cpd-scrolling #bg-10 {
+  background-image: url("../images/06-LE0A1948.jpg");
+}
+#cpd-scrolling #bg-11 {
+  background-image: url("../images/02-IMG_9158.jpg");
+}
+#cpd-scrolling #bg-11-overlay {
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   width: 100%;
@@ -921,7 +923,7 @@ Results
   z-index: 3;
   opacity: 0;
 }
-#home .overlay {
+#cpd-scrolling .overlay {
   background-color: #000;
   width: 100%;
   height: 100vh;
@@ -937,12 +939,12 @@ Results
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#000000', GradientType=0);
   /* IE6-9 */
 }
-#home .social-icons {
+#cpd-scrolling .social-icons {
   display: block;
   margin-top: 1em;
   font-size: .333em;
 }
-#home .share {
+#cpd-scrolling .share {
   display: inline-block;
   width: 2em;
   height: 2em;
@@ -955,25 +957,25 @@ Results
   -moz-transition: background-color 0.25s ease-in-out;
   -webkit-transition: background-color 0.25s ease-in-out;
 }
-#home .share:hover {
+#cpd-scrolling .share:hover {
   background-color: #ffffff;
 }
-#home .icon-twitter:before {
+#cpd-scrolling .icon-twitter:before {
   content: '\68';
   text-shadow: none;
 }
-#home .icon-facebook:before {
+#cpd-scrolling .icon-facebook:before {
   content: '\70';
   padding-left: .25em;
   text-shadow: none;
 }
-#home .icon-mail:before {
+#cpd-scrolling .icon-mail:before {
   content: '\75';
   padding-left: .1em;
   text-shadow: none;
 }
-#home [class*=" icon-"]:before,
-#home [class^=icon-]:before {
+#cpd-scrolling [class*=" icon-"]:before,
+#cpd-scrolling [class^=icon-]:before {
   font-family: fontello;
   font-style: normal;
   font-weight: 400;
@@ -986,47 +988,47 @@ Results
   opacity: 1;
   text-transform: none!important;
 }
-#home .spacer {
+#cpd-scrolling .spacer {
   text-align: center;
   min-height: 100px;
 }
-#home .spacer.s0 {
+#cpd-scrolling .spacer.s0 {
   min-height: 1px;
 }
-#home .spacer.s1 {
+#cpd-scrolling .spacer.s1 {
   min-height: 100px;
 }
-#home .spacer.s2 {
+#cpd-scrolling .spacer.s2 {
   min-height: 200px;
 }
-#home .spacer.s3 {
+#cpd-scrolling .spacer.s3 {
   min-height: 300px;
 }
-#home .spacer.s4 {
+#cpd-scrolling .spacer.s4 {
   min-height: 400px;
 }
-#home .spacer.s5 {
+#cpd-scrolling .spacer.s5 {
   min-height: 500px;
 }
-#home .spacer.s6 {
+#cpd-scrolling .spacer.s6 {
   min-height: 600px;
 }
-#home .spacer.s7 {
+#cpd-scrolling .spacer.s7 {
   min-height: 700px;
 }
-#home .spacer.s8 {
+#cpd-scrolling .spacer.s8 {
   min-height: 800px;
 }
-#home .spacer.s9 {
+#cpd-scrolling .spacer.s9 {
   min-height: 900px;
 }
-#home .spacer.s10 {
+#cpd-scrolling .spacer.s10 {
   min-height: 1000px;
 }
-#home .spacer.vh1 {
+#cpd-scrolling .spacer.vh1 {
   min-height: 100vh;
 }
-#home .spacer.vh1.half {
+#cpd-scrolling .spacer.vh1.half {
   min-height: 50vh;
 }
 @media screen and (max-width: 760px) {
@@ -1049,17 +1051,11 @@ Results
 /* ==========================================================================
 Framed vs Not Framed
 ========================================================================== */
-iframe {
+body.nested .cpd-container {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   -webkit-transition: opacity 0.5s ease-in-out;
-}
-body.nested {
-  background-color: transparent;
-}
-body.nested #cpd-header {
-  display: none;
 }
 body.not-nested {
   background-color: #000;

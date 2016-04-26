@@ -1,6 +1,6 @@
 {% extends "templates/_base.html" %}
 
-{% block bodyattrs %}id="home"{% endblock bodyattrs %}
+{% block bodyattrs %}id="home" class="nested"{% endblock bodyattrs %}
 
 
 {% block content %}
@@ -181,7 +181,23 @@
 
 <div id="app-wrapper">
 	<div id="replay-intro">replay!</div>
-	<div id="the-app"></div>
+	<div id="the-app">
+
+		<div class="container cpd-container">
+
+		    <div class="cpd-container-inner">
+		      {% block search %}
+		        {% include 'templates/_search.html' %}
+		      {% endblock search %}
+
+		      <div id="results-wrapper">
+		        {% include 'templates/_statement.html' %}
+		        {% include 'templates/_results.html' %}
+		      </div> <!--end: results wrapper-->
+		    </div><!--end: container-inner-->
+		  </div><!--end: container-->
+
+	</div>
 </div>
 
 
@@ -199,6 +215,8 @@
 {{ JS.push('vendor/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js') }}
 {{ JS.push('js/home.js') }}
 {{ JS.render('js/homepage-libs.min.js') }}
+
+{% include 'templates/_results_templates.html' %}
  
 <script>
 
@@ -208,10 +226,9 @@
 		$('#replay-intro').click(function(){
 			$('#cpd-scrolling').show();	
 			$('.slide, .bgimg').css('opacity', '');
-			$('iframe').css('opacity', 0);
+			$('.cpd-container').css('opacity', 0);
 			initScroll();
-		})
-		var pymParent = new pym.Parent('the-app', '/search/cases/', {});
+		});
 	});
 </script>
 

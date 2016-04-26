@@ -764,22 +764,12 @@ a:hover {
 Results
 ========================================================================== */
 #home {
-
   background-color: rgba(0,0,0,1);
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    color:#fff;
-  }
 
   .navbar {
     display:none;
   }
 
-  // #app-wrapper {
-  //   padding-bottom:80px;
-  // }
   #replay-intro {
     position:absolute;
     top:100px;
@@ -793,6 +783,32 @@ Results
     position: relative;
     z-index:4;
   }
+  .bgimg {
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    width: 100%;
+    position:fixed;
+    top:0;
+    opacity:0;
+  }  
+  #bg-12 {
+    background-image: url("../images/02-IMG_9158.jpg");
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    filter: blur(5px);
+  }
+
+}
+#cpd-scrolling {
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color:#fff;
+  }
+
+  
 
   h1 {
     font-weight: bold;
@@ -970,15 +986,6 @@ Results
     position:absolute;
     opacity:0;
   }
-  .bgimg {
-    background-size: cover;
-    background-position: center center;
-    height: 100vh;
-    width: 100%;
-    position:fixed;
-    top:0;
-    opacity:0;
-  }
   #bg-1 {
     background-image: url("../images/02-jg_closures_protest_15.jpg");
   }
@@ -1014,12 +1021,6 @@ Results
   }
   #bg-11 {
     background-image: url("../images/02-IMG_9158.jpg");
-  }
-  #bg-12 {
-    background-image: url("../images/02-IMG_9158.jpg");
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    filter: blur(5px);
   }
   #bg-11-overlay {
     background-color:rgba(0,0,0,.7);
@@ -1170,18 +1171,14 @@ Results
 /* ==========================================================================
 Framed vs Not Framed
 ========================================================================== */
-iframe {
-  opacity:0;
 
-  transition: opacity .5s ease-in-out;
-  -moz-transition: opacity .5s ease-in-out;
-  -webkit-transition: opacity .5s ease-in-out;
-}
 body.nested {
-  background-color:transparent;
+  .cpd-container {
+    opacity:0;
 
-  #cpd-header {
-    display:none;
+    transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
   }
 }
 body.not-nested {

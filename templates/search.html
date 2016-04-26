@@ -1,6 +1,6 @@
 {% extends "templates/_base.html" %}
 
-{% block bodyattrs %}class="page-{{ PATH[:-5] }} {{ init_view }}"{% endblock bodyattrs %}
+{% block bodyattrs %}class="page-{{ PATH[:-5] }} {{ init_view }} not-nested"{% endblock bodyattrs %}
 
 {% block library_css %}
 {{ super() }}

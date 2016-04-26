@@ -1,13 +1,12 @@
 (function() {
   var $ = jQuery;
 
-  var pymChild = new pym.Child({ id: 'the-app' });
-
   // Router
   var SearchRouter = Backbone.Router.extend({
     routes: {
       'search': 'cases',
       'search/': 'cases',
+      '': 'cases',
 
       'search/officers': 'officers',
       'search/cases': 'cases',
@@ -493,7 +492,6 @@
       } else {
         $('.detail-wrapper').show();
       }
-      pymChild.sendHeight();
     }
 
   });
@@ -517,14 +515,6 @@
       pushState: true,
       root: site_path
     });
-
-    if ( window.location !== window.parent.location ) {     
-      $('body').addClass('nested');
-    } else {      
-      $('body').addClass('not-nested');
-    }
-
-      pymChild.sendHeight();
   });
 
 })();
