@@ -11,7 +11,9 @@ SPREADSHEETS = {
     # Victims
     'victims': '1G5CnJw6ywg1BRY9VzM6H0iakDzfoU5e4-jKxcrMUW84',
     # Officers
-    'officers': '1_fgC_h3EslCxK2xqw8mr1yU11_E4gjXVa0ZvYniLEEM',
+    'officers_full': '18TByyAf5TB4AiC8zNEkMWiOREHLAi6dDwzrLOGh5b14',
+    # casecops -- completes the Officers dataset
+    'casecops': '1r3G3mmJ9fQV3fOJt3zKDnpf5-jzm78GJErSiLm1_H8A',
     # Payments
     'payments': '1IC5B7qoVkCMmzq6abrTkokq2Ua6nBQFmo4-0m-mPVgQ',
 }

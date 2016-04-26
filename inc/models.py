@@ -157,32 +157,37 @@ class Officer(BaseModel):
     type = 'officers'
 
     field_map = {
-        'timestamp': "Timestamp",
-        'case_number': "Case number",
-        'prefix': "Prefix",
-        'first': "First Name",
-        'middle': "Middle Initial",
-        'last': "Last Name",
-        'badge_number': "Badge Number",
-        'attorney': "Officer's Lead Attorney",
-        'attorney_firm': "Lead Attorney Law Firm",
-        'entered_by': "Entered By"
+        'timestamp': "matched_when",
+        'entered_by': "entered_by",
+        'appointed': 'appointed_date',
+        'resigned': 'resignation_date',
+        'attorney': "officer_atty",
+        'attorney_firm': "officer_atty_firm",
+        'prefix': "position_desc",
+        'badge_number': 'badge_no',
+        'case_number': 'case_no',
+        'id': 'cop',
+        'first': 'first_name',
+        'middle': 'middle_init',
+        'last': 'last_name',
     }
 
     timestamp = fields.StringField()
-    case_number = fields.StringField()
+    entered_by = fields.StringField()
+    appointed = fields.StringField()
+    resigned = fields.StringField()
+    attorney = fields.StringField()
+    attorney_firm = fields.StringField()
     prefix = fields.StringField()
+    badge_number = fields.StringField()
+    case_number = fields.StringField()
+    id = fields.StringField()
     first = fields.StringField()
     middle = fields.StringField()
     last = fields.StringField()
-    badge_number = fields.StringField()
-    attorney = fields.StringField()
-    attorney_firm = fields.StringField()
-    entered_by = fields.StringField()
 
     def get_slug(self):
-        return urlify(
-            "%s %s %s %s %s" % (self.prefix, self.first, self.middle, self.last, self.case_number))
+        return urlify(self.id)
 
 
 # Add a ModelList to each model
