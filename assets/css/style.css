@@ -416,6 +416,11 @@ Results
 .case .card-row {
   display: flex;
 }
+.case .no-description {
+  visibility: hidden;
+  max-height: 0;
+  margin: 0;
+}
 .case .case-payment-wrapper {
   min-width: 200px;
   padding: 20px;
@@ -667,7 +672,7 @@ a:hover {
   float: right;
 }
 /* ==========================================================================
-Results
+Intro Page
 ========================================================================== */
 #home {
   background-color: #000000;
