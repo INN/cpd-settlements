@@ -2,6 +2,8 @@
 import json
 
 from flask import Blueprint, render_template, g
+from GenericCache import GenericCache
+from GenericCache.decorators import cached
 from urlparse import urlparse
 
 from .inc.models import Case, Victims, Officer, Payment
@@ -14,6 +16,8 @@ blueprint = Blueprint(
     static_folder='assets',
     static_url_path='/assets/%s' % __name__
 )
+
+cache = GenericCache()
 
 
 """
@@ -126,6 +130,7 @@ def get_site_path():
         return '/'
 
 
+@cached(cache)
 def cases_json():
     cases = []
     for case in Case.objects:
@@ -161,6 +166,7 @@ def cases_json():
     return json.dumps(cases)
 
 
+@cached(cache)
 def officers_json():
     officers = []
     for officer in Officer.objects:
