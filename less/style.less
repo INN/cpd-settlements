@@ -478,7 +478,7 @@ Results
   }
 
   .read-more {
-    color:@cr-alert;
+    color:@cr-highlight;
     &:hover {
       cursor:pointer;
       text-decoration: underline;
@@ -487,8 +487,10 @@ Results
 
   .case-payment-wrapper {
     min-width:200px;
+    max-width:200px;
     padding:20px;
     background-color:@cr-darkest;
+    position:relative;
     text-align:center;
     display:flex;
     align-items: center;
@@ -507,18 +509,26 @@ Results
         margin-top: 0;
       }
     }
+
+    h4 {
+      color: fade(@cr-lightest,75%);
+      font-size: .9em;
+      font-weight: normal;
+      margin: 0;
+      position:absolute;
+      bottom:20px;
+      left:20px;
+    }
   }
 
   .case-description {
     padding:20px;
     color:lighten(@cr-darkest,20%);
     flex: 1; 
+  }
 
-    h4 {      
-      font-family:@cr-condensed;
-      margin-top:0;
-      color:@cr-darkest;
-    }
+  .case-summary {
+    margin-top:20px;
   }
 
   .case-details {
@@ -531,7 +541,7 @@ Results
     flex-wrap:wrap;
     li {
       display:inline-block;
-      margin:20px 0 0 0;
+      margin:0;
       span {
         display:block;
       }
@@ -552,11 +562,12 @@ Results
 
   .case-officers {
     width:100%;
-    padding:20px;
-    background-color:@cr-highlight;
+    margin-top:20px;
     color:@cr-darkest;
-    border-top:1px solid @cr-darkest;
-    display:flex;
+    // padding:20px;
+    // background-color:@cr-highlight;
+    // border-top:1px solid @cr-darkest;
+    // display:flex;
 
     .card-label {
       width: 70px;
@@ -565,16 +576,23 @@ Results
     }
 
     .officer-group {
-
+      display:flex;
+      flex-wrap:wrap;
     }
 
     .police-icon {
-      display:inline-block;
-      width:30px;
-      height:30px;
-      margin-bottom:-2px;
-      background:url("../images/police-icon.svg") center center no-repeat;
-      background-size:contain;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 4px 4px 0 0;
+      background: url("../images/police-icon.svg") center center no-repeat;
+      background-size: 30px 30px;
+      background-color: @cr-darkest;
+      padding: 20px;
+
+      &:hover {
+        background-color: @cr-alert;
+      }
     }
   }
 
