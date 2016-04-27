@@ -415,6 +415,7 @@ Results
 }
 .case .card-row {
   display: flex;
+  min-width: 100%;
 }
 .case .no-description {
   visibility: hidden;
@@ -442,6 +443,7 @@ Results
 .case .case-description {
   padding: 20px;
   color: #333333;
+  flex: 1;
 }
 .case .case-description h4 {
   font-family: 'Open Sans Condensed', sans-serif;

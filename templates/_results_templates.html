@@ -27,7 +27,7 @@
         <div class="case-description">
           <h4>Case <%= model.case_number %></h4>
 
-           <p>In facilisis scelerisque dui vel dignissim. Sed nunc orci, ultricies congue vehicula quis, facilisis a orci. In aliquet facilisis condimentum. Donec at orci orci, a dictum justo.  Donec at orci orci, a dictum justo.</p>
+           <% if (model.narrative !== 'NULL') { %><p><%= model.narrative %></p><% } else { %><p class="no-description"></p><% } %>
 
            <ul class="case-details">
              <li>
