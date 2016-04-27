@@ -417,10 +417,12 @@ Results
   display: flex;
   min-width: 100%;
 }
-.case .no-description {
-  visibility: hidden;
-  max-height: 0;
-  margin: 0;
+.case .read-more {
+  color: #bd261d;
+}
+.case .read-more:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .case .case-payment-wrapper {
   min-width: 200px;

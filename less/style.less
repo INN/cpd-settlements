@@ -477,10 +477,12 @@ Results
     min-width:100%;
   }
 
-  .no-description {
-    visibility: hidden;
-    max-height: 0;
-    margin: 0;
+  .read-more {
+    color:@cr-alert;
+    &:hover {
+      cursor:pointer;
+      text-decoration: underline;
+    }
   }
 
   .case-payment-wrapper {

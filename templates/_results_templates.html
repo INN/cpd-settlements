@@ -1,7 +1,7 @@
 <script type="text/javascript">
   var site_path = '{{ site_path }}';
   var cases_json = {{ cases_json()|safe }};
-  var officers_json = {{ officers_json()|safe }};
+  var officers_json = {{ officers_json()|safe }};  
 </script>
 
 {{ JS.push('vendor/chosen/chosen.jquery.js') }}
@@ -27,7 +27,9 @@
         <div class="case-description">
           <h4>Case <%= model.case_number %></h4>
 
-           <% if (model.narrative !== 'NULL') { %><p><%= model.narrative %></p><% } else { %><p class="no-description"></p><% } %>
+          <% if (model.narrative !== 'NULL') { %>
+            <p><%= this.formatStr(model.narrative) %></p>
+          <%  } %>
 
            <ul class="case-details">
              <li>

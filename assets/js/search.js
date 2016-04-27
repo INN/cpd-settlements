@@ -173,6 +173,28 @@
       });
       this.$el.html(content);
       return this;
+    },
+
+    formatStr: function(text) {
+      var formatted = '';
+
+      // https://regexper.com/#%5E(%5Cr%5Cn%7C.)%7B1%2C280%7D%5Cb
+      formatted = text.match(/^(\r\n|.){1,280}\b/g).join('');
+
+      //if (formatted.substring(formatted.length-1) == '-' || ' ' || ',' || ';'){
+      if (formatted.substring(formatted.length-1) == ' '){
+        formatted = formatted.substring(0, formatted.length-1);
+      }
+      if (formatted.substring(formatted.length-1) == ','){
+        formatted = formatted.substring(0, formatted.length-1);
+      }
+      if (formatted.substring(formatted.length-1) == '-'){
+        formatted = formatted.substring(0, formatted.length-1);
+      }
+
+      formatted += '...<span class="read-more">Read More &raquo; </span>';
+
+      return formatted;
     }
   });
 
