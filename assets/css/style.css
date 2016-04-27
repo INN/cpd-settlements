@@ -435,6 +435,9 @@ Results
   align-items: center;
   justify-content: center;
 }
+.case .case-payment-wrapper .case-payment {
+  margin-bottom: 20px;
+}
 .case .case-payment-wrapper .case-payment h2 {
   color: #ffffff;
   font-family: 'Open Sans Condensed', sans-serif;
@@ -442,12 +445,14 @@ Results
 .case .case-payment-wrapper .case-payment h3 {
   color: #bd261d;
   font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.1em;
   margin-top: 0;
 }
 .case .case-payment-wrapper h4 {
   color: rgba(255, 255, 255, 0.75);
-  font-size: .9em;
-  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+  font-size: .8em;
+  font-weight: 700;
   margin: 0;
   position: absolute;
   bottom: 20px;
@@ -510,6 +515,9 @@ Results
   background-size: 30px 30px;
   background-color: #000000;
   padding: 20px;
+  transition: background-color 0.15s ease-in;
+  -moz-transition: background-color 0.15s ease-in;
+  -webkit-transition: background-color 0.15s ease-in;
 }
 .case .case-officers .police-icon:hover {
   background-color: #bd261d;

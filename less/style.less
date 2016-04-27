@@ -498,6 +498,8 @@ Results
 
     .case-payment {
 
+      margin-bottom: 20px;
+  
       h2 {
         color:@cr-lightest;
         font-family:@cr-condensed;
@@ -506,14 +508,16 @@ Results
       h3 {
         color:@cr-alert;
         font-family:@cr-condensed;
+        font-size:1.1em;
         margin-top: 0;
       }
     }
 
     h4 {
       color: fade(@cr-lightest,75%);
-      font-size: .9em;
-      font-weight: normal;
+      font-family:@cr-regular;
+      font-size: .8em;
+      font-weight: 700;
       margin: 0;
       position:absolute;
       bottom:20px;
@@ -589,6 +593,9 @@ Results
       background-size: 30px 30px;
       background-color: @cr-darkest;
       padding: 20px;
+      transition: background-color .15s ease-in;
+      -moz-transition: background-color .15s ease-in;
+      -webkit-transition: background-color .15s ease-in;
 
       &:hover {
         background-color: @cr-alert;
