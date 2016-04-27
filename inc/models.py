@@ -42,7 +42,7 @@ class Case(BaseModel):
         'address': 'StreetAddress',
         'causes': 'Causes',
         'tags': 'Tags',
-        'entered_by': 'EnteredBy'
+        'narrative': 'Narrative'
     }
 
     case_number = fields.StringField()
@@ -59,6 +59,7 @@ class Case(BaseModel):
     address = fields.StringField()
     causes = fields.StringField()
     tags = fields.StringField()
+    narrative = fields.StringField()
 
     # Address/location/geo fields
     neighborhood = fields.StringField()
@@ -156,7 +157,6 @@ class Officer(BaseModel):
 
     field_map = {
         'timestamp': "matched_when",
-        'entered_by': "entered_by",
         'appointed': 'appointed_date',
         'resigned': 'resignation_date',
         'attorney': "officer_atty",
@@ -171,7 +171,6 @@ class Officer(BaseModel):
     }
 
     timestamp = fields.StringField()
-    entered_by = fields.StringField()
     appointed = fields.StringField()
     resigned = fields.StringField()
     attorney = fields.StringField()
