@@ -4,7 +4,6 @@ import json
 from jsonmodels import models
 
 from GenericCache import GenericCache
-#from GenericCache.decorators import cached
 
 
 class ModelList(list):
