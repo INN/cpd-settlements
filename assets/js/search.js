@@ -266,6 +266,12 @@
     filterOfficers: function(event, selection) {
       var officer = this.officers.findWhere(selection);
       this.officerList.officers.reset([officer]);
+
+      var detail = $('.detail-page');
+      if (detail) {
+        $('.detail-wrapper').hide();
+        $('.officer-list, .results-wrapper-inner').show();
+      }
     },
 
     filterCases: function(event, selection) {
@@ -399,6 +405,13 @@
       });
 
       this.caseList.cases.reset(filteredCases);
+
+      var detail = $('.detail-page');
+      if (detail) {
+        $('.detail-wrapper').hide();
+        $('.case-list, .results-wrapper-inner').show();
+        $('.search-statement-wrapper').show();
+      }
     },
 
     initSliders: function() {
