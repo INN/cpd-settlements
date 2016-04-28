@@ -403,7 +403,18 @@
 
           if (name == 'tags') {
             var tags = model.get('tags').toLowerCase();
-            if (tags.indexOf(value) < 0) {
+            var hasAll = true;
+            $('input:checked').each(function(){
+              var value = $(this).attr('value');
+              if (tags.indexOf(value) >= 0) {
+                hasAll = true;
+              } else {
+                hasAll = false;
+                return false;
+              }
+            })
+
+            if (!hasAll) {
               ret = false;
             }
           }
