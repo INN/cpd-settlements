@@ -23,22 +23,17 @@ def search(init_view='cases'):
 
     cases = Case.objects
     neighborhoods = {}
-    races = []
     primary_causes = []
 
     for case in cases:
         try:
-            if not neighborhoods.get(case.neighborhood_id, None) and case.neighborhood and case.neighborhood.strip() != '':
+            if (not neighborhoods.get(case.neighborhood_id, None)
+                    and case.neighborhood and case.neighborhood.strip() != ''):
                 neighborhoods[case.neighborhood_id] = {
                     'neighborhood': case.neighborhood,
                     'neighborhood_id': case.neighborhood_id
                 }
         except AttributeError:
-            pass
-
-        try:
-            races.append(case.victims[0].victim_1_race)
-        except IndexError:
             pass
 
         try:
@@ -55,8 +50,6 @@ def search(init_view='cases'):
             neighborhoods.values(), key=lambda x: x.get('neighborhood')),
         'officers': Officer.objects,
         'payments': Payment.objects,
-        'primary_causes': sorted(list(set(primary_causes))),
-        'races': sorted(list(set(races))),
         'site_path': get_site_path()
     })
 
