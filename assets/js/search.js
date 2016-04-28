@@ -362,30 +362,32 @@
           if (value == '')
             return;
 
-          // if (['neighborhood', 'victim_1_race'].indexOf(name) >= 0) {
-          //   if (name == 'neighborhood') {
-          //     if (value == 'unknown') {
-          //       if (typeof model.get(name) !== 'undefined') {
-          //         ret = false;
-          //       }
-          //     } else if (model.get(name) !== value) {
-          //       ret = false;
-          //     }
-          //   }
+          //if (['neighborhood', 'victim_1_race'].indexOf(name) >= 0) {
+          if (['neighborhood'].indexOf(name) >= 0) {
+            if (name == 'neighborhood') {
+              if (value == 'unknown') {
+                if (typeof model.get(name) !== 'undefined') {
+                  ret = false;
+                }
+              } else if (model.get(name) !== value) {
+                ret = false;
+              }
+            }
 
-          //   if (name =='victim_1_race' && typeof model.get('victims') !== 'undefined') {
-          //     var victims = model.get('victims');
-          //     if (victims.length && victims[0].victim_1_race !== value) {
-          //       ret = false;
-          //     }
-          //   }
-          // }
+            // if (name =='victim_1_race' && typeof model.get('victims') !== 'undefined') {
+            //   var victims = model.get('victims');
+            //   if (victims.length && victims[0].victim_1_race !== value) {
+            //     ret = false;
+            //   }
+            // }
+          }
 
           if (name == 'total_payments') {
-            var paymentRange = value.split(','),
+            var paymentRange = value.split('-'),
                 low = Number(paymentRange[0]),
                 high = Number(paymentRange[1]),
-                caseTotalPayments = Number(model.get(name));
+                //caseTotalPayments = Number(model.get(name));
+                caseTotalPayments = Number(model.get('total_payments'));
 
             if ( ! ( (caseTotalPayments >= low) && (caseTotalPayments <= high) ) ) {
               ret = false;
