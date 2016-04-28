@@ -2,8 +2,8 @@
 import os
 
 from base import BaseModel, ModelList
-from jsonmodels import fields
 from webhelpers.text import urlify
+from helpers import total_for_payments
 
 
 class NonMappedModelList(ModelList):
@@ -45,32 +45,6 @@ class Case(BaseModel):
         'narrative': 'Narrative'
     }
 
-    case_number = fields.StringField()
-    date_filed = fields.StringField()
-    date_closed = fields.StringField()
-    judge = fields.StringField()
-    plaintiff_attorney = fields.StringField()
-    plaintiff_attorney_firm = fields.StringField()
-    city_attorney = fields.StringField()
-    city_attorney_firm = fields.StringField()
-    magistrate_judge = fields.StringField()
-    date_of_incident = fields.StringField()
-    location = fields.StringField()
-    address = fields.StringField()
-    causes = fields.StringField()
-    tags = fields.StringField()
-    narrative = fields.StringField()
-
-    # Address/location/geo fields
-    neighborhood = fields.StringField()
-    neighborhood_id = fields.StringField()
-
-    community_area = fields.StringField()
-    community_area_id = fields.StringField()
-
-    latitude = fields.FloatField()
-    longitude = fields.FloatField()
-
     def get_slug(self):
         return urlify("%s" % self.case_number)
 
@@ -97,22 +71,6 @@ class Victims(BaseModel):
         'enterd_by': "Entered By"
     }
 
-    timestamp = fields.StringField()
-    case_number = fields.StringField()
-    victim_1 = fields.StringField()
-    victim_1_race = fields.StringField()
-    victim_1_age = fields.StringField()
-    victim_2 = fields.StringField()
-    victim_3 = fields.StringField()
-    victim_4 = fields.StringField()
-    victim_5 = fields.StringField()
-    victim_6 = fields.StringField()
-    victim_7 = fields.StringField()
-    victim_8 = fields.StringField()
-    more_victims = fields.StringField()
-    victim_1_deceased = fields.StringField()
-    enterd_by = fields.StringField()
-
 
 class Payment(BaseModel):
 
@@ -127,14 +85,6 @@ class Payment(BaseModel):
         'disposition': "disposition",
         'date_paid': "date_paid"
     }
-
-    case_number = fields.StringField()
-    payee = fields.StringField()
-    payment = fields.IntField()
-    fees = fields.StringField()
-    primary_cause = fields.StringField()
-    disposition = fields.StringField()
-    date_paid = fields.StringField()
 
     @staticmethod
     def process_field(field, value):
@@ -170,19 +120,6 @@ class Officer(BaseModel):
         'last': 'last_name',
     }
 
-    timestamp = fields.StringField()
-    appointed = fields.StringField()
-    resigned = fields.StringField()
-    attorney = fields.StringField()
-    attorney_firm = fields.StringField()
-    prefix = fields.StringField()
-    badge_number = fields.StringField()
-    case_number = fields.StringField()
-    id = fields.StringField()
-    first = fields.StringField()
-    middle = fields.StringField()
-    last = fields.StringField()
-
     def get_slug(self):
         return urlify(self.id)
 
@@ -202,3 +139,14 @@ for filename, model in to_load.items():
         model.objects = NonMappedModelList(filepath, model)
     else:
         model.objects = ModelList(filepath, model, model.field_map)
+
+# Do some heavy lifting up-front so this stuff gets stashed in memory
+for case in Case.objects:
+    case.payments = case.get_related(Payment)
+    case.officers = case.get_related(Officer)
+    case.victims = case.get_related(Victims)
+    case.slug = case.get_slug()
+
+for officer in Officer.objects:
+    officer.total_payments = total_for_payments(officer.get_related(Payment), False)
+    officer.slug = officer.get_slug()

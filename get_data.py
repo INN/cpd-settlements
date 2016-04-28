@@ -4,6 +4,7 @@ from lib.download_data import download_data
 from lib.geocode_addresses import geocode_addresses
 from lib.boundaries_for_points import boundaries_for_points
 from lib.prep_officer_data import prep_officer_data
+from lib.render_json import render_officers_json, render_cases_json
 
 
 if __name__ == '__main__':
@@ -15,3 +16,6 @@ if __name__ == '__main__':
     geocode_addresses()
     print "Get boundaries for points..."
     boundaries_for_points()
+    print "Rendering cases and officer front-end json..."
+    render_cases_json()
+    render_officers_json()

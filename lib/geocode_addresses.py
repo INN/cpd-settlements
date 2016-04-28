@@ -13,7 +13,7 @@ def main():
 
 def geocode_addresses():
     cases = ModelList('data/cases.json', Case, Case.field_map)
-    cases_dicts = [case.to_struct() for case in cases]
+    cases_dicts = [case for case in cases]
 
     geocoder = GoogleV3(timeout=30)
 

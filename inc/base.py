@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 
-from jsonmodels import models
-
-from GenericCache import GenericCache
-
 
 class ModelList(list):
     """
@@ -25,9 +21,9 @@ class ModelList(list):
     def filter(self, *args, **kwargs):
         def func(model):
             for key, val in kwargs.items():
-                if getattr(model, key) != val:
-                    return False
-            return True
+                if getattr(model, key) == val:
+                    return True
+            return False
         return filter(func, self)
 
     def get(self, *args, **kwargs):
@@ -37,7 +33,7 @@ class ModelList(list):
         return result[0]
 
     def to_json(self):
-        return json.dumps([item.to_struct() for item in self])
+        return json.dumps([item for item in self])
 
     def _load_json(self):
         try:
@@ -59,7 +55,7 @@ class ModelList(list):
         self.extend(models)
 
 
-class BaseModel(models.Base):
+class BaseModel(dict):
     type = 'base'
 
     """
@@ -73,15 +69,11 @@ class BaseModel(models.Base):
     """
     objects = ModelList()
 
-    cache = GenericCache()
+    def __init__(self, *args, **kwargs):
+        super(BaseModel, self).__init__(*args, **kwargs)
+        self.__dict__ = self
 
     def get_related(self, model=None, attribute='case_number'):
-        key = hash('%s-%s-%s' % (self.__hash__(), model.type, attribute))
-        cached = self.cache.fetch(key)
-
-        if cached:
-            return cached
-
         """
         Lookup other Models with the same case_number attribute
         """
@@ -91,7 +83,6 @@ class BaseModel(models.Base):
         getattr(model.objects[0], attribute)
 
         result = model.objects.filter(**{attribute: getattr(self, attribute)})
-        self.cache.insert(key, result)
         return result
 
     @staticmethod
