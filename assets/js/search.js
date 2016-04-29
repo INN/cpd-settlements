@@ -92,7 +92,7 @@
     model: Case,
 
     comparator: function(x, y) {
-     return this.hightolow(x,y);
+     return this.newtoold(x,y);
     },
 
     hightolow: function(x, y) {
@@ -111,6 +111,26 @@
       if (x_total < y_total)
         return -1;
       if (x_total > y_total)
+        return 1;
+      return 0;
+    },
+
+    newtoold: function(x, y) {
+      var x_date = Date.parse(x.get('date_of_incident')),
+          y_date = Date.parse(y.get('date_of_incident'))
+      if (x_date < y_date)
+        return 1;
+      if (x_date > y_date)
+        return -1;
+      return 0;
+    },
+
+    oldtonew: function(x, y) {
+      var x_date = Date.parse(x.get('date_of_incident')),
+          y_date = Date.parse(y.get('date_of_incident'))
+      if (x_date < y_date)
+        return -1;
+      if (x_date > y_date)
         return 1;
       return 0;
     },
@@ -484,8 +504,14 @@
         case 'payment-high-low':
           this.caseList.cases.comparator = this.caseList.cases.hightolow;
           break;
+        case 'date-newest-oldest':
+          this.caseList.cases.comparator = this.caseList.cases.newtoold;
+          break;
+        case 'date-oldest-newest':
+          this.caseList.cases.comparator = this.caseList.cases.oldtonew;
+          break;
         default:
-          this.caseList.cases.comparator = this.caseList.cases.hightolow;
+          this.caseList.cases.comparator = this.caseList.cases.newtoold;
           break;
       }
       this.caseList.cases.sort();
