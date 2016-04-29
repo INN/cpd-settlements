@@ -51,34 +51,22 @@
     },
 
     officers: function() {
-      $('.case-list').hide();
       this.searchSelector.goToTab('officers');
-      $('.officer-list, .results-wrapper-inner').show();
-      $('.search-statement-wrapper').hide();
       return false;
     },
 
     officer_detail: function() {
-      $('.case-list').hide();
       this.searchSelector.goToTab('officers', true);
-      $('.officer-list, .results-wrapper-inner').hide();
-      $('.search-statement-wrapper').hide();
       return false;
     },
 
     cases: function() {
-      $('.officer-list').hide();
       this.searchSelector.goToTab('cases');
-      $('.case-list, .results-wrapper-inner').show();
-      $('.search-statement-wrapper').show();
       return false;
     },
 
     case_detail: function() {
-      $('.officer-list').hide();
       this.searchSelector.goToTab('cases', true);
-      $('.case-list, .results-wrapper-inner').hide();
-      $('.search-statement-wrapper').hide();
       return false;
     }
     
@@ -289,8 +277,9 @@
 
       var detail = $('.detail-page');
       if (detail) {
-        $('.detail-wrapper').hide();
-        $('.officer-list, .results-wrapper-inner').show();
+        $('body').removeClass('detail-page');
+        $('body').removeClass('detail-case');
+        $('body').removeClass('detail-officer');
       }
     },
 
@@ -357,6 +346,10 @@
       this.filterData = this.$el.serializeObject();
       this.filterCases();
       this.updateStatement();
+
+      $('body').removeClass('detail-page');
+      $('body').removeClass('detail-case');
+      $('body').removeClass('detail-officer');
     },
 
     updateStatement: function() {
@@ -447,13 +440,6 @@
       });
 
       this.caseList.cases.reset(filteredCases);
-
-      var detail = $('.detail-page');
-      if (detail) {
-        $('.detail-wrapper').hide();
-        $('.case-list, .results-wrapper-inner').show();
-        $('.search-statement-wrapper').show();
-      }
     },
 
     initSliders: function() {
@@ -537,19 +523,13 @@
 
       if (typeof tabId == 'string') {
         fragment = 'search/' + tabId;
-        this.$el.find('.tab-selector li').removeClass('active');
-        this.$el.find('.tab-selector li.' + tabId).addClass('active');
       } else {
         fragment = $(tabId.currentTarget).attr('href').replace(Backbone.history.root, '');
-        $(tabId.currentTarget).siblings().removeClass('active');
-        $(tabId.currentTarget).addClass('active');
       }
 
-
-      this.$el.find('.tab-containers > .tab-container').hide();
-      this.$el.find('[data-tab-id="' + tabId + '"]').show();
-
       if (tabId == 'cases') {
+        $('body').removeClass('filter-officers');
+        $('body').addClass('filter-cases');
         if (typeof this.caseForm == 'undefined') {
           this.caseForm = new CaseSearchForm({
             el: '#case-search-form',
@@ -559,6 +539,8 @@
         }
         this.caseForm.filterCases();
       } else {
+        $('body').removeClass('filter-cases');
+        $('body').addClass('filter-officers');
         if (typeof this.officerForm == 'undefined') {
           this.officerForm = new OfficerSearchForm({
             el: '#officer-search-form',
@@ -569,12 +551,9 @@
       }
 
       if (!detail){
-        $('.detail-wrapper').hide();
         Backbone.history.navigate(fragment, { trigger: true });
         return false;
-      } else {
-        $('.detail-wrapper').show();
-      }
+      } 
     }
 
   });
