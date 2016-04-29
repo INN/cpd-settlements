@@ -1,36 +1,88 @@
+<div class="detail-wrapper">
+  <div class="case-detail" data-case_number="{{ case.case_number }}">
 
-<div class="case-detail" data-case_number="{{ case.case_number }}">
+    <h1>Case {{ case.case_number }}</h1>
 
-  <h1>Case {{ case.case_number }}</h1>
+    <div class="case-payment">
+      <h2>{{ total_for_payments(case.payments) }}</h2>
+      <h3>{{ case.primary_cause }}</h3>
+      <p class="tags">{{ case.tags }}</p>
+    </div>
 
-  <div class="case-payment">
-    <h2>{{ total_for_payments(case.payments) }}</h2>
-    <h3>{{ case.primary_cause }}</h3>
   </div>
+</div>
 
-  <div class="case-description">   
+<div class="detail-wrapper">
+  <div class="wrapper-inner-flex">
+    <div class="case-description"> 
 
-     <p>{{ case.narrative }}</p>
+      <div class="case-details">
+        {% for victim in case.victims %}
+          <p><span class="card-label">Plaintiff: </span>
+          {{ victim.victim_1 }}</p>
+        {% endfor %}
+        {% if case.date_of_incident %}
+          <p><span class="card-label">Incident date: </span>
+          {{ case.date_of_incident }}</p>
+        {% endif %}
+        {% if case.address %}
+          <p><span class="card-label">Location: </span>
+          {{ case.address }}</p>
+        {% endif %}
+      </div>
 
-     <ul class="case-details">
-       <li>Case number: {{ case.case_number }}</li>
-       <li>
-         <span>Plaintiff: </span>
-         {% for victim in case.victims %}
-           {{ victim.victim_1 }}
-         {% endfor %}
-       </li>
-       <li><span>Incident date: </span>{{ case.date_of_incident }}</li>
-       <li><span>Location: </span>{{ case.address }}</li>
-     </ul>
+
+      {% if (case.narrative != 'NULL') %}
+        <div class="case-summary">
+          <span class="card-label">Case summary: </span>
+          <p>{{ case.narrative }}</p>
+        </div>
+      {% endif %}
+
+
+      {% for victim in case.victims %}
+        {% if (victim.victim_2) %}
+          <span class="card-label">Additional victims: </span>
+          <ul class="case-details">
+              {% for victim in case.victims %}
+                {% if (victim.victim_2) %}
+                  <li>{{ victim.victim_2 }}</li>
+                {% endif %}
+                {% if (victim.victim_3) %}
+                  <li>{{ victim.victim_3 }}</li>
+                {% endif %}
+                {% if (victim.victim_4) %}
+                  <li>{{ victim.victim_4 }}</li>
+                {% endif %}
+                {% if (victim.victim_5) %}
+                  <li>{{ victim.victim_5 }}</li>
+                {% endif %}
+                {% if (victim.victim_6) %}
+                  <li>{{ victim.victim_6 }}</li>
+                {% endif %}
+                {% if (victim.victim_7) %}
+                  <li>{{ victim.victim_7 }}</li>
+                {% endif %}
+                {% if (victim.victim_8) %}
+                  <li>{{ victim.victim_8 }}</li>
+                {% endif %}
+              {% endfor %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+
+    <div id="map"></div>
   </div>
-
 </div>
 
 
+<div class="detail-wrapper">
   <div class="case-officers">
-    <label class="results-label" style="float:none;margin-top:20px;">Officers involved:</label>
+    <label class="results-label" style="float:none;">Officers involved:</label>
      {% for officer in case.officers %}
       {% include 'templates/_officer.html' %}
      {% endfor %}
   </div>
+</div>

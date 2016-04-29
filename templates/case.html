@@ -13,9 +13,9 @@
 
 	  <div id="results-wrapper">
       	{% include 'templates/_statement.html' %}
-	    <div class="detail-wrapper">
-	      {% include 'templates/_case.html' %}
-	    </div>
+	    
+	    {% include 'templates/_case.html' %}
+	    
 	    {% include 'templates/_results.html' %}
 	  </div> <!--end: results wrapper-->
 	</div><!--end: container-inner-->
@@ -25,6 +25,8 @@
 {% block library_scripts %}
 
 {{ super() }}
+
+{% include 'templates/_map.html' %}
 
 {% include 'templates/_results_templates.html' %}
 

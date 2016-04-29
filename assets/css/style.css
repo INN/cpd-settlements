@@ -129,11 +129,19 @@ Filters
   border: 1px solid #000;
   padding: 20px;
   margin-bottom: 1px;
+  float: left;
+  width: 100%;
 }
 .results-wrapper-inner label,
 .detail-wrapper label,
 .search-statement-wrapper label {
   color: #ffffff;
+}
+.results-wrapper-inner.split-column,
+.detail-wrapper.split-column,
+.search-statement-wrapper.split-column {
+  width: 50%;
+  float: left;
 }
 #search-intro,
 #case-search-statement {
@@ -613,6 +621,25 @@ label.results-label {
 .case-list-sort-container #case-list-sort .chosen-results,
 .case-list-sort-container .chosen-container .chosen-results {
   color: #ffffff;
+}
+/************
+  Detail Page
+************/
+.detail-page .case-description {
+  background-color: #ffffff;
+  padding: 20px;
+}
+.wrapper-inner-flex {
+  display: flex;
+}
+.wrapper-inner-flex .case-description {
+  flex: 1;
+  margin-right: 20px;
+}
+.wrapper-inner-flex #map {
+  min-height: 400px;
+  flex: 1;
+  margin-left: 0px;
 }
 /* 
   Nav
