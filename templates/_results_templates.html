@@ -1,8 +1,9 @@
 <script type="text/javascript">
-  var site_path = '{{ site_path }}';
+  var site_path = '{{ site_path }}'; 
   var cases_json = {{ cases_json()|safe }};
   var officers_json = {{ officers_json()|safe }};  
 </script>
+
 
 {{ JS.push('vendor/chosen/chosen.jquery.js') }}
 {{ JS.push('vendor/typeahead.js/dist/typeahead.bundle.js') }}

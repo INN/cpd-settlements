@@ -40,4 +40,35 @@
 
 {% include 'templates/_results_templates.html' %}
 
+
+<script>
+	function getOfficerData(code, array) {
+		return array.filter(
+			function(array){return array.slug == code}
+		);
+	}
+
+	function getCases(officer) {
+		var officerCases = [];
+
+		for (var i=0; i<cases_json.length; i++) {
+		 	var officers = cases_json[i].officers;
+
+			for (var j=0; j<officers.length; j++) {
+				var foundOfficer = getOfficerData(officer, officers);
+
+				if (foundOfficer.length > 0) {
+					officerCases.push(cases_json[i].slug);
+				}
+			}
+		}
+
+		return officerCases;
+	}
+
+	var thisOfficerCases = getCases( {{ officer.slug }} );
+	console.log( thisOfficerCases );
+
+</script>
+
 {% endblock %}
