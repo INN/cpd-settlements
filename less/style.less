@@ -655,7 +655,7 @@ Results
   .officer-text {
     padding-left:140px;
     background:url("../images/police-icon.svg") center left no-repeat;
-    background-size:contain;
+    background-size:100px;
     position:relative;
 
     h2 {
@@ -807,7 +807,7 @@ label.results-label {
   }
 
   #map {
-    min-height:400px;
+    min-height:300px;
     flex: 1;
     margin-left:0px;
   }
@@ -1343,4 +1343,38 @@ body.not-nested {
 .not-nested #bg-solid {
   background-color:@cr-darkest;
   display:block;
+}
+
+
+/* ==========================================================================
+Media Queries
+========================================================================== */
+@media screen and (max-width: 1000px) {
+  .wrapper-inner-flex{
+    display:block;
+
+    .case-description {
+      margin-right:0;
+      margin-bottom:20px;
+    }
+  }
+
+  .detail-wrapper {
+    .officer-logo {
+      min-width:100%;
+    }
+    .officer-text {
+      padding-left: 0;
+      padding-top: 40px;
+      background: url("../images/police-icon.svg") top center no-repeat;
+      background-size: 40px;
+      color: #fff;
+      position: relative;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 760px) {
+
 }
