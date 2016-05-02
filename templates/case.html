@@ -113,14 +113,24 @@
 	  </div> <!--end: results wrapper-->
 	</div><!--end: container-inner-->
 </div>
+
 {% endblock content %}
 
 {% block library_scripts %}
 
 {{ super() }}
 
-{% include 'templates/_map.html' %}
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmYnsdne3OZUy_MasdujKQ-FDspKBELQ&sensor=false"></script>
+<script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/map.js') }}"></script>
+<script>
+	var thisCase = { latitude:{{case.latitude}}, longitude:{{case.longitude}} };
+	// When the window has finished loading create our google map below
+	google.maps.event.addDomListener(window, 'load', init(thisCase));
+</script>
 
 {% include 'templates/_results_templates.html' %}
+
+
 
 {% endblock %}

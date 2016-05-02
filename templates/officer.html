@@ -27,6 +27,14 @@
 					</div>
 				</div>
 			</div>
+			<div id="officer-case-map" class="detail-wrapper">
+		  		<div class="wrapper-inner-flex">
+					<div id="map"></div>
+				</div>
+			</div>
+			<div id="officer-case-list" class="detail-wrapper">
+				<label class="results-label" style="float:none;">Cases involving {{ officer.last }}:</label>
+			</div>
 
 	    {% include 'templates/_results.html' %}
 	  </div> <!--end: results wrapper-->
@@ -38,10 +46,55 @@
 
 {{ super() }}
 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmYnsdne3OZUy_MasdujKQ-FDspKBELQ&sensor=false"></script>
+<script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/map.js') }}"></script>
+
 {% include 'templates/_results_templates.html' %}
 
 
 <script>
+
+	Number.prototype.formatMoney = function(c, d, t){
+	    var n = this,
+	        c = isNaN(c = Math.abs(c)) ? 2 : c,
+	        d = d == undefined ? "." : d,
+	        t = t == undefined ? "," : t,
+	        s = n < 0 ? "-" : "",
+	        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+	        j = (j = i.length) > 3 ? j % 3 : 0;
+	    return s + (j ? i.substr(0, j) + t : "") +
+	      i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) +
+	      (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+	};
+
+	var officerCaseList = getCases( {{ officer.slug }} );
+	var initialCase = { latitude:41.8781, longitude:-87.6298 };
+	google.maps.event.addDomListener(window, 'load', init(initialCase, officerCaseList));
+
+	renderCaseList();
+
+	function formatStr(text) {
+		var formatted = '';
+
+		// https://regexper.com/#%5E(%5Cr%5Cn%7C.)%7B1%2C280%7D%5Cb
+		formatted = text.match(/^(\r\n|.){1,280}\b/g).join('');
+
+		//if (formatted.substring(formatted.length-1) == '-' || ' ' || ',' || ';'){
+		if (formatted.substring(formatted.length-1) == ' '){
+			formatted = formatted.substring(0, formatted.length-1);
+		}
+		if (formatted.substring(formatted.length-1) == ','){
+			formatted = formatted.substring(0, formatted.length-1);
+		}
+		if (formatted.substring(formatted.length-1) == '-'){
+			formatted = formatted.substring(0, formatted.length-1);
+		}
+
+		formatted += '...<span class="read-more">Read More &raquo; </span>';
+
+		return formatted;
+    }
+
 	function getOfficerData(code, array) {
 		return array.filter(
 			function(array){return array.slug == code}
@@ -52,22 +105,30 @@
 		var officerCases = [];
 
 		for (var i=0; i<cases_json.length; i++) {
-		 	var officers = cases_json[i].officers;
+			var filteredCases = cases_json[i];
+		 	var officers = filteredCases.officers;
 
-			for (var j=0; j<officers.length; j++) {
-				var foundOfficer = getOfficerData(officer, officers);
+			var foundOfficer = getOfficerData(officer, officers);
 
-				if (foundOfficer.length > 0) {
-					officerCases.push(cases_json[i].slug);
-				}
+			if (foundOfficer.length > 0) {
+				officerCases.push(filteredCases);
 			}
 		}
 
+		console.log(officerCases);
 		return officerCases;
 	}
 
-	var thisOfficerCases = getCases( {{ officer.slug }} );
-	console.log( thisOfficerCases );
+	function renderCaseList() {
+		for (var i=0; i<officerCaseList.length; i++){
+			var thisCase = officerCaseList[i];
+	        var html = $( '#case-tmpl' ).html();
+	        var compiled = _.template(html, {variable: 'model'});
+	        var officerCase = compiled(thisCase);
+
+	        $('#officer-case-list').append( officerCase );
+	    };
+	}
 
 </script>
 
