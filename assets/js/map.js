@@ -26,7 +26,16 @@ function init(thisCase, officerCaseList) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng( thisCase.latitude, thisCase.longitude),
             map: map,
-            title: 'Snazzy!'
+            title: thisCase.case_number
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: "holding..."
+        });
+
+        marker.addListener('click', function() {
+            infowindow.setContent('<div id="content">'+ this.title +'</div>');
+            infowindow.open(map, this);
         });
 
         map.setCenter(marker.position);
@@ -44,14 +53,14 @@ function init(thisCase, officerCaseList) {
                 var coords = new google.maps.LatLng(thisCase.latitude, thisCase.longitude);
                 latlng.push(coords);
 
-                infowindow = new google.maps.InfoWindow({
-                    content: "holding..."
-                });
-
                 var marker = new google.maps.Marker({
                     position: coords,
                     map: map,
                     title: thisCase.case_number
+                });
+
+                infowindow = new google.maps.InfoWindow({
+                    content: "holding..."
                 });
 
                 marker.addListener('click', function() {
