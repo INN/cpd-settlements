@@ -2,14 +2,21 @@
   var site_path = '{{ site_path }}';
 </script>
 
-{{ JS.push('data/cases.js') }}
-{{ JS.push('data/officers.js') }}
-{{ JS.push('vendor/chosen/chosen.jquery.js') }}
-{{ JS.push('vendor/typeahead.js/dist/typeahead.bundle.js') }}
-{{ JS.push('vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.js') }}
-{{ JS.push('vendor/jquery-serialize-object/jquery.serialize-object.js') }}
-{{ JS.push('js/search.js') }}
-{{ JS.render('js/search.min.js') }}
+{% if BUILD_PATH %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='data/combined.min.js') }}"></script>
+{% else %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='data/cases.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='data/officers.js') }}"></script>
+{% endif %}
+
+{% if BUILD_PATH %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/search-libs.min.js') }}"></script>
+{% else %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.jquery.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/typeahead.js/dist/typeahead.bundle.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/jquery-serialize-object/jquery.serialize-object.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/search.js') }}"></script>
+{% endif %}
 
 <script type="text/template" id="case-tmpl">
 

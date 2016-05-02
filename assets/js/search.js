@@ -328,7 +328,6 @@
       this.caseList = options.caseList
 
       this.initChosen();
-      this.initSliders();
       this.initTags();
       return this;
     },
@@ -423,15 +422,6 @@
         $('.case-list, .results-wrapper-inner').show();
         $('.search-statement-wrapper').show();
       }
-    },
-
-    initSliders: function() {
-      $('.slider.payment').slider({
-        formatter: function(values) {
-          return '$' + Number(values[0]).formatMoney() + ' - $' + Number(values[1]).formatMoney();
-        },
-        tooltip_position: 'bottom'
-      });
     },
 
     initChosen: function() {

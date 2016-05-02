@@ -3,8 +3,7 @@ from flask import Blueprint, render_template, g
 from urlparse import urlparse
 
 from .inc.models import Case, Officer, Payment
-from .inc.helpers import (
-    format_currency, total_for_payments, JavascriptIncluder, CSSIncluder)
+from .inc.helpers import format_currency, total_for_payments
 
 blueprint = Blueprint(
     __name__,
@@ -115,9 +114,8 @@ def context_processor():
     Add helper functions to context for all projects.
     """
     return {
-        'JS': JavascriptIncluder(blueprint=blueprint),
-        'CSS': CSSIncluder(blueprint=blueprint),
         'enumerate': enumerate,
         'format_currency': format_currency,
-        'total_for_payments': total_for_payments
+        'total_for_payments': total_for_payments,
+        'BUILD_PATH': g.current_site.app.config.get('BUILD_PATH', None)
     }

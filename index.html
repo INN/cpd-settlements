@@ -209,12 +209,15 @@
 
 {{ super() }}
 
-{{ JS.push('vendor/gsap/src/minified/TweenMax.min.js') }}
-{{ JS.push('vendor/scrollmagic/scrollmagic/minified/ScrollMagic.min.js') }}
-{{ JS.push('vendor/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js') }}
-{{ JS.push('vendor/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js') }}
-{{ JS.push('js/home.js') }}
-{{ JS.render('js/homepage-libs.min.js') }}
+{% if BUILD_PATH %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/homepage-libs.min.js') }}"></script>
+{% else %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/gsap/src/minified/TweenMax.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/scrollmagic/scrollmagic/minified/ScrollMagic.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/home.js') }}"></script>
+{% endif %}
 
 {% include 'templates/_results_templates.html' %}
  

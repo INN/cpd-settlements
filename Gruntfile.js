@@ -25,6 +25,7 @@ module.exports = function(grunt) {
                 files: CSS_LESS_FILES
             },
         },
+
         cssmin: {
             target: {
                 options: {
@@ -32,13 +33,64 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'css',
-                    src: ['*.css', '!*.min.css'],
-                    dest: 'css',
+                    cwd: 'assets/css',
+                    src: ['assets/css/*.css', '!assets/css/*.min.css'],
+                    dest: 'assets/css',
                     ext: '.min.css'
                 }]
             }
         },
+
+        concat_css: {
+          all: {
+            src: [
+              "assets/vendor/chosen/chosen.css",
+              "assets/css/style.min.css"
+            ],
+            dest: "assets/css/styles-combined.min.css"
+          }
+        },
+
+        concat: {
+          options: {
+            separator: ';',
+          },
+          home: {
+            src: [
+              'assets/vendor/gsap/src/minified/TweenMax.min.js',
+              'assets/vendor/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
+              'assets/vendor/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
+              'assets/vendor/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
+              'assets/js/home.min.js'
+            ],
+            dest: 'assets/js/homepage-libs.min.js',
+          },
+          data: {
+            src: [
+              'assets/data/cases.min.js',
+              'assets/data/officers.min.js'
+            ],
+            dest: 'assets/data/combined.min.js',
+          },
+          libs: {
+            src: [
+              'assets/vendor/jquery/dist/jquery.min.js',
+              'assets/vendor/underscore/underscore.js',
+              'assets/vendor/backbone/backbone.js',
+            ],
+            dest: 'assets/js/libraries.min.js'
+          },
+          search: {
+            src: [
+              'assets/vendor/chosen/chosen.jquery.js',
+              'assets/vendor/typeahead.js/dist/typeahead.bundle.min.js',
+              'assets/vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js',
+              'assets/js/search.min.js'
+            ],
+            dest: 'assets/js/search-libs.min.js'
+          }
+        },
+
         uglify: {
             target: {
                 options: {
@@ -46,17 +98,20 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'js',
+                    cwd: '.',
                     src: [
-                        'links-common.js',
-                        'lroundups.js',
+                        'assets/js/home.js',
+                        'assets/data/cases.js',
+                        'assets/data/officers.js',
+                        'assets/js/search.js',
                         '!*.min.js'
                     ],
-                    dest: 'js',
+                    dest: '.',
                     ext: '.min.js'
                 }]
             }
         },
+
         watch: {
             less: {
                 files: [
@@ -72,6 +127,14 @@ module.exports = function(grunt) {
     });
 
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
+
+    grunt.registerTask('build', 'Build all asset files', [
+      'less',
+      'cssmin',
+      'concat_css',
+      'uglify',
+      'concat'
+    ]);
 
     // Default task(s).
     grunt.registerTask('default', ['watch']);

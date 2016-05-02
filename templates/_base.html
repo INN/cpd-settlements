@@ -4,20 +4,27 @@
 {% block library_css %}
 {{ super() }}
 
-{{ CSS.push('vendor/chosen/chosen.css') }}
-{{ CSS.push('css/style.css') }}
-{{ CSS.render('css/style.min.css') }}
+{% if BUILD_PATH %}
+  <link href='{{ url_for('cpd_settlements.static', filename='css/styles-combined.min.css') }}' rel='stylesheet' type='text/css'>
+{% else %}
+  <link href='{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.css') }}' rel='stylesheet' type='text/css'>
+  <link href='{{ url_for('cpd_settlements.static', filename='css/style.css') }}' rel='stylesheet' type='text/css'>
+{% endif %}
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+
 {% endblock library_css %}
 
 
 {% block library_scripts %}
-{{ JS.push('vendor/jquery/dist/jquery.js') }}
-{{ JS.push('vendor/underscore/underscore.js') }}
-{{ JS.push('vendor/backbone/backbone.js') }}
-{{ JS.render('js/libraries.min.js') }}
+{% if BUILD_PATH %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/libraries.min.js') }}"></script>
+{% else %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/jquery/dist/jquery.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/underscore/underscore.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/backbone/backbone.js') }}"></script>
+{% endif %}
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 {% endblock library_scripts %}
