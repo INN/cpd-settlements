@@ -34,8 +34,6 @@ S3_BUCKETS = {
     "staging": "stage-apps.inn.org/cpd-settlements",
 }
 
-FREEZER_BASE_URL = 'localhost:5000'
-
 import sys
 from tarbell.settings import Settings
 from tarbell.hooks import register_hook
@@ -43,9 +41,19 @@ from tarbell.hooks import register_hook
 sys.path.append(Settings().config.get('projects_path'))
 
 from cpd_settlements import blueprint
+from cpd_settlements.inc.models import Officer, Case
 
 @register_hook('generate')
 def app_setup(site, output_root, extra_context):
+
+    @site.freezer.register_generator
+    def officer_urls():
+        for officer in Officer.objects:
+            yield 'cpd_settlements.officer', {'slug': officer.slug}
+
+    @site.freezer.register_generator
+    def case_urls():
+        for case in Case.objects:
+            yield 'cpd_settlements.case', {'slug': case.slug}
+
     site.app.config['FREEZER_IGNORE_404_NOT_FOUND'] = True
-    if site.app.config.get('BUILD_PATH', False) and extra_context:
-        site.app.config['FREEZER_BASE_URL'] = 'http://%s/' % extra_context.get('ROOT_URL')
