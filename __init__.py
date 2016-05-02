@@ -102,8 +102,8 @@ def get_context(route):
 
 
 def get_site_path():
-    if g.current_site.app.config.get('FREEZER_BASE_URL', False):
-        return urlparse(g.current_site.app.config.get('FREEZER_BASE_URL')).path
+    if g.current_site.app.config.get('BUILD_PATH', False):
+        return '/cpd-settlements/'
     else:
         return '/'
 
