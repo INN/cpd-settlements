@@ -1,6 +1,6 @@
 {% extends "templates/_base.html" %}
 
-{% block bodyattrs %}class="not-nested detail-page"{% endblock bodyattrs %}
+{% block bodyattrs %}class="not-nested detail-page detail-case"{% endblock bodyattrs %}
 
 {% block content %}
   <div id="bg-static" class="bgimg"></div>
@@ -13,9 +13,102 @@
 
 	  <div id="results-wrapper">
       	{% include 'templates/_statement.html' %}
+	    
+	    
 	    <div class="detail-wrapper">
-	      {% include 'templates/_case.html' %}
-	    </div>
+		  <div class="case-detail" data-case_number="{{ case.case_number }}">
+
+		    <h1>Case {{ case.case_number }}</h1>
+
+		    <div class="case-payment">
+		      <h2>{{ total_for_payments(case.payments) }}</h2>
+		      <h3>{{ case.primary_cause }}</h3>
+		      <p class="tags">{{ case.tags }}</p>
+		    </div>
+
+		  </div>
+		</div>
+
+		<div class="detail-wrapper">
+		  <div class="wrapper-inner-flex">
+		    <div class="case-description"> 
+
+		      <div class="case-details">
+		        {% for victim in case.victims %}
+		          <p><span class="card-label">Plaintiff: </span>
+		          {{ victim.victim_1 }}</p>
+		        {% endfor %}
+		        {% if case.date_of_incident %}
+		          <p><span class="card-label">Incident date: </span>
+		          {{ case.date_of_incident }}</p>
+		        {% endif %}
+		        {% if case.address %}
+		          <p><span class="card-label">Location: </span>
+		          {{ case.address }}</p>
+		        {% endif %}
+		      </div>
+
+
+		      {% if (case.narrative != 'NULL') %}
+		        <div class="case-summary">
+		          <span class="card-label">Case summary: </span>
+		          <p>{{ case.narrative }}</p>
+		        </div>
+		      {% endif %}
+
+
+		      {% for victim in case.victims %}
+		        {% if (victim.victim_2) %}
+		          <span class="card-label">Additional victims: </span>
+		          <ul class="case-details">
+		              {% for victim in case.victims %}
+		                {% if (victim.victim_2) %}
+		                  <li>{{ victim.victim_2 }}</li>
+		                {% endif %}
+		                {% if (victim.victim_3) %}
+		                  <li>{{ victim.victim_3 }}</li>
+		                {% endif %}
+		                {% if (victim.victim_4) %}
+		                  <li>{{ victim.victim_4 }}</li>
+		                {% endif %}
+		                {% if (victim.victim_5) %}
+		                  <li>{{ victim.victim_5 }}</li>
+		                {% endif %}
+		                {% if (victim.victim_6) %}
+		                  <li>{{ victim.victim_6 }}</li>
+		                {% endif %}
+		                {% if (victim.victim_7) %}
+		                  <li>{{ victim.victim_7 }}</li>
+		                {% endif %}
+		                {% if (victim.victim_8) %}
+		                  <li>{{ victim.victim_8 }}</li>
+		                {% endif %}
+		              {% endfor %}
+		          </ul>
+		        {% endif %}
+		      {% endfor %}
+
+		    </div>
+
+		    <div id="map"></div>
+		  </div>
+		</div>
+
+
+		<div class="detail-wrapper">
+		  <div class="case-officers">
+		    <label class="results-label" style="float:none;">Officers involved:</label>
+		     {% for officer in case.officers %}
+		      {% include 'templates/_officer.html' %}
+		     {% endfor %}
+		  </div>
+		</div>
+
+
+
+
+
+	    
 	    {% include 'templates/_results.html' %}
 	  </div> <!--end: results wrapper-->
 	</div><!--end: container-inner-->
@@ -25,6 +118,8 @@
 {% block library_scripts %}
 
 {{ super() }}
+
+{% include 'templates/_map.html' %}
 
 {% include 'templates/_results_templates.html' %}
 

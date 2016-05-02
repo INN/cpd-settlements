@@ -1,36 +1,58 @@
+<div class="case" data-case_number="{{ case.case_number }}" onclick="location.href='{{ site_path }}case/{{ case.case_number }}'">
 
-<div class="case-detail" data-case_number="{{ case.case_number }}">
+  <div class="card-row">
+    <div class="case-payment-wrapper">
+      <h4>{{ case.case_number }}</h4>
+      <div class="case-payment">
+        <h2>${{ case.total_payments }}</h2>
+        <h3>{{ case.primary_cause }}</h3>
+      </div>
+    </div>
 
-  <h1>Case {{ case.case_number }}</h1>
+    <div class="case-description">
+      <div class="case-details">
+        {% for victim in case.victims %}
+          <p><span class="card-label">Plaintiff: </span>
+          {{ victim.victim_1 }}</p>
+        {% endfor %}
+        {% if case.date_of_incident %}
+          <p><span class="card-label">Incident date: </span>
+          {{ case.date_of_incident }}</p>
+        {% endif %}
+        {% if case.address %}
+          <p><span class="card-label">Location: </span>
+          {{ case.address }}</p>
+        {% endif %}
+      </div>
 
-  <div class="case-payment">
-    <h2>{{ total_for_payments(case.payments) }}</h2>
-    <h3>{{ case.primary_cause }}</h3>
+      {% if (case.narrative != 'NULL') %}
+        <div class="case-summary">
+          <span class="card-label">Case summary: </span>
+          <p>{{ case.narrative }}</p>
+        </div>
+      {% endif %}
+      
+      <p style="display:none;">{{ case.tags }}</p>
+
+      
+      {% if case.officers > 0 %}
+        <div class="case-officers">
+          <span class="card-label">Officers involved:</span>
+          <div class="officer-group">
+            {% for officer in case.officers %}
+              {% include 'templates/_officer.html' %}
+              <a href="{{ site_path }}officer/{{ officer.slug }}" class="police-icon" data-firstname="{{ officer.first }}" data-lastname="{{ officer.last }}"></a>
+            {% endfor %}
+           </div>
+        </div>
+      {% endif %}
+      
+       
+    </div>
   </div>
 
-  <div class="case-description">   
-
-     <p>{{ case.narrative }}</p>
-
-     <ul class="case-details">
-       <li>Case number: {{ case.case_number }}</li>
-       <li>
-         <span>Plaintiff: </span>
-         {% for victim in case.victims %}
-           {{ victim.victim_1 }}
-         {% endfor %}
-       </li>
-       <li><span>Incident date: </span>{{ case.date_of_incident }}</li>
-       <li><span>Location: </span>{{ case.address }}</li>
-     </ul>
-  </div>
+  
 
 </div>
 
 
-  <div class="case-officers">
-    <label class="results-label" style="float:none;margin-top:20px;">Officers involved:</label>
-     {% for officer in case.officers %}
-      {% include 'templates/_officer.html' %}
-     {% endfor %}
-  </div>

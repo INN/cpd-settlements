@@ -51,34 +51,22 @@
     },
 
     officers: function() {
-      $('.case-list').hide();
       this.searchSelector.goToTab('officers');
-      $('.officer-list, .results-wrapper-inner').show();
-      $('.search-statement-wrapper').hide();
       return false;
     },
 
     officer_detail: function() {
-      $('.case-list').hide();
       this.searchSelector.goToTab('officers', true);
-      $('.officer-list, .results-wrapper-inner').hide();
-      $('.search-statement-wrapper').hide();
       return false;
     },
 
     cases: function() {
-      $('.officer-list').hide();
       this.searchSelector.goToTab('cases');
-      $('.case-list, .results-wrapper-inner').show();
-      $('.search-statement-wrapper').show();
       return false;
     },
 
     case_detail: function() {
-      $('.officer-list').hide();
       this.searchSelector.goToTab('cases', true);
-      $('.case-list, .results-wrapper-inner').hide();
-      $('.search-statement-wrapper').hide();
       return false;
     }
     
@@ -92,7 +80,7 @@
     model: Case,
 
     comparator: function(x, y) {
-     return this.hightolow(x,y);
+     return this.newtoold(x,y);
     },
 
     hightolow: function(x, y) {
@@ -111,6 +99,26 @@
       if (x_total < y_total)
         return -1;
       if (x_total > y_total)
+        return 1;
+      return 0;
+    },
+
+    newtoold: function(x, y) {
+      var x_date = Date.parse(x.get('date_of_incident')),
+          y_date = Date.parse(y.get('date_of_incident'))
+      if (x_date < y_date)
+        return 1;
+      if (x_date > y_date)
+        return -1;
+      return 0;
+    },
+
+    oldtonew: function(x, y) {
+      var x_date = Date.parse(x.get('date_of_incident')),
+          y_date = Date.parse(y.get('date_of_incident'))
+      if (x_date < y_date)
+        return -1;
+      if (x_date > y_date)
         return 1;
       return 0;
     },
@@ -269,8 +277,9 @@
 
       var detail = $('.detail-page');
       if (detail) {
-        $('.detail-wrapper').hide();
-        $('.officer-list, .results-wrapper-inner').show();
+        $('body').removeClass('detail-page');
+        $('body').removeClass('detail-case');
+        $('body').removeClass('detail-officer');
       }
     },
 
@@ -336,6 +345,10 @@
       this.filterData = this.$el.serializeObject();
       this.filterCases();
       this.updateStatement();
+
+      $('body').removeClass('detail-page');
+      $('body').removeClass('detail-case');
+      $('body').removeClass('detail-officer');
     },
 
     updateStatement: function() {
@@ -402,7 +415,18 @@
 
           if (name == 'tags') {
             var tags = model.get('tags').toLowerCase();
-            if (tags.indexOf(value) < 0) {
+            var hasAll = true;
+            $('input:checked').each(function(){
+              var value = $(this).attr('value');
+              if (tags.indexOf(value) >= 0) {
+                hasAll = true;
+              } else {
+                hasAll = false;
+                return false;
+              }
+            })
+
+            if (!hasAll) {
               ret = false;
             }
           }
@@ -415,13 +439,6 @@
       });
 
       this.caseList.cases.reset(filteredCases);
-
-      var detail = $('.detail-page');
-      if (detail) {
-        $('.detail-wrapper').hide();
-        $('.case-list, .results-wrapper-inner').show();
-        $('.search-statement-wrapper').show();
-      }
     },
 
     initChosen: function() {
@@ -463,8 +480,14 @@
         case 'payment-high-low':
           this.caseList.cases.comparator = this.caseList.cases.hightolow;
           break;
+        case 'date-newest-oldest':
+          this.caseList.cases.comparator = this.caseList.cases.newtoold;
+          break;
+        case 'date-oldest-newest':
+          this.caseList.cases.comparator = this.caseList.cases.oldtonew;
+          break;
         default:
-          this.caseList.cases.comparator = this.caseList.cases.hightolow;
+          this.caseList.cases.comparator = this.caseList.cases.newtoold;
           break;
       }
       this.caseList.cases.sort();
@@ -490,19 +513,13 @@
 
       if (typeof tabId == 'string') {
         fragment = 'search/' + tabId;
-        this.$el.find('.tab-selector li').removeClass('active');
-        this.$el.find('.tab-selector li.' + tabId).addClass('active');
       } else {
         fragment = $(tabId.currentTarget).attr('href').replace(Backbone.history.root, '');
-        $(tabId.currentTarget).siblings().removeClass('active');
-        $(tabId.currentTarget).addClass('active');
       }
 
-
-      this.$el.find('.tab-containers > .tab-container').hide();
-      this.$el.find('[data-tab-id="' + tabId + '"]').show();
-
       if (tabId == 'cases') {
+        $('body').removeClass('filter-officers');
+        $('body').addClass('filter-cases');
         if (typeof this.caseForm == 'undefined') {
           this.caseForm = new CaseSearchForm({
             el: '#case-search-form',
@@ -512,6 +529,8 @@
         }
         this.caseForm.filterCases();
       } else {
+        $('body').removeClass('filter-cases');
+        $('body').addClass('filter-officers');
         if (typeof this.officerForm == 'undefined') {
           this.officerForm = new OfficerSearchForm({
             el: '#officer-search-form',
@@ -522,12 +541,9 @@
       }
 
       if (!detail){
-        $('.detail-wrapper').hide();
         Backbone.history.navigate(fragment, { trigger: true });
         return false;
-      } else {
-        $('.detail-wrapper').show();
-      }
+      } 
     }
 
   });

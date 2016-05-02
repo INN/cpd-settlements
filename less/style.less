@@ -110,22 +110,22 @@ Search Screen
   top:0;
 }
 
-body.cases {
-  .officer-tab {
-    display: none;
-  }
-  .case-tab {
-    display: block;
-  }
-}
-body.officers {
-  .officer-tab {
-    display: block;
-  }
-  .case-tab {
-    display: none;
-  }
-}
+// body.cases {
+//   .officer-tab {
+//     display: none;
+//   }
+//   .case-tab {
+//     display: block;
+//   }
+// }
+// body.officers {
+//   .officer-tab {
+//     display: block;
+//   }
+//   .case-tab {
+//     display: none;
+//   }
+// }
 
 /* ==========================================================================
 Filters
@@ -147,9 +147,16 @@ Filters
   border:1px solid #000;
   padding:20px;
   margin-bottom:1px;
+  float:left;
+  width:100%;
 
   label {
     color:@cr-lightest;
+  }
+
+  &.split-column {
+    width:50%;
+    float:left;
   }
 }
 #search-intro, #case-search-statement {
@@ -252,7 +259,9 @@ ul.tab-selector {
   .search-form {
     float: left;
     width:100%;
-    padding: 30px 20px 20px;
+  }
+  #case-search-form, #officer-search-form {
+    margin:30px 20px 20px;
   }
   #tag-group {
     display:block;
@@ -450,11 +459,6 @@ Form Elements
 /* ==========================================================================
 Results
 ========================================================================== */
-.case-list,
-.officer-list {
-  display: none;
-}
-
 .case {
   width:100%;
   border:1px solid @cr-darkest;
@@ -704,6 +708,111 @@ label.results-label {
     }
   }
 }
+
+/************
+  Detail Page
+************/
+.detail-wrapper {
+  display:none;
+}
+.results-wrapper-inner, .search-statement-wrapper {
+  display:block;
+}
+.case-list, .officer-list {
+  display:none;
+}
+
+.filter-cases {
+  li.cases {
+    background-color: @cr-highlight;
+    a { 
+      color: @cr-lightest;
+      text-decoration: none;
+      
+      &:hover {
+        color: @cr-darkest;
+      }
+    }
+  }
+  #case-search-form {
+    display:block;
+  }
+  #officer-search-form {
+    display:none;
+  }
+  .search-statement-wrapper {
+    display:block;
+  }
+  .case-list, .results-wrapper-inner, .search-statement-wrapper {
+    display:block;
+  }
+}
+.filter-officers {
+  li.officers {
+    background-color: @cr-highlight;
+    a { 
+      color: @cr-lightest;
+      text-decoration: none;
+      
+      &:hover {
+        color: @cr-darkest;
+      }
+    }
+  }
+  #case-search-form {
+    display:none;
+  }
+  #officer-search-form {
+    display:block;
+  }
+  .search-statement-wrapper {
+    display:none;
+  }
+  .officer-list, .results-wrapper-inner {
+    display:block;
+  }
+}
+
+.detail-page {
+
+  .detail-wrapper {
+    display:block;
+  }
+
+  &.detail-officer {
+    .officer-list, .case-list, .results-wrapper-inner, .search-statement-wrapper {
+      display:none;
+    }
+  } 
+
+  &.detail-case {
+    .officer-list, .case-list, .results-wrapper-inner, .search-statement-wrapper {
+      display:none;
+    }
+  }
+
+  .case-description {
+    background-color:@cr-lightest;
+    padding:20px;
+  }
+}
+
+.wrapper-inner-flex {
+  display:flex;
+
+  .case-description {
+    flex:1;
+    margin-right:20px;
+  }
+
+  #map {
+    min-height:400px;
+    flex: 1;
+    margin-left:0px;
+  }
+}
+
+
 
 /* 
   Nav
