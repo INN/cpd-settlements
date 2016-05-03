@@ -132,7 +132,9 @@ class CSSIncluder(Includer):
 def format_currency(amount):
     if not amount:
         amount = '0'
-    return '${:,.2f}'.format(int(amount))
+
+    # return '${:,.2f}'.format(int(amount))
+    return '${:,}'.format(int(amount))
 
 
 def total_for_payments(payments, format=True):

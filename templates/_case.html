@@ -1,10 +1,11 @@
-<div class="case" data-case_number="{{ case.case_number }}" onclick="location.href='{{ site_path }}case/{{ case.case_number }}'">
+<!-- <div class="case" data-case_number="{{ case.case_number }}" onclick="location.href='{{ site_path }}case/{{ case.case_number }}'"> -->
+<a href="{{ site_path }}case/{{ case.case_number }}"><div class="case" data-case_number="{{ case.case_number }}">
 
   <div class="card-row">
     <div class="case-payment-wrapper">
       <h4>{{ case.case_number }}</h4>
       <div class="case-payment">
-        <h2>${{ case.total_payments }}</h2>
+        <h2>${{ format_currency(case.total_payments) }}</h2>
         <h3>{{ case.primary_cause }}</h3>
       </div>
     </div>
@@ -53,6 +54,6 @@
 
   
 
-</div>
+</div></a>
 
 
