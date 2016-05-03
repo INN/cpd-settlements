@@ -347,6 +347,7 @@ select {
 }
 .form-group.tags {
   width: 100%;
+  margin-bottom: 0;
 }
 .form-group.tags label:not(.option) {
   margin-top: .75em;
