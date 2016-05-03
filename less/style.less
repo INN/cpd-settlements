@@ -7,6 +7,7 @@ Variables
 @cr-lightest: #fff;
 @cr-highlight: #3d9999;
 @cr-alert: #bd261d;
+@cr-grey: #8e8e8e;
 
 @cr-condensed: 'Open Sans Condensed', sans-serif;
 @cr-regular: 'Open Sans', sans-serif;
@@ -167,6 +168,29 @@ Filters
   color:@cr-lightest;
   text-align:center;
   font-size:2em;
+}
+.clear-filters {
+    font-size: 14px;
+    margin-top: 20px;
+    color:@cr-lightest;
+
+    &:hover {
+      cursor:pointer;
+      color: @cr-alert;
+    }
+
+    .x {
+      background-color:@cr-alert;
+      border-radius:50%;
+      padding: 0 0 1px 1px;
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      margin-right: 4px;
+      font-weight: 700;
+      line-height: 20px;
+      font-size: 15px;
+    }
 }
 
 
@@ -653,18 +677,25 @@ Results
   }
 
   .officer-text {
-    padding-left:140px;
+    padding-left:120px;
     background:url("../images/police-icon.svg") center left no-repeat;
-    background-size:100px;
+    background-size:80px;
     position:relative;
 
     h2 {
-      margin-top:0;
+      margin:0;
+    }
+    h3 {
+      margin-top: .25em;
+      font-size: 1em;
+      color: lighten(@cr-darkest,25%);
+      font-family: 'Open Sans';
+      font-weight: 300;
     }
   }
 
   .officer-logo {
-    width: 140px;
+    width: 120px;
     background-color: @cr-darkest;
     min-height: 100%;
     position: absolute;
@@ -715,6 +746,104 @@ label.results-label {
 ************/
 .detail-wrapper {
   display:none;
+
+  &.case-expanded {
+
+    .case-detail {
+      background-color: @cr-darkest;
+      text-align:center;
+      padding:40px;
+
+      h1 {
+        margin-top: 0;
+        text-transform: uppercase;
+        font-size: 1.1em;
+        color: #fff;
+      }
+      h2 {
+        color:@cr-lightest;
+        font-size:3.5em;
+        margin:16px 0 0;
+      }
+      h3 {
+        color:@cr-alert;
+        font-size:2em;
+        font-family:'Open Sans';
+        font-weight:300;
+        margin:10px 0 20px 0;
+      }
+    }
+    .secondary-details {
+      //background-color:fade(@cr-darkest,40%);
+      background-color: @cr-grey;
+      padding:20px;
+      text-align: center;
+
+      .tags {
+        color:darken(@cr-dark,30%);
+        text-transform: lowercase;
+        margin-bottom:0;
+      }
+    }
+    .card-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: .9em;
+      display: block;
+    }
+    .case-details {
+      list-style-type: none;
+      padding:0;
+    }
+  }
+
+  &.officer-expanded {
+    .officer {
+      margin-bottom: 0;
+      padding:40px 40px 60px 40px;
+    }
+    .officer-logo {
+      min-width:100%;
+      margin:-40px 0 -60px -40px;
+    }
+    .officer-text {
+      padding-left: 0;
+      padding-top: 40px;
+      background: url("../images/police-icon.svg") top center no-repeat;
+      background-size: 40px;
+      color: #fff;
+      position: relative;
+      text-align: center;
+      h2 {
+        color:@cr-lightest;
+        font-size:3.5em;
+        margin:16px 0 10px 0;
+      }
+      h3 {
+        color:@cr-alert;
+        font-size:2em;
+      }
+      .badge-num {
+        color:darken(@cr-lightest,30%);
+      } 
+    }
+    .secondary-details {
+      //background-color:fade(@cr-darkest,40%);
+      background-color: @cr-grey;
+      padding:20px;
+      text-align: center;
+
+      .badge-num {
+        color:darken(@cr-dark,30%);
+      } 
+      .total-payments-container {
+        color:darken(@cr-dark,30%);
+      }
+    }
+    #map {
+      margin-left:0;
+    }
+  }
 }
 .results-wrapper-inner, .search-statement-wrapper {
   display:block;
@@ -803,13 +932,12 @@ label.results-label {
 
   .case-description {
     flex:1;
-    margin-right:20px;
   }
 
   #map {
     min-height:300px;
     flex: 1;
-    margin-left:0px;
+    margin-left:20px;
   }
 }
 
@@ -1350,28 +1478,22 @@ body.not-nested {
 Media Queries
 ========================================================================== */
 @media screen and (max-width: 1000px) {
+  ul.tab-selector li a {
+    padding: 20px 0;
+  }
   .wrapper-inner-flex{
     display:block;
 
     .case-description {
-      margin-right:0;
       margin-bottom:20px;
+    }
+    #map {
+      margin-left:0;
     }
   }
 
   .detail-wrapper {
-    .officer-logo {
-      min-width:100%;
-    }
-    .officer-text {
-      padding-left: 0;
-      padding-top: 40px;
-      background: url("../images/police-icon.svg") top center no-repeat;
-      background-size: 40px;
-      color: #fff;
-      position: relative;
-      text-align: center;
-    }
+    
   }
 }
 

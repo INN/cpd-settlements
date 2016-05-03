@@ -92,13 +92,14 @@
     <div class="officer-logo"></div>
     <div class="officer-text">
       <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
-      <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
-      <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div>
+      <!-- <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
+      <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div> -->
     </div>
   </div>
 </script>
 
 <script type="text/tmpl" id="case-search-statement-tmpl">
-<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %> resulted in payments totalling <span class="clickable">$<%= payments.formatMoney(0) %></span>
+<span class="clickable"><%= incidents %></span> incidents<% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %> near <span class="clickable"><%= neighborhood %></span><% } %> resulted in payments totalling <span class="clickable">$<%= payments.formatMoney(0) %></span>.
 
+<div class="clear-filters"><span class="x">x</span> clear filters</div>
 </script>

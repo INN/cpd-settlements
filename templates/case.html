@@ -15,7 +15,7 @@
       	{% include 'templates/_statement.html' %}
 	    
 	    
-	    <div class="detail-wrapper">
+	    <div class="detail-wrapper case-expanded">
 		  <div class="case-detail" data-case_number="{{ case.case_number }}">
 
 		    <h1>Case {{ case.case_number }}</h1>
@@ -23,13 +23,15 @@
 		    <div class="case-payment">
 		      <h2>{{ total_for_payments(case.payments) }}</h2>
 		      <h3>{{ case.primary_cause }}</h3>
-		      <p class="tags">{{ case.tags }}</p>
 		    </div>
 
 		  </div>
+		  <div class="secondary-details">
+		      <p class="tags">{{ case.tags }}</p>
+		  </div>
 		</div>
 
-		<div class="detail-wrapper">
+		<div class="detail-wrapper case-expanded">
 		  <div class="wrapper-inner-flex">
 		    <div class="case-description"> 
 
@@ -89,8 +91,9 @@
 		      {% endfor %}
 
 		    </div>
-
-		    <div id="map"></div>
+		    {% if case.address %}
+		    	<div id="map"></div>
+		    {% endif %}
 		  </div>
 		</div>
 

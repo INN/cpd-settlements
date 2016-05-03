@@ -318,7 +318,7 @@
 
       // how to handle empties
       var content = this.template(context);
-      this.$el.html(content.trim() + '.');
+      this.$el.html(content.trim());
       $('#search-intro').hide();
     }
   });
@@ -361,6 +361,13 @@
       }
       this.caseSearchStatement.filterData = this.filterData;
       this.caseSearchStatement.render();
+      $('.clear-filters').show();
+
+      $('.clear-filters').click(function(){
+        $('#case-search-form input[type=checkbox]:checked').attr('checked', false).change();
+        $('#case-search-form select').val('selectedIndex',0).change();
+        $(this).hide();
+      });
     },
 
     filterCases: function() {
