@@ -8,9 +8,6 @@
       'search/': 'cases',
       'search/index.html': 'cases',
 
-      '': 'cases',
-      'index.html': 'cases',
-
       'search/officers': 'officers',
       'search/cases': 'cases',
 
@@ -564,7 +561,7 @@
       if (!detail){
         Backbone.history.navigate(fragment, { trigger: true });
         return false;
-      } 
+      }
     }
 
   });

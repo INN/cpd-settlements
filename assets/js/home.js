@@ -1,8 +1,8 @@
 function loadText(){
 	// ID of the Google Spreadsheet
 	var spreadsheetID = "1z59WxmAKbePMXrAOQ3-bbcYlJfQUC95V1sRKM_m1WT0";
-	
-	// Make sure it is public or set to Anyone with link can view 
+
+	// Make sure it is public or set to Anyone with link can view
 	var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
 
 	$.getJSON(url, function(data) {
@@ -18,7 +18,7 @@ function loadText(){
 			var slide_num = index+1;
 			var html = '<div class="block"><h3>' + col1;
 			var links = '<span class="social-icons">';
-			
+
 			if (col2){
 				var a1  = '<a target="_blank" href="' + col2 + '" onclick="window.open(';
 					a1 += "'" + col2;
@@ -48,7 +48,7 @@ function loadText(){
 			}
 		});
 
-	});	
+	});
 }
 
 // detect if mobile browser. regex -> http://detectmobilebrowsers.com
@@ -350,18 +350,19 @@ function initScroll(){
 							TweenMax.to('#slide-11', 1, {opacity:0});
 							TweenMax.to('#bg-11-overlay', 2, {opacity:0});
 							TweenMax.to('#bg-12', .5, {opacity:1});
-								
+
 							controller.destroy(true);
 							controller = null;
-							
+
 							$('body').css('overflow','hidden');
 							setTimeout(function(){
-								$('#cpd-scrolling').hide();				
+								$('#cpd-scrolling').hide();
 								$(window).scrollTop(0);
+								Backbone.history.navigate('search/cases', { trigger: true });
 								$('.cpd-container').css('opacity', 1);
 								$('body').css('overflow','auto');
 							},1000);
-						
+
 						}
 					});
 
