@@ -6,13 +6,19 @@
     routes: {
       'search': 'cases',
       'search/': 'cases',
+      'search/index.html': 'cases',
+
       '': 'cases',
+      'index.html': 'cases',
 
       'search/officers': 'officers',
       'search/cases': 'cases',
 
       'search/officers/': 'officers',
+      'search/officers/index.html': 'officers',
+
       'search/cases/': 'cases',
+      'search/cases/index.html': 'cases',
 
       'case/*path': 'case_detail',
       'officer/*path': 'officer_detail'

@@ -17,6 +17,7 @@ blueprint = Blueprint(
 ROUTES
 """
 @blueprint.route('/search/')
+@blueprint.route('/search/index.html')
 def search(init_view='cases'):
     context = get_context('search')
 
@@ -56,16 +57,19 @@ def search(init_view='cases'):
 
 
 @blueprint.route('/search/cases/')
+@blueprint.route('/search/cases/index.html')
 def search_cases():
     return search()
 
 
 @blueprint.route('/search/officers/')
+@blueprint.route('/search/officers/index.html')
 def search_officers():
     return search('officers')
 
 
 @blueprint.route('/officer/<slug>/')
+@blueprint.route('/officer/<slug>/index.html')
 def officer(slug):
     context = get_context('officer')
 
@@ -78,6 +82,7 @@ def officer(slug):
 
 
 @blueprint.route('/case/<slug>/')
+@blueprint.route('/case/<slug>/index.html')
 def case(slug):
     context = get_context('case')
 

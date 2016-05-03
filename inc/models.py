@@ -118,6 +118,8 @@ class Officer(BaseModel):
         'first': 'first_name',
         'middle': 'middle_init',
         'last': 'last_name',
+        'race': 'race',
+        'notes': 'notes'
     }
 
     def get_slug(self):
