@@ -28,14 +28,11 @@ module.exports = function(grunt) {
 
         cssmin: {
             target: {
-                options: {
-                    report: 'gzip'
-                },
                 files: [{
                     expand: true,
-                    cwd: 'assets/css',
+                    cwd: '.',
                     src: ['assets/css/*.css', '!assets/css/*.min.css'],
-                    dest: 'assets/css',
+                    dest: '.',
                     ext: '.min.css'
                 }]
             }
