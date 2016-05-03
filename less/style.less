@@ -174,11 +174,6 @@ Filters
     margin-top: 20px;
     color:@cr-lightest;
 
-    &:hover {
-      cursor:pointer;
-      color: @cr-alert;
-    }
-
     .x {
       background-color:@cr-alert;
       border-radius:50%;
@@ -190,6 +185,15 @@ Filters
       font-weight: 700;
       line-height: 20px;
       font-size: 15px;
+    }
+
+    &:hover {
+      cursor:pointer;
+      color: @cr-alert;
+
+      .x {
+        color:@cr-lightest;
+      }
     }
 }
 

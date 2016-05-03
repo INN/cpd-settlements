@@ -338,6 +338,7 @@
 
       this.initChosen();
       this.initTags();
+
       return this;
     },
 
@@ -361,13 +362,20 @@
       }
       this.caseSearchStatement.filterData = this.filterData;
       this.caseSearchStatement.render();
-      $('.clear-filters').show();
 
-      $('.clear-filters').click(function(){
+      var clearButton = $('.clear-filters')
+      if (this.filterData.neighborhood == '' && this.filterData.primary_causes[0] == '' && this.filterData.total_payments == '' && $('#case-search-form input[type=checkbox]:checked').length < 1) {
+        clearButton.hide();
+      } else {
+        clearButton.show();
+      }
+
+      clearButton.click(function(){
         $('#case-search-form input[type=checkbox]:checked').attr('checked', false).change();
-        $('#case-search-form select').val('selectedIndex',0).change();
-        $(this).hide();
+        $('#case-search-form select').chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
+        clearButton.unbind('click');
       });
+      
     },
 
     filterCases: function() {

@@ -146,10 +146,6 @@ Filters
   margin-top: 20px;
   color: #ffffff;
 }
-.clear-filters:hover {
-  cursor: pointer;
-  color: #bd261d;
-}
 .clear-filters .x {
   background-color: #bd261d;
   border-radius: 50%;
@@ -161,6 +157,13 @@ Filters
   font-weight: 700;
   line-height: 20px;
   font-size: 15px;
+}
+.clear-filters:hover {
+  cursor: pointer;
+  color: #bd261d;
+}
+.clear-filters:hover .x {
+  color: #ffffff;
 }
 ul.tab-selector {
   padding: 0;
