@@ -88,14 +88,15 @@
 
 
 <script type="text/template" id="officer-tmpl">
-  <div class="officer" data-case_number="<%= model.case_number %>">
+    <div class="officer" data-slug="<%= model.slug %>">
     <div class="officer-logo"></div>
-    <div class="officer-text">
-      <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
-      <!-- <div class="badge-num"><span>Badge #:</span> <%= model.badge_number %></div>
-      <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney() %></span> <span>total payments for all related cases</span><div> -->
-    </div>
+  <div class="officer-text">
+    <h2><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
+    <h3><%= model.prefix %></h3>
+    <!-- <div class="badge-num"><span>Badge #:</span> {{ officer.badge_number }}</div> -->
+    <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney(0) %></span> <span>total payments<!--  for all related cases --></span></div>
   </div>
+</div>
 </script>
 
 <script type="text/tmpl" id="case-search-statement-tmpl">
