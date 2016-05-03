@@ -173,6 +173,7 @@ Filters
     font-size: 14px;
     margin-top: 20px;
     color:@cr-lightest;
+    opacity:.6;
 
     .x {
       background-color:@cr-alert;
@@ -189,11 +190,7 @@ Filters
 
     &:hover {
       cursor:pointer;
-      color: @cr-alert;
-
-      .x {
-        color:@cr-lightest;
-      }
+      opacity:1;
     }
 }
 
@@ -264,16 +261,21 @@ ul.tab-selector {
     clear: both;
   }
   #tag-toggle {
-    background-color:lighten(@cr-dark,50%);
-    padding:4px 16px;
-    font-size:.8em;
+    color: #fff;
+    background-color: fade(@cr-darkest,50%);
+    padding: 10px;
+    margin: 10px 0 0 0;
+    font-size: .8em;
     font-weight: bold;
     text-transform: uppercase;
+    min-width: 100%;
+    flex: 1;
+    text-align: center;
     display:none;
 
     &:hover {
       cursor:pointer;
-    background-color:lighten(@cr-dark,52%);
+      background-color:@cr-darkest;
     }
 
     &.expanded {
@@ -342,23 +344,24 @@ input[type=checkbox]:checked + .option {
     border:1px solid @cr-lightest;
   }
 } 
-.chosen-container-single .chosen-single {
+.chosen-container-single .chosen-single, select {
   border-radius:0;
   border:1px solid @cr-darkest;
   background:@cr-lightest;
   padding:8px 0 8px 8px;
   height:auto;
+  max-width:100%;
 }
 .chosen-container-single .chosen-single div b {
   background-position:0px 10px;
 }
-.chosen-container-single .chosen-drop {
+.chosen-container-single .chosen-drop, select {
   border-radius:0;
   border:1px solid @cr-darkest;
   border-top:0;
   background:@cr-lightest;
 }
-.chosen-container-single.chosen-container-active .chosen-single {
+.chosen-container-single.chosen-container-active .chosen-single, select {
   border:1px solid @cr-darkest;
   background-image:none;
   background-color:#fff;
@@ -1506,6 +1509,32 @@ Media Queries
   }
 }
 
-@media screen and (max-width: 760px) {
-
+@media screen and (max-width: 768px) {
+  .search {
+    width:100%;
+    margin-bottom:20px;
+  }
+  #results-wrapper {
+    width: 100%;
+  }
+  .tab-containers #tag-toggle {
+    display:block;
+  }
+  .tab-containers #tag-group {
+    display:none;
+    padding-top:20px;
+    padding-bottom:0;
+  }
+  .filter-cases #case-search-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .form-group {
+    width: auto;
+    flex: 1;
+    padding-right: 20px;
+    &:last-of-type{
+      padding-right:none;
+    }
+  }
 }

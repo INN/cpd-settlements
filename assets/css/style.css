@@ -145,6 +145,7 @@ Filters
   font-size: 14px;
   margin-top: 20px;
   color: #ffffff;
+  opacity: .6;
 }
 .clear-filters .x {
   background-color: #bd261d;
@@ -160,10 +161,7 @@ Filters
 }
 .clear-filters:hover {
   cursor: pointer;
-  color: #bd261d;
-}
-.clear-filters:hover .x {
-  color: #ffffff;
+  opacity: 1;
 }
 ul.tab-selector {
   padding: 0;
@@ -226,16 +224,21 @@ ul.tab-selector li.active a:hover {
   clear: both;
 }
 .tab-containers #tag-toggle {
-  background-color: #c8c8c8;
-  padding: 4px 16px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin: 10px 0 0 0;
   font-size: .8em;
   font-weight: bold;
   text-transform: uppercase;
+  min-width: 100%;
+  flex: 1;
+  text-align: center;
   display: none;
 }
 .tab-containers #tag-toggle:hover {
   cursor: pointer;
-  background-color: #cdcdcd;
+  background-color: #000000;
 }
 .tab-containers #tag-toggle.expanded span:after {
   content: "Hide tags";
@@ -296,23 +299,27 @@ input[type=checkbox]:checked + .option {
 input[type=checkbox]:checked + .option:hover {
   border: 1px solid #ffffff;
 }
-.chosen-container-single .chosen-single {
+.chosen-container-single .chosen-single,
+select {
   border-radius: 0;
   border: 1px solid #000000;
   background: #ffffff;
   padding: 8px 0 8px 8px;
   height: auto;
+  max-width: 100%;
 }
 .chosen-container-single .chosen-single div b {
   background-position: 0px 10px;
 }
-.chosen-container-single .chosen-drop {
+.chosen-container-single .chosen-drop,
+select {
   border-radius: 0;
   border: 1px solid #000000;
   border-top: 0;
   background: #ffffff;
 }
-.chosen-container-single.chosen-container-active .chosen-single {
+.chosen-container-single.chosen-container-active .chosen-single,
+select {
   border: 1px solid #000000;
   background-image: none;
   background-color: #fff;
@@ -1333,5 +1340,34 @@ Media Queries
   }
   .wrapper-inner-flex #map {
     margin-left: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .search {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  #results-wrapper {
+    width: 100%;
+  }
+  .tab-containers #tag-toggle {
+    display: block;
+  }
+  .tab-containers #tag-group {
+    display: none;
+    padding-top: 20px;
+    padding-bottom: 0;
+  }
+  .filter-cases #case-search-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .form-group {
+    width: auto;
+    flex: 1;
+    padding-right: 20px;
+  }
+  .form-group:last-of-type {
+    padding-right: none;
   }
 }
