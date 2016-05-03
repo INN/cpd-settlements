@@ -10,23 +10,20 @@ env = Environment(loader=FileSystemLoader(template_dir))
 
 def render_includes():
     cases = Case.objects
-    neighborhoods = {}
+    neighborhoods = []
     primary_causes = []
 
     for case in cases:
         try:
-            if (not neighborhoods.get(case.neighborhood_id, None)
-                    and case.neighborhood and case.neighborhood.strip() != ''):
-                neighborhoods[case.neighborhood_id] = {
-                    'neighborhood': case.neighborhood,
-                    'neighborhood_id': case.neighborhood_id
-                }
+            neighborhoods.index(case.neighborhood_id)
+        except ValueError:
+            if (case.neighborhood and case.neighborhood.strip() != ''):
+                neighborhoods.append(case.neighborhood_id)
         except AttributeError:
             pass
 
         try:
-            case.primary_cause = case.payments[0].primary_cause
-            primary_causes.append(case.payments[0].primary_cause)
+            primary_causes.append(case.payments[0].primary_cause.strip())
         except IndexError:
             pass
 
@@ -34,6 +31,6 @@ def render_includes():
 
     with open('templates/_case_search_form.html', 'w+') as f:
         f.write(template.render(**{
-            'neighborhoods': neighborhoods,
-            'primary_causes': primary_causes
+            'neighborhoods': sorted(set(neighborhoods)),
+            'primary_causes': sorted(set(primary_causes))
         }))

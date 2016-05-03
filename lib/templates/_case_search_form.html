@@ -6,8 +6,8 @@
         <select name="neighborhood" class="chosen">
           <option value="">Any</option>
           <option value="unknown">Unknown</option>
-          {% for neighborhood in neighborhoods %}
-            <option value="{{ neighborhood.neighborhood }}">{{ neighborhood.neighborhood }}</option>
+          {% for name in neighborhoods %}
+            <option value="{{ name }}">{{ name }}</option>
           {% endfor %}
         </select>
       </div>
