@@ -1362,12 +1362,59 @@ Media Queries
     display: flex;
     flex-wrap: wrap;
   }
-  .form-group {
+  .filter-cases .form-group {
     width: auto;
     flex: 1;
+  }
+  .filter-cases .form-group:nth-child(1),
+  .filter-cases .form-group:nth-child(2) {
     padding-right: 20px;
   }
-  .form-group:last-of-type {
-    padding-right: none;
+}
+@media screen and (max-width: 480px) {
+  .cpd-links {
+    top: 60px;
+    width: 100%;
+  }
+  .cpd-links li {
+    width: 50%;
+  }
+  .cpd-links a {
+    line-height: 40px;
+  }
+  .container.cpd-container {
+    padding-top: 102px;
+  }
+  .filter-cases .form-group {
+    width: 100%;
+    padding: 0!important;
+    flex: auto;
+  }
+  .case .card-row {
+    display: block;
+  }
+  .case .case-payment-wrapper {
+    min-width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+  .case .case-payment-wrapper .case-payment {
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .case .case-payment-wrapper .case-payment h3 {
+    margin-bottom: 0;
+  }
+  .case .case-payment-wrapper h4 {
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+  }
+  .officer .officer-text {
+    padding-left: 90px;
+    background-size: 50px;
+  }
+  .officer .officer-logo {
+    width: 90px;
   }
 }
