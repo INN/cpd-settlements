@@ -590,7 +590,7 @@
 
   $(window).resize(function(){
     var width = $(this).width();
-    if (width >= 780){
+    if (width >= 820){
       $('#tag-toggle').removeClass('expanded');
       $('#tag-group').attr('style', '');
     }
