@@ -274,10 +274,6 @@
           }
         }
       });
-
-      $('.clear-filters').click(function(){        
-        $('.typeahead').typeahead('setQuery', '');
-      });
     },
 
     filterOfficers: function(selection, value) {
@@ -380,6 +376,7 @@
       clearButton.click(function(){
         $('#case-search-form input[type=checkbox]:checked').attr('checked', false).change();
         $('#case-search-form select').chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
+        $('.typeahead').val('').trigger('keyup');
         clearButton.unbind('click');
       });
       
