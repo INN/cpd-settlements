@@ -591,6 +591,7 @@
   $(window).resize(function(){
     var width = $(this).width();
     if (width >= 780){
+      $('#tag-toggle').removeClass('expanded');
       $('#tag-group').attr('style', '');
     }
   })
