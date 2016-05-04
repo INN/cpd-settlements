@@ -532,6 +532,7 @@ a.block-link {
 }
 .case .case-officers .police-icon {
   display: inline-block;
+  position: relative;
   width: 30px;
   height: 30px;
   margin: 4px 4px 0 0;
@@ -540,12 +541,47 @@ a.block-link {
   background-color: #000000;
   padding: 22px;
   border-radius: 50%;
-  transition: background-color 0.15s ease-in;
-  -moz-transition: background-color 0.15s ease-in;
-  -webkit-transition: background-color 0.15s ease-in;
+  color: transparent;
+  overflow: hidden;
+}
+.case .case-officers .police-icon .tooltip {
+  opcaity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease-in;
+  -moz-transition: opacity 0.1s ease-in;
+  -webkit-transition: opacity 0.1s ease-in;
 }
 .case .case-officers .police-icon:hover {
   background-color: #bd261d;
+  overflow: visible;
+}
+.case .case-officers .police-icon:hover .tooltip {
+  display: block;
+  background-color: #bd261d;
+  opacity: 1;
+  padding: 4px;
+  color: #ffffff;
+  font-weight: 700;
+  bottom: 52px;
+  left: 50%;
+  transform: translate(-50%);
+  min-width: 120px;
+  text-align: center;
+  vertical-align: bottom;
+}
+.case .case-officers .police-icon:hover .tooltip:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(189, 38, 29, 0);
+  border-top-color: #bd261d;
+  border-width: 8px;
+  margin-left: -8px;
 }
 .case h2 {
   margin-top: 0;

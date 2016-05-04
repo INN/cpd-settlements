@@ -618,6 +618,7 @@ a.block-link {
 
     .police-icon {
       display: inline-block;
+      position:relative;
       width: 30px;
       height: 30px;
       margin: 4px 4px 0 0;
@@ -626,13 +627,52 @@ a.block-link {
       background-color: @cr-darkest;
       padding: 22px;
       border-radius:50%;
-      transition: background-color .15s ease-in;
-      -moz-transition: background-color .15s ease-in;
-      -webkit-transition: background-color .15s ease-in;
+      color:transparent;
+      overflow:hidden;
+
+      .tooltip {
+        opcaity:0;
+        pointer-events: none;
+        transition: opacity .1s ease-in;
+        -moz-transition: opacity .1s ease-in;
+        -webkit-transition: opacity .1s ease-in;
+      }
 
       &:hover {
         background-color: @cr-alert;
+        overflow: visible;
+
+        .tooltip {
+          display:block;
+          background-color: @cr-alert;
+          opacity: 1;
+          padding: 4px;
+          color: @cr-lightest;
+          font-weight: 700;
+          bottom: 52px;
+          left: 50%;
+          transform: translate(-50%);
+          min-width: 120px;
+          text-align: center;
+          vertical-align: bottom;
+
+          &:after {
+            top: 100%;
+            left: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: fade(@cr-alert, 0%);
+            border-top-color: @cr-alert;
+            border-width: 8px;
+            margin-left: -8px;
+          }
+        }
       }
+
     }
   }
 
