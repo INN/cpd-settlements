@@ -369,18 +369,6 @@ input[type=checkbox]:checked + .option {
 .chosen-container-single.chosen-container-active .chosen-single div b {
   background-position:-18px 10px
 }
-.twitter-typeahead {
-  min-width: 100%;
-  border:1px solid @cr-darkest;
-  background-color: @cr-lightest;
-
-  .tt-input, .tt-hint {
-    padding:8px;
-  }
-}
-.typeahead {
-  width:100%;
-}
 .form-group {
   display:inline-block;   
   vertical-align:top;
@@ -441,11 +429,12 @@ Form Elements
 .tt-hint { }
 
 .typeahead {
-  background-color: #fff;
-}
-
-.typeahead:focus {
-  border: 2px solid #0097cf;
+  width: 100%;
+  border-radius: 0;
+  border: 1px solid #000000;
+  background: #ffffff;
+  padding: 8px 0 8px 8px;
+  height: auto;
 }
 
 .tt-query { }
