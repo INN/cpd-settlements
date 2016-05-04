@@ -274,10 +274,6 @@
           }
         }
       });
-
-      $('.clear-filters').click(function(){        
-        $('.typeahead').typeahead('setQuery', '');
-      });
     },
 
     filterOfficers: function(selection, value) {
@@ -380,6 +376,7 @@
       clearButton.click(function(){
         $('#case-search-form input[type=checkbox]:checked').attr('checked', false).change();
         $('#case-search-form select').chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
+        $('.typeahead').val('').trigger('keyup');
         clearButton.unbind('click');
       });
       
@@ -590,5 +587,13 @@
       root: site_path
     });
   });
+
+  $(window).resize(function(){
+    var width = $(this).width();
+    if (width >= 780){
+      $('#tag-toggle').removeClass('expanded');
+      $('#tag-group').attr('style', '');
+    }
+  })
 
 })();
