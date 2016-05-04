@@ -267,16 +267,16 @@ label.option {
   text-transform: lowercase;
   font-weight: normal;
   padding: 4px 6px;
-  background-color: rgba(255, 255, 255, 0.75);
-  color: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid transparent;
   line-height: 1;
   font-size: 1em;
 }
 label.option:hover {
   cursor: pointer;
-  background-color: #ffffff;
-  border: 1px solid #000000;
+  background-color: #000000;
+  color: #ffffff;
 }
 label.option i {
   opacity: .7;
@@ -292,12 +292,9 @@ input[type=checkbox] {
   overflow: hidden;
 }
 input[type=checkbox]:checked + .option {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
   border: 1px solid #000000;
-}
-input[type=checkbox]:checked + .option:hover {
-  border: 1px solid #ffffff;
+  color: #000000;
 }
 .chosen-container-single .chosen-single,
 select {

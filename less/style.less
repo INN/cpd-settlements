@@ -308,16 +308,16 @@ label {
     text-transform: lowercase;
     font-weight: normal;
     padding: 4px 6px;        
-    background-color: fade(@cr-lightest,75%);
-    color:@cr-darkest;
-    border:1px solid fade(@cr-lightest,75%);
+    background-color: fade(@cr-darkest,50%);
+    color:fade(@cr-lightest,90%);
+    border:1px solid transparent;
     line-height: 1;
     font-size:1em;
 
     &:hover {
       cursor:pointer;
-      background-color: @cr-lightest;
-      border:1px solid @cr-darkest;
+      background-color: @cr-darkest;
+      color:@cr-lightest;
     }
 
     i {
@@ -336,12 +336,11 @@ input[type=checkbox] {
   overflow:hidden;
 }
 input[type=checkbox]:checked + .option {
-  background-color:@cr-darkest;
-  color:@cr-lightest;
+  background-color:@cr-lightest;
   border:1px solid @cr-darkest;
+  color:@cr-darkest;
  
   &:hover {
-    border:1px solid @cr-lightest;
   }
 } 
 .chosen-container-single .chosen-single, select {
