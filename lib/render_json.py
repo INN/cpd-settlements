@@ -32,7 +32,7 @@ def render_cases_json():
             'prefix': officer.prefix,
             'badge_number': officer.badge_number,
             'slug': officer.get_slug()
-        } for officer in case.get_related(Officer)]
+        } for officer in case.get_related_officers()]
 
         cases.append(case_dict)
 
@@ -42,17 +42,27 @@ def render_cases_json():
 
 def render_officers_json():
     officers = []
+    seen = []
+
     for officer in Officer.objects:
-        officer_dict = officer
+        try:
+            if (seen.index(officer.get('id')) >= 0):
+                print "Already saw officer %s" % officer.get('id')
+                continue
+        except ValueError:
+            # Total of all payments for the officer
+            officer_payments = []
+            for case_no in officer.case_numbers:
+                officer_payments += Payment.objects.filter(case_number=case_no)
 
-        # Total of all payments for the officer
-        officer_dict['total_payments'] = total_for_payments(officer.get_related(Payment), False)
+            officer['total_payments'] = total_for_payments(officer_payments, False)
 
-        # Add the slug
-        officer_dict['slug'] = officer.get_slug()
+            # Add the slug
+            officer['slug'] = officer.get_slug()
 
-        officers.append(officer_dict)
+            officers.append(officer)
+
+            seen.append(officer.get('id'))
 
     with open('assets/data/officers.js', 'w+') as f:
-        f.write("var officers_json = %s;" % json.dumps(sorted(
-            officers, lambda x, y: cmp(x.get('last'), y.get('last')))))
+        f.write("var officers_json = %s;" % json.dumps(officers))

@@ -15,7 +15,7 @@
       	{% include 'templates/_statement.html' %}
 			
 			<div class="detail-wrapper officer-expanded">
-				<div class="officer" data-case_number="{{ officer.case_number }}">
+				<div class="officer">
 					<div class="officer-logo"></div>
 					<div class="officer-text">
 						<h2>{{ officer.first }} {{ officer.last }}</h2>
@@ -122,7 +122,6 @@
 			}
 		}
 
-		console.log(officerCases);
 		return officerCases;
 	}
 

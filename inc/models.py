@@ -27,26 +27,17 @@ class Case(BaseModel):
 
     type = 'cases'
 
-    field_map = {
-        'case_number': 'CaseNumber',
-        'date_filed': 'DateFiled',
-        'date_closed': 'DateClosed',
-        'judge': 'Judge',
-        'plaintiff_attorney': "PlaintiffsLeadAttorney",
-        'plaintiff_attorney_firm': "PlaintiffsAttorneyLawFirm",
-        'city_attorney': "CitysLeadAttorney",
-        'city_attorney_firm': "CitysAttorneyLawFirm",
-        'magistrate_judge': "MagistrateJudge",
-        'date_of_incident': "DateofIncident",
-        'location': 'LocationListed',
-        'address': 'StreetAddress',
-        'causes': 'Causes',
-        'tags': 'Tags',
-        'narrative': 'Narrative'
-    }
-
     def get_slug(self):
         return urlify("%s" % self.case_number)
+
+    def get_related_officers(self):
+        result = []
+
+        for officer in Officer.objects:
+            if self.case_number in officer.case_numbers:
+                result.append(officer)
+
+        return result
 
 
 class Victims(BaseModel):
@@ -105,23 +96,6 @@ class Officer(BaseModel):
 
     type = 'officers'
 
-    field_map = {
-        'timestamp': "matched_when",
-        'appointed': 'appointed_date',
-        'resigned': 'resignation_date',
-        'attorney': "officer_atty",
-        'attorney_firm': "officer_atty_firm",
-        'prefix': "position_desc",
-        'badge_number': 'badge_no',
-        'case_number': 'case_no',
-        'id': 'cop',
-        'first': 'first_name',
-        'middle': 'middle_init',
-        'last': 'last_name',
-        'race': 'race',
-        'notes': 'notes'
-    }
-
     def get_slug(self):
         return urlify(self.id)
 
@@ -137,7 +111,7 @@ to_load = {
 for filename, model in to_load.items():
     filepath = os.path.abspath(os.path.join(os.path.dirname(__file__), '../data/%s' % filename))
 
-    if filename == 'cases.geocoded.boundaries.json':
+    if filename in ['cases.geocoded.boundaries.json', 'officers.json']:
         model.objects = NonMappedModelList(filepath, model)
     else:
         model.objects = ModelList(filepath, model, model.field_map)
@@ -145,10 +119,13 @@ for filename, model in to_load.items():
 # Do some heavy lifting up-front so this stuff gets stashed in memory
 for case in Case.objects:
     case.payments = case.get_related(Payment)
-    case.officers = case.get_related(Officer)
+    case.officers = case.get_related_officers()
     case.victims = case.get_related(Victims)
     case.slug = case.get_slug()
 
 for officer in Officer.objects:
-    officer.total_payments = total_for_payments(officer.get_related(Payment), False)
+    officer_payments = []
+    for case_no in officer.case_numbers:
+        officer_payments += Payment.objects.filter(case_number=case_no)
+    officer.total_payments = total_for_payments(officer_payments, False)
     officer.slug = officer.get_slug()
