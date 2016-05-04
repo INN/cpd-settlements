@@ -313,16 +313,31 @@
       }
 
       var context = _.extend(this.filterData, {
-        incidents: this.caseList.cases.length,
+        incidents: this.languagize(this.caseList.cases.length),
         payments: this.caseList.cases.reduce( function(memo, model) {
           return memo + model.get('total_payments');
-        }, 0),
+        }, 0)
       });
 
       // how to handle empties
       var content = this.template(context);
       this.$el.html(content.trim());
       $('#search-intro').hide();
+    },
+    languagize: function(int) {
+      if (int < 10){
+        if (int == 0) { int = 'zero'};
+        if (int == 1) { int = 'one'};
+        if (int == 2) { int = 'two'};
+        if (int == 3) { int = 'three'};
+        if (int == 4) { int = 'four'};
+        if (int == 5) { int = 'five'};
+        if (int == 6) { int = 'six'};
+        if (int == 7) { int = 'seven'};
+        if (int == 8) { int = 'eight'};
+        if (int == 9) { int = 'nine'};
+      }
+      return int;
     }
   });
 
@@ -366,12 +381,29 @@
       this.caseSearchStatement.filterData = this.filterData;
       this.caseSearchStatement.render();
 
-      var clearButton = $('.clear-filters')
+      var clearButton = $('.clear-filters');
       if (this.filterData.neighborhood == '' && this.filterData.primary_causes[0] == '' && this.filterData.total_payments == '' && $('#case-search-form input[type=checkbox]:checked').length < 1) {
         clearButton.hide();
       } else {
         clearButton.show();
       }
+      $('.clickable .x').click(function(){
+        var $this = $(this);
+        var neighborhood = $(this).closest('.clickable.neighborhood').length;
+        var payment_amount = $(this).closest('.clickable.payment_amount').length;
+        var primary_cause = $(this).closest('.clickable.primary_cause').length;
+        var tag = $(this).closest('.clickable.tag').length;
+
+        if (neighborhood > 0) {
+          $("#neighborhood").chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
+        } else if (payment_amount > 0) {
+          $("#payment_amount").chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
+        } else if (primary_cause > 0) {
+          $("#primary_cause").chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
+        } else if (tag > 0) {
+
+        }
+      });
 
       clearButton.click(function(){
         $('#case-search-form input[type=checkbox]:checked').attr('checked', false).change();
@@ -594,6 +626,6 @@
       $('#tag-toggle').removeClass('expanded');
       $('#tag-group').attr('style', '');
     }
-  })
+  });
 
 })();

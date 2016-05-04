@@ -141,6 +141,35 @@ Filters
   text-align: center;
   font-size: 2em;
 }
+.number-of-incidents {
+  text-transform: capitalize;
+}
+.clickable {
+  background-color: rgba(189, 38, 29, 0.8);
+  padding: 8px 24px 8px 8px;
+  position: relative;
+  white-space: nowrap;
+}
+.clickable .x {
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 4px;
+  font-weight: 700;
+  line-height: 18px;
+  font-size: 15px;
+  position: absolute;
+  top: 2px;
+}
+.clickable .x:hover {
+  color: #bd261d;
+  cursor: pointer;
+  opacity: 1;
+}
 .clear-filters {
   font-size: 14px;
   margin-top: 20px;
@@ -148,18 +177,19 @@ Filters
   opacity: .6;
 }
 .clear-filters .x {
-  background-color: #bd261d;
+  background-color: #000000;
   border-radius: 50%;
-  padding: 0 0 1px 1px;
+  padding: 0;
   display: inline-block;
   width: 22px;
   height: 22px;
   margin-right: 4px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 18px;
   font-size: 15px;
 }
 .clear-filters:hover {
+  color: #bd261d;
   cursor: pointer;
   opacity: 1;
 }
@@ -486,6 +516,7 @@ a.block-link {
 }
 .case .case-summary {
   margin-top: 12px;
+  margin-bottom: 8px;
 }
 .case .case-details {
   list-style-type: none;
@@ -562,7 +593,7 @@ a.block-link {
   bottom: 52px;
   left: 50%;
   transform: translate(-50%);
-  min-width: 120px;
+  white-space: nowrap;
   text-align: center;
   vertical-align: bottom;
 }
