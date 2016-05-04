@@ -92,6 +92,7 @@
   <div class="officer-text">
     <h2><a href="<%= site_path %>officer/<%= model.slug %>"><%= model.prefix %> <%= model.first %> <%= model.last %></a></h2>
     <h3><%= model.prefix %></h3>
+    <div class="ids"><span class="badge-num"><%= model.badge_number %></span><span class="slug"><%= model.slug %></span></div>
     <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney(0) %></span> <span>total payments<!--  for all related cases --></span></div>
   </div>
 </div>

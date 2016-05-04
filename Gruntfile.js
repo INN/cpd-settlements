@@ -80,7 +80,6 @@ module.exports = function(grunt) {
           search: {
             src: [
               'assets/vendor/chosen/chosen.jquery.js',
-              'assets/vendor/typeahead.js/dist/typeahead.bundle.min.js',
               'assets/vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js',
               'assets/js/search.min.js'
             ],

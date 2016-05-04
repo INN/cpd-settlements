@@ -3,7 +3,7 @@
 	<div class="officer-text">
 	  <h2><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.first }} {{ officer.last }}</a></h2>
 	  <h3>{{ officer.prefix }}</h3>
-	  <!-- <div class="badge-num"><span>Badge #:</span> {{ officer.badge_number }}</div> -->
+	  <div class="ids"><span class="badge-num">{{ officer.badge_number }}</span><span class="slug">{{ officer.slug }}</span></div>
 	  <div class="total-payments-container"><span class="total-payments">{{ format_currency(officer.total_payments) }}</span> <span>total payments<!--  for all related cases --></span></div>
 	</div>
 </div>

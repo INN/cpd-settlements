@@ -247,43 +247,47 @@
     initTypeahead: function() {
       var self = this;
 
-      var source = new Bloodhound({
-        local: this.officers.toJSON(),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace([
-            'first', 'last', 'prefix', 'badge_number'
-        ])
-      });
+      $('.typeahead').keyup(function(){
+        var detail = $('.detail-page');
+        var officerPage = $('detail-officer');
+        var casePage = $('detail-case');
+        var value = $(this).val().toLowerCase();
 
-      this.$el.find('.typeahead').typeahead({
-        minLength: 3,
-        highlight: true
-      },
-      {
-        name: 'officers',
-        display: function(obj) {
-          var display = obj.prefix + ' ' + obj.first + ' ' + obj.last;
-          if (obj.badge_number) {
-            display += ' (badge: ' + obj.badge_number + ')';
+        // only filter officers if there are more than two letters in the textbox
+        if (value.length > 2){
+          $('.officer').each(function(){
+            self.filterOfficers(this, value);       
+          });
+          if (detail) {
+            $('body').removeClass('detail-page');
+            $('body').removeClass('detail-case');
+            $('body').removeClass('detail-officer');
           }
-          return display;
-        },
-        source: source
+        } else {
+          if (officerPage) {
+            $('body').addClass('detail-page');
+            $('body').addClass('detail-officer');
+            $('.officer').show();
+          } else if (casePage) {
+            $('body').addClass('detail-page');
+            $('body').addClass('detail-case');
+          }
+        }
       });
 
-      this.$el.find('.typeahead').on('typeahead:select', this.filterOfficers.bind(this));
+      $('.clear-filters').click(function(){        
+        $('.typeahead').typeahead('setQuery', '');
+      });
     },
 
-    filterOfficers: function(event, selection) {
-      var officer = this.officers.findWhere(selection);
-      this.officerList.officers.reset([officer]);
+    filterOfficers: function(selection, value) {
+      var $this = $(selection);
+      var $officer = $this.find('h2');
+      var $badge = $this.find('.badge-num');
+      var $slug = $this.find('.slug');
+      var searchText = ( $officer.text() + $badge.text() + $slug.text() ).toLowerCase();
 
-      var detail = $('.detail-page');
-      if (detail) {
-        $('body').removeClass('detail-page');
-        $('body').removeClass('detail-case');
-        $('body').removeClass('detail-officer');
-      }
+      (searchText.indexOf(value) >= 0) ? $this.show() : $this.hide(); 
     },
 
     filterCases: function(event, selection) {
