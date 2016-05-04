@@ -588,4 +588,11 @@
     });
   });
 
+  $(window).resize(function(){
+    var width = $(this).width();
+    if (width >= 780){
+      $('#tag-group').attr('style', '');
+    }
+  })
+
 })();
