@@ -106,7 +106,7 @@ def case(slug):
 Utility functions
 """
 def get_context(route):
-    context = g.current_site.project.DEFAULT_CONTEXT
+    context = g.current_site.project.DEFAULT_CONTEXT.copy()
     context['route'] = route
     return context
 
