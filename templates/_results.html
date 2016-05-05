@@ -15,7 +15,9 @@
     <div class="col-xs-12">
       <div class="case-list-inner" id="case-list-view">
         {% for case in cases %}
-          {% include 'templates/_case.html' %}
+          <a href="{{ site_path }}case/{{ case.case_number }}">
+            <div class="case" data-case_number="{{ case.case_number }}">Case number {{ case.case_number }}</div>
+          </a>
         {% endfor %}
       </div>
     </div>
@@ -25,7 +27,9 @@
     <div class="col-xs-12">
       <div class="officer-list-inner" id="officer-list-view">
         {% for officer in officers %}
-          {% include 'templates/_officer.html' %}
+          <div class="officer">
+            <a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.first }} {{ officer.last }}</a>
+          </div>
         {% endfor %}
       </div>
     </div>

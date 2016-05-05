@@ -35,7 +35,8 @@
 
       // Officer list view
       this.officerList = new OfficerList({
-        el: '#officer-list-view'
+        el: '#officer-list-view',
+        officers: this.officerCollection
       });
 
       // The search tab selector view
@@ -72,7 +73,7 @@
       this.searchSelector.goToTab('cases', true);
       return false;
     }
-    
+
   });
 
   // Case model
@@ -213,10 +214,11 @@
   var OfficerList = Backbone.View.extend({
     officers: new Officers(),
 
-    initialize: function() {
+    initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
+      this.officers = options.officers;
       this.template = _.template($('#officer-tmpl').html());
-      this.officers.on('reset', this.render.bind(this));
+      this.render();
       return this;
     },
 
@@ -256,7 +258,7 @@
         // only filter officers if there are more than two letters in the textbox
         if (value.length > 2){
           $('.officer').each(function(){
-            self.filterOfficers(this, value);       
+            self.filterOfficers(this, value);
           });
           if (detail) {
             $('body').removeClass('detail-page');
@@ -283,7 +285,7 @@
       var $slug = $this.find('.slug');
       var searchText = ( $officer.text() + $badge.text() + $slug.text() ).toLowerCase();
 
-      (searchText.indexOf(value) >= 0) ? $this.show() : $this.hide(); 
+      (searchText.indexOf(value) >= 0) ? $this.show() : $this.hide();
     },
 
     filterCases: function(event, selection) {
@@ -408,7 +410,6 @@
           $("#primary_cause").chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
         } else if (tag > 0) {
           var tagVal = $(this).parent().data('val');
-          console.log(tagVal);
           $('#case-search-form input[type=checkbox]:checked').each(function(){
             var checkbox = $(this);
             var value = $(this).val().toLowerCase();
@@ -601,7 +602,7 @@
             el: '#officer-search-form',
             officers: this.officers,
             officerList: this.officerList
-          })
+          });
         }
       }
 
