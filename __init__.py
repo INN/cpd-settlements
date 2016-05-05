@@ -122,5 +122,5 @@ def context_processor():
         'format_currency': format_currency,
         'total_for_payments': total_for_payments,
         'BUILD_PATH': g.current_site.app.config.get('BUILD_PATH', None),
-        'site_path': g.current_site.app.config.get('BUILD_PATH', None) and '/cpd-settlements/' or ''
+        'site_path': get_site_path()
     }
