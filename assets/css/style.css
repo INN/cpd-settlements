@@ -1091,14 +1091,14 @@ Intro Page
   bottom: 0;
   z-index: 9999999;
 }
-#cpd-scrolling #cpd-progress svg {
+#cpd-scrolling #cpd-progress > div {
   display: block;
   min-width: 100%;
 }
-#cpd-scrolling #cpd-progress rect {
+#cpd-scrolling #cpd-progress .rect {
+  width: 0;
   height: 24px;
-  fill: #3d9999;
-  /*fill:#000;*/
+  background-color: #3d9999;
 }
 #cpd-scrolling #desc {
   width: 100%;

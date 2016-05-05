@@ -1236,14 +1236,14 @@ Intro Page
       bottom: 0;
       z-index: 9999999;
   }
-  #cpd-progress svg {
+  #cpd-progress>div {
     display:block;
     min-width:100%;
   }
-  #cpd-progress rect {
+  #cpd-progress .rect {
+    width:0;
     height:24px;
-    fill:@cr-highlight;
-    /*fill:#000;*/
+    background-color:@cr-highlight;
   }
 
   /*
