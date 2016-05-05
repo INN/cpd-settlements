@@ -199,11 +199,7 @@
 
 	</div>
 </div>
-
-
 {% endblock content %}
-
-
 
 {% block library_scripts %}
 
@@ -220,22 +216,19 @@
 {% endif %}
 
 {% include 'templates/_results_templates.html' %}
- 
-<script>
 
-	$(document).ready(function(){	
+<script>
+	$(document).ready(function(){
 		loadText(); //holding off on spreadsheets integration for now (until scrolling events are figured out)
 		//initScroll();
 		$('#replay-intro').click(function(){
-			$('#cpd-scrolling').show();	
+			$('#cpd-scrolling').show();
 			$('.slide, .bgimg').css('opacity', '');
 			$('.cpd-container').css('opacity', 0);
 			initScroll();
 		});
 	});
 </script>
-
-
 {% endblock library_scripts %}
 
 
