@@ -107,11 +107,6 @@
 		  </div>
 		</div>
 
-
-
-
-
-	    
 	    {% include 'templates/_results.html' %}
 	  </div> <!--end: results wrapper-->
 	</div><!--end: container-inner-->
@@ -123,7 +118,7 @@
 
 {{ super() }}
 
-
+{% if case.latitude and case.longitude %}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmYnsdne3OZUy_MasdujKQ-FDspKBELQ&sensor=false"></script>
 <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/map.js') }}"></script>
 <script>
@@ -131,9 +126,7 @@
 	// When the window has finished loading create our google map below
 	google.maps.event.addDomListener(window, 'load', init(thisCase));
 </script>
+{% endif %}
 
 {% include 'templates/_results_templates.html' %}
-
-
-
 {% endblock %}

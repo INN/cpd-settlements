@@ -144,6 +144,10 @@ Filters
 #results-wrapper {
   width:70%;
   float:left;
+
+  .loading {
+    color: @cr-lightest;
+  }
 }
 .results-wrapper-inner, .detail-wrapper, .search-statement-wrapper {
   background-color:rgba(0,0,0,.7);
@@ -1139,14 +1143,12 @@ Intro Page
   .navbar {
     display:none;
   }
-
   #replay-intro {
     position:absolute;
     top:100px;
     z-index:5;
     display:none;
   }
-
   #the-app {
     width:100%;
     min-height:100vh;

@@ -112,6 +112,9 @@ Filters
   width: 70%;
   float: left;
 }
+#results-wrapper .loading {
+  color: #ffffff;
+}
 .results-wrapper-inner,
 .detail-wrapper,
 .search-statement-wrapper {

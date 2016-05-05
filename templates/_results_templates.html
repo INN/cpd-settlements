@@ -3,13 +3,6 @@
 </script>
 
 {% if BUILD_PATH %}
-  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='data/combined.min.js') }}"></script>
-{% else %}
-  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='data/cases.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='data/officers.js') }}"></script>
-{% endif %}
-
-{% if BUILD_PATH %}
   <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/search-libs.min.js') }}"></script>
 {% else %}
   <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='vendor/chosen/chosen.jquery.js') }}"></script>
