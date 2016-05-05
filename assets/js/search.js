@@ -481,15 +481,6 @@
             }
           }
 
-          // if (['victim_1_race'].indexOf(name) >= 0) {
-          //   if (name =='victim_1_race' && typeof model.get('victims') !== 'undefined') {
-          //     var victims = model.get('victims');
-          //     if (victims.length && victims[0].victim_1_race !== value) {
-          //       ret = false;
-          //     }
-          //   }
-          // }
-
           if (name == 'total_payments') {
             var paymentRange = value.split('-'),
                 low = Number(paymentRange[0]),

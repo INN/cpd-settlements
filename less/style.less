@@ -181,7 +181,7 @@ Filters
 
 }
 .totals-label {
-  
+
 }
 .filtered .totals-amount {
   color:@cr-alert;
@@ -1143,14 +1143,12 @@ Intro Page
   .navbar {
     display:none;
   }
-
   #replay-intro {
     position:absolute;
     top:100px;
     z-index:5;
     display:none;
   }
-
   #the-app {
     width:100%;
     min-height:100vh;
@@ -1167,10 +1165,10 @@ Intro Page
     opacity:0;
   }  
   #bg-12 {
-    background-image: url("../images/02-IMG_9158.jpg");
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    filter: blur(5px);
+    background-image: url("../images/02-IMG_9158-blur.jpg");
+    // -webkit-filter: blur(5px);
+    // -moz-filter: blur(5px);
+    // filter: blur(5px);
   }
 
 }
@@ -1238,14 +1236,14 @@ Intro Page
       bottom: 0;
       z-index: 9999999;
   }
-  #cpd-progress svg {
+  #cpd-progress>div {
     display:block;
     min-width:100%;
   }
-  #cpd-progress rect {
+  #cpd-progress .rect {
+    width:0;
     height:24px;
-    fill:@cr-highlight;
-    /*fill:#000;*/
+    background-color:@cr-highlight;
   }
 
   /*
@@ -1561,10 +1559,10 @@ body.not-nested {
 }
 
 .not-nested #bg-static {
-  background-image: url("../images/02-IMG_9158.jpg");
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  filter: blur(10px);
+  background-image: url("../images/02-IMG_9158-blur.jpg");
+  // -webkit-filter: blur(10px);
+  // -moz-filter: blur(10px);
+  // filter: blur(10px);
   display:block;
 }
 .not-nested #bg-solid {

@@ -368,7 +368,7 @@ function initScroll(){
 
 	// init tween, then scene
 	var duration_bar = $('#cpd-scrolling').height() - main_offset;
-	var tween_bar = TweenMax.to("#cpd-progress rect", 1, {width: '100%'});
+	var tween_bar = TweenMax.to("#cpd-progress .rect", 1, {width: '100%'});
 	var scene_bar = new ScrollMagic.Scene({triggerElement: "#trigger-top", duration: duration_bar, offset: main_offset})
 					.setTween(tween_bar)
 					.addTo(controller);
