@@ -3,18 +3,10 @@
     <div id="cpd-logo">
       <a href="http://chicagoreporter.com/"></a>
     </div>
-    {% if BUILD_PATH %}
-    <a href="/cpd-settlements/{{ url_for('preview') }}" class="cpd-title">Settling for too much</a>
-    {% else %}
-    <a href="{{ url_for('preview') }}" class="cpd-title">Settling for too much</a>
-    {% endif %}
+    <a href="{{ site_path}}{{ url_for('preview') }}" class="cpd-title">Settling for too much</a>
     <div class="cpd-links">
       <ul>
-        {% if BUILD_PATH %}
-        <li><a href="/cpd-settlements/{{url_for('cpd_settlements.search')}}">Data</a></li>
-        {% else %}
-        <li><a href="{{url_for('cpd_settlements.search')}}">Data</a></li>
-        {% endif %}
+        <li><a href="{{ site_path }}{{ url_for('cpd_settlements.search') }}">Data</a></li>
         <li><a href="http://chicagoreporter.com/">Stories</a></li>
       </ul>
     </div>
