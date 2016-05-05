@@ -169,9 +169,57 @@ Filters
 #search-intro, #case-search-statement {
   font-family:@cr-regular;
   font-weight:300;
+  line-height: 1.7;
   color:@cr-lightest;
   text-align:center;
   font-size:2em;
+}
+.filter-statement {
+  margin-bottom:1em;
+}
+.totals-statement {
+
+}
+.totals-label {
+  
+}
+.filtered .totals-amount {
+  color:@cr-alert;
+  background-color: #fff;
+  padding: 2px 8px;
+  font-weight: bold;
+}
+.number-of-incidents {
+  text-transform: capitalize;
+}
+.clickable {
+  background-color: fade(@cr-alert,80%);
+  padding:2px 26px 2px 8px;
+  position:relative;
+  white-space: nowrap;
+
+  .x {
+    color:@cr-lightest;
+    background-color:@cr-darkest;
+    border-radius:50%;
+    padding: 0;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    right: 2px;
+    font-weight: 700;
+    line-height: 18px;
+    font-size: 15px;
+    position: absolute;
+    top: 2px;
+
+    &:hover {
+      color:@cr-alert;
+      cursor:pointer;
+      opacity:1;
+    }
+  }
+  
 }
 .clear-filters {
     font-size: 14px;
@@ -180,19 +228,20 @@ Filters
     opacity:.6;
 
     .x {
-      background-color:@cr-alert;
+      background-color:@cr-darkest;
       border-radius:50%;
-      padding: 0 0 1px 1px;
+      padding: 0;
       display: inline-block;
       width: 22px;
       height: 22px;
       margin-right: 4px;
       font-weight: 700;
-      line-height: 20px;
+      line-height: 18px;
       font-size: 15px;
     }
 
     &:hover {
+      color:@cr-alert;
       cursor:pointer;
       opacity:1;
     }
@@ -312,16 +361,16 @@ label {
     text-transform: lowercase;
     font-weight: normal;
     padding: 4px 6px;        
-    background-color: fade(@cr-lightest,75%);
-    color:@cr-darkest;
-    border:1px solid fade(@cr-lightest,75%);
+    background-color: fade(@cr-darkest,50%);
+    color:fade(@cr-lightest,90%);
+    border:1px solid transparent;
     line-height: 1;
     font-size:1em;
 
     &:hover {
       cursor:pointer;
-      background-color: @cr-lightest;
-      border:1px solid @cr-darkest;
+      background-color: @cr-darkest;
+      color:@cr-lightest;
     }
 
     i {
@@ -340,12 +389,11 @@ input[type=checkbox] {
   overflow:hidden;
 }
 input[type=checkbox]:checked + .option {
-  background-color:@cr-darkest;
-  color:@cr-lightest;
+  background-color:@cr-lightest;
   border:1px solid @cr-darkest;
+  color:@cr-darkest;
  
   &:hover {
-    border:1px solid @cr-lightest;
   }
 } 
 .chosen-container-single .chosen-single, select {
@@ -568,7 +616,8 @@ a.block-link {
   }
 
   .case-summary {
-    margin-top:20px;
+    margin-top:12px; //20px minus 8px from case-details li
+    margin-bottom:8px;
   }
 
   .case-details {
@@ -581,7 +630,7 @@ a.block-link {
     flex-wrap:wrap;
     li {
       display:inline-block;
-      margin:0;
+      margin:0 0 8px 0;
       span {
         display:block;
       }
@@ -656,7 +705,7 @@ a.block-link {
           bottom: 52px;
           left: 50%;
           transform: translate(-50%);
-          min-width: 120px;
+          white-space: nowrap;
           text-align: center;
           vertical-align: bottom;
 
@@ -1527,10 +1576,8 @@ body.not-nested {
 /* ==========================================================================
 Media Queries
 ========================================================================== */
+
 @media screen and (max-width: 1000px) {
-  ul.tab-selector li a {
-    padding: 20px 0;
-  }
   .wrapper-inner-flex{
     display:block;
 
@@ -1542,12 +1589,6 @@ Media Queries
     }
   }
 
-  .detail-wrapper {
-    
-  }
-}
-
-@media screen and (max-width: 768px) {
   .search {
     width:100%;
     margin-bottom:20px;
@@ -1578,23 +1619,39 @@ Media Queries
 }
 
 @media screen and (max-width: 480px) {
+  #cpd-logo a {
+    width:44px;
+    height:44px;
+  }
+  a.cpd-title {
+    padding-top:20px;
+  }
   .cpd-links {
-    top:60px;
+    top:40px;
     width:100%;
     li {
       width:50%;
     }
     a {
-      line-height:40px;
+      line-height:36px;
     }
   }
   .container.cpd-container {
-    padding-top:102px;
+    padding-top:80px;
+  }
+  .container.cpd-container .cpd-container-inner {
+    margin: 20px 0 0 0;
+  }  
+  ul.tab-selector li a {
+      padding: 8px 0;
   }
   .filter-cases .form-group {
     width: 100%;
     padding: 0!important;
     flex: auto;
+  }
+  .results-wrapper-inner .results-label {
+    display:none;
   }
   .case .card-row {
     display:block;
@@ -1615,6 +1672,13 @@ Media Queries
     bottom:20px;
     right:20px;
     left:auto;
+  }
+  .case .case-details li {
+    width: 100%;
+    margin-bottom: 8px;
+    &:last-of-type {
+      margin-bottom:0;
+    }
   }
   .officer {
     .officer-text {

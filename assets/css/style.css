@@ -140,9 +140,48 @@ Filters
 #case-search-statement {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  line-height: 1.7;
   color: #ffffff;
   text-align: center;
   font-size: 2em;
+}
+.filter-statement {
+  margin-bottom: 1em;
+}
+.filtered .totals-amount {
+  color: #bd261d;
+  background-color: #fff;
+  padding: 2px 8px;
+  font-weight: bold;
+}
+.number-of-incidents {
+  text-transform: capitalize;
+}
+.clickable {
+  background-color: rgba(189, 38, 29, 0.8);
+  padding: 2px 26px 2px 8px;
+  position: relative;
+  white-space: nowrap;
+}
+.clickable .x {
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  right: 2px;
+  font-weight: 700;
+  line-height: 18px;
+  font-size: 15px;
+  position: absolute;
+  top: 2px;
+}
+.clickable .x:hover {
+  color: #bd261d;
+  cursor: pointer;
+  opacity: 1;
 }
 .clear-filters {
   font-size: 14px;
@@ -151,18 +190,19 @@ Filters
   opacity: .6;
 }
 .clear-filters .x {
-  background-color: #bd261d;
+  background-color: #000000;
   border-radius: 50%;
-  padding: 0 0 1px 1px;
+  padding: 0;
   display: inline-block;
   width: 22px;
   height: 22px;
   margin-right: 4px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 18px;
   font-size: 15px;
 }
 .clear-filters:hover {
+  color: #bd261d;
   cursor: pointer;
   opacity: 1;
 }
@@ -270,16 +310,16 @@ label.option {
   text-transform: lowercase;
   font-weight: normal;
   padding: 4px 6px;
-  background-color: rgba(255, 255, 255, 0.75);
-  color: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid transparent;
   line-height: 1;
   font-size: 1em;
 }
 label.option:hover {
   cursor: pointer;
-  background-color: #ffffff;
-  border: 1px solid #000000;
+  background-color: #000000;
+  color: #ffffff;
 }
 label.option i {
   opacity: .7;
@@ -295,12 +335,9 @@ input[type=checkbox] {
   overflow: hidden;
 }
 input[type=checkbox]:checked + .option {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
   border: 1px solid #000000;
-}
-input[type=checkbox]:checked + .option:hover {
-  border: 1px solid #ffffff;
+  color: #000000;
 }
 .chosen-container-single .chosen-single,
 select {
@@ -491,7 +528,8 @@ a.block-link {
   flex: 1;
 }
 .case .case-summary {
-  margin-top: 20px;
+  margin-top: 12px;
+  margin-bottom: 8px;
 }
 .case .case-details {
   list-style-type: none;
@@ -504,7 +542,7 @@ a.block-link {
 }
 .case .case-details li {
   display: inline-block;
-  margin: 0;
+  margin: 0 0 8px 0;
 }
 .case .case-details li span {
   display: block;
@@ -568,7 +606,7 @@ a.block-link {
   bottom: 52px;
   left: 50%;
   transform: translate(-50%);
-  min-width: 120px;
+  white-space: nowrap;
   text-align: center;
   vertical-align: bottom;
 }
@@ -1362,9 +1400,6 @@ body.not-nested {
 Media Queries
 ========================================================================== */
 @media screen and (max-width: 1000px) {
-  ul.tab-selector li a {
-    padding: 20px 0;
-  }
   .wrapper-inner-flex {
     display: block;
   }
@@ -1374,8 +1409,6 @@ Media Queries
   .wrapper-inner-flex #map {
     margin-left: 0;
   }
-}
-@media screen and (max-width: 768px) {
   .search {
     width: 100%;
     margin-bottom: 20px;
@@ -1405,23 +1438,39 @@ Media Queries
   }
 }
 @media screen and (max-width: 480px) {
+  #cpd-logo a {
+    width: 44px;
+    height: 44px;
+  }
+  a.cpd-title {
+    padding-top: 20px;
+  }
   .cpd-links {
-    top: 60px;
+    top: 40px;
     width: 100%;
   }
   .cpd-links li {
     width: 50%;
   }
   .cpd-links a {
-    line-height: 40px;
+    line-height: 36px;
   }
   .container.cpd-container {
-    padding-top: 102px;
+    padding-top: 80px;
+  }
+  .container.cpd-container .cpd-container-inner {
+    margin: 20px 0 0 0;
+  }
+  ul.tab-selector li a {
+    padding: 8px 0;
   }
   .filter-cases .form-group {
     width: 100%;
     padding: 0!important;
     flex: auto;
+  }
+  .results-wrapper-inner .results-label {
+    display: none;
   }
   .case .card-row {
     display: block;
@@ -1442,6 +1491,13 @@ Media Queries
     bottom: 20px;
     right: 20px;
     left: auto;
+  }
+  .case .case-details li {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .case .case-details li:last-of-type {
+    margin-bottom: 0;
   }
   .officer .officer-text {
     padding-left: 90px;
