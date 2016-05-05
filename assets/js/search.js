@@ -382,10 +382,16 @@
       this.caseSearchStatement.render();
 
       var clearButton = $('.clear-filters');
+      var filterStatement = $('.filter-statement').hide();
+      var statementWrapper = $('.search-statement-wrapper');
       if (this.filterData.neighborhood == '' && this.filterData.primary_causes[0] == '' && this.filterData.total_payments == '' && $('#case-search-form input[type=checkbox]:checked').length < 1) {
         clearButton.hide();
+        filterStatement.hide();
+        statementWrapper.removeClass('filtered');
       } else {
         clearButton.show();
+        filterStatement.show();
+        statementWrapper.addClass('filtered');
       }
       $('.clickable .x').click(function(){
         var $this = $(this);
@@ -401,7 +407,15 @@
         } else if (primary_cause > 0) {
           $("#primary_cause").chosen().prop('selectedIndex',0).change().trigger("chosen:updated");
         } else if (tag > 0) {
-
+          var tagVal = $(this).parent().data('val');
+          console.log(tagVal);
+          $('#case-search-form input[type=checkbox]:checked').each(function(){
+            var checkbox = $(this);
+            var value = $(this).val().toLowerCase();
+            if (tagVal == value) { 
+              checkbox.attr('checked', false).change();
+            }
+          });
         }
       });
 

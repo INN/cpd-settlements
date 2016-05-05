@@ -80,10 +80,10 @@
   <% var checkboxes = $('input[type=checkbox]:checked'); cblength = checkboxes.length; %> 
   <% var primary_cause = $('#primary_cause').val().replace(/ /g, '\u00a0').toLowerCase(); %> 
   <% var payment_amount = $('#payment_amount').val() %>
-  
+  <div class="filter-statement">
   <span class="number-of-incidents"><%= incidents %> </span>
   
-  <% if ( payment_amount !== "" ) { %> 
+  <% if ( payment_amount !== "" && (cblength > 0 || primary_cause !== "" || ( neighborhood !== "" && neighborhood !== "unknown" ) ) ) { %> 
     <span class="clickable payment_amount"><% print($('#payment_amount option:selected').html()) %><span class="x">x</span></span>   
   <% } %>
 
@@ -91,6 +91,10 @@
     settlements
   <% } else { %>
     settlement
+  <% } %>
+
+  <% if ( payment_amount !== "" && cblength == 0 && primary_cause == "" && ( neighborhood == "" || neighborhood == "unknown" ) ) { %> 
+    resulted in payments of <span class="clickable payment_amount"><% print($('#payment_amount option:selected').html()) %><span class="x">x</span></span>&nbsp;each.  
   <% } %>
 
   <% if ( cblength > 0 ) { %> 
@@ -103,27 +107,33 @@
       <% } %>
       tagged 
       <% _.each(checkboxes, function(tag, i) { %>
-        <span class="clickable tag"><% print($(tag).val()) %><span class="x">x</span></span>
+        <span class="clickable tag" data-val="<% print($(tag).val()) %>"><% print($(tag).val()) %>
         <% if ( i > -1 && i < cblength-1 && i != cblength-2) { %> 
-          , 
+          , <span class="x">x</span></span>&nbsp;
         <% } %>
         <% if ( cblength > 1 && i == cblength-2 ) { %> 
-           and
+           <span class="x">x</span></span>&nbsp;and
         <% } %>
-      <% }) %>. <!--there's the period -->
+        <% if (i == cblength - 1) { %>
+          .<span class="x">x</span></span> <!--there's the period -->
+        <% } %>
+      <% }) %>
     <% } else { %>
 
       &mdash; tagged 
       <% _.each(checkboxes, function(tag, i) { %>
-        <span class="clickable tag"><% print($(tag).val()) %><span class="x">x</span></span>
+        <span class="clickable tag" data-val="<% print($(tag).val()) %>"><% print($(tag).val()) %>
         <% if ( i > -1 && i < cblength-1 && i != cblength-2) { %> 
-          , 
+          ,<span class="x">x</span></span>&nbsp; 
         <% } %>
         <% if ( cblength > 1 && i == cblength-2 ) { %> 
-           and
+           <span class="x">x</span></span>&nbsp;and
+        <% } %>
+        <% if (i == cblength - 1) { %>
+          <span class="x">x</span></span>
         <% } %>
       <% }) %>
-      &mdash; 
+      &nbsp;&mdash; 
 
     <% } %>
   <% } %>
@@ -135,24 +145,33 @@
     <% } else { %>
       an incident
     <% } %>
-    of <span class="clickable primary_cause"><%= primary_cause %><span class="x">x</span></span>
-    <% if ( neighborhood == "" || neighborhood == "unknown" ) { %>.<% } %> <!--there's another period-->
+    of
+    <% if ( neighborhood == "" || neighborhood == "unknown" ) { %>
+      <span class="clickable primary_cause"><%= primary_cause %>.<span class="x">x</span></span><!--there's another period-->
+    <% } else { %>
+      <span class="clickable primary_cause"><%= primary_cause %><span class="x">x</span></span>
+    <% } %>
   <% } %>
 
   <% if ( neighborhood !== "" && neighborhood !== "unknown" ) { %>     
 
-    <% if ( cblength == 0 && primary_cause == "" && payment_amount == "" ) { %> 
+    <% if ( primary_cause == "" ) { %> 
       resulted from incidents
     <% } %>
 
-    near <span class="clickable neighborhood"><%= neighborhood %>.<span class="x">x</span></span>
-  <% } %><br ><br >
-
-  <% if ( incidents !== "one" ) { %> 
-    These <%= incidents %> settlements cost Chicago a total of $<%= payments.formatMoney(0) %>.
-  <% } else { %>
-    This settlement cost Chicago $<%= payments.formatMoney(0) %>.
+    near <span class="clickable neighborhood"><%= neighborhood %>.<span class="x">x</span></span><!--there's another period-->
   <% } %>
+  </div>
+  <div class="totals-statement"><span class="totals-label">
 
-  <div class="clear-filters"><span class="x">x</span> clear all filters</div>
+  <% if ( incidents == "zero" ) { %> 
+    Please try another search.</span>
+  <% } else if ( incidents == "one" ) {  %>
+    This settlement cost Chicago</span> <span class="totals-amount">$<%= payments.formatMoney(0) %>.</span>
+  <% } else {  %>
+    These <%= incidents %> settlements cost Chicago a total of</span> <span class="totals-amount">$<%= payments.formatMoney(0) %>.</span>
+  <% } %>
+  </div>
+
+  <div class="clear-filters filters-statement"><span class="x">x</span> clear all filters</div>
 </script>
