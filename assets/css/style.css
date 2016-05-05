@@ -1015,10 +1015,7 @@ Intro Page
   opacity: 0;
 }
 #home #bg-12 {
-  background-image: url("../images/02-IMG_9158.jpg");
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  filter: blur(5px);
+  background-image: url("../images/02-IMG_9158-blur.jpg");
 }
 #cpd-scrolling {
   /*
@@ -1383,10 +1380,7 @@ body.not-nested {
   display: none;
 }
 .not-nested #bg-static {
-  background-image: url("../images/02-IMG_9158.jpg");
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  filter: blur(10px);
+  background-image: url("../images/02-IMG_9158-blur.jpg");
   display: block;
 }
 .not-nested #bg-solid {
