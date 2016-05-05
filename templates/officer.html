@@ -61,6 +61,16 @@
 
 <script>
 
+  var loadData = function(callback) {
+    var url = site_path + 'assets/cpd_settlements/data/combined.min.js';
+    $.ajax({
+      url: url,
+      cache: true,
+      dataType: 'script',
+      success: callback
+    });
+  };
+
 	Number.prototype.formatMoney = function(c, d, t){
 	    var n = this,
 	        c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -74,11 +84,9 @@
 	      (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 	};
 
-	var officerCaseList = getCases( {{ officer.slug }} );
+	var officerCaseList;
 	var initialCase = { latitude:41.8781, longitude:-87.6298 };
 	google.maps.event.addDomListener(window, 'load', init(initialCase, officerCaseList));
-
-	renderCaseList();
 
 	function formatStr(text) {
 		var formatted = '';
@@ -135,6 +143,11 @@
 	        $('#officer-case-list').append( officerCase );
 	    };
 	}
+
+  loadData(function() {
+    officerCaseList = getCases( {{ officer.slug }} );
+    renderCaseList();
+  });
 
 </script>
 

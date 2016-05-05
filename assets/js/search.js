@@ -22,8 +22,10 @@
     },
 
     initialize: function() {
+      var self = this;
+
       // The collection of all cases
-      this.caseCollection = new Cases(cases_json);
+      this.caseCollection = new Cases();
 
       // The list of cases/search results view
       this.caseList = new CaseList({
@@ -31,7 +33,7 @@
       });
 
       // The collections of all officers
-      this.officerCollection = new Officers(officers_json);
+      this.officerCollection = new Officers();
 
       // Officer list view
       this.officerList = new OfficerList({
@@ -50,8 +52,26 @@
         officerList: this.officerList
       });
 
+      this.loadData(function() {
+        self.officerCollection = self.officerCollection.reset(officers_json);
+        self.caseCollection = self.caseCollection.reset(cases_json);
+        self.caseList.cases.reset(cases_json);
+      });
+
       Backbone.Router.prototype.initialize.apply(this, arguments);
       return this;
+    },
+
+    loadData: function(callback) {
+      if (typeof cases_json == 'undefined' && typeof officers_json == 'undefined') {
+        var url = site_path + 'assets/cpd_settlements/data/combined.min.js';
+        $.ajax({
+          url: url,
+          cache: true,
+          dataType: 'script',
+          success: callback
+        });
+      }
     },
 
     officers: function() {
@@ -179,11 +199,15 @@
       var self = this,
           content = '';
 
-      this.$el.html('');
-      this.cases.each(function(model) {
-        content += self.template({ model: model.toJSON() });
-      });
-      this.$el.html(content);
+      if (!this.cases.length) {
+        this.$el.html('<div class="loading">LOADING...</div>');
+      } else {
+        this.$el.html('');
+        this.cases.each(function(model) {
+          content += self.template({ model: model.toJSON() });
+        });
+        this.$el.html(content);
+      }
       return this;
     },
 
@@ -217,6 +241,7 @@
     initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
       this.officers = options.officers;
+      this.officers.on('reset', this.render.bind(this));
       this.template = _.template($('#officer-tmpl').html());
       this.render();
       return this;
@@ -227,10 +252,14 @@
           content = '';
 
       this.$el.html('');
-      this.officers.each(function(model) {
-        content += self.template({ model: model.toJSON() });
-      });
-      this.$el.html(content);
+      if (!this.officers.length) {
+        this.$el.html('<div class="loading">LOADING...</div>');
+      } else {
+        this.officers.each(function(model) {
+          content += self.template({ model: model.toJSON() });
+        });
+        this.$el.html(content);
+      }
       return this;
     }
   });
