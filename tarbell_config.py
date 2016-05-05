@@ -57,3 +57,4 @@ def app_setup(site, output_root, extra_context):
             yield 'cpd_settlements.case', {'slug': case.slug}
 
     site.app.config['FREEZER_IGNORE_404_NOT_FOUND'] = True
+    site.project.DEFAULT_CONTEXT['ROOT_URL'] = extra_context['ROOT_URL']
