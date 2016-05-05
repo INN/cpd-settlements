@@ -49,8 +49,7 @@ def search(init_view='cases'):
         'neighborhoods': sorted(
             neighborhoods.values(), key=lambda x: x.get('neighborhood')),
         'officers': Officer.objects,
-        'payments': Payment.objects,
-        'site_path': get_site_path()
+        'payments': Payment.objects
     })
 
     return render_template('templates/search.html', **context)
@@ -122,5 +121,6 @@ def context_processor():
         'enumerate': enumerate,
         'format_currency': format_currency,
         'total_for_payments': total_for_payments,
-        'BUILD_PATH': g.current_site.app.config.get('BUILD_PATH', None)
+        'BUILD_PATH': g.current_site.app.config.get('BUILD_PATH', None),
+        'site_path': g.current_site.app.config.get('BUILD_PATH', None) and '/cpd-settlements/' or ''
     }
