@@ -139,7 +139,7 @@ def context_processor():
         'title': 'Search the CPD settlement database | Chicago Reporter',
         'opengraph_image': (
             'http://' + get_root_url() +
-            '/assets/cpd_settlements/images/01-112414_FergusonReaction-2.jpg'
+            '/assets/cpd_settlements/images/02-IMG_9158.jpg'
         ),
         'opengraph_description': (
             'Between 2012 and 2015, the City of Chicago paid $212 million '
