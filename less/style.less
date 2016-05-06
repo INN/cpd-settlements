@@ -169,7 +169,7 @@ Filters
 #search-intro, #case-search-statement {
   font-family:@cr-regular;
   font-weight:300;
-  line-height: 1.7;
+  line-height: 1.6;
   color:@cr-lightest;
   text-align:center;
   font-size:2em;
@@ -186,7 +186,7 @@ Filters
 .filtered .totals-amount {
   color:@cr-alert;
   background-color: #fff;
-  padding: 2px 8px;
+  padding: 0px 3px;
   font-weight: bold;
 }
 .number-of-incidents {
@@ -194,8 +194,9 @@ Filters
 }
 .clickable {
   background-color: fade(@cr-alert,80%);
-  padding:2px 26px 2px 8px;
-  position:relative;
+  // padding:2px 26px 2px 8px;
+  // position:relative;
+  padding-left:3px;
   white-space: nowrap;
 
   .x {
@@ -204,14 +205,16 @@ Filters
     border-radius:50%;
     padding: 0;
     display: inline-block;
+    margin: 6px 2px;
+    vertical-align: top;
     width: 22px;
     height: 22px;
     right: 2px;
     font-weight: 700;
     line-height: 18px;
     font-size: 15px;
-    position: absolute;
-    top: 2px;
+    // position: absolute;
+    // top: 2px;
 
     &:hover {
       color:@cr-alert;

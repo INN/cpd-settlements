@@ -285,7 +285,7 @@
         var value = $(this).val().toLowerCase();
 
         // only filter officers if there are more than two letters in the textbox
-        if (value.length > 2){
+        if (value.length > 0){
           $('.officer').each(function(){
             self.filterOfficers(this, value);
           });
@@ -295,13 +295,15 @@
             $('body').removeClass('detail-officer');
           }
         } else {
-          if (officerPage) {
+          if (officerPage.length > 0) {
             $('body').addClass('detail-page');
             $('body').addClass('detail-officer');
             $('.officer').show();
-          } else if (casePage) {
+          } else if (casePage > 0) {
             $('body').addClass('detail-page');
             $('body').addClass('detail-case');
+          } else {
+            $('.results-wrapper-inner .officer').show();
           }
         }
       });
@@ -357,7 +359,7 @@
     },
     languagize: function(int) {
       if (int < 10){
-        if (int == 0) { int = 'zero'};
+        if (int == 0) { int = 'no'};
         if (int == 1) { int = 'one'};
         if (int == 2) { int = 'two'};
         if (int == 3) { int = 'three'};
