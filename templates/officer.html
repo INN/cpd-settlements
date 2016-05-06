@@ -90,10 +90,17 @@
 
 	function renderOfficerInfo() {
 		calculateService();
-		$('.number-of-cases').text(officerCaseList.length + ' cases');
+		var numCases = officerCaseList.length;
+		var numText = '';
+		if (numCases == 1) {
+			numText = numCases + ' case';
+		} else {
+			numText = numCases + ' cases';
+		}
+		$('.number-of-cases').text(numText);
 		
 		if (officerObj.race != '') {
-			$('.officer-race').text('Race: ' + officerObj.race);
+			$('.officer-race').text('Race: ' + officerObj.race.toLowerCase());
 		}
 		if (officerObj.note != '') {
 			$('.note').text('Note: ' + officerObj.race);
