@@ -11,7 +11,7 @@
 {% endif %}
 
 <script type="text/template" id="case-tmpl">
-    <div class="case" data-case_number="<%= model.case_number %>" onclick="location.href='<%= site_path %>case/<%= model.slug %>'">
+    <div class="case" data-case_number="<%= model.case_number %>" data-total_payments="<%= model.total_payments %>" data-date_of_incident="<%= model.date_of_incident %>" onclick="location.href='<%= site_path %>case/<%= model.slug %>'">
       <div class="card-row">
         <div class="case-payment-wrapper">
           <h4><%= model.case_number %></h4>
