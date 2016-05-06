@@ -70,10 +70,15 @@ def search_officers():
 @blueprint.route('/officer/<slug>/')
 @blueprint.route('/officer/<slug>/index.html')
 def officer(slug):
-    context = get_context('officer')
+    context = get_context('officer/%s' % slug)
 
     try:
-        context['officer'] = filter(lambda x: x.get_slug() == slug, Officer.objects)[0]
+        officer = filter(lambda x: x.get_slug() == slug, Officer.objects)[0]
+        context['officer'] = officer
+        context['title'] = "Cases and settlements involving %s %s %s | Chicago Reporter" % (
+            officer.prefix, officer.first, officer.last)
+        if officer.get('note', False):
+            context['opengraph_description'] = officer.get('note')
     except IndexError:
         context['officer'] = False
 
@@ -83,10 +88,14 @@ def officer(slug):
 @blueprint.route('/case/<slug>/')
 @blueprint.route('/case/<slug>/index.html')
 def case(slug):
-    context = get_context('case')
+    context = get_context('case/%s' % slug)
 
     try:
-        context['case'] = filter(lambda x: x.get_slug() == slug, Case.objects)[0]
+        case = filter(lambda x: x.get_slug() == slug, Case.objects)[0]
+        context['case'] = case
+        context['title'] = "Details for case %s | Chicago Reporter" % case.get('case_number')
+        if case.get('narrative', False):
+            context['opengraph_description'] = case.get('narrative')
     except IndexError:
         context['case'] = False
 
@@ -97,11 +106,8 @@ def case(slug):
 Utility functions
 """
 def get_context(route):
-    site = g.current_site
-    context = site.get_context()
-    context.update({
-        'PATH': route
-    })
+    context = g.current_site.project.DEFAULT_CONTEXT.copy()
+    context['route'] = route
     return context
 
 
@@ -112,15 +118,31 @@ def get_site_path():
         return '/'
 
 
+def get_root_url():
+    return g.current_site.project.DEFAULT_CONTEXT.get('ROOT_URL')
+
+
 @blueprint.app_context_processor
 def context_processor():
     """
     Add helper functions to context for all projects.
     """
     return {
+        # Functions
         'enumerate': enumerate,
         'format_currency': format_currency,
         'total_for_payments': total_for_payments,
+
+        # Variables
         'BUILD_PATH': g.current_site.app.config.get('BUILD_PATH', None),
-        'site_path': get_site_path()
+        'site_path': get_site_path(),
+        'title': 'Search the CPD settlement database | Chicago Reporter',
+        'opengraph_image': (
+            'http://' + get_root_url() +
+            '/assets/cpd_settlements/images/02-IMG_9158.jpg'
+        ),
+        'opengraph_description': (
+            'Between 2012 and 2015, the City of Chicago paid $212 million '
+            'in settlements in police misconduct cases.'
+        )
     }
