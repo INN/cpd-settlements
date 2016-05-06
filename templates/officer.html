@@ -86,7 +86,6 @@
 
 	var officerCaseList;
 	var initialCase = { latitude:41.8781, longitude:-87.6298 };
-	google.maps.event.addDomListener(window, 'load', init(initialCase, officerCaseList));
 
 	function formatStr(text) {
 		var formatted = '';
@@ -146,6 +145,7 @@
 
   loadData(function() {
     officerCaseList = getCases( {{ officer.slug }} );
+	google.maps.event.addDomListener(window, 'load', init(initialCase, officerCaseList));
     renderCaseList();
   });
 
