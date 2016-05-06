@@ -29,7 +29,8 @@
 
       // The list of cases/search results view
       this.caseList = new CaseList({
-        el: '#case-list-view'
+        el: '#case-list-view',
+        cases: this.caseCollection
       });
 
       // The collections of all officers
@@ -55,7 +56,6 @@
       this.loadData(function() {
         self.officerCollection = self.officerCollection.reset(officers_json);
         self.caseCollection = self.caseCollection.reset(cases_json);
-        self.caseList.cases.reset(cases_json);
       });
 
       Backbone.Router.prototype.initialize.apply(this, arguments);
@@ -101,55 +101,7 @@
 
   // Cases collection
   var Cases = Backbone.Collection.extend({
-    model: Case,
-
-    comparator: function(x, y) {
-     return this.newtoold(x,y);
-    },
-
-    hightolow: function(x, y) {
-      var x_total = Number(x.get('total_payments')),
-          y_total = Number(y.get('total_payments'))
-      if (x_total < y_total)
-        return 1;
-      if (x_total > y_total)
-        return -1;
-      return 0;
-    },
-
-    lowtohigh: function(x, y) {
-      var x_total = Number(x.get('total_payments')),
-          y_total = Number(y.get('total_payments'))
-      if (x_total < y_total)
-        return -1;
-      if (x_total > y_total)
-        return 1;
-      return 0;
-    },
-
-    newtoold: function(x, y) {
-      var x_date = Date.parse(x.get('date_of_incident')),
-          y_date = Date.parse(y.get('date_of_incident'))
-      if (x_date < y_date)
-        return 1;
-      if (x_date > y_date)
-        return -1;
-      return 0;
-    },
-
-    oldtonew: function(x, y) {
-      var x_date = Date.parse(x.get('date_of_incident')),
-          y_date = Date.parse(y.get('date_of_incident'))
-      if (x_date < y_date)
-        return -1;
-      if (x_date > y_date)
-        return 1;
-      return 0;
-    },
-
-    getUniqueValuesForAttr: function(attribute) {
-      return _.compact(_.uniq(this.map(function(x) { return x.get(attribute); })));
-    }
+    model: Case
   });
 
   // Officer model
@@ -184,14 +136,18 @@
 
     cases: new Cases(),
 
-    initialize: function() {
+    case_numbers: [],
+
+    initialize: function(options) {
       Backbone.View.prototype.initialize.apply(this, arguments);
       this.template = _.template($('#case-tmpl').html());
+      this.cases = options.cases;
       this.cases.on('reset', this.render.bind(this));
       this.listSorter = new CaseListSort({
         caseList: this,
         el: '#case-list-sort',
       });
+      this.render();
       return this;
     },
 
@@ -209,6 +165,89 @@
         this.$el.html(content);
       }
       return this;
+    },
+
+    sortElements: function(option) {
+      var comparator;
+
+      switch (option) {
+        case 'payment-low-high':
+          comparator = this.lowtohigh;
+        break;
+        case 'payment-high-low':
+          comparator = this.hightolow;
+        break;
+        case 'date-newest-oldest':
+          comparator = this.newtoold;
+        break;
+        case 'date-oldest-newest':
+          comparator = this.oldtonew;
+        break;
+        default:
+          comparator = this.newtoold;
+        break;
+      }
+
+      var case_elements = this.$el.children('.case');
+      case_elements.sort(comparator);
+      case_elements.detach().appendTo(this.$el);
+    },
+
+    renderFiltered: function(case_numbers) {
+      if (!case_numbers) {
+        case_numbers = this.case_numbers;
+      } else {
+        this.case_numbers = case_numbers;
+      }
+
+      var self = this;
+
+      this.$el.find('.case').hide();
+      _.each(case_numbers, function(case_number) {
+        self.$el.find('[data-case_number="' + case_number + '"]').show();
+      });
+
+      return this;
+    },
+
+    hightolow: function(x, y) {
+      var x_total = Number($(x).data('total_payments')),
+          y_total = Number($(y).data('total_payments'))
+      if (x_total < y_total)
+        return 1;
+      if (x_total > y_total)
+        return -1;
+      return 0;
+    },
+
+    lowtohigh: function(x, y) {
+      var x_total = Number($(x).data('total_payments')),
+          y_total = Number($(y).data('total_payments'))
+      if (x_total < y_total)
+        return -1;
+      if (x_total > y_total)
+        return 1;
+      return 0;
+    },
+
+    newtoold: function(x, y) {
+      var x_date = Date.parse($(x).data('date_of_incident')),
+          y_date = Date.parse($(y).data('date_of_incident'))
+      if (x_date < y_date)
+        return 1;
+      if (x_date > y_date)
+        return -1;
+      return 0;
+    },
+
+    oldtonew: function(x, y) {
+      var x_date = Date.parse($(x).data('date_of_incident')),
+          y_date = Date.parse($(y).data('date_of_incident'))
+      if (x_date < y_date)
+        return -1;
+      if (x_date > y_date)
+        return 1;
+      return 0;
     },
 
     formatStr: function(text) {
@@ -317,18 +356,8 @@
       var searchText = ( $officer.text() + $badge.text() + $slug.text() ).toLowerCase();
 
       (searchText.indexOf(value) >= 0) ? $this.show() : $this.hide();
-    },
-
-    filterCases: function(event, selection) {
-      var case_numbers = selection.case_numbers,
-          filteredCases = this.cases.filter(function(model) {
-            if (case_numbers.indexOf(model.get('case_number')) >= 0) {
-              return model;
-            }
-          });
-
-      this.caseList.cases.reset(filteredCases);
     }
+
   });
 
   var CaseSearchStatement = Backbone.View.extend({
@@ -340,13 +369,14 @@
       this.caseList = options.caseList;
       return this;
     },
+
     render: function() {
       if ( typeof this.filterData == 'undefined' ) {
         return false;
       }
 
       var context = _.extend(this.filterData, {
-        incidents: this.languagize(this.caseList.cases.length),
+        incidents: this.languagize(this.caseList.case_numbers.length),
         payments: this.caseList.cases.reduce( function(memo, model) {
           return memo + model.get('total_payments');
         }, 0)
@@ -357,6 +387,7 @@
       this.$el.html(content.trim());
       $('#search-intro').hide();
     },
+
     languagize: function(int) {
       if (int < 10){
         if (int == 0) { int = 'no'};
@@ -444,7 +475,7 @@
           $('#case-search-form input[type=checkbox]:checked').each(function(){
             var checkbox = $(this);
             var value = $(this).val().toLowerCase();
-            if (tagVal == value) { 
+            if (tagVal == value) {
               checkbox.attr('checked', false).change();
             }
           });
@@ -457,12 +488,12 @@
         $('.typeahead').val('').trigger('keyup');
         clearButton.unbind('click');
       });
-      
+
     },
 
     filterCases: function() {
       var self = this,
-          filteredCases = [];
+          case_numbers = [];
 
       this.cases.each(function(model) {
         var ret = true;
@@ -487,7 +518,6 @@
             var paymentRange = value.split('-'),
                 low = Number(paymentRange[0]),
                 high = Number(paymentRange[1]),
-                //caseTotalPayments = Number(model.get(name));
                 caseTotalPayments = Number(model.get('total_payments'));
 
             if ( ! ( (caseTotalPayments >= low) && (caseTotalPayments <= high) ) ) {
@@ -522,11 +552,11 @@
         });
 
         if (ret) {
-          filteredCases.push(model);
+          case_numbers.push(model.get('case_number'));
         }
       });
 
-      this.caseList.cases.reset(filteredCases);
+      this.caseList.renderFiltered(case_numbers);
     },
 
     initChosen: function() {
@@ -547,9 +577,7 @@
       this.$el.chosen({ width: '200px', disable_search : true});
       this.caseList = options.caseList;
       this.caseList.cases.on(
-        'sort', this.caseList.render.bind(
-          this.caseList
-        )
+        'sort', this.caseList.renderFiltered.bind(this.caseList)
       );
       Backbone.View.prototype.initialize.apply(this, arguments);
       return this;
@@ -561,24 +589,7 @@
 
     sortCaseList: function(event) {
       var option = $(event.currentTarget).val();
-      switch (option) {
-        case 'payment-low-high':
-          this.caseList.cases.comparator = this.caseList.cases.lowtohigh;
-          break;
-        case 'payment-high-low':
-          this.caseList.cases.comparator = this.caseList.cases.hightolow;
-          break;
-        case 'date-newest-oldest':
-          this.caseList.cases.comparator = this.caseList.cases.newtoold;
-          break;
-        case 'date-oldest-newest':
-          this.caseList.cases.comparator = this.caseList.cases.oldtonew;
-          break;
-        default:
-          this.caseList.cases.comparator = this.caseList.cases.newtoold;
-          break;
-      }
-      this.caseList.cases.sort();
+      this.caseList.sortElements(option);
     },
   });
 
