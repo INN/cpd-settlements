@@ -119,17 +119,73 @@ module.exports = function(grunt) {
                     'cssmin'
                 ]
             },
+        },
+
+        shell: {
+          execOptions: {
+            maxBuffer: 200*1024*1024
+          },
+          render_components: {
+            command: [
+              './render_json.py',
+              './render_includes.py',
+            ].join('&&'),
+            options: {
+              stdout: true
+            }
+          },
+          prep_officer_data: {
+            command: [
+              'python -c',
+              '"from lib.prep_officer_data import prep_officer_data; prep_officer_data()"'
+            ].join(' '),
+            options: {
+              stdout: true
+            }
+          },
+          get_data: {
+            command: './get_data.py',
+            options: {
+              stdout: true
+            }
+          },
+          check_boundary_service: {
+            command: [
+              'python -c',
+              '"from lib.check_boundary_service import check_boundary_service; check_boundary_service()"'
+            ].join(' '),
+            options: {
+              stdout: true
+            }
+          }
         }
     });
 
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
 
     grunt.registerTask('build', 'Build all asset files', [
+      'shell:render_components',
       'less',
       'cssmin',
       'concat_css',
       'uglify',
       'concat'
+    ]);
+
+    grunt.registerTask('render_components',
+      'Render includes and json to files', [
+      'shell:render_components'
+    ]);
+
+    grunt.registerTask('prep_officer_data',
+      'Prep officer data and render a new data/officers.json file', [
+      'shell:prep_officer_data'
+    ]);
+
+    grunt.registerTask('get_data',
+      'Pull data from Google and run the entire prep process including prep_officer_data and render_components.', [
+      'shell:check_boundary_service',
+      'shell:prep_officer_data'
     ]);
 
     // Default task(s).
