@@ -29,9 +29,18 @@
 				<div class="secondary-details">
 					<div class="total-payments-container">
 						<span class="total-payments">{{ format_currency(officer.total_payments) }}</span> 
-						<span>total payments<!--  for all related cases --></span>
+						<span>total payments in </span>
+						<span class="number-of-cases"></span>
 					</div>
-					<div class="notes"></div>
+					
+					<div class="years-of-service"></div>
+					{% if officer.race %}
+						<div class="officer-race">{{ officer.race }}</div>
+					{% endif %}
+
+					{% if officer.note %}
+						<div class="notes">{{ officer.note }}</div>
+					{% endif %}
 				</div>
 			</div>
 			<div id="officer-case-map" class="detail-wrapper officer-expanded">
@@ -61,15 +70,15 @@
 
 <script>
 
-  var loadData = function(callback) {
-    var url = site_path + 'assets/cpd_settlements/data/combined.min.js';
-    $.ajax({
-      url: url,
-      cache: true,
-      dataType: 'script',
-      success: callback
-    });
-  };
+	var loadData = function(callback) {
+		var url = site_path + 'assets/cpd_settlements/data/combined.min.js';
+		$.ajax({
+			url: url,
+			cache: true,
+			dataType: 'script',
+			success: callback
+		});
+	};
 
 	Number.prototype.formatMoney = function(c, d, t){
 	    var n = this,
@@ -86,6 +95,29 @@
 
 	var officerCaseList;
 	var initialCase = { latitude:41.8781, longitude:-87.6298 };
+
+	function renderOfficerInfo() {
+		calculateService();
+		$('.number-of-cases').text(officerCaseList.length + ' cases');
+	}
+
+	function calculateService(){
+		var appointed = '{{ officer.appointed }}';
+		var resigned = '{{ officer.resigned }}';
+
+		appointed = new Date(appointed);
+		if (resigned == '') {
+			var today = new Date();
+			resigned = today;
+		} else {
+			resigned = new Date(resigned);
+		}
+
+		var serviceYears = ((resigned.getFullYear() * 12 + resigned.getMonth()) - (appointed.getFullYear() * 12 + appointed.getMonth()))/12;
+		var fullYears = Math.floor(serviceYears);
+		var remainder = Math.round( (serviceYears % 1) * 12 );
+		$('.years-of-service').text( 'Length of service: ' + fullYears + ' years, ' + remainder + ' months' );
+	}
 
 	function formatStr(text) {
 		var formatted = '';
@@ -143,11 +175,13 @@
 	    };
 	}
 
-  loadData(function() {
-    officerCaseList = getCases( {{ officer.slug }} );
-	google.maps.event.addDomListener(window, 'load', init(initialCase, officerCaseList));
-    renderCaseList();
-  });
+	loadData(function() {
+		officerCaseList = getCases( {{ officer.slug }} );
+		google.maps.event.addDomListener(window, 'load', init(initialCase, officerCaseList));
+		renderOfficerInfo();
+		renderCaseList();
+	});
+
 
 </script>
 
