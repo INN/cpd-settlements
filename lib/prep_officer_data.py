@@ -27,12 +27,22 @@ def prep_officer_data():
             officer_data = filter(lambda x: x.get('id', None) == cop.get('cop', None), officers)[0]
 
             """
-            Unset some keys we're going to replace with data from the officers sheet
+            Unset some keys we're going to replace with data from the officers sheet or
+            just aren't using.
             """
             delete_these = [
+                'officer_atty',
+                'officer_atty_firm',
+                'case',
                 'cop_first_name',
                 'cop_middle_initial',
-                'cop_last_name'
+                'cop_last_name',
+                'entered_by',
+                'entered_when',
+                'fact_checked_by',
+                'fact_checked_when',
+                'matched_by',
+                'matched_when'
             ]
 
             for key in delete_these:
@@ -57,8 +67,7 @@ def prep_officer_data():
                 'race',
                 'appointed_date',
                 'resignation_date',
-                'position_desc',
-                'notes'
+                'position_desc'
             ]
 
             for key in use_these:
@@ -70,11 +79,8 @@ def prep_officer_data():
 
             # Map fields to what we're using in the app already
             field_map = {
-                'timestamp': "matched_when",
                 'appointed': 'appointed_date',
                 'resigned': 'resignation_date',
-                'attorney': "officer_atty",
-                'attorney_firm': "officer_atty_firm",
                 'prefix': "position_desc",
                 'badge_number': 'badge_no',
                 'case_number': 'case_no',
@@ -83,12 +89,12 @@ def prep_officer_data():
                 'middle': 'middle_init',
                 'last': 'last_name',
                 'race': 'race',
-                'notes': 'notes'
             }
 
             for use, dont in field_map.items():
                 cop[use] = cop[dont]
-                del cop[dont]
+                if use != dont:
+                    del cop[dont]
 
             result.append(cop)
             seen.append(cop.get('id'))

@@ -34,6 +34,25 @@ def render_cases_json():
             'slug': officer.get_slug()
         } for officer in case.get_related_officers()]
 
+        delete_these = [
+            'city_attorney',
+            'city_attorney_firm',
+            'judge',
+            'magistrate_judge',
+            'plaintiff_attorney',
+            'plaintiff_attorney_firm',
+            'police_beat',
+            'police_beat_id',
+            'police_district',
+            'police_district_id'
+        ]
+
+        for key in delete_these:
+            try:
+                del(case_dict[key])
+            except KeyError:
+                pass
+
         cases.append(case_dict)
 
     with open('assets/data/cases.js', 'w+') as f:
