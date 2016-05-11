@@ -135,6 +135,8 @@ def context_processor():
 
         # Variables
         'BUILD_PATH': g.current_site.app.config.get('BUILD_PATH', None),
+        'GOOGLE_ANALYTICS_ID': 'UA-2350659-4',
+
         'site_path': get_site_path(),
         'title': 'Search the CPD settlement database | Chicago Reporter',
         'opengraph_image': (
