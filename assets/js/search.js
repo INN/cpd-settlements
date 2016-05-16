@@ -375,12 +375,18 @@
         return false;
       }
 
-      var context = _.extend(this.filterData, {
-        incidents: this.languagize(this.caseList.case_numbers.length),
-        payments: this.caseList.cases.reduce( function(memo, model) {
-          return memo + model.get('total_payments');
-        }, 0)
-      });
+      var self = this,
+          context = _.extend(this.filterData, {
+            incidents: this.languagize(this.caseList.case_numbers.length),
+            payments: _.reduce( this.caseList.cases.filter(function(c) {
+                if (_.indexOf(self.caseList.case_numbers, c.get('case_number')) >= 0) {
+                  return c;
+                }
+              }),
+              function(memo, model) {
+                return memo + model.get('total_payments');
+              }, 0)
+          });
 
       // how to handle empties
       var content = this.template(context);
