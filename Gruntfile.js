@@ -185,7 +185,7 @@ module.exports = function(grunt) {
     grunt.registerTask('get_data',
       'Pull data from Google and run the entire prep process including prep_officer_data and render_components.', [
       'shell:check_boundary_service',
-      'shell:prep_officer_data'
+      'shell:get_data'
     ]);
 
     // Default task(s).

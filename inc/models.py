@@ -27,6 +27,24 @@ class Case(BaseModel):
 
     type = 'cases'
 
+    field_map = {
+        'case_number': 'CaseNumber',
+        'date_filed': 'DateFiled',
+        'date_closed': 'DateClosed',
+        'judge': 'Judge',
+        'plaintiff_attorney': "PlaintiffsLeadAttorney",
+        'plaintiff_attorney_firm': "PlaintiffsAttorneyLawFirm",
+        'city_attorney': "CitysLeadAttorney",
+        'city_attorney_firm': "CitysAttorneyLawFirm",
+        'magistrate_judge': "MagistrateJudge",
+        'date_of_incident': "DateofIncident",
+        'location': 'LocationListed',
+        'address': 'StreetAddress',
+        'primary_cause': 'primary_cause',
+        'tags': 'tags',
+        'narrative': 'Narrative'
+    }
+
     def get_slug(self):
         return urlify("%s" % self.case_number)
 
@@ -111,7 +129,7 @@ to_load = {
 for filename, model in to_load.items():
     filepath = os.path.abspath(os.path.join(os.path.dirname(__file__), '../data/%s' % filename))
 
-    if filename in ['cases.geocoded.boundaries.json', 'officers.json']:
+    if filename in ['officers.json', 'cases.geocoded.boundaries.json']:
         model.objects = NonMappedModelList(filepath, model)
     else:
         model.objects = ModelList(filepath, model, model.field_map)

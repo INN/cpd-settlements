@@ -64,6 +64,9 @@ def render_officers_json():
     seen = []
 
     for officer in Officer.objects:
+        if not officer.get('id', None):
+            continue
+
         try:
             if (seen.index(officer.get('id')) >= 0):
                 print "Already saw officer %s" % officer.get('id')
