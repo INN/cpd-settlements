@@ -37,8 +37,7 @@ def search(init_view='cases'):
             pass
 
         try:
-            case.primary_cause = case.payments[0].primary_cause
-            primary_causes.append(case.payments[0].primary_cause)
+            primary_causes.append(case.primary_cause)
         except IndexError:
             pass
 

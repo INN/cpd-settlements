@@ -15,10 +15,6 @@ def render_cases_json():
         # Total of all payments for the case
         case_dict['total_payments'] = total_for_payments(case.get_related(Payment), False)
 
-        # Get primary cause
-        if case.get_related(Payment):
-            case_dict['primary_cause'] = case.get_related(Payment)[0].primary_cause
-
         # Grab the victim data
         case_dict['victims'] = [{
             'victim_1': victim.victim_1,

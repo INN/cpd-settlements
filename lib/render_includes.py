@@ -23,7 +23,7 @@ def render_includes():
             pass
 
         try:
-            primary_causes.append(case.payments[0].primary_cause.strip())
+            primary_causes.append(case.primary_cause)
         except IndexError:
             pass
 
