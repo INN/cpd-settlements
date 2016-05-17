@@ -335,7 +335,6 @@ input[type=checkbox] {
 }
 input[type=checkbox]:checked + .option {
   background-color: #ffffff;
-  border: 1px solid #000000;
   color: #000000;
 }
 .chosen-container-single .chosen-single,
@@ -486,7 +485,7 @@ a.block-link {
 .case .case-payment-wrapper {
   min-width: 200px;
   max-width: 200px;
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
   background-color: #000000;
   position: relative;
   text-align: center;
@@ -734,10 +733,26 @@ label.results-label {
 .detail-wrapper {
   display: none;
 }
+.detail-wrapper.case-expanded .social-icons,
+.detail-wrapper.officer-expanded .social-icons {
+  display: block;
+  position: absolute;
+  margin-top: 0;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+}
+.detail-wrapper.case-expanded .social-icons a,
+.detail-wrapper.officer-expanded .social-icons a,
+.detail-wrapper.case-expanded .social-icons a:visited,
+.detail-wrapper.officer-expanded .social-icons a:visited {
+  color: #8e8e8e;
+}
 .detail-wrapper.case-expanded .case-detail {
   background-color: #000000;
   text-align: center;
   padding: 40px;
+  position: relative;
 }
 .detail-wrapper.case-expanded .case-detail h1 {
   margin-top: 0;
@@ -776,6 +791,10 @@ label.results-label {
 .detail-wrapper.case-expanded .case-details {
   list-style-type: none;
   padding: 0;
+}
+.detail-wrapper.officer-expanded .social-icons {
+  top: -41px;
+  right: -41px;
 }
 .detail-wrapper.officer-expanded .officer {
   margin-bottom: 0;
@@ -1023,7 +1042,12 @@ a:hover {
 }
 .social-icons {
   display: block;
+  position: absolute;
   margin-top: 1em;
+  right: 0;
+  z-index: 4;
+  top: 0;
+  font-size: 1em;
 }
 .social-icons a,
 .social-icons a:visited {
@@ -1031,8 +1055,9 @@ a:hover {
 }
 .share {
   display: inline-block;
-  width: 2em;
-  height: 2em;
+  font-size: 1.425em;
+  width: 1.5em;
+  height: 1.5em;
   margin: .5em;
   transition: background-color 0.25s ease-in-out;
   -moz-transition: background-color 0.25s ease-in-out;
@@ -1053,6 +1078,8 @@ a:hover {
   text-align: center;
   padding-top: .45em;
   border-radius: 1em;
+  width: 2em;
+  height: 2em;
 }
 #cpd-scrolling .share:hover {
   background-color: #ffffff;
@@ -1088,6 +1115,7 @@ a:hover {
 .case-payment-wrapper .social-icons {
   margin: 20px 0;
   position: absolute;
+  top: auto;
   bottom: 0;
   left: 0;
   right: 0;
@@ -1102,7 +1130,7 @@ a:hover {
   opacity: 1;
 }
 .case-payment-wrapper .icon-twitter {
-  font-size: .8em;
+  font-size: 1.75rem;
 }
 /* ==========================================================================
 Intro Page
@@ -1147,6 +1175,33 @@ Intro Page
   /*
     Elements
   */
+}
+#cpd-scrolling #instruction {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  bottom: 30px;
+  left: 0;
+  text-align: center;
+  color: #ffffff;
+}
+#cpd-scrolling #instruction .scroll {
+  text-transform: uppercase;
+  font-family: 'Open Sans Condensed', sans-serif;
+  display: block;
+}
+#cpd-scrolling #instruction .arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 16px 20px 0 20px;
+  border-color: #ffffff transparent transparent transparent;
+  opacity: .5;
+  display: inline-block;
+  margin-top: 4px;
+}
+#cpd-scrolling #instruction .arrow:hover {
+  opacity: 1;
 }
 #cpd-scrolling h1,
 #cpd-scrolling h2,
@@ -1203,19 +1258,46 @@ Intro Page
   height: 1%;
 }
 #cpd-scrolling #cpd-progress {
-  width: 100%;
+  height: 100vh;
+  width: 61px;
   position: fixed;
-  bottom: 0;
+  top: 0;
+  left: 0;
   z-index: 9999999;
+  padding-top: 62px;
 }
 #cpd-scrolling #cpd-progress > div {
   display: block;
   min-width: 100%;
 }
-#cpd-scrolling #cpd-progress .rect {
+#cpd-scrolling #cpd-progress > div .down {
   width: 0;
-  height: 24px;
-  background-color: #3d9999;
+  height: 0;
+  border-style: solid;
+  border-width: 16px 30px 0 30px;
+  border-color: #bd261d transparent transparent transparent;
+  opacity: .5;
+  display: block;
+  margin: -62px 0 0 0;
+}
+#cpd-scrolling #cpd-progress > div .scroll {
+  color: #fff;
+  padding: 2px;
+  width: 62px;
+  opacity: .8;
+  text-align: center;
+  display: inline-block;
+  font-family: 'Open Sans Condensed';
+  text-transform: uppercase;
+  text-shadow: 0 0 1px #000;
+  line-height: 1;
+}
+#cpd-scrolling #cpd-progress .rect {
+  width: 61px;
+  height: 0;
+  background-color: #bd261d;
+  margin-bottom: 62px;
+  opacity: .5;
 }
 #cpd-scrolling #desc {
   width: 100%;
@@ -1228,6 +1310,7 @@ Intro Page
 }
 #cpd-scrolling #desc h1 {
   font-size: 6em;
+  font-family: 'Open Sans Condensed', sans-serif;
   text-transform: uppercase;
   line-height: 1;
   margin-top: 15vh;
@@ -1239,7 +1322,7 @@ Intro Page
   letter-spacing: .03em;
 }
 #cpd-scrolling #desc h1 .for {
-  display: block;
+  display: inline;
   text-transform: lowercase;
   font-weight: 300;
   font-size: .5em;
@@ -1254,6 +1337,17 @@ Intro Page
   font-weight: 300;
   line-height: 1;
   font-size: 2.25em;
+  color: #bd261d;
+  margin: 1em 2em;
+}
+#cpd-scrolling #desc .scroll {
+  color: #ffffff;
+  display: inline-block;
+  font-family: 'Open Sans Condensed';
+  text-transform: uppercase;
+  text-shadow: 0 0 1px #000;
+  line-height: 1;
+  margin-top: 2em;
 }
 #cpd-scrolling .block {
   width: 100%;
@@ -1541,6 +1635,7 @@ Media Queries
     min-width: 100%;
     max-width: 100%;
     text-align: left;
+    display: block;
   }
   .case .case-payment-wrapper .case-payment {
     margin-bottom: 0;
@@ -1562,6 +1657,17 @@ Media Queries
   }
   .case .case-details li:last-of-type {
     margin-bottom: 0;
+  }
+  .detail-wrapper.case-expanded .case-detail h1,
+  .detail-wrapper.officer-expanded .officer-text {
+    margin-top: 60px;
+  }
+  .detail-wrapper.case-expanded .social-icons,
+  .detail-wrapper.officer-expanded .social-icons {
+    left: 0;
+  }
+  .detail-wrapper.officer-expanded .social-icons {
+    top: -101px;
   }
   .officer .officer-text {
     padding-left: 90px;

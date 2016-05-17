@@ -45,6 +45,15 @@ function loadText(){
 
 			if (entry.length == slide_num){
 				initScroll();
+
+				// $('#instruction .arrow').click(function(){
+				// 	var next = $('.slide.active').nextAll('.slide')[0];
+				// 	if (next){
+				// 		$('html,body').animate({
+				//           scrollTop: $(next).offset().top
+				//         }, 500);
+				//     }
+				// })
 			}
 		});
 
@@ -75,7 +84,11 @@ function initScroll(){
 	var scene_introtext = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: dur_introtext, offset: main_offset})
 					.setTween(tween_introtext)
 					.setPin("#desc")
-					.addTo(controller);
+					.addTo(controller)
+					.on('enter', function (e) {
+						$('.active').removeClass('active');
+						$('#slide-intro').addClass('active');
+					});
 
 	// introtext
 	var dur_toomuch = stringDuration(40);
@@ -98,6 +111,8 @@ function initScroll(){
 					.on('enter', function(e){
 						//TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:0}, {opacity:1});
 						TweenMax.to('#slide-1', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-1').addClass('active');
 					})
 					.on('leave', function(e){
 						//TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:1}, {opacity:0});
@@ -111,6 +126,8 @@ function initScroll(){
 					.setPin("#slide-2 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-2', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-2').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-2', 2, {opacity:0});
@@ -154,6 +171,8 @@ function initScroll(){
 					.setPin("#slide-3 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-3', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-3').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-3', 2, {opacity:0});
@@ -189,6 +208,8 @@ function initScroll(){
 					.setPin("#slide-4 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-4', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-5').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-4', 1, {opacity:0});
@@ -201,6 +222,8 @@ function initScroll(){
 					.setPin("#slide-5 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-5', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-5').addClass('active');
 					})
 					.on('leave', function(e){
 						// bg-4
@@ -212,6 +235,8 @@ function initScroll(){
 					.setPin("#slide-6 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-6', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-6').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-6', 1, {opacity:0});
@@ -277,6 +302,8 @@ function initScroll(){
 					.on('enter', function(e){
 						TweenMax.to('#slide-7', 1, {opacity:1});
 						TweenMax.to('#bg-11-overlay', 0, {opacity:0});
+						$('.active').removeClass('active');
+						$('#slide-7').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-7', 1, {opacity:0});
@@ -301,6 +328,8 @@ function initScroll(){
 					.on('enter', function(e){
 						TweenMax.to('#slide-8', 1, {opacity:1});
 						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-8').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-8', 1, {opacity:0});
@@ -317,6 +346,8 @@ function initScroll(){
 					.setPin("#slide-9 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-9', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-9').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-9', 1, {opacity:0});
@@ -329,6 +360,8 @@ function initScroll(){
 					.setPin("#slide-10 .block h3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-10', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-10').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-10', 1, {opacity:0});
@@ -343,6 +376,8 @@ function initScroll(){
 						TweenMax.to('#bg-12', 1, {opacity:0});
 						TweenMax.to('#slide-11', 1, {opacity:1});
 						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#slide-111').addClass('active');
 					})
 					.on('leave', function(e){
 						var direction = e.target.controller().info("scrollDirection").toLowerCase();
@@ -368,7 +403,7 @@ function initScroll(){
 
 	// init tween, then scene
 	var duration_bar = $('#cpd-scrolling').height() - main_offset;
-	var tween_bar = TweenMax.to("#cpd-progress .rect", 1, {width: '100%'});
+	var tween_bar = TweenMax.to("#cpd-progress .rect", 1, {height: (main_offset*2-62) });
 	var scene_bar = new ScrollMagic.Scene({triggerElement: "#trigger-top", duration: duration_bar, offset: main_offset})
 					.setTween(tween_bar)
 					.addTo(controller);
