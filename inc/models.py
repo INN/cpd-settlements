@@ -42,7 +42,14 @@ class Case(BaseModel):
         'address': 'StreetAddress',
         'primary_cause': 'primary_cause',
         'tags': 'tags',
-        'narrative': 'Narrative'
+        'narrative': 'Narrative',
+        # Tags
+        'interaction_type': 'interaction_type',
+        'officers_tags': 'officers',
+        'victims_tags': 'victims',
+        'misconduct_type': 'misconduct_type',
+        'weapons_used': 'weapons_used',
+        'outcome': 'outcome',
     }
 
     def get_slug(self):

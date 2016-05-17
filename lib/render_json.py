@@ -40,7 +40,13 @@ def render_cases_json():
             'police_beat',
             'police_beat_id',
             'police_district',
-            'police_district_id'
+            'police_district_id',
+            'interaction_type',
+            'officers_tags',
+            'victims_tags',
+            'misconduct_type',
+            'weapons_used',
+            'outcome'
         ]
 
         for key in delete_these:

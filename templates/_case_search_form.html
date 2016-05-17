@@ -215,7 +215,7 @@
           
             <option value="Illegal/Unreasonable Seizure">Illegal/Unreasonable Seizure</option>
           
-            <option value="Illinois Domestic Act">Illinois Domestic Act</option>
+            <option value="Illinois Domestic Violence Act">Illinois Domestic Violence Act</option>
           
             <option value="Intentional Infliction of Emotional Distress">Intentional Infliction of Emotional Distress</option>
           
@@ -227,7 +227,7 @@
           
             <option value="Other 1983/Civil Rights Violations">Other 1983/Civil Rights Violations</option>
           
-            <option value="Policies and Practices ("Monell")">Policies and Practices ("Monell")</option>
+            <option value="Policies and Practices">Policies and Practices</option>
           
             <option value="Reckless Conduct">Reckless Conduct</option>
           
@@ -240,8 +240,6 @@
             <option value="Willful and Wanton Misconduct">Willful and Wanton Misconduct</option>
           
             <option value="Wrongful Death">Wrongful Death</option>
-          
-            <option value="lllinois Domestic Violence Act">lllinois Domestic Violence Act</option>
           
         </select>
       </div>
@@ -262,93 +260,176 @@
 
         <div class="form-group tags">
           <label>Type of interaction</label>
-            <input type="checkbox" name="tags" id="home-invasion" value="home invasion">
-              <label for="home-invasion" class="option">Home invasion <i>108</i></label>
-            <input type="checkbox" name="tags" id="traffic-stop" value="traffic stop">
-              <label for="traffic-stop" class="option">Traffic stop <i>98</i></label>
-            <input type="checkbox" name="tags" id="lock-up" value="lock-up">
-              <label for="lock-up" class="option">Lock-up <i>20</i></label>
-            <input type="checkbox" name="tags" id="plain-clothes-officer" value="plain-clothes officer">
-              <label for="plain-clothes-officer" class="option">Plain-clothes officer <i>20</i></label>
-            <input type="checkbox" name="tags" id="off-duty-officer" value="off-duty officer">
-              <label for="off-duty-officer" class="option">Off-duty officer <i>20</i></label>
-            <input type="checkbox" name="tags" id="protest" value="protest">
-              <label for="protest" class="option">Protest <i>20</i></label>
-        
+             
+              <input type="checkbox" name="tags" id="home-invasion" value="home invasion">
+                <label for="home-invasion" class="option">Home invasion</label>
+             
+              <input type="checkbox" name="tags" id="protest" value="protest">
+                <label for="protest" class="option">Protest</label>
+             
+              <input type="checkbox" name="tags" id="stop-and-frisk" value="stop and frisk">
+                <label for="stop-and-frisk" class="option">Stop and frisk</label>
+             
+              <input type="checkbox" name="tags" id="traffic-stop" value="traffic stop">
+                <label for="traffic-stop" class="option">Traffic stop</label>
+             
+              <input type="checkbox" name="tags" id="strip-search" value="strip search">
+                <label for="strip-search" class="option">Strip search</label>
+             
+              <input type="checkbox" name="tags" id="lock-up" value="lock-up">
+                <label for="lock-up" class="option">Lock-up</label>
+             
 
           <label>Type of misconduct</label>
-            <input type="checkbox" name="tags" id="false-report" value="false report">
-              <label for="false-report" class="option">False report <i>313</i></label>
-            <input type="checkbox" name="tags" id="stolen-property" value="stolen property">
-              <label for="stolen-property" class="option">Stolen property <i>32</i></label>
-            <input type="checkbox" name="tags" id="witness-manipulation" value="witness manipulation">
-              <label for="witness-manipulation" class="option">Witness manipulation <i>28</i></label>
-            <input type="checkbox" name="tags" id="strip-search" value="strip search">
-              <label for="strip-search" class="option">Strip search <i>20</i></label>
-            <input type="checkbox" name="tags" id="retaliation" value="retaliation">
-              <label for="retaliation" class="option">Retaliation <i>20</i></label>
-            <input type="checkbox" name="tags" id="sexual-harassment" value="sexual harassment">
-              <label for="sexual-harassment" class="option">Sexual harassment <i>20</i></label>
-            <input type="checkbox" name="tags" id="forced-confession" value="forced confession">
-              <label for="forced-confession" class="option">Forced confession <i>20</i></label>
-            <input type="checkbox" name="tags" id="lawyer" value="lawyer">
-              <label for="lawyer" class="option">Laywer (legal access) <i>20</i></label>
-            <input type="checkbox" name="tags" id="torture" value="torture">
-              <label for="torture" class="option">Torture <i>20</i></label>
-            <input type="checkbox" name="tags" id="sexual-abuse" value="sexual abuse">
-              <label for="sexual-abuse" class="option">Sexual abuse <i>20</i></label>
-            <input type="checkbox" name="tags" id="bribery" value="bribery">
-              <label for="bribery" class="option">Bribery <i>20</i></label>
+             
+              <input type="checkbox" name="tags" id="false-report" value="false report">
+                <label for="false-report" class="option">False report</label>
+             
+              <input type="checkbox" name="tags" id="shooting" value="shooting">
+                <label for="shooting" class="option">Shooting</label>
+             
+              <input type="checkbox" name="tags" id="torture" value="torture">
+                <label for="torture" class="option">Torture</label>
+             
+              <input type="checkbox" name="tags" id="damage-to-property" value="damage to property">
+                <label for="damage-to-property" class="option">Damage to property</label>
+             
+              <input type="checkbox" name="tags" id="racial-epithets" value="racial epithets">
+                <label for="racial-epithets" class="option">Racial epithets</label>
+             
+              <input type="checkbox" name="tags" id="legal-access-denied" value="legal access denied">
+                <label for="legal-access-denied" class="option">Legal access denied</label>
+             
+              <input type="checkbox" name="tags" id="retaliation" value="retaliation">
+                <label for="retaliation" class="option">Retaliation</label>
+             
+              <input type="checkbox" name="tags" id="threats/intimidation" value="threats/intimidation">
+                <label for="threats/intimidation" class="option">Threats/intimidation</label>
+             
+              <input type="checkbox" name="tags" id="bribery" value="bribery">
+                <label for="bribery" class="option">Bribery</label>
+             
+              <input type="checkbox" name="tags" id="excessive-force" value="excessive force">
+                <label for="excessive-force" class="option">Excessive force</label>
+             
+              <input type="checkbox" name="tags" id="destroy/conceal/fabricate-evidence" value="destroy/conceal/fabricate evidence">
+                <label for="destroy/conceal/fabricate-evidence" class="option">Destroy/conceal/fabricate evidence</label>
+             
+              <input type="checkbox" name="tags" id="strip-search" value="strip search">
+                <label for="strip-search" class="option">Strip search</label>
+             
+              <input type="checkbox" name="tags" id="stolen-property" value="stolen property">
+                <label for="stolen-property" class="option">Stolen property</label>
+             
+              <input type="checkbox" name="tags" id="witness-manipulation" value="witness manipulation">
+                <label for="witness-manipulation" class="option">Witness manipulation</label>
+             
+              <input type="checkbox" name="tags" id="forced-confession" value="forced confession">
+                <label for="forced-confession" class="option">Forced confession</label>
+             
+              <input type="checkbox" name="tags" id="sexual-harassment/abuse" value="sexual harassment/abuse">
+                <label for="sexual-harassment/abuse" class="option">Sexual harassment/abuse</label>
+             
         </div>
 
         <div class="form-group tags">
-          <label>Outcome</label>          
-            <input type="checkbox" name="tags" id="resisting-arrest-charges" value="resisting arrest charges">
-              <label for="resisting-arrest-charges" class="option">Resisting arrest charges <i>68</i></label>
-            <input type="checkbox" name="tags" id="assault-charges" value="assault charges">
-              <label for="assault-charges" class="option">Assault charges <i>63</i></label>
-            <input type="checkbox" name="tags" id="killed" value="killed">
-              <label for="killed" class="option">Killed <i>20</i></label>
-            <input type="checkbox" name="tags" id="officer-charged" value="officer charged">
-              <label for="officer-charged" class="option">Officer charged <i>20</i></label>
-            <input type="checkbox" name="tags" id="car-impounded" value="car impounded">
-              <label for="car-impounded" class="option">Car impounded <i>20</i></label>
+          <label>Outcome</label>
+           
+            <input type="checkbox" name="tags" id="weapons-charges" value="weapons charges">
+              <label for="weapons-charges" class="option">Weapons charges</label>
+           
+            <input type="checkbox" name="tags" id="hospitalized" value="hospitalized">
+              <label for="hospitalized" class="option">Hospitalized</label>
+           
+            <input type="checkbox" name="tags" id="resisting-or-obstructing-arrest-charges" value="resisting or obstructing arrest charges">
+              <label for="resisting-or-obstructing-arrest-charges" class="option">Resisting or obstructing arrest charges</label>
+           
+            <input type="checkbox" name="tags" id="other-charges-filed" value="other charges filed">
+              <label for="other-charges-filed" class="option">Other charges filed</label>
+           
+            <input type="checkbox" name="tags" id="died-in-custody" value="died in custody">
+              <label for="died-in-custody" class="option">Died in custody</label>
+           
+            <input type="checkbox" name="tags" id="drug-charges" value="drug charges">
+              <label for="drug-charges" class="option">Drug charges</label>
+           
+            <input type="checkbox" name="tags" id="assault-or-battery-to-an-officer-charges" value="assault or battery to an officer charges">
+              <label for="assault-or-battery-to-an-officer-charges" class="option">Assault or battery to an officer charges</label>
+           
+            <input type="checkbox" name="tags" id="killed-by-officer" value="killed by officer">
+              <label for="killed-by-officer" class="option">Killed by officer</label>
+           
+            <input type="checkbox" name="tags" id="died-out-of-custody" value="died out of custody">
+              <label for="died-out-of-custody" class="option">Died out of custody</label>
+           
 
-
-          <label>Type of weapon</label>        
-            <input type="checkbox" name="tags" id="shooting" value="shooting">
-              <label for="shooting" class="option">Shooting <i>45</i></label>
-            <input type="checkbox" name="tags" id="taser" value="taser">
-              <label for="taser" class="option">Taser <i>20</i></label>
-            <input type="checkbox" name="tags" id="pepper-spray" value="pepper spray">
-              <label for="pepper-spray" class="option">Pepper spray <i>20</i></label>
+          <label>Type of weapon</label>
+           
             <input type="checkbox" name="tags" id="nightstick" value="nightstick">
-              <label for="nightstick" class="option">Nightstick <i>20</i></label>
-            <input type="checkbox" name="tags" id="hog-tied" value="hog tied">
-              <label for="hog-tied" class="option">Hog tied <i>20</i></label>
-
+              <label for="nightstick" class="option">Nightstick</label>
+           
+            <input type="checkbox" name="tags" id="pepper-spray" value="pepper spray">
+              <label for="pepper-spray" class="option">Pepper spray</label>
+           
+            <input type="checkbox" name="tags" id="taser" value="taser">
+              <label for="taser" class="option">Taser</label>
+           
+            <input type="checkbox" name="tags" id="gun" value="gun">
+              <label for="gun" class="option">Gun</label>
+           
+            <input type="checkbox" name="tags" id="physical-force" value="physical force">
+              <label for="physical-force" class="option">Physical force</label>
+           
+            <input type="checkbox" name="tags" id="hog-tied" value="hog-tied">
+              <label for="hog-tied" class="option">Hog-tied</label>
+           
 
           <label>Plaintiff details</label>
-            <input type="checkbox" name="tags" id="minor" value="minor">
-              <label for="minor" class="option">Minor <i>66</i></label>
-            <input type="checkbox" name="tags" id="mental-health-issues" value="mental health issues">
-              <label for="mental-health-issues" class="option">Mental health issues <i>14</i></label>
-            <input type="checkbox" name="tags" id="physical-disability" value="physical disability">
-              <label for="physical-disability" class="option">Physical disability <i>20</i></label>
-            <input type="checkbox" name="tags" id="animal" value="animal">
-              <label for="animal" class="option">Animal (Pet) <i>20</i></label>
+          
             <input type="checkbox" name="tags" id="pregnant" value="pregnant">
-              <label for="pregnant" class="option">Pregnant <i>20</i></label>
-            <input type="checkbox" name="tags" id="elderly" value="elderly">
-              <label for="elderly" class="option">Elderly <i>20</i></label>
-            <input type="checkbox" name="tags" id="sexual-orientation-gender-identity" value="sexual orientation/gender identity">
-              <label for="sexual-orientation-gender-identity" class="option">Sexual orientation / gender identity <i>20</i></label>
+              <label for="pregnant" class="option">Pregnant</label>
+           
+            <input type="checkbox" name="tags" id="lgbt" value="lgbt">
+              <label for="lgbt" class="option">LGBT</label>
+           
             <input type="checkbox" name="tags" id="muslim" value="muslim">
-              <label for="muslim" class="option">Muslim <i>20</i></label>
+              <label for="muslim" class="option">Muslim</label>
+           
+            <input type="checkbox" name="tags" id="elderly" value="elderly">
+              <label for="elderly" class="option">Elderly</label>
+           
+            <input type="checkbox" name="tags" id="mental-illness" value="mental illness">
+              <label for="mental-illness" class="option">Mental Illness</label>
+           
+            <input type="checkbox" name="tags" id="physical-disability" value="physical disability">
+              <label for="physical-disability" class="option">Physical disability</label>
+           
+            <input type="checkbox" name="tags" id="pets" value="pets">
+              <label for="pets" class="option">Pets</label>
+           
+            <input type="checkbox" name="tags" id="minor" value="minor">
+              <label for="minor" class="option">Minor</label>
+           
+
+
+          <label>Officer details</label>
+          
+            <input type="checkbox" name="tags" id="plainclothes" value="plainclothes">
+              <label for="plainclothes" class="option">Plainclothes</label>
+           
+            <input type="checkbox" name="tags" id="off-duty" value="off duty">
+              <label for="off-duty" class="option">Off duty</label>
+           
+            <input type="checkbox" name="tags" id="under-the-influence" value="under the influence">
+              <label for="under-the-influence" class="option">Under the influence</label>
+           
+            <input type="checkbox" name="tags" id="later-charged" value="later charged">
+              <label for="later-charged" class="option">Later charged</label>
+           
         </div>
 
       </div>
-      
+
     </form>
   </div>
 </div>
