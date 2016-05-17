@@ -779,7 +779,7 @@ label.results-label {
 }
 .detail-wrapper.officer-expanded .officer {
   margin-bottom: 0;
-  padding: 40px 40px 60px 40px;
+  padding: 40px 40px 20px 40px;
 }
 .detail-wrapper.officer-expanded .officer-logo {
   min-width: 100%;
@@ -806,16 +806,46 @@ label.results-label {
 .detail-wrapper.officer-expanded .officer-text .badge-num {
   color: #b3b3b3;
 }
+.detail-wrapper.officer-expanded .officer-text .total-payments-container {
+  color: #ffffff;
+  font-size: 1.25em;
+  margin: 2em;
+  line-height: 2;
+}
+.detail-wrapper.officer-expanded .officer-text .total-payments-container .total-payments {
+  color: #bd261d;
+  background-color: #ffffff;
+  padding: 4px;
+  font-weight: bold;
+}
+.detail-wrapper.officer-expanded .officer-text .total-payments-container .number-of-cases > span {
+  color: #ffffff;
+  background-color: #bd261d;
+  padding: 4px;
+}
 .detail-wrapper.officer-expanded .secondary-details {
   background-color: #8e8e8e;
   padding: 20px;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.detail-wrapper.officer-expanded .secondary-details > div {
+  flex: 1;
+}
+.detail-wrapper.officer-expanded .secondary-details > div span {
+  text-transform: uppercase;
+  font-weight: bold;
+  display: block;
 }
 .detail-wrapper.officer-expanded .secondary-details .badge-num {
   color: #000000;
 }
 .detail-wrapper.officer-expanded .secondary-details .total-payments-container {
   color: #000000;
+}
+.detail-wrapper.officer-expanded .secondary-details .note {
+  min-width: 100%;
 }
 .detail-wrapper.officer-expanded #map {
   margin-left: 0;
@@ -995,6 +1025,10 @@ a:hover {
   display: block;
   margin-top: 1em;
 }
+.social-icons a,
+.social-icons a:visited {
+  color: #626262;
+}
 .share {
   display: inline-block;
   width: 2em;
@@ -1009,6 +1043,10 @@ a:hover {
 }
 #cpd-scrolling .social-icons {
   font-size: .333em;
+}
+#cpd-scrolling .social-icons a,
+#cpd-scrolling .social-icons a:visited {
+  color: #3d9999;
 }
 #cpd-scrolling .share {
   background-color: rgba(255, 255, 255, 0.3);

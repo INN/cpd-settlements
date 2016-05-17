@@ -911,7 +911,7 @@ label.results-label {
   &.officer-expanded {
     .officer {
       margin-bottom: 0;
-      padding:40px 40px 60px 40px;
+      padding:40px 40px 20px 40px;
     }
     .officer-logo {
       min-width:100%;
@@ -937,18 +937,50 @@ label.results-label {
       .badge-num {
         color:darken(@cr-lightest,30%);
       } 
+      .total-payments-container {
+        color:@cr-lightest;
+        font-size:1.25em;
+        margin: 2em;
+        line-height: 2;
+
+        .total-payments {
+          color:@cr-alert;
+          background-color:@cr-lightest;
+          padding:4px;
+          font-weight:bold;
+        }
+
+        .number-of-cases>span {
+          color:@cr-lightest;
+          background-color:@cr-alert;
+          padding:4px;
+        }
+      }
     }
     .secondary-details {
       //background-color:fade(@cr-darkest,40%);
       background-color: @cr-grey;
       padding:20px;
       text-align: center;
+      display:flex;
+      flex-wrap:wrap;
 
+      &>div {
+        flex: 1;
+      }
+      &>div span {
+        text-transform:uppercase;
+        font-weight: bold;
+        display:block;
+      }
       .badge-num {
         color:darken(@cr-dark,30%);
       } 
       .total-payments-container {
         color:darken(@cr-dark,30%);
+      }
+      .note {
+        min-width:100%;
       }
     }
     #map {
@@ -1150,6 +1182,9 @@ a:hover {
 .social-icons {
   display:block;
   margin-top:1em;
+  a, a:visited {
+    color:lighten(@cr-dark, 10%);
+  }
 }
 .share {
   display: inline-block;
@@ -1165,6 +1200,9 @@ a:hover {
 }
 #cpd-scrolling .social-icons {
   font-size:.333em;
+  a, a:visited {
+    color:@cr-highlight;
+  }
 }
 #cpd-scrolling .share {
   background-color: fade(@cr-lightest,30%);

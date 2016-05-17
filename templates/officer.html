@@ -20,9 +20,11 @@
 					<div class="officer-text">
 						<h2>{{ officer.first }} {{ officer.last }}</h2>
 						<h3>{{ officer.prefix }}</h3>
-						{% if officer.badge_number %}
-				          <div class="badge-num"><span>Badge:</span> {{ officer.badge_number }}</div>
-				        {% endif %}
+						<div class="total-payments-container">
+							This individual was named in <span class="number-of-cases"></span> that cost Chicago 
+							<span class="total-payments">{{ format_currency(officer.total_payments) }}</span> 
+							<span>in settlement payments</span>.							
+						</div>
 				        <span class="social-icons">
 							<a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
 							<a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
@@ -30,14 +32,11 @@
 						</span>
 						
 					</div>
-					<div class="total-payments-container">
-						<span class="total-payments">{{ format_currency(officer.total_payments) }}</span> 
-						<span>total payments in </span>
-						<span class="number-of-cases"></span>
-					</div>
 				</div>
 				<div class="secondary-details">
-					
+					{% if officer.badge_number %}
+			          <div class="badge-num"><span>Badge:</span> {{ officer.badge_number }}</div>
+			        {% endif %}
 					<div class="years-of-service"></div>
 					<div class="officer-race"></div>
 					<div class="note"></div>
@@ -98,19 +97,35 @@
 		var numCases = officerCaseList.length;
 		var numText = '';
 		if (numCases == 1) {
-			numText = numCases + ' case';
+			numText = '<span>' + languagize(numCases) + '</span> case';
 		} else {
-			numText = numCases + ' cases';
+			numText = '<span>' + languagize(numCases) + '</span> cases';
 		}
-		$('.number-of-cases').text(numText);
+		$('.number-of-cases').html(numText);
 		
 		if (officerObj.race != '') {
-			$('.officer-race').text('Race: ' + officerObj.race.toLowerCase());
+			$('.officer-race').html('<span>Race:</span> ' + officerObj.race.toLowerCase());
 		}
 		if (officerObj.note != '') {
-			$('.note').text('Note: ' + officerObj.race);
+			$('.note').html('<span>Note:</span> ' + officerObj.race);
 		}
 		
+	}
+
+	function languagize(int) {
+		if (int < 10){
+	        if (int == 0) { int = 'no'};
+	        if (int == 1) { int = 'one'};
+	        if (int == 2) { int = 'two'};
+	        if (int == 3) { int = 'three'};
+	        if (int == 4) { int = 'four'};
+	        if (int == 5) { int = 'five'};
+	        if (int == 6) { int = 'six'};
+	        if (int == 7) { int = 'seven'};
+	        if (int == 8) { int = 'eight'};
+	        if (int == 9) { int = 'nine'};
+	      }
+      	return int;
 	}
 
 	function calculateService(){
@@ -128,7 +143,7 @@
 		var serviceYears = ((resigned.getFullYear() * 12 + resigned.getMonth()) - (appointed.getFullYear() * 12 + appointed.getMonth()))/12;
 		var fullYears = Math.floor(serviceYears);
 		var remainder = Math.round( (serviceYears % 1) * 12 );
-		$('.years-of-service').text( 'Length of service: ' + fullYears + ' years, ' + remainder + ' months' );
+		$('.years-of-service').html( '<span>Length of service:</span> ' + fullYears + ' years, ' + remainder + ' months' );
 	}
 
 	function formatStr(text) {
