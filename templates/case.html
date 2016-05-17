@@ -23,6 +23,11 @@
 		    <div class="case-payment">
 		      <h2>{{ total_for_payments(case.payments) }}</h2>
 		      <h3>{{ case.primary_cause }}</h3>
+			  <span class="social-icons">
+				<a><span class="share icon-twitter" onclick="case_twitter(this)"></span></a>
+				<a><span class="share icon-facebook" onclick="case_facebook(this)"></span></a>
+    			<a target="_blank" href="mailto:?subject=This police settlement cost Chicago {{ total_for_payments(case.payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/case/{{ case.slug }}"><span class="share icon-mail"></span></a>
+		      </span>
 		    </div>
 
 		  </div>

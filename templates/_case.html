@@ -1,12 +1,19 @@
-<a href="{{ site_path }}case/{{ case.case_number }}"><div class="case" data-case_number="{{ case.case_number }}">
+<div class="case" data-case_number="{{ case.case_number }}">
 
   <div class="card-row">
     <div class="case-payment-wrapper">
-      <h4>{{ case.case_number }}</h4>
-      <div class="case-payment">
-        <h2>${{ format_currency(case.total_payments) }}</h2>
-        <h3>{{ case.primary_cause }}</h3>
-      </div>
+      <a href="{{ site_path }}case/{{ case.case_number }}" class="case-link">
+        <div class="case-payment">
+          <h4>{{ case.case_number }}</h4>
+          <h2>${{ format_currency(case.total_payments) }}</h2>
+          <h3>{{ case.primary_cause }}</h3>
+        </div>
+      </a>
+      <span class="social-icons">
+        <a><span class="share icon-twitter" onclick="case_twitter(this)"></span></a>
+        <a><span class="share icon-facebook" onclick="case_facebook(this)"></span></a>
+        <a target="_blank" href="mailto:?subject=This police settlement cost Chicago {{ format_currency(case.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/case/{{ case.slug }}"><span class="share icon-mail"></span></a>
+      </span>
     </div>
 
     <div class="case-description">
@@ -27,8 +34,10 @@
 
       {% if (case.narrative != 'NULL') %}
         <div class="case-summary">
-          <span class="card-label">Case summary: </span>
-          <p>{{ case.narrative }}</p>
+          <a href="{{ site_path }}case/{{ case.case_number }}" class="case-link">
+            <span class="card-label">Case summary: </span>
+            <p>{{ case.narrative }}</p>
+          </a>
         </div>
       {% endif %}
       
@@ -53,6 +62,6 @@
 
   
 
-</div></a>
+</div>
 
 

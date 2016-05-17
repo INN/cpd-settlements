@@ -1,9 +1,14 @@
 <div class="officer">
   	<div class="officer-logo"></div>
 	<div class="officer-text">
-	  <h2><a href="{{ url_for('cpd_settlements.officer', slug=officer.slug) }}">{{ officer.first }} {{ officer.last }}</a></h2>
+	  <h2><a href="http://{{ ROOT_URL }}/officer/{{ officer.slug }}" class="officer-link">{{ officer.first }} {{ officer.last }}</a></h2>
 	  <h3>{{ officer.prefix }}</h3>
 	  <div class="ids"><span class="badge-num">{{ officer.badge_number }}</span><span class="slug">{{ officer.slug }}</span></div>
 	  <div class="total-payments-container"><span class="total-payments">{{ format_currency(officer.total_payments) }}</span> <span>total payments<!--  for all related cases --></span></div>
+	  <span class="social-icons">
+	      <a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
+	      <a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
+	      <a target="_blank" href="mailto:?subject={{ officer.first }} {{ officer.last }} was named in police settlements that cost Chicago {{ format_currency(officer.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/{{ officer.slug }}"><span class="share icon-mail"></span></a>
+    	</span>
 	</div>
 </div>

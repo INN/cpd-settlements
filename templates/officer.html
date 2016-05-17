@@ -23,15 +23,20 @@
 						{% if officer.badge_number %}
 				          <div class="badge-num"><span>Badge:</span> {{ officer.badge_number }}</div>
 				        {% endif %}
+				        <span class="social-icons">
+							<a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
+							<a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
+							<a target="_blank" href="mailto:?subject={{ officer.first }} {{ officer.last }} was named in police settlements that cost Chicago {{ format_currency(officer.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/{{ officer.slug }}"><span class="share icon-mail"></span></a>
+						</span>
 						
 					</div>
-				</div>
-				<div class="secondary-details">
 					<div class="total-payments-container">
 						<span class="total-payments">{{ format_currency(officer.total_payments) }}</span> 
 						<span>total payments in </span>
 						<span class="number-of-cases"></span>
 					</div>
+				</div>
+				<div class="secondary-details">
 					
 					<div class="years-of-service"></div>
 					<div class="officer-race"></div>

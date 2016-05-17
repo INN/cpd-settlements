@@ -472,10 +472,6 @@ a.block-link {
 .case:last-of-type {
   margin-bottom: 0;
 }
-.case:hover {
-  box-shadow: 0px 0px 3px #000000;
-  cursor: pointer;
-}
 .case .card-row {
   display: flex;
   min-width: 100%;
@@ -498,8 +494,14 @@ a.block-link {
   align-items: center;
   justify-content: center;
 }
+.case .case-payment-wrapper a {
+  text-decoration: none;
+}
 .case .case-payment-wrapper .case-payment {
   margin-bottom: 20px;
+}
+.case .case-payment-wrapper .case-payment:hover {
+  cursor: pointer;
 }
 .case .case-payment-wrapper .case-payment h2 {
   color: #ffffff;
@@ -516,10 +518,6 @@ a.block-link {
   font-family: 'Open Sans', sans-serif;
   font-size: .8em;
   font-weight: 700;
-  margin: 0;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
 }
 .case .case-description {
   padding: 20px;
@@ -529,6 +527,13 @@ a.block-link {
 .case .case-summary {
   margin-top: 12px;
   margin-bottom: 8px;
+}
+.case .case-summary a {
+  text-decoration: none;
+  color: #333333;
+}
+.case .case-summary a:hover {
+  cursor: pointer;
 }
 .case .case-details {
   list-style-type: none;
@@ -986,6 +991,81 @@ a:hover {
 .cpd-links li {
   float: right;
 }
+.social-icons {
+  display: block;
+  margin-top: 1em;
+}
+.share {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  margin: .5em;
+  transition: background-color 0.25s ease-in-out;
+  -moz-transition: background-color 0.25s ease-in-out;
+  -webkit-transition: background-color 0.25s ease-in-out;
+}
+.share:hover {
+  cursor: pointer;
+}
+#cpd-scrolling .social-icons {
+  font-size: .333em;
+}
+#cpd-scrolling .share {
+  background-color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  padding-top: .45em;
+  border-radius: 1em;
+}
+#cpd-scrolling .share:hover {
+  background-color: #ffffff;
+}
+.icon-twitter:before {
+  content: '\68';
+  text-shadow: none;
+}
+.icon-facebook:before {
+  content: '\70';
+  padding-left: .25em;
+  text-shadow: none;
+}
+.icon-mail:before {
+  content: '\75';
+  padding-left: .1em;
+  text-shadow: none;
+}
+[class*=" icon-"]:before,
+[class^=icon-]:before {
+  font-family: fontello;
+  font-style: normal;
+  font-weight: 400;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  opacity: 1;
+  text-transform: none!important;
+}
+.case-payment-wrapper .social-icons {
+  margin: 20px 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.case-payment-wrapper .share {
+  margin: 0 .25em;
+  width: auto;
+  height: auto;
+  opacity: .8;
+}
+.case-payment-wrapper .share:hover {
+  opacity: 1;
+}
+.case-payment-wrapper .icon-twitter {
+  font-size: .8em;
+}
 /* ==========================================================================
 Intro Page
 ========================================================================== */
@@ -1256,55 +1336,6 @@ Intro Page
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#000000', GradientType=0);
   /* IE6-9 */
 }
-#cpd-scrolling .social-icons {
-  display: block;
-  margin-top: 1em;
-  font-size: .333em;
-}
-#cpd-scrolling .share {
-  display: inline-block;
-  width: 2em;
-  height: 2em;
-  background-color: rgba(255, 255, 255, 0.3);
-  text-align: center;
-  padding-top: .45em;
-  border-radius: 1em;
-  margin: .5em;
-  transition: background-color 0.25s ease-in-out;
-  -moz-transition: background-color 0.25s ease-in-out;
-  -webkit-transition: background-color 0.25s ease-in-out;
-}
-#cpd-scrolling .share:hover {
-  background-color: #ffffff;
-}
-#cpd-scrolling .icon-twitter:before {
-  content: '\68';
-  text-shadow: none;
-}
-#cpd-scrolling .icon-facebook:before {
-  content: '\70';
-  padding-left: .25em;
-  text-shadow: none;
-}
-#cpd-scrolling .icon-mail:before {
-  content: '\75';
-  padding-left: .1em;
-  text-shadow: none;
-}
-#cpd-scrolling [class*=" icon-"]:before,
-#cpd-scrolling [class^=icon-]:before {
-  font-family: fontello;
-  font-style: normal;
-  font-weight: 400;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
-  opacity: 1;
-  text-transform: none!important;
-}
 #cpd-scrolling .spacer {
   text-align: center;
   min-height: 100px;
@@ -1480,10 +1511,12 @@ Media Queries
   .case .case-payment-wrapper .case-payment h3 {
     margin-bottom: 0;
   }
-  .case .case-payment-wrapper h4 {
-    bottom: 20px;
-    right: 20px;
+  .case .case-payment-wrapper .social-icons {
+    margin: 0;
+    bottom: auto;
     left: auto;
+    right: 20px;
+    top: 20px;
   }
   .case .case-details li {
     width: 100%;
