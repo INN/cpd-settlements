@@ -1433,7 +1433,7 @@ Intro Page
   font-weight: normal;
   background-color: rgba(255, 255, 255, 0.8);
   color: #bd261d;
-  transform: translateX(-53%);
+  transform: translateX(-54%);
 }
 #cpd-scrolling #desc h1 .for {
   display: inline;
@@ -1452,7 +1452,7 @@ Intro Page
   background-color: rgba(189, 38, 29, 0.8);
   color: #ffffff;
   margin-top: 180px;
-  transform: translateX(-48%);
+  transform: translateX(-52%);
 }
 #cpd-scrolling #desc h2 {
   font-weight: 300;
