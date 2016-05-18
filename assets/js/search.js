@@ -267,7 +267,7 @@
         formatted = formatted.substring(0, formatted.length-1);
       }
 
-      formatted += '...<span class="read-more">Read More &raquo; </span>';
+      formatted += '...<span class="read-more">Read More&nbsp;&raquo; </span>';
 
       return formatted;
     }
@@ -671,6 +671,27 @@
     Backbone.history.start({
       pushState: true,
       root: site_path
+    });
+
+    $('label.option').hover(function(){
+      var inner = $(this).find('span');
+      var outer = $(this);
+
+      inner.css('display', 'inline');
+      
+      var diff = outer.width() - inner.width();
+
+      if (diff < -4){
+        inner.css({
+          'left': diff,
+          'width': inner.width + diff
+        })
+      }
+    }, function(){
+      $(this).find('span').css({
+        'left':'',
+        'display': 'block'
+      })
     });
   });
 

@@ -309,11 +309,34 @@ label.option {
   text-transform: lowercase;
   font-weight: normal;
   padding: 4px 6px;
+  margin: 0 1px 0 0;
   background-color: rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 0.9);
   border: 1px solid transparent;
   line-height: 1;
   font-size: 1em;
+  overflow: hidden;
+  /* To make the width of the container exact. */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+label.option.caps {
+  text-transform: uppercase;
+}
+label.option span {
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.3;
+  /* Starting transition */
+  left: 0%;
+  width: 100%;
+  -webkit-transition: left .5s, width .5s;
+  -moz-transition: left .5s, width .5s;
+  transition: left .5s, width .5s;
 }
 label.option:hover {
   cursor: pointer;
@@ -755,7 +778,7 @@ label.results-label {
   position: relative;
 }
 .detail-wrapper.case-expanded .case-detail h1 {
-  margin-top: 0;
+  margin-top: 30px;
   text-transform: uppercase;
   font-size: 1.1em;
   color: #fff;
@@ -767,20 +790,29 @@ label.results-label {
 }
 .detail-wrapper.case-expanded .case-detail h3 {
   color: #bd261d;
+  text-transform: uppercase;
   font-size: 2em;
   font-family: 'Open Sans';
   font-weight: 300;
   margin: 10px 0 20px 0;
 }
 .detail-wrapper.case-expanded .secondary-details {
-  background-color: #8e8e8e;
-  padding: 20px;
+  background-color: #000;
+  padding: 20px 0 0 0;
   text-align: center;
 }
 .detail-wrapper.case-expanded .secondary-details .tags {
-  color: #000000;
   text-transform: lowercase;
   margin-bottom: 0;
+}
+.detail-wrapper.case-expanded .secondary-details span.display-tag {
+  background-color: #4d4d4d;
+  color: #ffffff;
+  opacity: .8;
+  padding: 4px 6px;
+  line-height: 1.3;
+  display: inline-block;
+  margin: 3px;
 }
 .detail-wrapper.case-expanded .card-label {
   font-weight: 700;
@@ -1059,22 +1091,25 @@ a:hover {
   width: 1.5em;
   height: 1.5em;
   margin: .5em;
-  transition: background-color 0.25s ease-in-out;
-  -moz-transition: background-color 0.25s ease-in-out;
-  -webkit-transition: background-color 0.25s ease-in-out;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+  -moz-transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+  -webkit-transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 }
 .share:hover {
   cursor: pointer;
 }
 #cpd-scrolling .social-icons {
   font-size: .333em;
+  top: auto;
+  left: 0;
 }
 #cpd-scrolling .social-icons a,
 #cpd-scrolling .social-icons a:visited {
   color: #3d9999;
 }
 #cpd-scrolling .share {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000000;
   text-align: center;
   padding-top: .45em;
   border-radius: 1em;
@@ -1083,6 +1118,7 @@ a:hover {
 }
 #cpd-scrolling .share:hover {
   background-color: #ffffff;
+  color: #3d9999;
 }
 .icon-twitter:before {
   content: '\68';
@@ -1119,6 +1155,7 @@ a:hover {
   bottom: 0;
   left: 0;
   right: 0;
+  display: none;
 }
 .case-payment-wrapper .share {
   margin: 0 .25em;
@@ -1131,6 +1168,9 @@ a:hover {
 }
 .case-payment-wrapper .icon-twitter {
   font-size: 1.75rem;
+}
+.case:hover .case-payment-wrapper .social-icons {
+  display: inline-block;
 }
 /* ==========================================================================
 Intro Page
@@ -1266,38 +1306,51 @@ Intro Page
   z-index: 9999999;
   padding-top: 62px;
 }
-#cpd-scrolling #cpd-progress > div {
+#cpd-scrolling .rect-wrap {
   display: block;
   min-width: 100%;
 }
-#cpd-scrolling #cpd-progress > div .down {
+#cpd-scrolling .rect-wrap .rect {
+  width: 61px;
+  height: 0;
+  background-color: #bd261d;
+  margin-bottom: 62px;
+  opacity: .6;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
+}
+#cpd-scrolling .rect-wrap .down {
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 16px 30px 0 30px;
   border-color: #bd261d transparent transparent transparent;
-  opacity: .5;
+  opacity: .6;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
   display: block;
   margin: -62px 0 0 0;
 }
-#cpd-scrolling #cpd-progress > div .scroll {
+#cpd-scrolling .rect-wrap .scroll {
   color: #fff;
   padding: 2px;
   width: 62px;
   opacity: .8;
   text-align: center;
-  display: inline-block;
   font-family: 'Open Sans Condensed';
   text-transform: uppercase;
   text-shadow: 0 0 1px #000;
   line-height: 1;
+  display: none;
 }
-#cpd-scrolling #cpd-progress .rect {
-  width: 61px;
-  height: 0;
-  background-color: #bd261d;
-  margin-bottom: 62px;
-  opacity: .5;
+#cpd-scrolling .rect-wrap:hover .rect,
+#cpd-scrolling .rect-wrap:hover .down {
+  opacity: .8;
+}
+#cpd-scrolling .rect-wrap:hover .scroll {
+  display: inline-block;
 }
 #cpd-scrolling #desc {
   width: 100%;

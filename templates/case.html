@@ -29,11 +29,11 @@
     			<a target="_blank" href="mailto:?subject=This police settlement cost Chicago {{ total_for_payments(case.payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/case/{{ case.slug }}"><span class="share icon-mail"></span></a>
 		      </span>
 		    </div>
-
+		    <div class="secondary-details">
+			      <p class="tags">{{ case.tags }}</p>
+			  </div>
 		  </div>
-		  <div class="secondary-details">
-		      <p class="tags">{{ case.tags }}</p>
-		  </div>
+		  
 		</div>
 
 		<div class="detail-wrapper case-expanded">
@@ -102,7 +102,6 @@
 		  </div>
 		</div>
 
-
 		<div class="detail-wrapper">
 		  <div class="case-officers">
 		    <label class="results-label" style="float:none;">Officers involved:</label>
@@ -134,4 +133,16 @@
 {% endif %}
 
 {% include 'templates/_results_templates.html' %}
+<script type="text/javascript">
+$(document).ready(function(){
+	var tag_area = $('.secondary-details .tags');
+	var tags = tag_area.text().split("|");
+	var tag_html = "";
+	for (var i=0; i< tags.length; i++){
+		var tag = tags[i];
+		tag_html += "<span class='display-tag'>" + tag + "</span>";
+	}
+	tag_area.empty().html(tag_html);
+});
+</script>
 {% endblock %}
