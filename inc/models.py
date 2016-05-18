@@ -62,6 +62,9 @@ class Case(BaseModel):
             if self.case_number in officer.case_numbers:
                 result.append(officer)
 
+        if len(result) < 2 and result[0].first == 'Unnamed' and result[0].last == 'Officers':
+            result = []
+
         return result
 
 

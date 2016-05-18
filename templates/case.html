@@ -105,9 +105,13 @@
 		<div class="detail-wrapper">
 		  <div class="case-officers">
 		    <label class="results-label" style="float:none;">Officers involved:</label>
-		     {% for officer in case.officers %}
-		      {% include 'templates/_officer.html' %}
-		     {% endfor %}
+		    {% if case.officers %}
+			     {% for officer in case.officers %}
+			      {% include 'templates/_officer.html' %}
+			     {% endfor %}
+			{% else %}
+				<p class="reversed">No officers were named in this case.</p>
+			{% endif %}
 		  </div>
 		</div>
 
