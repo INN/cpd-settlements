@@ -58,8 +58,12 @@
             <span class="card-label">Officers involved:</span>
             <div class="officer-group">
               <% _.each(model.officers, function(officer) { %>
-              <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
-             <% }) %>
+                <% if ( officer.slug > 0){ %>
+                  <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
+                <% } else { %>
+                  <a disabled class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>" ><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
+                <% } %>
+              <% }) %>
              </div>
           </div>
           <% } %>

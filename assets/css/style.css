@@ -638,6 +638,7 @@ a.block-link {
   white-space: nowrap;
   text-align: center;
   vertical-align: bottom;
+  text-transform: uppercase;
 }
 .case .case-officers .police-icon:hover .tooltip:after {
   top: 100%;
@@ -652,6 +653,17 @@ a.block-link {
   border-top-color: #bd261d;
   border-width: 8px;
   margin-left: -8px;
+}
+.case .case-officers .police-icon[disabled] {
+  opacity: .7;
+  background-color: #000000;
+}
+.case .case-officers .police-icon[disabled]:hover .tooltip {
+  background-color: #000000;
+}
+.case .case-officers .police-icon[disabled]:hover .tooltip:after {
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: #000000;
 }
 .case h2 {
   margin-top: 0;

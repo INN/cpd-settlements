@@ -758,6 +758,7 @@ a.block-link {
           white-space: nowrap;
           text-align: center;
           vertical-align: bottom;
+          text-transform: uppercase;
 
           &:after {
             top: 100%;
@@ -772,6 +773,21 @@ a.block-link {
             border-top-color: @cr-alert;
             border-width: 8px;
             margin-left: -8px;
+          }
+        }
+      }
+
+      &[disabled]{
+        opacity:.7;
+        background-color:@cr-darkest;
+        &:hover {
+          .tooltip {
+            background-color:@cr-darkest;
+
+            &:after {
+              border-color: fade(@cr-darkest, 0%);
+              border-top-color: @cr-darkest;
+            }
           }
         }
       }
