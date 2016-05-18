@@ -43,25 +43,17 @@
                 <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
              {% endfor %}
 
-          <label>Type of misconduct</label>
-             {% for tag in tags.misconduct_type.tags %}
-              <input type="checkbox" name="tags" id="{{ tag|lower|replace(' ', '-') }}" value="{{ tag|lower }}">
-                <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
-             {% endfor %}
-        </div>
-
-        <div class="form-group tags">
-          <label>Outcome</label>
-           {% for tag in tags.outcome.tags %}
-            <input type="checkbox" name="tags" id="{{ tag|lower|replace(' ', '-') }}" value="{{ tag|lower }}">
-              <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
-           {% endfor %}
-
           <label>Type of weapon</label>
            {% for tag in tags.weapons_used.tags %}
             <input type="checkbox" name="tags" id="{{ tag|lower|replace(' ', '-') }}" value="{{ tag|lower }}">
               <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
            {% endfor %}
+
+          <label>Type of misconduct</label>
+             {% for tag in tags.misconduct_type.tags %}
+              <input type="checkbox" name="tags" id="{{ tag|lower|replace(' ', '-') }}" value="{{ tag|lower }}">
+                <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
+             {% endfor %}
 
           <label>Plaintiff details</label>
           {% for tag in tags.victims_tags.tags %}
@@ -73,12 +65,19 @@
               {% endif %}
            {% endfor %}
 
-
           <label>Officer details</label>
           {% for tag in tags.officers_tags.tags %}
             <input type="checkbox" name="tags" id="{{ tag|lower|replace(' ', '-') }}" value="{{ tag|lower }}">
               <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
            {% endfor %}
+
+          <label>Outcome</label>
+           {% for tag in tags.outcome.tags %}
+            <input type="checkbox" name="tags" id="{{ tag|lower|replace(' ', '-') }}" value="{{ tag|lower }}">
+              <label for="{{ tag|lower|replace(' ', '-') }}" class="option"><span>{{ tag }}</span></label>
+           {% endfor %}
+
+          
         </div>
 
       </div>
