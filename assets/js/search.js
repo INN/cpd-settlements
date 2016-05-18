@@ -710,13 +710,14 @@
 function case_twitter(element){
   var $case = $(element).closest('.case, .case-detail');
   var dollars = $case.find('h2').text();
+  var cause = $case.find('h3').text().toLowerCase();
   var link; 
   if ($case.find('a.case-link').get(0)) {
     link = $case.find('a.case-link').get(0).href;  
   } else {
     link = window.location.href;
   }  
-  var text = "This police settlement cost Chicago " + dollars + ". " + link + " via @chicagoreporter";
+  var text = "This police lawsuit for " + cause + " cost Chicago " + dollars + ". " + link + " via @chicagoreporter";
   var twitter_url = "https://twitter.com/home?status=" + encodeURIComponent(text);
   window.open(twitter_url, 'newwindow', 'width=600, height=400');
 }
@@ -742,7 +743,14 @@ function officer_twitter(element){
     link = window.location.href;
   }
   var dollars = $officer.find('.total-payments').text();
-  var text = name + " was named in police settlements that cost Chicago " + dollars + ". " + link + " via @chicagoreporter";
+
+  var text;
+  if ($('.detail-officer').length > 0){
+    text = $.trim($('.officer-expanded .total-payments-container').text()).replace(/\n/g,' ') + ' ' + link + ' via @chicagoreporter';
+  } else {
+    text = name + " was named in police misconduct lawsuits that cost Chicago " + dollars + ". " + link + ' via @chicagoreporter';
+  }
+  
   var twitter_url = "https://twitter.com/home?status=" + encodeURIComponent(text);
   window.open(twitter_url, 'newwindow', 'width=600, height=400');
 }

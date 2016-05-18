@@ -9,7 +9,7 @@
 			<span class="social-icons">
 			  <a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
 			  <a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
-			  <a target="_blank" href="mailto:?subject={{ officer.first }} {{ officer.last }} was named in police settlements that cost Chicago {{ format_currency(officer.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/{{ officer.slug }}"><span class="share icon-mail"></span></a>
+			  <a target="_blank" href="mailto:?subject={{ officer.first }} {{ officer.last }} was named in police misconduct lawsuits that cost Chicago {{ format_currency(officer.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/{{ officer.slug }}"><span class="share icon-mail"></span></a>
 			</span>
 		{% else %}
 			<h2>{{ officer.first }} {{ officer.last }}</h2>

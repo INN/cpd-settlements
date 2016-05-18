@@ -21,14 +21,14 @@
 						<h2>{{ officer.first }} {{ officer.last }}</h2>
 						<h3>{{ officer.prefix }}</h3>
 						<div class="total-payments-container">
-							This individual was named in <span class="number-of-cases"></span> that cost Chicago 
-							<span class="total-payments">{{ format_currency(officer.total_payments) }}</span> 
-							<span>in settlement payments</span>.							
+							{{ officer.last|title }} was named in <span class="number-of-cases"></span> that cost Chicago 
+							<span class="total-payments">{{ format_currency(officer.total_payments) }}.</span> 
+							<!-- <span>in settlement payments</span>. -->						
 						</div>
 				        <span class="social-icons">
 							<a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
 							<a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
-							<a target="_blank" href="mailto:?subject={{ officer.first }} {{ officer.last }} was named in police settlements that cost Chicago {{ format_currency(officer.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/{{ officer.slug }}"><span class="share icon-mail"></span></a>
+							<a target="_blank" href="mailto:?subject={{ officer.first }} {{ officer.last }} was named in police misconduct lawsuits that cost Chicago {{ format_currency(officer.total_payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/{{ officer.slug }}"><span class="share icon-mail"></span></a>
 						</span>
 						
 					</div>
@@ -98,9 +98,9 @@
 		var numCases = officerCaseList.length;
 		var numText = '';
 		if (numCases == 1) {
-			numText = '<span>' + languagize(numCases) + '</span> case';
+			numText = '<span>' + languagize(numCases) + '</span> misconduct lawsuit';
 		} else {
-			numText = '<span>' + languagize(numCases) + '</span> cases';
+			numText = '<span>' + languagize(numCases) + '</span> misconduct lawsuits';
 		}
 		$('.number-of-cases').html(numText);
 		
