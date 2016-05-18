@@ -72,15 +72,20 @@
 <div class="officer" data-slug="<%= model.slug %>">
   <div class="officer-logo"></div>
   <div class="officer-text">
-    <h2><a class="officer-link" href="<%= site_path %>officer/<%= model.slug %>"><%= model.first %> <%= model.last %></a></h2>
-    <h3><%= model.prefix %></h3>
-    <div class="ids"><span class="badge-num"><%= model.badge_number %></span><span class="slug"><%= model.slug %></span></div>
-    <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney(0) %></span> <span>total payments<!--  for all related cases --></span></div>
-    <span class="social-icons">
-      <a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
-      <a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
-      <a target="_blank" href="mailto:?subject=<%= model.first %> <%= model.last %> was named in police settlements that cost Chicago $<%= Number(model.total_payments).formatMoney(0) %>&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/<%= model.slug %>"><span class="share icon-mail"></span></a>
-    </span>
+    <% if (model.slug.length > 0) { %>
+      <h2><a class="officer-link" href="<%= site_path %>officer/<%= model.slug %>"><%= model.first %> <%= model.last %></a></h2>
+      <h3><%= model.prefix %></h3>
+      <div class="ids"><span class="badge-num"><%= model.badge_number %></span><span class="slug"><%= model.slug %></span></div>
+      <div class="total-payments-container"><span class="total-payments">$<%= Number(model.total_payments).formatMoney(0) %></span> <span>total payments<!--  for all related cases --></span></div>
+      <span class="social-icons">
+        <a><span class="share icon-twitter" onclick="officer_twitter(this)"></span></a>
+        <a><span class="share icon-facebook" onclick="officer_facebook(this)"></span></a>
+        <a target="_blank" href="mailto:?subject=<%= model.first %> <%= model.last %> was named in police settlements that cost Chicago $<%= Number(model.total_payments).formatMoney(0) %>&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/officer/<%= model.slug %>"><span class="share icon-mail"></span></a>
+      </span>
+    <% } else { %>
+      <h2><%= model.first %> <%= model.last %></h2>
+    <% } %>
+    
   </div>
 </div>
 </script>

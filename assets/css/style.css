@@ -692,9 +692,11 @@ a.block-link {
   background: url("../images/police-icon.svg") center left no-repeat;
   background-size: 80px;
   position: relative;
+  min-height: 70px;
 }
 .officer .officer-text h2 {
   margin: 0;
+  text-transform: uppercase;
 }
 .officer .officer-text h3 {
   margin-top: .25em;
@@ -1728,6 +1730,7 @@ Media Queries
   .officer .officer-text {
     padding-left: 90px;
     background-size: 50px;
+    min-height: 40px;
   }
   .officer .officer-logo {
     width: 90px;
