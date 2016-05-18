@@ -1622,10 +1622,16 @@ Intro Page
     font-size: 6em;
     text-transform: uppercase;
     line-height: 1.5;
-    margin-top:15vh;
-    margin-bottom:0;
     position:relative;
+    width: 0;
+    margin: 0 auto;
     //text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
+
+    &>span {
+      top:15vh;
+      position:absolute;
+      padding:4px 8px;
+    }
   }
   #desc h1 .settling {
     font-family:@cr-condensed;
@@ -1633,10 +1639,8 @@ Intro Page
     letter-spacing: .03em;
     font-weight: normal;
     background-color:fade(@cr-lightest,80%);
-    padding:4px 8px;
     color:@cr-alert;
-    position:absolute;
-    left:150px;
+    transform:translateX(-53%);
   }
   #desc h1 .for {
     display:inline;
@@ -1644,31 +1648,18 @@ Intro Page
     font-weight:300;
     font-size:.5em;
     background-color:fade(@cr-lightest,80%);
-    padding:4px 8px;
     color:@cr-darkest;
-    position:absolute;
-    top: 130px;
     z-index: 2;
-    right: 140px;
-  }
-  /*#desc h1 .redtext { 
-    color:#bd261d;
-  }*/
-  #desc h1 .too {
-    font-size:1.25em;
-  }
-  #desc h1 .much {
-    font-size:1.25em;
+    margin-top: 130px;
+    transform:translateX(160%);
   }
   #desc h1 .toomuch {
     font-family:@cr-condensed;
     font-size:1.25em;
     background-color:fade(@cr-alert,80%);
-    padding:4px 8px;
     color:@cr-lightest;
-    position:absolute;
-    top: 180px;
-    left: 110px;
+    margin-top: 180px;
+    transform:translateX(-48%);
   }
 
   #desc h2 {
@@ -1676,18 +1667,20 @@ Intro Page
     line-height: 1;
     font-size:2.15em;
     color:@cr-highlight;
-    margin:500px 4em 1em;
+    max-width: 480px;
+    margin:500px auto 1em;
     text-transform: uppercase;
   }
 
   #desc .scroll {
     color:@cr-lightest;
-    display: inline-block;
+    display: block;
     font-family: 'Open Sans Condensed';
-    text-transform: uppercase;
+    text-transform: lowercase;
     text-shadow: 0 0 1px #000;
     line-height: 1;
     margin-top:2em;
+    font-size:.5em;
   }
 
   .block {
@@ -1865,12 +1858,23 @@ Intro Page
 
 @media screen and (max-width: 760px) {
   #home {
-    #desc h1 {
-      font-size:3em;
-
+    #desc {
+      padding: 0 5%;
     }
+
+    #desc h1 {
+      transform: scale(.75);
+      &>span {
+        top:15vh;
+      }
+    }
+
     #desc h2 {
-      font-size:1.5em;
+      font-size: 2.25em;
+      margin: 8em auto 1em;
+      max-width: 70%;
+      top: 15vh;
+      position: relative;
     }
 
     .block h3 {
@@ -1882,6 +1886,24 @@ Intro Page
     }
     .spacer.vh1.half{
       min-height: 25vh;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #home {
+    #desc h1 {
+      transform: scale(.5);
+      &>span {
+        top:35vh;
+      }
+    }
+    #desc h2 {
+      font-size:1.5em;
+      margin: 3em auto 1em;
+      max-width: 70%;
+      top: 35vh;
+      position: relative;
     }
   }
 }
