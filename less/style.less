@@ -782,15 +782,14 @@ a.block-link {
       }
 
       &[disabled]{
-        background-color:lighten(@cr-darkest,30%);
-        opacity:.8;
+        background-color:@cr-grey;
         &:hover {
           .tooltip {
-            background-color:lighten(@cr-darkest,30%);
+            background-color:@cr-grey;
 
             &:after {
-              border-color: fade(@cr-darkest, 0%);
-              border-top-color: lighten(@cr-darkest,30%);
+              border-color: fade(@cr-grey, 0%);
+              border-top-color: @cr-grey;
             }
           }
         }
@@ -831,9 +830,17 @@ span.display-tag {
   margin: 3px;
 }
 
+.card-row .tags {
+  margin-bottom:0;
+}
 .card-row span.display-tag {
-    font-size: .75em;
-    margin: 1px;
+    font-size: .8em;
+    margin: 0 16px 0 0;
+    color: @cr-grey;
+    padding: 0;
+    line-height: 1.3;
+    background-color: transparent;
+    display: inline;
 }
 
 .case-detail {

@@ -658,15 +658,14 @@ a.block-link {
   margin-left: -8px;
 }
 .case .case-officers .police-icon[disabled] {
-  background-color: #4d4d4d;
-  opacity: .8;
+  background-color: #8e8e8e;
 }
 .case .case-officers .police-icon[disabled]:hover .tooltip {
-  background-color: #4d4d4d;
+  background-color: #8e8e8e;
 }
 .case .case-officers .police-icon[disabled]:hover .tooltip:after {
-  border-color: rgba(0, 0, 0, 0);
-  border-top-color: #4d4d4d;
+  border-color: rgba(142, 142, 142, 0);
+  border-top-color: #8e8e8e;
 }
 .case h2 {
   margin-top: 0;
@@ -694,9 +693,17 @@ span.display-tag {
   display: inline-block;
   margin: 3px;
 }
+.card-row .tags {
+  margin-bottom: 0;
+}
 .card-row span.display-tag {
-  font-size: .75em;
-  margin: 1px;
+  font-size: .8em;
+  margin: 0 16px 0 0;
+  color: #8e8e8e;
+  padding: 0;
+  line-height: 1.3;
+  background-color: transparent;
+  display: inline;
 }
 .case-detail {
   background-color: #ffffff;
