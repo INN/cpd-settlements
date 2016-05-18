@@ -29,9 +29,11 @@
     			<a target="_blank" href="mailto:?subject=This police misconduct lawsuit cost Chicago {{ total_for_payments(case.payments) }}&amp;body=Get the details from the Chicago Reporter investigation: http://{{ ROOT_URL }}/case/{{ case.slug }}"><span class="share icon-mail"></span></a>
 		      </span>
 		    </div>
+		    {% if case.tags %}
 		    <div class="secondary-details">
 			    <p class="tags">{{ case.tags }}</p>
 			</div>
+			{% endif %}
 		  </div>
 		  
 		</div>
