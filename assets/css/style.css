@@ -560,6 +560,9 @@ a.block-link {
 .case .case-summary a:hover {
   cursor: pointer;
 }
+.case .card-tags {
+  margin-top: 20px;
+}
 .case .case-details {
   list-style-type: none;
   padding: 0;
@@ -655,15 +658,15 @@ a.block-link {
   margin-left: -8px;
 }
 .case .case-officers .police-icon[disabled] {
-  opacity: .7;
-  background-color: #000000;
+  background-color: #4d4d4d;
+  opacity: .8;
 }
 .case .case-officers .police-icon[disabled]:hover .tooltip {
-  background-color: #000000;
+  background-color: #4d4d4d;
 }
 .case .case-officers .police-icon[disabled]:hover .tooltip:after {
   border-color: rgba(0, 0, 0, 0);
-  border-top-color: #000000;
+  border-top-color: #4d4d4d;
 }
 .case h2 {
   margin-top: 0;
@@ -681,6 +684,19 @@ a.block-link {
 }
 .case span.officer:last-of-type:after {
   content: '';
+}
+span.display-tag {
+  background-color: #4d4d4d;
+  color: #ffffff;
+  opacity: .8;
+  padding: 4px 6px;
+  line-height: 1.3;
+  display: inline-block;
+  margin: 3px;
+}
+.card-row span.display-tag {
+  font-size: .75em;
+  margin: 1px;
 }
 .case-detail {
   background-color: #ffffff;
@@ -819,17 +835,7 @@ label.results-label {
   text-align: center;
 }
 .detail-wrapper.case-expanded .secondary-details .tags {
-  text-transform: lowercase;
   margin-bottom: 0;
-}
-.detail-wrapper.case-expanded .secondary-details span.display-tag {
-  background-color: #4d4d4d;
-  color: #ffffff;
-  opacity: .8;
-  padding: 4px 6px;
-  line-height: 1.3;
-  display: inline-block;
-  margin: 3px;
 }
 .detail-wrapper.case-expanded .card-label {
   font-weight: 700;

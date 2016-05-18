@@ -51,22 +51,25 @@
           </div>
           <%  } %>
 
-          <p style="display:none;"><%= model.tags %></p>
-
           <% if ( model.officers.length > 0){ %>
-          <div class="case-officers">
-            <span class="card-label">Officers involved:</span>
-            <div class="officer-group">
-              <% _.each(model.officers, function(officer) { %>
-                <% if ( officer.slug > 0){ %>
-                  <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
-                <% } else { %>
-                  <a disabled class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>" ><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
-                <% } %>
-              <% }) %>
-             </div>
-          </div>
+            <div class="case-officers">
+              <span class="card-label">Officers involved:</span>
+              <div class="officer-group">
+                <% _.each(model.officers, function(officer) { %>
+                  <% if ( officer.slug > 0){ %>
+                    <a href="<%= site_path %>officer/<%= officer.slug %>" class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>"><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
+                  <% } else { %>
+                    <a disabled class="police-icon" data-firstname="<%= officer.first %>" data-lastname="<%= officer.last %>" ><div class="tooltip"><%= officer.first %> <%= officer.last %></div></a>
+                  <% } %>
+                <% }) %>
+               </div>
+            </div>
           <% } %>
+
+          <div class="card-tags">
+            <span class="card-label">Tags:</span>
+            <p class="tags"><%= split_tags(model.tags) %></p>
+          </div>
         </div>
       </div>
     </div>

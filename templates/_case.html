@@ -41,9 +41,6 @@
         </div>
       {% endif %}
       
-      <p style="display:none;">{{ case.tags }}</p>
-
-      
       {% if case.officers > 0 %}
         <div class="case-officers">
           <span class="card-label">Officers involved:</span>
@@ -60,6 +57,11 @@
            </div>
         </div>
       {% endif %}
+
+      <div class="card-tags">
+        <span class="card-label">Tags:</span>
+        <p class="tags">{%  split_tags(case.tags)  %}</p>
+      </div>
       
        
     </div>

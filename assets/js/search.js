@@ -563,6 +563,7 @@
       });
 
       this.caseList.renderFiltered(case_numbers);
+
     },
 
     initChosen: function() {
@@ -764,4 +765,18 @@ function officer_facebook(element){
   }
   var facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + link; 
   window.open(facebook_url, 'newwindow', 'width=600, height=400');
+}
+
+function split_tags(tags){
+  var tags = tags.split("|");
+  var tag_html = "";
+  for (var i=0; i< tags.length; i++){
+    var tag = tags[i];
+    if (tag !== 'LGBT') {
+      tag_html += "<span class='display-tag'>" + tag.toLowerCase() + "</span>";
+    } else {
+      tag_html += "<span class='display-tag'>" + tag + "</span>";
+    }    
+  }
+  return tag_html;
 }
