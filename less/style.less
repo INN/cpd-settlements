@@ -866,6 +866,12 @@ span.display-tag {
     h2 {
       margin:0;
       text-transform: uppercase;
+        a {
+          text-decoration:none;
+          &:hover {
+            color:darken(@cr-highlight,5%);
+          }
+        }
     }
     h3 {
       margin-top: .25em;
@@ -882,6 +888,26 @@ span.display-tag {
     min-height: 100%;
     position: absolute;
     margin: -20px 0 -20px -20px;
+
+    a {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+  }
+
+  .social-icons {
+    display:none;
+  }
+
+  &:hover {
+    .social-icons {
+      display:block;
+    }
   }
 }
 
@@ -942,6 +968,10 @@ label.results-label {
 
     a, a:visited {
       color: @cr-grey;
+
+      &:hover {
+        color:@cr-lightest;
+      }
     }
   }
 
@@ -1281,6 +1311,10 @@ a:hover {
   font-size: 1em;
   a, a:visited {
     color:lighten(@cr-dark, 10%);
+
+    &:hover {
+      color:@cr-dark;
+    }
   }
 }
 .share {
@@ -1977,6 +2011,14 @@ Media Queries
       margin-bottom:0;
     }
   }
+  .officer .social-icons{
+    top: 50%;
+    right:-10px;
+    transform: translateY(-50%);;
+    max-width: 30px;
+    margin-top: 0;
+    font-size: .8em;
+  }
   .detail-wrapper.case-expanded .case-detail h1,.detail-wrapper.officer-expanded .officer-text {
     margin-top: 60px;
   }
@@ -1985,10 +2027,15 @@ Media Queries
   }
   .detail-wrapper.officer-expanded .social-icons {
     top: -101px;
+    max-width: initial;
+    left: -41px;
+    font-size:1em;
+    transform: none;
   }
   .officer {
     .officer-text {
       padding-left:90px;
+      padding-right: 20px;
       background-size:50px;
       min-height:40px;
     }

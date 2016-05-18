@@ -726,6 +726,12 @@ span.display-tag {
   margin: 0;
   text-transform: uppercase;
 }
+.officer .officer-text h2 a {
+  text-decoration: none;
+}
+.officer .officer-text h2 a:hover {
+  color: #368787;
+}
 .officer .officer-text h3 {
   margin-top: .25em;
   font-size: 1em;
@@ -739,6 +745,21 @@ span.display-tag {
   min-height: 100%;
   position: absolute;
   margin: -20px 0 -20px -20px;
+}
+.officer .officer-logo a {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.officer .social-icons {
+  display: none;
+}
+.officer:hover .social-icons {
+  display: block;
 }
 label.results-label {
   float: left;
@@ -803,6 +824,12 @@ label.results-label {
 .detail-wrapper.case-expanded .social-icons a:visited,
 .detail-wrapper.officer-expanded .social-icons a:visited {
   color: #8e8e8e;
+}
+.detail-wrapper.case-expanded .social-icons a:hover,
+.detail-wrapper.officer-expanded .social-icons a:hover,
+.detail-wrapper.case-expanded .social-icons a:visited:hover,
+.detail-wrapper.officer-expanded .social-icons a:visited:hover {
+  color: #ffffff;
 }
 .detail-wrapper.case-expanded .case-detail {
   background-color: #000000;
@@ -1108,6 +1135,10 @@ a:hover {
 .social-icons a,
 .social-icons a:visited {
   color: #626262;
+}
+.social-icons a:hover,
+.social-icons a:visited:hover {
+  color: #484848;
 }
 .share {
   display: inline-block;
@@ -1735,6 +1766,14 @@ Media Queries
   .case .case-details li:last-of-type {
     margin-bottom: 0;
   }
+  .officer .social-icons {
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    max-width: 30px;
+    margin-top: 0;
+    font-size: .8em;
+  }
   .detail-wrapper.case-expanded .case-detail h1,
   .detail-wrapper.officer-expanded .officer-text {
     margin-top: 60px;
@@ -1745,9 +1784,14 @@ Media Queries
   }
   .detail-wrapper.officer-expanded .social-icons {
     top: -101px;
+    max-width: initial;
+    left: -41px;
+    font-size: 1em;
+    transform: none;
   }
   .officer .officer-text {
     padding-left: 90px;
+    padding-right: 20px;
     background-size: 50px;
     min-height: 40px;
   }
