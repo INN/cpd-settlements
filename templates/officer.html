@@ -35,8 +35,9 @@
 				</div>
 				<div class="secondary-details">
 					{% if officer.badge_number %}
-			          <div class="badge-num"><span>Badge:</span> {{ officer.badge_number }}</div>
+			          <!--<div class="badge-num"><span>Badge:</span> {{ officer.badge_number }}</div>-->
 			        {% endif %}
+					<div class="officer-gender"></div>
 					<div class="years-of-service"></div>
 					<div class="officer-race"></div>
 					<div class="note"></div>
@@ -105,6 +106,18 @@
 		
 		if (officerObj.race != '') {
 			$('.officer-race').html('<span>Race:</span> ' + officerObj.race.toLowerCase());
+		}
+		if (officerObj.sex != '') {
+			var sex = officerObj.sex.toLowerCase();
+			var gender;
+			if (sex == 'm'){
+				gender = 'male';
+			} else if (sex == 'f') {
+				gender = 'female';
+			} else {
+				gender = sex;
+			}
+			$('.officer-gender').html('<span>Gender:</span> ' + gender);
 		}
 		if (officerObj.note != '') {
 			$('.note').html('<span>Note:</span> ' + officerObj.race);
