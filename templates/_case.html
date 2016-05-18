@@ -58,11 +58,12 @@
         </div>
       {% endif %}
 
+      {% if case.tags > 0 %}
       <div class="card-tags">
         <span class="card-label">Tags:</span>
         <p class="tags">{%  split_tags(case.tags)  %}</p>
       </div>
-      
+      {% endif %}
        
     </div>
   </div>

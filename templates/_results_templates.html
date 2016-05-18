@@ -66,10 +66,12 @@
             </div>
           <% } %>
 
+          <% if ( model.tags.length > 0){ %>
           <div class="card-tags">
             <span class="card-label">Tags:</span>
             <p class="tags"><%= split_tags(model.tags) %></p>
           </div>
+          <% } %>
         </div>
       </div>
     </div>
