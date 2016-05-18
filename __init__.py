@@ -76,7 +76,7 @@ def officer(slug):
         context['officer'] = officer
         context['title'] = "Cases and settlements involving %s %s %s | Chicago Reporter" % (
             officer.prefix, officer.first, officer.last)
-        if officer.get('note', False):
+        if officer.get('note', False) and officer.get('note') != 'NULL':
             context['opengraph_description'] = officer.get('note')
     except IndexError:
         context['officer'] = False
@@ -93,7 +93,7 @@ def case(slug):
         case = filter(lambda x: x.get_slug() == slug, Case.objects)[0]
         context['case'] = case
         context['title'] = "Details for case %s | Chicago Reporter" % case.get('case_number')
-        if case.get('narrative', False):
+        if case.get('narrative', False) and case.get('narrative') != 'NULL':
             context['opengraph_description'] = case.get('narrative')
     except IndexError:
         context['case'] = False
