@@ -1418,22 +1418,35 @@ Intro Page
 }
 #cpd-scrolling #desc h1 {
   font-size: 6em;
-  font-family: 'Open Sans Condensed', sans-serif;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.5;
   margin-top: 15vh;
   margin-bottom: 0;
-  text-shadow: 0px 0px 30px #000000;
+  position: relative;
 }
 #cpd-scrolling #desc h1 .settling {
+  font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1.25em;
   letter-spacing: .03em;
+  font-weight: normal;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  color: #bd261d;
+  position: absolute;
+  left: 150px;
 }
 #cpd-scrolling #desc h1 .for {
   display: inline;
   text-transform: lowercase;
   font-weight: 300;
   font-size: .5em;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  color: #000000;
+  position: absolute;
+  top: 130px;
+  z-index: 2;
+  right: 140px;
 }
 #cpd-scrolling #desc h1 .too {
   font-size: 1.25em;
@@ -1441,12 +1454,23 @@ Intro Page
 #cpd-scrolling #desc h1 .much {
   font-size: 1.25em;
 }
+#cpd-scrolling #desc h1 .toomuch {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.25em;
+  background-color: rgba(189, 38, 29, 0.8);
+  padding: 4px 8px;
+  color: #ffffff;
+  position: absolute;
+  top: 180px;
+  left: 110px;
+}
 #cpd-scrolling #desc h2 {
   font-weight: 300;
   line-height: 1;
-  font-size: 2.25em;
-  color: #bd261d;
-  margin: 1em 2em;
+  font-size: 2.15em;
+  color: #3d9999;
+  margin: 500px 4em 1em;
+  text-transform: uppercase;
 }
 #cpd-scrolling #desc .scroll {
   color: #ffffff;
