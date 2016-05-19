@@ -54,6 +54,11 @@
       });
 
       this.loadData(function() {
+
+        cases_json = sort_cases(cases_json);
+
+
+
         self.officerCollection = self.officerCollection.reset(officers_json);
         self.caseCollection = self.caseCollection.reset(cases_json);
       });
@@ -156,7 +161,7 @@
           content = '';
 
       if (!this.cases.length) {
-        this.$el.html('<div class="loading">LOADING...</div>');
+        this.$el.html('<div class="loading">Loading...</div>');
       } else {
         this.$el.html('');
         this.cases.each(function(model) {
@@ -422,7 +427,7 @@
       Backbone.View.prototype.initialize.apply(this, arguments);
       this.filterData = this.$el.serializeObject();
       this.cases = options.cases;
-      this.caseList = options.caseList
+      this.caseList = options.caseList;
 
       this.initChosen();
       this.initTags();
@@ -780,3 +785,23 @@ function split_tags(tags){
   }
   return tag_html;
 }
+
+function sort_cases(json){
+  var array=[],obj=json;
+  for(a in obj){
+   array.push(obj[a])
+  }
+  //sort by date (most recent to oldest)
+  array.sort(function(x,y){
+    var x_date = Date.parse(x.date_of_incident),
+        y_date = Date.parse(y.date_of_incident)
+    if (x_date < y_date)
+      return 1;
+    if (x_date > y_date)
+      return -1;
+    return 0;
+  });
+
+  return array;
+}
+
