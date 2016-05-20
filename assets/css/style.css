@@ -1461,14 +1461,15 @@ Intro Page
   margin-top: 180px;
   transform: translateX(-52%);
 }
-#cpd-scrolling #desc h2 {
+#cpd-scrolling #desc .subhead {
   font-weight: 300;
   line-height: 1;
-  font-size: 2.15em;
+  font-size: .4em;
   color: #3d9999;
-  max-width: 480px;
-  margin: 500px auto 1em;
+  width: 480px;
+  margin: 11em auto;
   text-transform: uppercase;
+  transform: translateX(-50%);
 }
 #cpd-scrolling #desc .scroll {
   color: #ffffff;
@@ -1655,13 +1656,6 @@ Intro Page
   #home #desc h1 > span {
     top: 15vh;
   }
-  #home #desc h2 {
-    font-size: 2.25em;
-    margin: 8em auto 1em;
-    max-width: 70%;
-    top: 15vh;
-    position: relative;
-  }
   #home .block h3 {
     font-size: 2em;
   }
@@ -1679,12 +1673,9 @@ Intro Page
   #home #desc h1 > span {
     top: 35vh;
   }
-  #home #desc h2 {
-    font-size: 1.5em;
-    margin: 3em auto 1em;
-    max-width: 70%;
-    top: 35vh;
-    position: relative;
+  #home #desc h1 .subhead > span {
+    margin-top: .75em;
+    font-size: 1em;
   }
 }
 /* ==========================================================================

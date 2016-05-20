@@ -1669,14 +1669,15 @@ Intro Page
     transform:translateX(-52%);
   }
 
-  #desc h2 {
-    font-weight:300;
+  #desc .subhead {
+    font-weight: 300;
     line-height: 1;
-    font-size:2.15em;
-    color:@cr-highlight;
-    max-width: 480px;
-    margin:500px auto 1em;
+    font-size: .4em;
+    color: #3d9999;
+    width: 480px;
+    margin: 11em auto;
     text-transform: uppercase;
+    transform: translateX(-50%);
   }
 
   #desc .scroll {
@@ -1880,14 +1881,6 @@ Intro Page
       }
     }
 
-    #desc h2 {
-      font-size: 2.25em;
-      margin: 8em auto 1em;
-      max-width: 70%;
-      top: 15vh;
-      position: relative;
-    }
-
     .block h3 {
       font-size:2em;
     }
@@ -1908,13 +1901,10 @@ Intro Page
       &>span {
         top:35vh;
       }
-    }
-    #desc h2 {
-      font-size:1.5em;
-      margin: 3em auto 1em;
-      max-width: 70%;
-      top: 35vh;
-      position: relative;
+      .subhead>span {
+        margin-top: .75em;
+        font-size: 1em;
+      }
     }
   }
 }
