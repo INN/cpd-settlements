@@ -138,10 +138,10 @@ def format_currency(amount):
 
 
 def total_for_payments(payments, format=True):
-    total = 0
-    for payment in payments:
-        if payment.payment:
-            total += payment.payment
+    payouts = [p.payment for p in payments if p.payment is not None]
+    fees = [p.fees for p in payments if p.fees is not None]
+    total = sum(payouts + fees)
+
     if format:
         return format_currency(total)
     else:

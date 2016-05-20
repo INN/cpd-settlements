@@ -107,7 +107,7 @@ class Payment(BaseModel):
 
     @staticmethod
     def process_field(field, value):
-        if field == 'payment':
+        if field in ['payment', 'fees']:
             value = value.replace(',', '').strip()
             if value == '':
                 return None
