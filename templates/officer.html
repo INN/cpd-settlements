@@ -144,19 +144,29 @@
 	function calculateService(){
 		var appointed = '{{ officer.appointed }}';
 		var resigned = '{{ officer.resigned }}';
+		var active = '';
+		var html = '<span>Length of service:</span> ';
 
 		appointed = new Date(appointed);
 		if (resigned == '') {
 			var today = new Date();
 			resigned = today;
+			active = 'active';
 		} else {
 			resigned = new Date(resigned);
+			active = 'inactive';
 		}
 
 		var serviceYears = ((resigned.getFullYear() * 12 + resigned.getMonth()) - (appointed.getFullYear() * 12 + appointed.getMonth()))/12;
 		var fullYears = Math.floor(serviceYears);
 		var remainder = Math.round( (serviceYears % 1) * 12 );
-		$('.years-of-service').html( '<span>Length of service:</span> ' + fullYears + ' years, ' + remainder + ' months' );
+		if (remainder > 0) {
+			html += fullYears + ' years, ' + remainder + ' months'
+		} else {
+			html += fullYears + ' years, ' + remainder + ' months'
+		}
+		html += ' (' + active + ')';
+		$('.years-of-service').html( html );
 	}
 
 	function formatStr(text) {

@@ -894,8 +894,7 @@ label.results-label {
   margin: -40px 0 -60px -40px;
 }
 .detail-wrapper.officer-expanded .officer-text {
-  padding-left: 0;
-  padding-top: 50px;
+  padding: 50px 0 0;
   background: url("../images/police-icon.svg") top center no-repeat;
   background-size: 40px;
   background-position-y: 20px;
@@ -1104,22 +1103,21 @@ a:hover {
   top: 0;
 }
 .cpd-links a {
-  padding: 0 1em;
+  padding: 0 20px;
   display: block;
-  min-width: 100px;
   line-height: 60px;
   border: 1px solid #000;
   border-left: 0;
-  background-color: #3d9999;
+  background-color: transparent;
   color: #ffffff;
   font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 16px;
   text-transform: uppercase;
   text-align: center;
 }
 .cpd-links a:hover {
-  background-color: #50b9b9;
+  background-color: #3d9999;
   text-decoration: none;
 }
 .cpd-links ul {
@@ -1129,6 +1127,52 @@ a:hover {
 }
 .cpd-links li {
   float: right;
+}
+.menu-toggle-wrap {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+}
+.menu-toggle-wrap .menu-toggle {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  height: .5em;
+  width: 20px;
+  border-top: 0.2em solid #ffffff;
+  border-bottom: 0.2em solid #ffffff;
+  margin: 0.1em 10px 0 0;
+  transform: scale(2);
+}
+.menu-toggle-wrap .menu-toggle span {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.menu-toggle-wrap .menu-toggle:after {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 100%;
+  height: 0;
+  border-top: 0.2em solid #ffffff;
+}
+.menu-toggle-wrap:hover {
+  cursor: pointer;
+}
+.menu-toggle-wrap:hover .menu-toggle {
+  border-top: 0.2em solid #3d9999;
+  border-bottom: 0.2em solid #3d9999;
+}
+.menu-toggle-wrap:hover .menu-toggle:after {
+  border-top: 0.2em solid #3d9999;
 }
 .social-icons {
   display: block;
@@ -1240,18 +1284,19 @@ Intro Page
 #intro-controls {
   position: fixed;
   bottom: 0;
-  left: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 999;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1.15em;
 }
 #intro-controls > div {
-  padding: 10px;
-  border: 1px solid #000000;
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.7);
   border-bottom: none;
   background-color: #ffffff;
   color: #000000;
-  opacity: .8;
+  opacity: .5;
 }
 #intro-controls > div:hover {
   cursor: pointer;
@@ -1740,6 +1785,27 @@ body.not-nested {
 Media Queries
 ========================================================================== */
 @media screen and (max-width: 1000px) {
+  .menu-toggle-wrap {
+    display: block;
+  }
+  .cpd-links {
+    display: none;
+  }
+  #main-menu.expanded .cpd-links {
+    display: block;
+    top: 60px;
+    min-width: 300px;
+    background-color: #484848;
+  }
+  #main-menu.expanded .cpd-links li {
+    float: none;
+  }
+  #main-menu.expanded .cpd-links a {
+    width: 100%;
+    border-left: 1px solid #000000;
+    border-top: 0;
+    font-weight: 700;
+  }
   .wrapper-inner-flex {
     display: block;
   }
@@ -1778,22 +1844,12 @@ Media Queries
   }
 }
 @media screen and (max-width: 480px) {
-  #cpd-logo a {
-    width: 44px;
-    height: 44px;
-  }
-  a.cpd-title {
-    padding-top: 20px;
-  }
   .cpd-links {
-    top: 40px;
     width: 100%;
-  }
-  .cpd-links li {
-    width: 50%;
+    max-width: 100%;
   }
   .cpd-links a {
-    line-height: 36px;
+    border-left: 0;
   }
   .container.cpd-container {
     padding-top: 80px;
@@ -1873,5 +1929,12 @@ Media Queries
   }
   .officer .officer-logo {
     width: 90px;
+  }
+  .detail-wrapper.officer-expanded .secondary-details > div {
+    min-width: 100%;
+    margin-top: .5em;
+  }
+  .detail-wrapper.officer-expanded .secondary-details > div:first-of-type {
+    margin-top: 0;
   }
 }

@@ -367,7 +367,7 @@ function initScroll(){
 						TweenMax.to('#slide-10', 1, {opacity:0});
 					});
 
-	// slide 11
+	// slide 11 - final
 	var dur_slide11 = stringDuration(200);
 	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: dur_slide11, offset: 350})
 					.addTo(controller)

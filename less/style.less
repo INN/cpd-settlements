@@ -1046,8 +1046,7 @@ label.results-label {
       margin:-40px 0 -60px -40px;
     }
     .officer-text {
-      padding-left: 0;
-      padding-top: 50px;
+      padding:50px 0 0;
       background: url("../images/police-icon.svg") top center no-repeat;
       background-size: 40px;
       background-position-y: 20px;
@@ -1271,21 +1270,23 @@ a:hover {
 
 .cpd-links {
   a {
-    padding:0 1em;
+    //padding:0 1em;
+    padding:0 20px;
     display: block;
-    min-width:100px;
     line-height: 60px;
     border:1px solid #000;
     border-left:0;
-    background-color:@cr-highlight;
+    //background-color:@cr-highlight;
+    background-color: transparent;
     color:@cr-lightest;
     font-family:@cr-condensed;
-    font-weight:700;
+    font-weight:300;
     font-size:16px;
     text-transform:uppercase;
     text-align: center;
     &:hover {
-      background-color:lighten(@cr-highlight,10%);
+      //background-color:lighten(@cr-highlight,10%);
+      background-color:@cr-highlight;
       text-decoration: none;
     }
   }
@@ -1303,6 +1304,58 @@ a:hover {
     &:last-of-type{
       a {
         //border-left:0;
+      }
+    }
+  }
+}
+
+.menu-toggle-wrap{
+  display:none;
+  position: absolute;
+  top:0;
+  right:0;
+  width:60px;
+  height:60px;
+
+  .menu-toggle {
+    position: absolute;
+    top: 24px;
+    right:20px;
+    height: .5em;
+    width: 20px;
+    border-top: 0.2em solid @cr-lightest;
+    border-bottom: 0.2em solid @cr-lightest;
+    margin: 0.1em 10px 0 0;
+    transform: scale(2);
+
+    span {
+      position:absolute;
+      left:-10000px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+  }
+  .menu-toggle:after {
+    content: "";
+    position: absolute;
+    top: 0.55em;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-top: 0.2em solid @cr-lightest;
+  }
+
+  &:hover {
+    cursor:pointer;
+    
+    .menu-toggle {
+      border-top: 0.2em solid @cr-highlight;
+      border-bottom: 0.2em solid @cr-highlight;
+
+      &:after {
+        border-top: 0.2em solid @cr-highlight;
       }
     }
   }
@@ -1423,17 +1476,18 @@ Intro Page
 #intro-controls {
   position:fixed;
   bottom:0;
-  left: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index:999;
   font-family:@cr-condensed;
   font-size: 1.15em;
   &>div {
-    padding:10px;
-    border:1px solid @cr-darkest;
+    padding:4px 10px;
+    border:1px solid fade(@cr-darkest,70%);
     border-bottom:none;
     background-color:@cr-lightest;
     color:@cr-darkest;
-    opacity:.8;
+    opacity:.5;
 
     &:hover {
       cursor:pointer;
@@ -1989,6 +2043,30 @@ Media Queries
 ========================================================================== */
 
 @media screen and (max-width: 1000px) {
+  .menu-toggle-wrap {
+    display:block;
+  }
+  .cpd-links {
+    display:none;
+  }
+  #main-menu.expanded {
+    .cpd-links {
+      display:block;
+      top:60px;
+      min-width:300px;
+      background-color:@cr-dark;
+
+      li {
+        float:none;
+      }
+      a {
+        width:100%;
+        border-left:1px solid @cr-darkest;
+        border-top: 0;
+        font-weight:700;
+      }
+    }
+  }
   .wrapper-inner-flex{
     display:block;
 
@@ -2030,21 +2108,12 @@ Media Queries
 }
 
 @media screen and (max-width: 480px) {
-  #cpd-logo a {
-    width:44px;
-    height:44px;
-  }
-  a.cpd-title {
-    padding-top:20px;
-  }
+
   .cpd-links {
-    top:40px;
     width:100%;
-    li {
-      width:50%;
-    }
+    max-width:100%;
     a {
-      line-height:36px;
+      border-left:0;
     }
   }
   .container.cpd-container {
@@ -2053,6 +2122,9 @@ Media Queries
   .container.cpd-container .cpd-container-inner {
     margin: 20px 0 0 0;
   }  
+  // ul.tab-selector {
+  //   display:none;
+  // }
   ul.tab-selector li a {
       padding: 8px 0;
   }
@@ -2130,6 +2202,14 @@ Media Queries
 
     .officer-logo {
       width: 90px;
+    }
+  }
+  .detail-wrapper.officer-expanded .secondary-details > div {
+    min-width: 100%;
+    margin-top: .5em;
+
+    &:first-of-type {
+      margin-top:0;
     }
   }
 }
