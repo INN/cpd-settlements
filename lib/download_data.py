@@ -9,7 +9,7 @@ SPREADSHEETS = {
     # Cases
     'cases': '1DyJz3uWjZXBFZIVpV1y0FxBElfA29U4NR41nX_5XT9w',
     # Victims
-    'victims': '1G5CnJw6ywg1BRY9VzM6H0iakDzfoU5e4-jKxcrMUW84',
+    'victims': '1bRYEa8tzryjbs8HpvDqnu15oHoLLlBO93GsAaIOrFvA',
     # Officers
     'officers_full': '18TByyAf5TB4AiC8zNEkMWiOREHLAi6dDwzrLOGh5b14',
     # casecops -- completes the Officers dataset
