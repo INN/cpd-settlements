@@ -1793,7 +1793,7 @@ Media Queries
   }
   #main-menu.expanded .cpd-links {
     display: block;
-    top: 60px;
+    top: 62px;
     min-width: 300px;
     background-color: #484848;
   }
