@@ -184,7 +184,7 @@
 <div id="bg-12" class="bgimg"></div>
 
 <div id="app-wrapper">
-	<div id="replay-intro">replay!</div>
+	
 	<div id="the-app">
 
 		<div class="container cpd-container">
@@ -225,11 +225,8 @@
 	$(document).ready(function(){
 		loadText(); //holding off on spreadsheets integration for now (until scrolling events are figured out)
 		//initScroll();
-		$('#replay-intro').click(function(){
-			$('#cpd-scrolling').show();
-			$('.slide, .bgimg').css('opacity', '');
-			$('.cpd-container').css('opacity', 0);
-			initScroll();
+		$('#skip-intro').click(function(){
+			$('body, html').scrollTop($(document).height());
 		});
 	});
 </script>

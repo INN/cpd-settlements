@@ -679,6 +679,15 @@
       root: site_path
     });
 
+
+    $('#replay-intro').click(function(){
+      // $('#cpd-scrolling').show();
+      // $('.slide, .bgimg').css('opacity', '');
+      // $('.cpd-container').css('opacity', 0);
+      // initScroll();
+      window.location.href = site_path;
+    });
+
     $('label.option').hover(function(){
       var inner = $(this).find('span');
       var outer = $(this);
@@ -804,4 +813,5 @@ function sort_cases(json){
 
   return array;
 }
+
 

@@ -1237,16 +1237,50 @@ a:hover {
 /* ==========================================================================
 Intro Page
 ========================================================================== */
+#intro-controls {
+  position: fixed;
+  bottom: 0;
+  left: 10px;
+  z-index: 999;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.15em;
+}
+#intro-controls > div {
+  padding: 10px;
+  border: 1px solid #000000;
+  border-bottom: none;
+  background-color: #ffffff;
+  color: #000000;
+  opacity: .8;
+}
+#intro-controls > div:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+#intro-controls #skip-intro {
+  display: none;
+}
+#intro-controls #replay-intro {
+  display: block;
+}
 #home {
   background-color: #000000;
 }
-#home .navbar {
+#home.filter-cases #intro-controls #skip-intro,
+#home.filter-officers #intro-controls #skip-intro {
   display: none;
 }
-#home #replay-intro {
-  position: absolute;
-  top: 100px;
-  z-index: 5;
+#home.filter-cases #intro-controls #replay-intro,
+#home.filter-officers #intro-controls #replay-intro {
+  display: block;
+}
+#home #intro-controls #skip-intro {
+  display: block;
+}
+#home #intro-controls #replay-intro {
+  display: none;
+}
+#home .navbar {
   display: none;
 }
 #home #the-app {
