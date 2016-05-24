@@ -81,6 +81,7 @@ module.exports = function(grunt) {
             src: [
               'assets/vendor/chosen/chosen.jquery.js',
               'assets/vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js',
+              'assets/js/shared.min.js',
               'assets/js/search.min.js'
             ],
             dest: 'assets/js/search-libs.min.js'
@@ -99,6 +100,7 @@ module.exports = function(grunt) {
                         'assets/js/home.js',
                         'assets/data/cases.js',
                         'assets/data/officers.js',
+                        'assets/js/shared.js',
                         'assets/js/search.js',
                         '!*.min.js'
                     ],
