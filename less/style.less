@@ -1800,11 +1800,14 @@ Intro Page
   .block h3 {
     font-size: 3em;
     line-height: 1.15;
-    margin-top:2em;
     margin-bottom:0;
     padding:0 18%;
     text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
     text-align:center;
+    margin-top:-60px!important;
+    top:50%!important;
+    padding:0 10%;
+    transform:translateY(-50%);
 
       img {
         max-width:20px;
@@ -2048,6 +2051,12 @@ Media Queries
 ========================================================================== */
 
 @media screen and (max-width: 1000px) {
+  #cpd-scrolling {
+    .block h3{
+      transform: scale(.9) translateY(-50%);
+    }
+  }
+
   .menu-toggle-wrap {
     display:block;
   }
@@ -2212,6 +2221,12 @@ Media Queries
 }
 
 @media screen and (max-width: 480px) {
+
+  #cpd-scrolling {
+    .block h3{
+      transform: scale(.75) translateY(-50%);
+    }
+  }
 
   .cpd-links {
     width:100%;

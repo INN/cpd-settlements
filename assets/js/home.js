@@ -46,14 +46,14 @@ function loadText(){
 			if (entry.length == slide_num){
 				initScroll();
 
-				// $('#instruction .arrow').click(function(){
-				// 	var next = $('.slide.active').nextAll('.slide')[0];
-				// 	if (next){
-				// 		$('html,body').animate({
-				//           scrollTop: $(next).offset().top
-				//         }, 500);
-				//     }
-				// })
+				$('#cpd-progress').click(function(){
+					var next = $('.slide.active').nextAll('.slide')[0];
+					if (next){
+						$('html,body').animate({
+				          scrollTop: $(next).offset().top
+				        }, 500);
+				    }
+				})
 			}
 		});
 
@@ -377,7 +377,7 @@ function initScroll(){
 						TweenMax.to('#slide-11', 1, {opacity:1});
 						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
 						$('.active').removeClass('active');
-						$('#slide-111').addClass('active');
+						$('#slide-11').addClass('active');
 					})
 					.on('leave', function(e){
 						var direction = e.target.controller().info("scrollDirection").toLowerCase();
