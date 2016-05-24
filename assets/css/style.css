@@ -1867,8 +1867,8 @@ Media Queries
   }
   #explore-data span {
     margin-top: -1px;
-    background-color: #bd261d;
-    color: #fff;
+    background-color: #ffffff;
+    color: #bd261d;
     display: inline-block;
     width: 100%;
     line-height: 40px;
@@ -1877,7 +1877,7 @@ Media Queries
   }
   #explore-data span:hover {
     cursor: pointer;
-    background-color: #911d16;
+    background-color: #e6e6e6;
   }
   .search {
     position: absolute;

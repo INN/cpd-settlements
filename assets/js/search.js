@@ -62,8 +62,8 @@
         for (var i=0; i<length; i++){
           total += cases_json[i].total_payments;
         }
-        $('#search-intro .count').text( length );
-        $('#search-intro .total').text( '$' + Number(total).formatMoney(0) );
+
+        $('#search-intro').text('These ' + length + ' lawsuits cost Chicago a total of $' + Number(total).formatMoney(0) + '.');
 
         self.officerCollection = self.officerCollection.reset(officers_json);
         self.caseCollection = self.caseCollection.reset(cases_json);
@@ -679,7 +679,7 @@
       (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   };
 
-  
+
 
   function sort_cases(json){
     var array=[],obj=json;
