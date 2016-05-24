@@ -679,6 +679,27 @@
       (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   };
 
+  
+
+  function sort_cases(json){
+    var array=[],obj=json;
+    for(a in obj){
+     array.push(obj[a])
+    }
+    //sort by date (most recent to oldest)
+    array.sort(function(x,y){
+      var x_date = Date.parse(x.date_of_incident),
+          y_date = Date.parse(y.date_of_incident)
+      if (x_date < y_date)
+        return 1;
+      if (x_date > y_date)
+        return -1;
+      return 0;
+    });
+
+    return array;
+  }
+
   $(document).ready(function() {
     window.router = new SearchRouter();
     Backbone.history.start({

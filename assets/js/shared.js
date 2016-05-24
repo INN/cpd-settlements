@@ -72,25 +72,6 @@ function split_tags(tags){
   return tag_html;
 }
 
-function sort_cases(json){
-  var array=[],obj=json;
-  for(a in obj){
-   array.push(obj[a])
-  }
-  //sort by date (most recent to oldest)
-  array.sort(function(x,y){
-    var x_date = Date.parse(x.date_of_incident),
-        y_date = Date.parse(y.date_of_incident)
-    if (x_date < y_date)
-      return 1;
-    if (x_date > y_date)
-      return -1;
-    return 0;
-  });
-
-  return array;
-}
-
 $(document).ready(function(){
   $('.menu-toggle-wrap').click(function(){
     var parent = $(this).closest('#main-menu')
