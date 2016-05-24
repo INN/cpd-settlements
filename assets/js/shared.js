@@ -96,4 +96,63 @@ $(document).ready(function(){
     var parent = $(this).closest('#main-menu')
     parent.toggleClass('expanded');
   });
+
+  $('.mobile-tab-selector li.cases').click(function(){
+    if ( !($('body').hasClass('filter-cases')) ) {
+      $('.tab-selector .cases a').trigger('click');
+    }
+  });
+
+  $('.mobile-tab-selector li.officers').click(function(){
+    if ( !($('body').hasClass('filter-officers')) ) {
+      $('.tab-selector .officers a').trigger('click');
+    }
+  });
+
+  $('#explore-data').click(function(){
+    var $search = $('.search');
+    var $toggle = $(this).find('span');
+    $search.toggleClass('expanded')
+  });
+
+  $('#replay-intro').click(function(){
+    window.location.href = site_path;
+  });
+
+  $('label.option').hover(function(){
+    var inner = $(this).find('span');
+    var outer = $(this);
+
+    inner.css('display', 'inline');
+    
+    var diff = outer.width() - inner.width();
+
+    if (diff < -4){
+      inner.css({
+        'left': diff,
+        'width': inner.width + diff
+      })
+    }
+  }, function(){
+    $(this).find('span').css({
+      'left':'',
+      'display': 'block'
+    })
+  });
+
 });
+
+
+$(window).resize(function(){
+  var width = $(this).width();
+  if (width >= 820){
+    $('#tag-toggle').removeClass('expanded');
+    $('#tag-group').attr('style', '');
+    $('#main-menu').removeClass('expanded');
+  }
+});
+
+
+
+
+

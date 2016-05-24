@@ -161,7 +161,7 @@ Filters
   text-transform: capitalize;
 }
 .clickable {
-  background-color: rgba(189, 38, 29, 0.8);
+  background-color: #bd261d;
   padding-left: 3px;
   white-space: nowrap;
 }
@@ -208,29 +208,33 @@ Filters
   cursor: pointer;
   opacity: 1;
 }
-ul.tab-selector {
+ul.tab-selector,
+ul.mobile-tab-selector {
   padding: 0;
   margin-bottom: 0;
   list-style: none;
+  background-color: #3d9999;
   border-bottom: 1px solid #3d9999;
   position: relative;
   z-index: 2;
 }
-ul.tab-selector li {
+ul.tab-selector li,
+ul.mobile-tab-selector li {
   width: 50%;
   float: left;
   display: inline-block;
   background-color: #000000;
   border: 1px solid #000000;
-  border-bottom: none;
   position: relative;
   margin-bottom: -1px;
   text-align: center;
 }
-ul.tab-selector li.officers {
+ul.tab-selector li.officers,
+ul.mobile-tab-selector li.officers {
   border-right: none;
 }
-ul.tab-selector li a {
+ul.tab-selector li a,
+ul.mobile-tab-selector li a {
   display: block;
   padding: 20px;
   margin-bottom: -1px;
@@ -243,19 +247,27 @@ ul.tab-selector li a {
   -moz-transition: color 0.1s ease-in-out;
   -webkit-transition: color 0.1s ease-in-out;
 }
-ul.tab-selector li a:hover {
+ul.tab-selector li a:hover,
+ul.mobile-tab-selector li a:hover {
   text-decoration: none;
   color: #ffffff;
 }
-ul.tab-selector li.active {
+ul.tab-selector li.active,
+ul.mobile-tab-selector li.active {
   background-color: #3d9999;
 }
-ul.tab-selector li.active a {
+ul.tab-selector li.active a,
+ul.mobile-tab-selector li.active a {
   color: #ffffff;
   text-decoration: none;
 }
-ul.tab-selector li.active a:hover {
+ul.tab-selector li.active a:hover,
+ul.mobile-tab-selector li.active a:hover {
   color: #000000;
+}
+ul.mobile-tab-selector,
+#explore-data {
+  display: none;
 }
 .tab-containers {
   background-color: #3d9999;
@@ -270,7 +282,7 @@ ul.tab-selector li.active a:hover {
 }
 .tab-containers #tag-toggle {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 10px;
   margin: 10px 0 0 0;
   font-size: .8em;
@@ -313,7 +325,7 @@ label.option {
   font-weight: normal;
   padding: 4px 6px;
   margin: 0 1px 0 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   color: rgba(255, 255, 255, 0.9);
   border: 1px solid transparent;
   line-height: 1;
@@ -968,6 +980,7 @@ label.results-label {
 }
 .filter-cases li.cases {
   background-color: #3d9999;
+  border-bottom: 1px solid #3d9999;
 }
 .filter-cases li.cases a {
   color: #ffffff;
@@ -992,6 +1005,7 @@ label.results-label {
 }
 .filter-officers li.officers {
   background-color: #3d9999;
+  border-bottom: 1px solid #3d9999;
 }
 .filter-officers li.officers a {
   color: #ffffff;
@@ -1117,7 +1131,7 @@ a:hover {
   text-align: center;
 }
 .cpd-links a:hover {
-  background-color: #3d9999;
+  background-color: #484848;
   text-decoration: none;
 }
 .cpd-links ul {
@@ -1138,7 +1152,7 @@ a:hover {
 }
 .menu-toggle-wrap .menu-toggle {
   position: absolute;
-  top: 24px;
+  top: 22px;
   right: 20px;
   height: .5em;
   width: 20px;
@@ -1292,7 +1306,7 @@ Intro Page
 }
 #intro-controls > div {
   padding: 4px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.6);
   border-bottom: none;
   background-color: #ffffff;
   color: #000000;
@@ -1789,22 +1803,31 @@ Media Queries
     display: block;
   }
   .cpd-links {
-    display: none;
-  }
-  #main-menu.expanded .cpd-links {
-    display: block;
     top: 62px;
     min-width: 300px;
-    background-color: #484848;
+    background-color: #8e8e8e;
+    transform: rotate(180deg);
+    min-width: 60%;
+    max-height: 0;
+    /* approximate max height */
+    overflow: hidden;
+    transition: max-height 0.085s ease-in-out;
+    -moz-transition: max-height 0.085s ease-in-out;
+    -webkit-transition: max-height 0.085s ease-in-out;
   }
-  #main-menu.expanded .cpd-links li {
+  .cpd-links li {
     float: none;
+    transform: rotate(-180deg);
   }
-  #main-menu.expanded .cpd-links a {
+  .cpd-links a {
     width: 100%;
     border-left: 1px solid #000000;
     border-top: 0;
     font-weight: 700;
+  }
+  #main-menu.expanded .cpd-links {
+    overflow-y: hidden;
+    max-height: 310px;
   }
   .wrapper-inner-flex {
     display: block;
@@ -1815,9 +1838,85 @@ Media Queries
   .wrapper-inner-flex #map {
     margin-left: 0;
   }
-  .search {
+  ul.mobile-tab-selector li {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left: none;
+    border-top: 1px solid transparent;
+  }
+  ul.mobile-tab-selector li:hover {
+    cursor: pointer;
+  }
+  ul.mobile-tab-selector li a {
+    padding: 12px;
+  }
+  #explore-data {
+    display: block;
+    height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #3d9999;
+    color: #ffffff;
+    z-index: 99;
+  }
+  #explore-data span {
+    margin-top: -1px;
+    background-color: #bd261d;
+    color: #fff;
+    display: inline-block;
     width: 100%;
-    margin-bottom: 20px;
+    line-height: 40px;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+  }
+  #explore-data span:hover {
+    cursor: pointer;
+    background-color: #911d16;
+  }
+  .search {
+    position: absolute;
+    top: 109px;
+    left: 0;
+    right: 0;
+    min-width: 100%;
+    z-index: 99;
+    border: none;
+  }
+  .search .tab-containers {
+    border: none;
+  }
+  .search #tabs {
+    display: none;
+  }
+  .search #tap-to-close {
+    display: none;
+  }
+  .search #tap-to-open {
+    display: block;
+  }
+  .search.expanded #tabs {
+    display: block;
+  }
+  .search.expanded #tap-to-close {
+    display: block;
+  }
+  .search.expanded #tap-to-open {
+    display: none;
+  }
+  ul.tab-selector {
+    display: none;
+  }
+  ul.mobile-tab-selector {
+    display: block;
+    position: absolute;
+    top: 62px;
+    left: 0;
+    right: 0;
+    min-width: 100%;
+    z-index: 99;
+  }
+  .container.cpd-container {
+    padding-top: 148px;
   }
   #results-wrapper {
     width: 100%;
@@ -1851,9 +1950,6 @@ Media Queries
   .cpd-links a {
     border-left: 0;
   }
-  .container.cpd-container {
-    padding-top: 80px;
-  }
   .container.cpd-container .cpd-container-inner {
     margin: 20px 0 0 0;
   }
@@ -1864,6 +1960,9 @@ Media Queries
     width: 100%;
     padding: 0!important;
     flex: auto;
+  }
+  .container.cpd-container {
+    padding-top: 129px;
   }
   .results-wrapper-inner .results-label {
     display: none;

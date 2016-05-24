@@ -57,7 +57,13 @@
 
         cases_json = sort_cases(cases_json);
 
-
+        var length = cases_json.length;
+        var total = 0;
+        for (var i=0; i<length; i++){
+          total += cases_json[i].total_payments;
+        }
+        $('#search-intro .count').text( length );
+        $('#search-intro .total').text( '$' + Number(total).formatMoney(0) );
 
         self.officerCollection = self.officerCollection.reset(officers_json);
         self.caseCollection = self.caseCollection.reset(cases_json);
@@ -259,7 +265,7 @@
       var formatted = '';
 
       // https://regexper.com/#%5E(%5Cr%5Cn%7C.)%7B1%2C280%7D%5Cb
-      formatted = text.match(/^(\r\n|.){1,280}\b/g).join('');
+      formatted = text.match(/^(\r\n|.){1,220}\b/g).join('');
 
       //if (formatted.substring(formatted.length-1) == '-' || ' ' || ',' || ';'){
       if (formatted.substring(formatted.length-1) == ' '){
@@ -439,6 +445,7 @@
       this.filterData = this.$el.serializeObject();
       this.filterCases();
       this.updateStatement();
+      $('.search').removeClass('expanded');
 
       $('body').removeClass('detail-page');
       $('body').removeClass('detail-case');
@@ -678,44 +685,6 @@
       pushState: true,
       root: site_path
     });
-
-
-    $('#replay-intro').click(function(){
-      // $('#cpd-scrolling').show();
-      // $('.slide, .bgimg').css('opacity', '');
-      // $('.cpd-container').css('opacity', 0);
-      // initScroll();
-      window.location.href = site_path;
-    });
-
-    $('label.option').hover(function(){
-      var inner = $(this).find('span');
-      var outer = $(this);
-
-      inner.css('display', 'inline');
-      
-      var diff = outer.width() - inner.width();
-
-      if (diff < -4){
-        inner.css({
-          'left': diff,
-          'width': inner.width + diff
-        })
-      }
-    }, function(){
-      $(this).find('span').css({
-        'left':'',
-        'display': 'block'
-      })
-    });
-  });
-
-  $(window).resize(function(){
-    var width = $(this).width();
-    if (width >= 820){
-      $('#tag-toggle').removeClass('expanded');
-      $('#tag-group').attr('style', '');
-    }
   });
 
 })();
