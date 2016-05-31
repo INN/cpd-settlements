@@ -72,6 +72,23 @@ function split_tags(tags){
   return tag_html;
 }
 
+function adjust_whitespace(){
+  var click_tags = $('.clickable.tag');
+  for (var i=0; i<click_tags.length; i++){
+    var this_tag = $(click_tags[i]);
+    var tag_text = this_tag.html();
+    //tag_text.replace(' <span class="x">', '<span class="x">'); 
+    //tag_text.replace(/(\r\n|\n|\r)/gm,'').replace(/\s+/g,'').replace(/\d/g, '');
+    //tag_text = $.trim(tag_text).replace(/(\r\n|\n|\r)/gm,'');
+    tag_text = tag_text.replace(/(\r\n|\n|\r)/gm,'').replace(/ +(?= )/g,'');
+    tag_text = tag_text.replace(' .','.');
+    tag_text = tag_text.replace(' ,',',');
+    tag_text = tag_text.replace(' <sp','<sp');
+    this_tag.html(tag_text);
+  }
+  
+}
+
 $(document).ready(function(){
   $('.menu-toggle-wrap').click(function(){
     var parent = $(this).closest('#main-menu')
