@@ -1,0 +1,30 @@
+{% extends "templates/_base.html" %}
+
+{% block bodyattrs %}class="{{ init_view }} about not-nested"{% endblock bodyattrs %}
+
+{% block library_css %}
+{{ super() }}
+{% endblock library_css %}
+
+{% block content %}
+  <div id="bg-solid" class="bgimg"></div>
+  <div id="bg-static" class="bgimg"></div>
+  <div class="container cpd-container">
+
+    <div class="cpd-container-inner">
+
+      <div id="results-wrapper">
+        <div class="about-wrapper-inner">
+          <div class="about-content">
+            <h1>About 'Settling for too much'</h1>
+            <p>Content goes here</p>
+          </div>
+        </div>
+      </div> <!--end: results wrapper-->
+    </div><!--end: container-inner-->
+  </div><!--end: container-->
+{% endblock content %}
+
+{% block library_scripts %}
+{{ super() }}
+{% endblock %}

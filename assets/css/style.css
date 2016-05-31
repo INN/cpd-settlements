@@ -58,6 +58,23 @@ Navigation
   color: #aaaaaa;
 }
 /* ==========================================================================
+About Page
+========================================================================== */
+.about #results-wrapper {
+  float: none;
+  margin: 0 auto;
+}
+.about .about-content {
+  background-color: #ffffff;
+  padding: 20px;
+  color: #333333;
+  flex: 1;
+}
+.about h1 {
+  text-transform: uppercase;
+  margin-top: 0;
+}
+/* ==========================================================================
 Search Screen               
 ========================================================================== */
 .container.cpd-container {
@@ -120,7 +137,8 @@ Filters
 }
 .results-wrapper-inner,
 .detail-wrapper,
-.search-statement-wrapper {
+.search-statement-wrapper,
+.about-wrapper-inner {
   background-color: rgba(0, 0, 0, 0.7);
   border: 1px solid #000;
   padding: 20px;
@@ -130,12 +148,14 @@ Filters
 }
 .results-wrapper-inner label,
 .detail-wrapper label,
-.search-statement-wrapper label {
+.search-statement-wrapper label,
+.about-wrapper-inner label {
   color: #ffffff;
 }
 .results-wrapper-inner.split-column,
 .detail-wrapper.split-column,
-.search-statement-wrapper.split-column {
+.search-statement-wrapper.split-column,
+.about-wrapper-inner.split-column {
   width: 50%;
   float: left;
 }
@@ -147,6 +167,7 @@ Filters
   color: #ffffff;
   text-align: center;
   font-size: 2em;
+  overflow: hidden;
 }
 .filter-statement {
   margin-bottom: 1em;
@@ -1500,9 +1521,7 @@ Intro Page
 #cpd-scrolling .rect-wrap:hover .rect,
 #cpd-scrolling .rect-wrap:hover .down {
   opacity: .8;
-}
-#cpd-scrolling .rect-wrap:hover .scroll {
-  display: inline-block;
+  cursor: pointer;
 }
 #cpd-scrolling #desc {
   width: 100%;
@@ -1580,16 +1599,23 @@ Intro Page
   z-index: 2;
   position: absolute;
 }
+#cpd-scrolling .inner-block {
+  min-width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  margin-top: -100px !important;
+}
 #cpd-scrolling .block h3 {
+  width: 100%;
   font-size: 3em;
   line-height: 1.15;
   margin-bottom: 0;
   padding: 0 18%;
   text-shadow: 0px 0px 30px #000000;
   text-align: center;
-  margin-top: -60px !important;
-  top: 50%!important;
-  padding: 0 10%;
+  position: absolute;
+  margin-top: -100px;
+  top: 50%;
   transform: translateY(-50%);
 }
 #cpd-scrolling .block h3 img {
@@ -1803,6 +1829,7 @@ Media Queries
 ========================================================================== */
 @media screen and (max-width: 1000px) {
   #cpd-scrolling .block h3 {
+    padding: 0 10%;
     transform: scale(0.9) translateY(-50%);
   }
   .menu-toggle-wrap {
@@ -1924,6 +1951,9 @@ Media Queries
   .container.cpd-container {
     padding-top: 148px;
   }
+  .about .container.cpd-container {
+    padding-top: 62px;
+  }
   #results-wrapper {
     width: 100%;
   }
@@ -1972,6 +2002,9 @@ Media Queries
   }
   .container.cpd-container {
     padding-top: 129px;
+  }
+  .about .container.cpd-container {
+    padding-top: 43px;
   }
   .results-wrapper-inner .results-label {
     display: none;
