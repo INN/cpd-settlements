@@ -462,6 +462,7 @@
       }
       this.caseSearchStatement.filterData = this.filterData;
       this.caseSearchStatement.render();
+      adjust_whitespace();
 
       var clearButton = $('.clear-filters');
       var filterStatement = $('.filter-statement').hide();
