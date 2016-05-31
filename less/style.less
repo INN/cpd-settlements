@@ -70,6 +70,25 @@ Navigation
   }
 }
 
+/* ==========================================================================
+About Page
+========================================================================== */
+.about {
+  #results-wrapper {
+    float: none;
+    margin: 0 auto;
+  }
+  .about-content {
+    background-color:@cr-lightest;
+    padding:20px;
+    color:lighten(@cr-darkest,20%);
+    flex: 1; 
+  }
+  h1 {
+    text-transform:uppercase;
+    margin-top:0;
+  }
+}
 
 /* ==========================================================================
 Search Screen               
@@ -153,7 +172,7 @@ Filters
     color: @cr-lightest;
   }
 }
-.results-wrapper-inner, .detail-wrapper, .search-statement-wrapper {
+.results-wrapper-inner, .detail-wrapper, .search-statement-wrapper, .about-wrapper-inner {
   background-color:rgba(0,0,0,.7);
   border:1px solid #000;
   padding:20px;
@@ -177,6 +196,7 @@ Filters
   color:@cr-lightest;
   text-align:center;
   font-size:2em;
+  overflow:hidden;
 }
 .filter-statement {
   margin-bottom:1em;
@@ -1706,9 +1726,10 @@ Intro Page
     &:hover {
       .rect, .down {
         opacity:.8;
+        cursor:pointer;
       }
       .scroll {
-        display:inline-block;
+        //display:inline-block;
       }
     }
   }
@@ -1797,16 +1818,24 @@ Intro Page
     position:absolute;
   }
 
+  .inner-block {
+    min-width:100%;
+    min-height:100vh;
+    position:absolute;
+    margin-top: -100px!important;
+  }
+
   .block h3 {
+    width:100%;
     font-size: 3em;
     line-height: 1.15;
     margin-bottom:0;
     padding:0 18%;
     text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
     text-align:center;
-    margin-top:-60px!important;
-    top:50%!important;
-    padding:0 10%;
+    position:absolute;
+    margin-top: -100px;
+    top:50%;
     transform:translateY(-50%);
 
       img {
@@ -2053,6 +2082,7 @@ Media Queries
 @media screen and (max-width: 1000px) {
   #cpd-scrolling {
     .block h3{
+      padding:0 10%;
       transform: scale(.9) translateY(-50%);
     }
   }
@@ -2194,7 +2224,9 @@ Media Queries
   .container.cpd-container {
     padding-top:148px;
   }
-
+  .about .container.cpd-container {
+    padding-top:62px;
+  }
   #results-wrapper {
     width: 100%;
   }
@@ -2251,6 +2283,9 @@ Media Queries
   }
   .container.cpd-container {
     padding-top:129px;
+  }
+  .about .container.cpd-container {
+    padding-top:43px;
   }
   .results-wrapper-inner .results-label {
     display:none;
