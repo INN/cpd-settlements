@@ -29,3 +29,30 @@ The project directory must use underscores, not hyphens. So, be sure and change 
 Tarbell will also ask if you want to install requirements with `pip install -r requirements`. Answer "y" to this prompt.
 
 At this point, you'll need to pull the project data from Google Sheets. If you haven't already done so, refer to DEPLOY.md for information on the data import process.
+
+## Running the project locally
+
+NOTE: You **MUST** complete the data import process before trying to run the project locally. Refer to DEPLOY.md if you haven't already done so.
+
+This project uses npm (grunt) and bower for its pre-deployment build process and javascript dependencies. Make sure the required software is installed by running the following commands from the root of the `cpd_settlements` project directory:
+
+    npm install
+    bower install
+
+Once you've installed the npm and bower requirements, run the build process:
+
+    grunt build
+
+After the build process completes, use tarbell to "switch" to the CPD project:
+
+    tarbell switch cpd_settlements
+
+This will start a local development server where you can view and work on the app: http://localhost:5000/
+
+## Working with LESS and JS files
+
+If you are making changes to the LESS files, be sure and run `grunt watch` so that any changes made in the LESS files are reflected in the compiled CSS used by the app.
+
+After you've made changes to the LESS files and are ready to commit, run the `grunt build` command to ensure all of the appropriate CSS files have been compiled and minified.
+
+Likewise, if you make any changes to the `*.js` files in the `assets/js` directory, you must run `grunt build` to ensure the appropriate `*.min.js` files have been concatenated and uglified.
