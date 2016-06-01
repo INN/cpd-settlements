@@ -27,4 +27,12 @@
 
 {% block library_scripts %}
 {{ super() }}
+<script type="text/javascript">
+  var site_path = '{{ site_path }}';  
+</script>
+{% if BUILD_PATH %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/shared.min.js') }}"></script>
+{% else %}
+  <script type="text/javascript" src="{{ url_for('cpd_settlements.static', filename='js/shared.js') }}"></script>
+{% endif %}
 {% endblock %}
