@@ -112,7 +112,7 @@ def get_context(route):
 
 def get_site_path():
     if g.current_site.app.config.get('BUILD_PATH', False):
-        return '/cpd-settlements/'
+        return '/settlements/'
     else:
         return '/'
 
@@ -143,7 +143,7 @@ def context_processor():
             '/assets/cpd_settlements/images/02-IMG_9158.jpg'
         ),
         'opengraph_description': (
-            'Between 2012 and 2015, the City of Chicago paid $212 million '
+            'Between 2012 and 2015, the City of Chicago paid $210 million '
             'in settlements in police misconduct cases.'
         )
     }
