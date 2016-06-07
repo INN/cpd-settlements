@@ -579,7 +579,7 @@ function initScroll(){
 					});
 
 	// slide 2 background images
-	var dur_bg18 = stringDuration(100);
+	var dur_bg18 = stringDuration(400);
 	var bg18 = new ScrollMagic.Scene({triggerElement: "#trigger-bg18", duration: dur_bg18, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-18', 1, {opacity:1});
@@ -608,7 +608,7 @@ function initScroll(){
 	// 				//.addIndicators();
 
 	// slide 2 background images
-	var dur_bg_slast = stringDuration(100);
+	var dur_bg_slast = stringDuration(200);
 	var bg_slast = new ScrollMagic.Scene({triggerElement: "#trigger-slast", duration: dur_bg_slast, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-slast', 1, {opacity:1});
@@ -616,8 +616,10 @@ function initScroll(){
 						$('#trigger-slast').addClass('active');
 					})
 					.on('leave', function(e){
-						//TweenMax.to('#bg-16', 1, {opacity:0});
-						TweenMax.to('#bg-last-overlay', 1, {opacity:0});
+						var direction = e.target.controller().info("scrollDirection").toLowerCase();
+						if (direction !=='forward'){
+							TweenMax.to('#bg-slast', 1, {opacity:0});
+						}
 					})
 					.addTo(controller)
 					//.addIndicators();	
