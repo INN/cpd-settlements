@@ -107,7 +107,7 @@
 
 <script type="text/tmpl" id="case-search-statement-tmpl">
   <% var checkboxes = $('input[type=checkbox]:checked'); cblength = checkboxes.length; %> 
-  <% var primary_cause = $('#primary_cause').val().replace(/ /g, '\u00a0').toLowerCase(); %> 
+  <% var primary_cause = $('#primary_cause').val().toLowerCase(); %> 
   <% if (('illinois').indexOf(primary_cause)) { primary_cause = primary_cause.replace('illinois', 'Illinois');} %>
   <% var payment_amount = $('#payment_amount').val() %>
   <div class="filter-statement">

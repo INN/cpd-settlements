@@ -58,6 +58,12 @@ function loadText(){
 					triggerNext(triggerList);
 				});
 
+				$('#titles p.scroll').click(function(){
+					$('html,body').animate({
+			          scrollTop: $('#cpd-scrolling').height() - 3000
+			        }, 60000, 'linear');
+				})
+
 				$(document).keydown(function(e) {
 				    switch(e.which) {
 				        case 38: // up
@@ -127,10 +133,10 @@ function initScroll(){
 
 	// introtext
 	var dur_introtext = stringDuration(40);
-	var tween_introtext = TweenMax.to("#desc", 1, {opacity: 0});
+	var tween_introtext = TweenMax.to("#titles", 1, {opacity: 0});
 	var scene_introtext = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: dur_introtext, offset: main_offset})
 					.setTween(tween_introtext)
-					.setPin("#desc")
+					.setPin("#titles")
 					.addTo(controller)
 					//.addIndicators()
 					.on('enter', function (e) {
@@ -139,18 +145,18 @@ function initScroll(){
 					});
 
 	// introimg
-	var dur_introimg = stringDuration(300);
+	var dur_introimg = stringDuration(200);
 	var scene_introimg = new ScrollMagic.Scene({triggerElement: "#trigger-intro", duration: dur_introimg, offset: main_offset})
 					.setPin("#slide-intro .img.fixed")
 					.addTo(controller)
 					//.addIndicators();	
 
 	// slide 1
-	var dur_slide1 = stringDuration(200);
+	var dur_slide1 = stringDuration(100);
 	var scene_slide1 = new ScrollMagic.Scene({triggerElement: "#trigger-1", duration: dur_slide1, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-1 .block .inner-block")
+					.setPin("#slide-1")
 					.on('enter', function(e){
 						//TweenMax.fromTo(['#slide-1', '#slide-1'], 1, {opacity:0}, {opacity:1});
 						TweenMax.to('#slide-1', 1, {opacity:1});
@@ -163,35 +169,36 @@ function initScroll(){
 					})
 
 	// slide 2
-	var dur_slide2 = stringDuration(350);
-	var scene_slide2 = new ScrollMagic.Scene({triggerElement: "#trigger-2", duration: dur_slide2, offset: 200})
+	var dur_slide2 = stringDuration(200);
+	var scene_slide2 = new ScrollMagic.Scene({triggerElement: "#trigger-2", duration: dur_slide2, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-2 .block .inner-block")
+					.setPin("#slide-2")
 					.on('enter', function(e){
 						TweenMax.to('#slide-2', 1, {opacity:1});
 						$('.active').removeClass('active');
 						$('#trigger-2').addClass('active');
 					})
 					.on('leave', function(e){
-						//moved to bg-2
+						TweenMax.to('#slide-2', 2, {opacity:0});
 					});
 
+	// // slide 2 background images
+	// var dur_bg1 = stringDuration(100);
+	// var bg1 = new ScrollMagic.Scene({triggerElement: "#trigger-bg1", duration: dur_bg1, offset: main_offset})
+	// 				.on('enter', function(e){
+	// 					TweenMax.to('#bg-1', 1, {opacity:1});
+	// 					$('.active').removeClass('active');
+	// 					$('#trigger-bg1').addClass('active');
+	// 				})
+	// 				.on('leave', function(e){
+	// 					TweenMax.to('#bg-1', 1, {opacity:0});
+	// 				})
+	// 				.addTo(controller)
+	// 				//.addIndicators();	
+
 	// slide 2 background images
-	var dur_bg1 = stringDuration(100);
-	var bg1 = new ScrollMagic.Scene({triggerElement: "#trigger-bg1", duration: dur_bg1, offset: main_offset})
-					.on('enter', function(e){
-						TweenMax.to('#bg-1', 1, {opacity:1});
-						$('.active').removeClass('active');
-						$('#trigger-bg1').addClass('active');
-					})
-					.on('leave', function(e){
-						TweenMax.to('#bg-1', 1, {opacity:0});
-					})
-					.addTo(controller)
-					//.addIndicators();	
-	// slide 2 background images
-	var dur_bg2 = stringDuration(100);
+	var dur_bg2 = stringDuration(200);
 	var bg2 = new ScrollMagic.Scene({triggerElement: "#trigger-bg2", duration: dur_bg2, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-2', 2, {opacity:1});
@@ -200,12 +207,11 @@ function initScroll(){
 					})
 					.on('leave', function(e){
 						TweenMax.to('#bg-2', 1, {opacity:0});
-						TweenMax.to('#slide-2', 2, {opacity:0});
 					})
 					.addTo(controller)
 					//.addIndicators();	
 	// slide 2 background images
-	var dur_bg3 = stringDuration(100);
+	var dur_bg3 = stringDuration(200);
 	var bg3 = new ScrollMagic.Scene({triggerElement: "#trigger-bg3", duration: dur_bg3, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-3', 3, {opacity:1});
@@ -220,10 +226,10 @@ function initScroll(){
 
 	// slide 3
 	var dur_slide3 = stringDuration(100);
-	var scene_slide3 = new ScrollMagic.Scene({triggerElement: "#trigger-3", duration: dur_slide3, offset: 200})
+	var scene_slide3 = new ScrollMagic.Scene({triggerElement: "#trigger-3", duration: dur_slide3, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-3 .block .inner-block")
+					.setPin("#slide-3")
 					.on('enter', function(e){
 						TweenMax.to('#slide-3', 1, {opacity:1});
 						$('.active').removeClass('active');
@@ -260,11 +266,11 @@ function initScroll(){
 
 
 	// slide 4
-	var dur_slide4 = stringDuration(220);
-	var scene_slide4 = new ScrollMagic.Scene({triggerElement: "#trigger-4", duration: dur_slide4, offset: 200})
+	var dur_slide4 = stringDuration(200);
+	var scene_slide4 = new ScrollMagic.Scene({triggerElement: "#trigger-4", duration: dur_slide4, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-4 .block .inner-block")
+					.setPin("#slide-4")
 					.on('enter', function(e){
 						TweenMax.to('#slide-4', 1, {opacity:1});
 						$('.active').removeClass('active');
@@ -275,11 +281,11 @@ function initScroll(){
 					});
 
 	// slide 5
-	var dur_slide5 = stringDuration(220);
-	var scene_slide5 = new ScrollMagic.Scene({triggerElement: "#trigger-5", duration: dur_slide5, offset: 200})
+	var dur_slide5 = stringDuration(200);
+	var scene_slide5 = new ScrollMagic.Scene({triggerElement: "#trigger-5", duration: dur_slide5, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-5 .block .inner-block")
+					.setPin("#slide-5")
 					.on('enter', function(e){
 						TweenMax.to('#slide-5', 1, {opacity:1});
 						$('.active').removeClass('active');
@@ -289,11 +295,11 @@ function initScroll(){
 						// bg-4
 					});
 	// slide 6
-	var dur_slide6 = stringDuration(300);
-	var scene_slide6 = new ScrollMagic.Scene({triggerElement: "#trigger-6", duration: dur_slide6, offset: 200})
+	var dur_slide6 = stringDuration(200);
+	var scene_slide6 = new ScrollMagic.Scene({triggerElement: "#trigger-6", duration: dur_slide6, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-6 .block .inner-block")
+					.setPin("#slide-6")
 					.on('enter', function(e){
 						TweenMax.to('#slide-6', 1, {opacity:1});
 						$('.active').removeClass('active');
@@ -329,7 +335,21 @@ function initScroll(){
 						TweenMax.to('#bg-7', 1, {opacity:0});
 					})
 					.addTo(controller)
-					//.addIndicators();	
+					//.addIndicators();
+	// slide 2 background images
+	var dur_bg19 = stringDuration(200);
+	var bg19 = new ScrollMagic.Scene({triggerElement: "#trigger-bg19", duration: dur_bg19, offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-19', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg19').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-19', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();
+
 	// slide 2 background images
 	var dur_bg8 = stringDuration(200);
 	var bg8 = new ScrollMagic.Scene({triggerElement: "#trigger-bg8", duration: dur_bg8, offset: main_offset})
@@ -340,19 +360,6 @@ function initScroll(){
 					})
 					.on('leave', function(e){
 						TweenMax.to('#bg-8', 1, {opacity:0});
-					})
-					.addTo(controller)
-					//.addIndicators();	
-	// slide 2 background images
-	var dur_bg9 = stringDuration(200);
-	var bg9 = new ScrollMagic.Scene({triggerElement: "#trigger-bg9", duration: dur_bg9, offset: main_offset})
-					.on('enter', function(e){
-						TweenMax.to('#bg-9', 1, {opacity:1});
-						$('.active').removeClass('active');
-						$('#trigger-bg9').addClass('active');
-					})
-					.on('leave', function(e){
-						TweenMax.to('#bg-9', 1, {opacity:0});
 					})
 					.addTo(controller)
 					//.addIndicators();	
@@ -370,15 +377,29 @@ function initScroll(){
 					.addTo(controller)
 					//.addIndicators();	
 
+	// slide 2 background images
+	var dur_bg9 = stringDuration(600);
+	var bg9 = new ScrollMagic.Scene({triggerElement: "#trigger-bg9", duration: dur_bg9, offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-9', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg9').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-9', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();	
+
 	// slide 7
-	var dur_slide7 = stringDuration(300);
-	var scene_slide7 = new ScrollMagic.Scene({triggerElement: "#trigger-7", duration: dur_slide7, offset: 200})
+	var dur_slide7 = stringDuration(400);
+	var scene_slide7 = new ScrollMagic.Scene({triggerElement: "#trigger-7", duration: dur_slide7, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-7 .block .inner-block")
+					.setPin("#slide-7")
 					.on('enter', function(e){
 						TweenMax.to('#slide-7', 1, {opacity:1});
-						TweenMax.to('#bg-11-overlay', 0, {opacity:0});
+						//TweenMax.to('#bg-11-overlay', 0, {opacity:0});
 						$('.active').removeClass('active');
 						$('#trigger-7').addClass('active');
 					})
@@ -386,46 +407,62 @@ function initScroll(){
 						TweenMax.to('#slide-7', 1, {opacity:0});
 					});
 
-	// slide 2 background images
-	var dur_bg11 = stringDuration(1250);
-	var bg11 = new ScrollMagic.Scene({triggerElement: "#trigger-bg11", duration: dur_bg11, offset: main_offset})
-					.on('enter', function(e){
-						TweenMax.to('#bg-11', 1, {opacity:1});
-						$('.active').removeClass('active');
-						$('#trigger-bg11').addClass('active');
-					})
-					// .on('leave', function(e){
-					// 	TweenMax.to('#bg-11', 1, {opacity:0});
-					// })
-					.addTo(controller)
-					//.addIndicators();	
-
-	// slide 8
-	var dur_slide8 = stringDuration(200);
-	var scene_slide8 = new ScrollMagic.Scene({triggerElement: "#trigger-8", duration: dur_slide8, offset: 250})
+	// slide 7
+	var dur_slide8 = stringDuration(300);
+	var scene_slide8 = new ScrollMagic.Scene({triggerElement: "#trigger-8", duration: dur_slide8, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-8 .block .inner-block")
+					.setPin("#slide-8")
 					.on('enter', function(e){
 						TweenMax.to('#slide-8', 1, {opacity:1});
-						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
+						//TweenMax.to('#bg-11-overlay', 0, {opacity:0});
 						$('.active').removeClass('active');
 						$('#trigger-8').addClass('active');
 					})
 					.on('leave', function(e){
 						TweenMax.to('#slide-8', 1, {opacity:0});
-						var direction = e.target.controller().info("scrollDirection").toLowerCase();
-						if (direction !=='forward'){
-							TweenMax.to('#bg-11', 1, {opacity:0});
-						}
 					});
+
+	// slide 2 background images
+	var dur_bg11 = stringDuration(1000);
+	var bg11 = new ScrollMagic.Scene({triggerElement: "#trigger-bg11", duration: dur_bg11, offset: main_offset})
+					.setPin('#bg-11')
+					.on('enter', function(e){
+						TweenMax.to('#bg-11', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg11').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-11', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();	
+
+	// // slide 8
+	// var dur_slide8 = stringDuration(200);
+	// var scene_slide8 = new ScrollMagic.Scene({triggerElement: "#trigger-8", duration: dur_slide8, offset: main_offset})
+	// 				.addTo(controller)
+	// 				//.addIndicators()
+	// 				.setPin("#slide-8")
+	// 				.on('enter', function(e){
+	// 					TweenMax.to('#slide-8', 1, {opacity:1});
+	// 					$('.active').removeClass('active');
+	// 					$('#trigger-8').addClass('active');
+	// 				})
+	// 				.on('leave', function(e){
+	// 					TweenMax.to('#slide-8', 1, {opacity:0});
+	// 					var direction = e.target.controller().info("scrollDirection").toLowerCase();
+	// 					if (direction !=='forward'){
+	// 						TweenMax.to('#bg-11', 1, {opacity:0});
+	// 					}
+	// 				});
 
 	// slide 9
 	var dur_slide9 = stringDuration(200);
-	var scene_slide9 = new ScrollMagic.Scene({triggerElement: "#trigger-9", duration: dur_slide9, offset: 300})
+	var scene_slide9 = new ScrollMagic.Scene({triggerElement: "#trigger-9", duration: dur_slide9, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-9 .block .inner-block")
+					.setPin("#slide-9")
 					.on('enter', function(e){
 						TweenMax.to('#slide-9', 1, {opacity:1});
 						$('.active').removeClass('active');
@@ -435,12 +472,43 @@ function initScroll(){
 						TweenMax.to('#slide-9', 1, {opacity:0});
 					});
 
+
+
+	// slide 2 background images
+	var dur_bg15 = stringDuration(100);
+	var bg15 = new ScrollMagic.Scene({triggerElement: "#trigger-bg15", duration: dur_bg15, offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-15', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg15').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-15', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();
+
+	// slide 2 background images
+	var dur_bg16 = stringDuration(100);
+	var bg16 = new ScrollMagic.Scene({triggerElement: "#trigger-bg16", duration: dur_bg14, offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-16', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg16').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-16', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();	
+
+
 	// slide 10
 	var dur_slide10 = stringDuration(200);
-	var scene_slide10 = new ScrollMagic.Scene({triggerElement: "#trigger-10", duration: dur_slide10, offset: 350})
+	var scene_slide10 = new ScrollMagic.Scene({triggerElement: "#trigger-10", duration: dur_slide10, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-10 .block .inner-block")
+					.setPin("#slide-10")
 					.on('enter', function(e){
 						TweenMax.to('#slide-10', 1, {opacity:1});
 						$('.active').removeClass('active');
@@ -450,25 +518,129 @@ function initScroll(){
 						TweenMax.to('#slide-10', 1, {opacity:0});
 					});
 
-	// slide 11 - final
+
+	// slide 2 background images
+	var dur_bg14 = stringDuration(100);
+	var bg14 = new ScrollMagic.Scene({triggerElement: "#trigger-bg14", duration: dur_bg14/2, offset: main_offset*2})
+					.on('enter', function(e){
+						TweenMax.to('#bg-14', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg14').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-14', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();
+
+	// slide 10
 	var dur_slide11 = stringDuration(200);
-	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: dur_slide11, offset: 350})
+	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: dur_slide11, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
-					.setPin("#slide-11 .block .inner-block")
+					.setPin("#slide-11")
 					.on('enter', function(e){
-						TweenMax.to('#bg-12', 1, {opacity:0});
 						TweenMax.to('#slide-11', 1, {opacity:1});
-						TweenMax.to('#bg-11-overlay', 1, {opacity:1});
 						$('.active').removeClass('active');
 						$('#trigger-11').addClass('active');
 					})
 					.on('leave', function(e){
+						TweenMax.to('#slide-11', 1, {opacity:0});
+					});
+
+	// slide 10
+	var dur_slide12 = stringDuration(200);
+	var scene_slide12 = new ScrollMagic.Scene({triggerElement: "#trigger-12", duration: dur_slide12, offset: main_offset})
+					.addTo(controller)
+					//.addIndicators()
+					.setPin("#slide-12")
+					.on('enter', function(e){
+						TweenMax.to('#slide-12', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-12').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-12', 1, {opacity:0});
+					});
+
+	// slide 10
+	var dur_slide13 = stringDuration(200);
+	var scene_slide13 = new ScrollMagic.Scene({triggerElement: "#trigger-13", duration: dur_slide13, offset: main_offset})
+					.addTo(controller)
+					//.addIndicators()
+					.setPin("#slide-13")
+					.on('enter', function(e){
+						TweenMax.to('#slide-13', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-13').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#slide-13', 1, {opacity:0});
+					});
+
+	// slide 2 background images
+	var dur_bg18 = stringDuration(100);
+	var bg18 = new ScrollMagic.Scene({triggerElement: "#trigger-bg18", duration: dur_bg18, offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-18', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-bg18').addClass('active');
+					})
+					.on('leave', function(e){
+						TweenMax.to('#bg-18', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();
+
+
+	// // slide 2 background images
+	// var dur_bg19 = stringDuration(100);
+	// var bg19 = new ScrollMagic.Scene({triggerElement: "#trigger-bg19", duration: dur_bg19, offset: main_offset})
+	// 				.on('enter', function(e){
+	// 					TweenMax.to('#bg-19', 1, {opacity:1});
+	// 					$('.active').removeClass('active');
+	// 					$('#trigger-bg19').addClass('active');
+	// 				})
+	// 				.on('leave', function(e){
+	// 					TweenMax.to('#bg-19', 1, {opacity:0});
+	// 				})
+	// 				.addTo(controller)
+	// 				//.addIndicators();
+
+	// slide 2 background images
+	var dur_bg_slast = stringDuration(100);
+	var bg_slast = new ScrollMagic.Scene({triggerElement: "#trigger-slast", duration: dur_bg_slast, offset: main_offset})
+					.on('enter', function(e){
+						TweenMax.to('#bg-slast', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-slast').addClass('active');
+					})
+					.on('leave', function(e){
+						//TweenMax.to('#bg-16', 1, {opacity:0});
+						TweenMax.to('#bg-last-overlay', 1, {opacity:0});
+					})
+					.addTo(controller)
+					//.addIndicators();	
+
+	// slide - final/last
+	var dur_slide_last = stringDuration(200);
+	var scene_slide_last = new ScrollMagic.Scene({triggerElement: "#trigger-last", duration: dur_slide_last, offset: main_offset})
+					.addTo(controller)
+					//.addIndicators()
+					.setPin("#slide-last")
+					.on('enter', function(e){
+						TweenMax.to('#bg-final', 1, {opacity:0});
+						TweenMax.to('#slide-last', 1, {opacity:1});
+						TweenMax.to('#bg-last-overlay', 1, {opacity:1});
+						$('.active').removeClass('active');
+						$('#trigger-last').addClass('active');
+					})
+					.on('leave', function(e){
 						var direction = e.target.controller().info("scrollDirection").toLowerCase();
 						if (direction =='forward'){
-							TweenMax.to('#slide-11', 1, {opacity:0});
-							TweenMax.to('#bg-11-overlay', 2, {opacity:0});
-							TweenMax.to('#bg-12', .5, {opacity:1});
+							TweenMax.to('#slide-last', 1, {opacity:0});
+							TweenMax.to('#bg-last-overlay', 2, {opacity:0});
+							TweenMax.to('#bg-final', .5, {opacity:1});
 
 							controller.destroy(true);
 							controller = null;
