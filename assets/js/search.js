@@ -56,6 +56,7 @@
       this.loadData(function() {
 
         cases_json = sort_cases(cases_json);
+        officers_json = sort_officers(officers_json);
 
         var length = cases_json.length;
         var total = 0;
@@ -695,6 +696,25 @@
         return 1;
       if (x_date > y_date)
         return -1;
+      return 0;
+    });
+
+    return array;
+  }
+
+  function sort_officers(json){
+    var array=[],obj=json;
+    for(a in obj){
+     array.push(obj[a])
+    }
+    //sort by date (most recent to oldest)
+    array.sort(function(x,y){
+      var x_last = x.last.toLowerCase(),
+          y_last = y.last.toLowerCase();
+      if (x_last < y_last)
+        return -1;
+      if (x_last > y_last)
+        return 1;
       return 0;
     });
 

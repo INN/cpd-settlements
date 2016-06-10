@@ -46,7 +46,7 @@
           <% if (model.narrative !== 'NULL') { %>
           <div class="case-summary">
             <a href="<%= site_path %>case/<%= model.slug %>">
-              <span class="card-label">Case summary: </span>
+              <span class="card-label">Allegations: </span>
               <p><%= this.formatStr(model.narrative) %></p>
             </a>
           </div>
@@ -54,7 +54,7 @@
 
           <% if ( model.officers.length > 0){ %>
             <div class="case-officers">
-              <span class="card-label">Officers involved:</span>
+              <span class="card-label">Officers named:</span>
               <div class="officer-group">
                 <% _.each(model.officers, function(officer) { %>
                   <% if ( officer.slug > 0){ %>

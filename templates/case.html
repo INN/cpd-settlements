@@ -60,7 +60,7 @@
 
 		      {% if (case.narrative != 'NULL') %}
 		        <div class="case-summary">
-		          <span class="card-label">Case summary: </span>
+		          <span class="card-label">Allegations: </span>
 		          <p>{{ case.narrative }}</p>
 		        </div>
 		      {% endif %}
@@ -106,7 +106,7 @@
 
 		<div class="detail-wrapper">
 		  <div class="case-officers">
-		    <label class="results-label" style="float:none;">Officers involved:</label>
+		    <label class="results-label" style="float:none;">Officers named:</label>
 		    {% if case.officers %}
 			     {% for officer in case.officers %}
 			      {% include 'templates/_officer.html' %}

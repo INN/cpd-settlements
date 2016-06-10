@@ -15,7 +15,7 @@
       	{% include 'templates/_statement.html' %}
 			
 			<div class="detail-wrapper officer-expanded">
-				<div class="officer">
+				<div class="officer" data-slug="{{ officer.slug }}">
 					<div class="officer-logo"></div>
 					<div class="officer-text">
 						<h2>{{ officer.first }} {{ officer.last }}</h2>
@@ -80,19 +80,6 @@
 		});
 	};
 
-	Number.prototype.formatMoney = function(c, d, t){
-	    var n = this,
-	        c = isNaN(c = Math.abs(c)) ? 2 : c,
-	        d = d == undefined ? "." : d,
-	        t = t == undefined ? "," : t,
-	        s = n < 0 ? "-" : "",
-	        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-	        j = (j = i.length) > 3 ? j % 3 : 0;
-	    return s + (j ? i.substr(0, j) + t : "") +
-	      i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) +
-	      (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-	};
-
 	function renderOfficerInfo() {
 		calculateService();
 		var numCases = officerCaseList.length;
@@ -123,22 +110,6 @@
 			$('.note').html('<span>Note:</span> ' + officerObj.race);
 		}
 		
-	}
-
-	function languagize(int) {
-		if (int < 10){
-	        if (int == 0) { int = 'no'};
-	        if (int == 1) { int = 'one'};
-	        if (int == 2) { int = 'two'};
-	        if (int == 3) { int = 'three'};
-	        if (int == 4) { int = 'four'};
-	        if (int == 5) { int = 'five'};
-	        if (int == 6) { int = 'six'};
-	        if (int == 7) { int = 'seven'};
-	        if (int == 8) { int = 'eight'};
-	        if (int == 9) { int = 'nine'};
-	      }
-      	return int;
 	}
 
 	function calculateService(){
@@ -190,39 +161,6 @@
 
 		return formatted;
     }
-
-	function getOfficerData(code, array) {
-		return array.filter(
-			function(array){return array.slug == code}
-		);
-	}
-
-	function findOfficer(slug) {
-		for (i = 0; i < officers_json.length; i++) {
-		    var officerObj = officers_json[i];
-		    if (officerObj.slug == slug) {
-		        return officerObj;
-		        break;
-		    }
-		}
-	}
-
-	function getCases(officer) {
-		var officerCases = [];
-
-		for (var i=0; i<cases_json.length; i++) {
-			var filteredCases = cases_json[i];
-		 	var officers = filteredCases.officers;
-
-			var foundOfficer = getOfficerData(officer, officers);
-
-			if (foundOfficer.length > 0) {
-				officerCases.push(filteredCases);
-			}
-		}
-
-		return officerCases;
-	}
 
 	function renderCaseList() {
 		for (var i=0; i<officerCaseList.length; i++){

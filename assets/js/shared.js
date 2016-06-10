@@ -1,3 +1,64 @@
+Number.prototype.formatMoney = function(c, d, t){
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) +
+      (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
+
+function languagize(int) {
+  if (int < 10){
+        if (int == 0) { int = 'no'};
+        if (int == 1) { int = 'one'};
+        if (int == 2) { int = 'two'};
+        if (int == 3) { int = 'three'};
+        if (int == 4) { int = 'four'};
+        if (int == 5) { int = 'five'};
+        if (int == 6) { int = 'six'};
+        if (int == 7) { int = 'seven'};
+        if (int == 8) { int = 'eight'};
+        if (int == 9) { int = 'nine'};
+      }
+      return int;
+}
+
+function findOfficer(slug) {
+  for (i = 0; i < officers_json.length; i++) {
+      var officerObj = officers_json[i];
+      if (officerObj.slug == slug) {
+          return officerObj;
+          break;
+      }
+  }
+}
+
+function getOfficerData(code, array) {
+  return array.filter(
+    function(array){return array.slug == code}
+  );
+}
+
+function getCases(officer) {
+  var officerCases = [];
+
+  for (var i=0; i<cases_json.length; i++) {
+    var filteredCases = cases_json[i];
+    var officers = filteredCases.officers;
+
+    var foundOfficer = getOfficerData(officer, officers);
+
+    if (foundOfficer.length > 0) {
+      officerCases.push(filteredCases);
+    }
+  }
+
+  return officerCases;
+}
 
 function case_twitter(element){
   var $case = $(element).closest('.case, .case-detail');
@@ -13,6 +74,7 @@ function case_twitter(element){
   var twitter_url = "https://twitter.com/home?status=" + encodeURIComponent(text);
   window.open(twitter_url, 'newwindow', 'width=600, height=400');
 }
+
 function case_facebook(element){
   var $case = $(element).closest('.case, .case-detail');
   var dollars = $case.find('h2').text();
@@ -25,27 +87,37 @@ function case_facebook(element){
   var facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + link; 
   window.open(facebook_url, 'newwindow', 'width=600, height=400');
 }
+
 function officer_twitter(element){
   var $officer = $(element).closest('.officer');
-  var name = $officer.find('h2').text();
+  var slug = $officer.data('slug');
+  var officerObj = findOfficer(slug);
+
   var link;
   if ($officer.find('a.officer-link').get(0)){
     link = $officer.find('a.officer-link').get(0).href;
   } else {
     link = window.location.href;
   }
-  var dollars = $officer.find('.total-payments').text();
 
-  var text;
-  if ($('.detail-officer').length > 0){
-    text = $.trim($('.officer-expanded .total-payments-container').text()).replace(/\n/g,' ') + ' ' + link + ' via @chicagoreporter';
-  } else {
-    text = name + " was named in police misconduct lawsuits that cost Chicago " + dollars + ". " + link + ' via @chicagoreporter';
-  }
+  if (officerObj) {
+    var text = '';
+    var name = officerObj.first + ' ' + officerObj.last;
+    var dollars = officerObj.total_payments.formatMoney(0);
+    var numCases = getCases(slug).length;
+
+    if (numCases == 1) {
+      text = toTitleCase(name) + " was named in one police misconduct lawsuit that cost Chicago $" + dollars + ". " + link + ' via @chicagoreporter';
+    } else {
+      text = toTitleCase(name) + " was named in " + languagize(numCases) + " police misconduct lawsuits that cost Chicago $" + dollars + ". " + link + ' via @chicagoreporter';
+    }
+    
+  } 
   
   var twitter_url = "https://twitter.com/home?status=" + encodeURIComponent(text);
   window.open(twitter_url, 'newwindow', 'width=600, height=400');
 }
+
 function officer_facebook(element){
   var $officer = $(element).closest('.officer');
   var link;
@@ -70,6 +142,10 @@ function split_tags(tags){
     }    
   }
   return tag_html;
+}
+
+function toTitleCase(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
 function adjust_whitespace(){
