@@ -51,7 +51,7 @@ The process will take some time to complete.
 
 ## Deploying the project/app
 
-The following commands should be run from the root of the `cpd_settlements` proejct directory.
+The following commands should be run from the root of the `cpd_settlements` project directory.
 
 To deploy to staging:
 
