@@ -629,6 +629,8 @@
     },
 
     goToTab: function(tabId, detail) {
+      check_disclaimer();
+
       var fragment;
 
       if (typeof tabId == 'string') {
@@ -719,6 +721,32 @@
     });
 
     return array;
+  }
+
+  function check_disclaimer(){
+    if (window.location.href.match( /(search|case|officer)/ )){
+      var x = get_cookie('cpd-disclaimer');
+      if (!x) {
+        show_disclaimer();
+        set_cookie('cpd-disclaimer', 1, 7);
+      }
+    }
+  }
+
+  function show_disclaimer(){
+    var html = '<div class="disclaimer-overlay"><div class="disclaimer-container"><div class="disclaimer-close">close</div><h3>Disclaimer</h3><p>This database aims to summarize the complaint, the Chicago police officers named, and the settlement/judgment amount, and does not purport to summarize the entire legal proceeding. Information in this database is based on civil complaints filed against police officers and/or the city of Chicago, other federal and state court records, and City of Chicago records. Complaints are legal documents that set out the plaintiff’s perception of facts and are not necessarily a full or accurate account of the events. A settlement or judgment in a case is not an indication that every allegation made in the complaint is true. In fact, the city and police officers typically deny many or all of the allegations, and the court may dismiss some “causes of action,” or alleged violations of the law, before settlement. This database reflects the causes of action in the complaint and makes no representation as to what causes of action remained in each case at the time of settlement. In addition, the database includes only defendants who were Chicago Police Department personnel and makes no representation as to additional defendants who may have been named in the case. The Chicago Reporter is not responsible for inaccuracies caused by errors in the underlying data obtained from official sources.</p></div></div>'
+  
+    $('body').append(html);
+
+    var overlay = $('.disclaimer-overlay');
+    overlay.click(function(){
+      var e = $(event.target);
+      if (!e.closest('.disclaimer-container').length > 0) {
+        overlay.remove();
+      } else if (e.hasClass('disclaimer-close')){
+        overlay.remove();
+      }
+    })
   }
 
   $(document).ready(function() {
