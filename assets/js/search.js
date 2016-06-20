@@ -734,18 +734,21 @@
   }
 
   function show_disclaimer(){
-    var html = '<div class="disclaimer-overlay"><div class="disclaimer-container"><div class="disclaimer-close">close</div><h3>Disclaimer</h3><p>This database aims to summarize the complaint, the Chicago police officers named, and the settlement/judgment amount, and does not purport to summarize the entire legal proceeding. Information in this database is based on civil complaints filed against police officers and/or the city of Chicago, other federal and state court records, and City of Chicago records. Complaints are legal documents that set out the plaintiff’s perception of facts and are not necessarily a full or accurate account of the events. A settlement or judgment in a case is not an indication that every allegation made in the complaint is true. In fact, the city and police officers typically deny many or all of the allegations, and the court may dismiss some “causes of action,” or alleged violations of the law, before settlement. This database reflects the causes of action in the complaint and makes no representation as to what causes of action remained in each case at the time of settlement. In addition, the database includes only defendants who were Chicago Police Department personnel and makes no representation as to additional defendants who may have been named in the case. The Chicago Reporter is not responsible for inaccuracies caused by errors in the underlying data obtained from official sources.</p></div></div>'
+    var html = '<div class="disclaimer-overlay"><div class="disclaimer-container"><div class="disclaimer-close">close</div><h3>Disclaimer</h3><p>This database of civil police misconduct claims aims to summarize the complaint, the Chicago police officers named, and the settlement/judgment amount, and does not purport to summarize the entire legal proceeding. Defendants typically deny the allegations in a complaint, and a settlement or judgment is not an indication that every allegation is true. This database does not reflect the additional, non-Chicago police officer defendants who may have been named in the case or the specific claims that remained at the end of each case. For full credits and methodology, <a href="http://projects.chicagoreporter.com/settlements/about.html">click here</a>.</p><div class="disclaimer-button">I understand.</div></div></div>'
   
     $('body').append(html);
 
     var overlay = $('.disclaimer-overlay');
-    overlay.click(function(){
-      var e = $(event.target);
-      if (!e.closest('.disclaimer-container').length > 0) {
-        overlay.remove();
-      } else if (e.hasClass('disclaimer-close')){
-        overlay.remove();
-      }
+    // overlay.click(function(){
+    //   var e = $(event.target);
+    //   if (!e.closest('.disclaimer-container').length > 0) {
+    //     overlay.remove();
+    //   } else if (e.hasClass('disclaimer-close')){
+    //     overlay.remove();
+    //   }
+    // });
+    $('.disclaimer-button').click(function(){
+      overlay.remove();
     })
   }
 

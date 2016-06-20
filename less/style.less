@@ -2082,15 +2082,36 @@ body.not-nested {
   left:50%;
   margin:20px;
   transform:translateX(-50%) translateY(-50%);
+
+  h3 {
+    margin-top:0;
+  }
 }
 
 .disclaimer-close {
   text-align: right;
   opacity: .6;
   margin-bottom:-1em;
-
+  display:none;
+  
   &:hover {
     cursor:pointer;
+  }
+}
+
+.disclaimer-button {
+  display:inline-block;
+  clear:both;
+  background-color:@cr-alert;
+  color:@cr-lightest;
+  padding:10px 20px;
+  margin-top:10px;
+  font-family:@cr-condensed;
+  font-weight:700;
+  font-size:1.25em;
+  &:hover {
+    cursor:pointer;
+    background-color: lighten(@cr-alert, 10%);
   }
 }
 

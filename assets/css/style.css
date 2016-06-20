@@ -1832,13 +1832,32 @@ body.not-nested {
   margin: 20px;
   transform: translateX(-50%) translateY(-50%);
 }
+.disclaimer-container h3 {
+  margin-top: 0;
+}
 .disclaimer-close {
   text-align: right;
   opacity: .6;
   margin-bottom: -1em;
+  display: none;
 }
 .disclaimer-close:hover {
   cursor: pointer;
+}
+.disclaimer-button {
+  display: inline-block;
+  clear: both;
+  background-color: #bd261d;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.25em;
+}
+.disclaimer-button:hover {
+  cursor: pointer;
+  background-color: #df382e;
 }
 /* ==========================================================================
 Media Queries
