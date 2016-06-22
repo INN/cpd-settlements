@@ -505,6 +505,9 @@ input[type=checkbox]:checked + .option {
     label:not(.option) {
       margin-top:.75em;
     }
+    input:focus + label {
+      background-color:@cr-alert;
+    }
   }    
 }
 #officer-search-form .form-group {
@@ -1805,6 +1808,9 @@ Intro Page
     margin-top:60px;
     font-size:16px;
   }
+  #titles p.scroll.tap {
+    display:none;
+  }
 
   .block {
     width:100%;
@@ -1905,7 +1911,7 @@ Intro Page
     background-image: url("../images/10-052015CityCouncilFirstMeetingwithNewMembers49.jpg");
   }
   #bg-6 {
-    background-image: url("../images/06-LE0A1948.jpg");   
+    background-image: url("../images/06-LE0A1948.jpg");
   }
   #bg-7 {
     background-image: url("../images/07-121314_MillionsMarchChi-4.jpg");
@@ -1976,8 +1982,6 @@ Intro Page
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
   }
 
-  
-
   /*
     Elements
   */
@@ -2028,6 +2032,19 @@ Intro Page
 
 
 
+.ajax-loader, #home.filter-cases .ajax-loader, #home.filter-officers .ajax-loader  {
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%);
+  z-index:999;
+}
+
+#home .ajax-loader {
+  display:block;
+}
+
 
 /* ==========================================================================
 Framed vs Not Framed
@@ -2069,10 +2086,11 @@ body.not-nested {
   height: 100vh;
   z-index:9999;
   background-color: fade(@cr-darkest,70%);
+  padding:20px;
 }
 
 .disclaimer-container {
-  width:100%;
+  width:90%;
   max-width:700px;
   background-color:@cr-lightest;
   border:1px solid @cr-darkest;
@@ -2080,7 +2098,6 @@ body.not-nested {
   position:absolute;
   top:50%;
   left:50%;
-  margin:20px;
   transform:translateX(-50%) translateY(-50%);
 
   h3 {
@@ -2093,7 +2110,7 @@ body.not-nested {
   opacity: .6;
   margin-bottom:-1em;
   display:none;
-  
+
   &:hover {
     cursor:pointer;
   }
@@ -2310,7 +2327,11 @@ Media Queries
     }
 
     .block h3 {
-      font-size:2.5em;
+      font-size:2.15em;
+      margin-top: 2em;
+    }
+    .social-icons {
+      font-size: .6em;
     }
 
     .spacer.vh1{
@@ -2335,6 +2356,22 @@ Media Queries
   #cpd-scrolling {
     margin-bottom:100vh;
 
+    .rect-wrap .rect {
+      max-width: 20px;
+      margin-left: 20px;
+    }
+    .rect-wrap .down {
+      border-width: 8px 10px 0 10px;
+      margin-left: 20px;
+    }
+
+    #titles p.scroll {
+      display:none;
+    }
+    #titles p.scroll.tap {
+      display:block;
+    }
+
     #titles {
       //transform: scale(.6);
       min-width:100%;
@@ -2345,6 +2382,15 @@ Media Queries
     }
     .block h3{
       transform: scale(.75);
+    }
+
+    #bg-6 {
+      background-image: url("../images/06-LE0A1948.jpg");
+      background-position: -200px center;
+    }
+    #bg-9 {
+      background-image: url("../images/police-photos-06.jpg");
+      background-position: -140px center;
     }
   }
 

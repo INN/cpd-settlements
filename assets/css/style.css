@@ -441,6 +441,9 @@ select {
 .form-group.tags label:not(.option) {
   margin-top: .75em;
 }
+.form-group.tags input:focus + label {
+  background-color: #bd261d;
+}
 #officer-search-form .form-group {
   width: 100%;
 }
@@ -1584,6 +1587,9 @@ Intro Page
   margin-top: 60px;
   font-size: 16px;
 }
+#cpd-scrolling #titles p.scroll.tap {
+  display: none;
+}
 #cpd-scrolling .block {
   width: 100%;
   min-height: 100vh;
@@ -1787,6 +1793,19 @@ Intro Page
 #cpd-scrolling .spacer.vh1.half {
   min-height: 50vh;
 }
+.ajax-loader,
+#home.filter-cases .ajax-loader,
+#home.filter-officers .ajax-loader {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
+}
+#home .ajax-loader {
+  display: block;
+}
 /* ==========================================================================
 Framed vs Not Framed
 ========================================================================== */
@@ -1819,9 +1838,10 @@ body.not-nested {
   height: 100vh;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
 }
 .disclaimer-container {
-  width: 100%;
+  width: 90%;
   max-width: 700px;
   background-color: #ffffff;
   border: 1px solid #000000;
@@ -1829,7 +1849,6 @@ body.not-nested {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: 20px;
   transform: translateX(-50%) translateY(-50%);
 }
 .disclaimer-container h3 {
@@ -2025,7 +2044,11 @@ Media Queries
     color: rgba(255, 255, 255, 0.8);
   }
   #home .block h3 {
-    font-size: 2.5em;
+    font-size: 2.15em;
+    margin-top: 2em;
+  }
+  #home .social-icons {
+    font-size: .6em;
   }
   #home .spacer.vh1 {
     min-height: 50vh;
@@ -2047,6 +2070,20 @@ Media Queries
   #cpd-scrolling {
     margin-bottom: 100vh;
   }
+  #cpd-scrolling .rect-wrap .rect {
+    max-width: 20px;
+    margin-left: 20px;
+  }
+  #cpd-scrolling .rect-wrap .down {
+    border-width: 8px 10px 0 10px;
+    margin-left: 20px;
+  }
+  #cpd-scrolling #titles p.scroll {
+    display: none;
+  }
+  #cpd-scrolling #titles p.scroll.tap {
+    display: block;
+  }
   #cpd-scrolling #titles {
     min-width: 100%;
     font-size: 5.5em;
@@ -2056,6 +2093,14 @@ Media Queries
   }
   #cpd-scrolling .block h3 {
     transform: scale(0.75);
+  }
+  #cpd-scrolling #bg-6 {
+    background-image: url("../images/06-LE0A1948.jpg");
+    background-position: -200px center;
+  }
+  #cpd-scrolling #bg-9 {
+    background-image: url("../images/police-photos-06.jpg");
+    background-position: -140px center;
   }
   .clickable {
     white-space: normal;

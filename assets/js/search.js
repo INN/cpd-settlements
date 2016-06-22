@@ -55,6 +55,9 @@
 
       this.loadData(function() {
 
+        sessionStorage.setItem( 'cases', JSON.stringify(cases_json) );
+        sessionStorage.setItem( 'officers', JSON.stringify(officers_json) );
+
         cases_json = sort_cases(cases_json);
         officers_json = sort_officers(officers_json);
 
@@ -75,14 +78,34 @@
     },
 
     loadData: function(callback) {
-      if (typeof cases_json == 'undefined' && typeof officers_json == 'undefined') {
-        var url = site_path + 'assets/cpd_settlements/data/combined.min.js';
-        $.ajax({
-          url: url,
-          cache: true,
-          dataType: 'script',
-          success: callback
-        });
+
+      if (sessionStorage.getItem('cases')){
+
+        cases_json = sort_cases(JSON.parse( sessionStorage.getItem( 'cases' ) ));
+        officers_json = sort_officers(JSON.parse( sessionStorage.getItem( 'officers' ) ));
+
+        var length = cases_json.length;
+        var total = 0;
+        for (var i=0; i<length; i++){
+          total += cases_json[i].total_payments;
+        }
+
+        $('#search-intro').text('These ' + length + ' lawsuits cost Chicago a total of $' + Number(total).formatMoney(0) + '.');
+
+        this.officerCollection = this.officerCollection.reset(officers_json);
+        this.caseCollection = this.caseCollection.reset(cases_json);
+
+      } else {
+
+        if (typeof cases_json == 'undefined' && typeof officers_json == 'undefined') {
+          var url = site_path + 'assets/cpd_settlements/data/combined.min.js';
+          $.ajax({
+            url: url,
+            cache: true,
+            dataType: 'script',
+            success: callback
+          });
+        }
       }
     },
 
@@ -728,8 +751,8 @@
       var x = get_cookie('cpd-disclaimer');
       if (!x) {
         show_disclaimer();
-        set_cookie('cpd-disclaimer', 1, 7);
       }
+      set_cookie('cpd-disclaimer', 1, 7);
     }
   }
 
@@ -753,11 +776,23 @@
   }
 
   $(document).ready(function() {
+
     window.router = new SearchRouter();
     Backbone.history.start({
       pushState: true,
       root: site_path
     });
+
+    $(window).keydown(function(event){
+      if(event.keyCode == 13) {
+        if (!event.target.href){
+          event.preventDefault();
+          $('#tap-to-close').click();
+          return false;
+        }
+      }
+    });
+
   });
 
 })();

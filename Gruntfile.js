@@ -72,14 +72,14 @@ module.exports = function(grunt) {
           libs: {
             src: [
               'assets/vendor/jquery/dist/jquery.min.js',
-              'assets/vendor/underscore/underscore.js',
-              'assets/vendor/backbone/backbone.js',
+              'assets/vendor/underscore/underscore-min.js',
+              'assets/vendor/backbone/backbone-min.js',
             ],
             dest: 'assets/js/libraries.min.js'
           },
           search: {
             src: [
-              'assets/vendor/chosen/chosen.jquery.js',
+              'assets/vendor/chosen/chosen.jquery.min.js',
               'assets/vendor/jquery-serialize-object/dist/jquery.serialize-object.min.js',
               'assets/js/shared.min.js',
               'assets/js/search.min.js'

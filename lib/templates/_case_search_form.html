@@ -3,7 +3,7 @@
     <form id="case-search-form">
       <div class="form-group">
         <label>Neighborhood</label>
-        <select name="neighborhood" id="neighborhood" class="chosen">
+        <select name="neighborhood" id="neighborhood" class="chosen" tabindex=0>
           <option value="">Any</option>
           <option value="unknown">Unknown</option>
           {% for name in neighborhoods %}
@@ -14,7 +14,7 @@
 
       <div class="form-group">
         <label>Primary cause</label>
-        <select data-placeholder="Select primary causes" id="primary_cause" name="primary_causes[]" class="chosen">
+        <select data-placeholder="Select primary causes" id="primary_cause" name="primary_causes[]" class="chosen" tabindex=0>
           <option value="">Any</option>
           {% for cause in primary_causes %}
             <option value="{{ cause }}">{{ cause }}</option>
@@ -24,7 +24,7 @@
 
       <div class="form-group">
         <label>Payment amount</label>
-        <select name="total_payments" id="payment_amount" class="payment chosen">
+        <select name="total_payments" id="payment_amount" class="payment chosen" tabindex=0>
           <option value="">Any</option>
           <option value="0-3000">$0-$3,000</option>
           <option value="3000-12000">$3,000-$12,000</option>

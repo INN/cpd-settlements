@@ -25,21 +25,17 @@
 					<h1><span>Settling</span><span class="for">for</span><span>Misconduct</span></h1>
 					<h2><span>Police Lawsuits in Chicago</span></h2>
 					<p class="scroll">scroll to continue</p>
+					<p class="scroll tap">tap to continue</p>
 				</div>
 		</div>
 	</section>
 
 	<div class="trigger" id="trigger-1"></div>	
-	<section id="slide-1" class="slide">			
-		
-	</section>
+	<section id="slide-1" class="slide"></section>
 
 	<div class="trigger" id="trigger-2"></div>
-	<section id="slide-2" class="slide">
-	</section>
+	<section id="slide-2" class="slide"></section>
 	
-	<!-- <div class="spacer vh1"></div>
-	<div class="trigger" id="trigger-bg1"></div> -->
 	<div class="trigger" id="trigger-bg2"></div>
 	<div class="spacer vh1"></div>
 	<div class="spacer vh1"></div>
@@ -90,9 +86,9 @@
 	<div class="spacer vh1"></div>
 	<div class="trigger" id="trigger-bg9"></div>
 
+	<div id="bg-8" class="bgimg"></div>
 	<div id="bg-10" class="bgimg"></div>
 	<div id="bg-9" class="bgimg"></div>
-	<div id="bg-8" class="bgimg"></div>
 	<div class="spacer vh1"></div>
 	
 	<div class="trigger" id="trigger-7"></div>
@@ -128,21 +124,26 @@
 	<div class="spacer vh1"></div>
 
 
-	<div id="bg-19" class="bgimg"></div>
-	<div id="bg-7" class="bgimg"></div>
 	<div id="bg-6" class="bgimg"></div>
-	
-	<div class="trigger" id="trigger-bg14"></div>
+	<div id="bg-7" class="bgimg"></div>
+	<div id="bg-19" class="bgimg"></div>
+
 	<div class="trigger" id="trigger-10"></div>
 	<section id="slide-10" class="slide">
 	</section>
 	
 	<div class="trigger" id="trigger-11"></div>
-	<section id="slide-11" class="slide">
+	<section id="slide-11" class="slide">	
 	</section>
 
-	<div class="trigger" id="trigger-bg15"></div>
+	<div class="trigger" id="trigger-bg14"></div>
 	<div id="bg-14" class="bgimg"></div>
+	
+	<div class="spacer vh1"></div>
+	<div class="spacer vh1"></div>
+
+
+	<!-- <div class="trigger" id="trigger-bg15"></div>
 	<div id="bg-15" class="bgimg"></div>
 	<div class="spacer vh1"></div>
 	<div class="spacer vh1"></div>
@@ -151,7 +152,7 @@
 	<div class="trigger" id="trigger-bg16"></div>
 	<div id="bg-16" class="bgimg"></div>
 	<div class="spacer vh1"></div>
-	<div class="spacer vh1"></div>
+	<div class="spacer vh1"></div> -->
 
 
 
@@ -194,7 +195,7 @@
 	
 </div>
 
-<div id="bg-final" class="bgimg"></div>
+<div id="bg-final" class="bgimg"><img src="{{ site_path }}assets/images/ajax-loader.gif" class="ajax-loader" width="50"/></div>
 
 <div id="app-wrapper">
 	
@@ -239,7 +240,8 @@
 		loadText(); //holding off on spreadsheets integration for now (until scrolling events are figured out)
 		//initScroll();
 		$('#skip-intro').click(function(){
-			$('body, html').scrollTop($(document).height());
+			//$('body, html').scrollTop($(document).height());
+			window.location.href = site_path + 'search/';
 		});
 	});
 </script>
