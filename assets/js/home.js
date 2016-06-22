@@ -254,7 +254,7 @@ function initScroll(){
 
 
 	// slide 2 background images
-	var dur_bg4 = stringDuration(700);
+	var dur_bg4 = stringDuration(800);
 	var bg4 = new ScrollMagic.Scene({triggerElement: "#trigger-bg4", duration: dur_bg4, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-4', 1, {opacity:1});
@@ -308,7 +308,7 @@ function initScroll(){
 						// bg-4
 					});
 	// slide 6
-	var dur_slide6 = stringDuration(200);
+	var dur_slide6 = stringDuration(300);
 	var scene_slide6 = new ScrollMagic.Scene({triggerElement: "#trigger-6", duration: dur_slide6, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
@@ -324,7 +324,7 @@ function initScroll(){
 
 
 	// slide 2 background images
-	var dur_bg6 = stringDuration(200);
+	var dur_bg6 = stringDuration(300);
 	var bg6 = new ScrollMagic.Scene({triggerElement: "#trigger-bg6", duration: dur_bg6, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-6', 1, {opacity:1});
@@ -337,7 +337,7 @@ function initScroll(){
 					.addTo(controller)
 					//.addIndicators();	
 	// slide 2 background images
-	var dur_bg7 = stringDuration(200);
+	var dur_bg7 = stringDuration(300);
 	var bg7 = new ScrollMagic.Scene({triggerElement: "#trigger-bg7", duration: dur_bg7, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-7', 1, {opacity:1});
@@ -547,7 +547,7 @@ function initScroll(){
 					//.addIndicators();
 
 	// slide 10
-	var dur_slide11 = stringDuration(400);
+	var dur_slide11 = stringDuration(200);
 	var scene_slide11 = new ScrollMagic.Scene({triggerElement: "#trigger-11", duration: dur_slide11, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
@@ -577,7 +577,7 @@ function initScroll(){
 					});
 
 	// slide 10
-	var dur_slide13 = stringDuration(200);
+	var dur_slide13 = stringDuration(300);
 	var scene_slide13 = new ScrollMagic.Scene({triggerElement: "#trigger-13", duration: dur_slide13, offset: main_offset})
 					.addTo(controller)
 					//.addIndicators()
@@ -592,7 +592,7 @@ function initScroll(){
 					});
 
 	// slide 2 background images
-	var dur_bg18 = stringDuration(600);
+	var dur_bg18 = stringDuration(800);
 	var bg18 = new ScrollMagic.Scene({triggerElement: "#trigger-bg18", duration: dur_bg18, offset: main_offset})
 					.on('enter', function(e){
 						TweenMax.to('#bg-18', 1, {opacity:1});
