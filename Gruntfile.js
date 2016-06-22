@@ -73,7 +73,7 @@ module.exports = function(grunt) {
             src: [
               'assets/vendor/jquery/dist/jquery.min.js',
               'assets/vendor/underscore/underscore-min.js',
-              'assets/vendor/backbone/backbone-min.js',
+              'assets/vendor/backbone/backbone.js',
             ],
             dest: 'assets/js/libraries.min.js'
           },
