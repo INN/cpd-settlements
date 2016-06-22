@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from urlparse import urlparse
+from titlecase import titlecase
 
 from .inc.models import Case, Officer, Payment
 from .inc.helpers import format_currency, total_for_payments
@@ -74,8 +75,8 @@ def officer(slug):
     try:
         officer = filter(lambda x: x.get_slug() == slug, Officer.objects)[0]
         context['officer'] = officer
-        context['title'] = "Cases and settlements involving %s %s %s | Chicago Reporter" % (
-            officer.prefix, officer.first, officer.last)
+        context['title'] = "%s %s | Chicago Reporter" % (
+            titlecase(officer.first), titlecase(officer.last))
         if officer.get('note', False) and officer.get('note') != 'NULL':
             context['opengraph_description'] = officer.get('note')
     except IndexError:
@@ -92,7 +93,7 @@ def case(slug):
     try:
         case = filter(lambda x: x.get_slug() == slug, Case.objects)[0]
         context['case'] = case
-        context['title'] = "Details for case %s | Chicago Reporter" % case.get('case_number')
+        context['title'] = "Case %s | Chicago Reporter" % case.get('case_number')
         if case.get('narrative', False) and case.get('narrative') != 'NULL':
             context['opengraph_description'] = case.get('narrative')
     except IndexError:
@@ -137,7 +138,7 @@ def context_processor():
         'GOOGLE_ANALYTICS_ID': 'UA-2350659-4',
 
         'site_path': get_site_path(),
-        'title': 'Search the CPD settlement database | Chicago Reporter',
+        'title': 'Settling for Misconduct | Chicago Reporter',
         'opengraph_image': (
             'http://' + get_root_url() +
             '/assets/cpd_settlements/images/02-IMG_9158.jpg'

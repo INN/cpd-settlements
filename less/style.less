@@ -399,7 +399,8 @@ label {
     text-transform: lowercase;
     font-weight: normal;
     padding: 4px 6px;   
-    margin:0 1px 0 0;     
+    //margin:0 1px 0 0;     
+    margin: 0 3px 2px 0;
     background-color: fade(@cr-darkest,60%);
     color:fade(@cr-lightest,90%);
     border:1px solid transparent;
@@ -1143,7 +1144,8 @@ label.results-label {
         color:darken(@cr-dark,30%);
       }
       .note {
-        min-width:100%;
+        width: 100%;
+        flex: 0;
       }
     }
     #map {

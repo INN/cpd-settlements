@@ -349,7 +349,7 @@ label.option {
   text-transform: lowercase;
   font-weight: normal;
   padding: 4px 6px;
-  margin: 0 1px 0 0;
+  margin: 0 3px 2px 0;
   background-color: rgba(0, 0, 0, 0.6);
   color: rgba(255, 255, 255, 0.9);
   border: 1px solid transparent;
@@ -994,7 +994,8 @@ label.results-label {
   color: #000000;
 }
 .detail-wrapper.officer-expanded .secondary-details .note {
-  min-width: 100%;
+  width: 100%;
+  flex: 0;
 }
 .detail-wrapper.officer-expanded #map {
   margin-left: 0;
