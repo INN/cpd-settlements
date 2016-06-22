@@ -115,7 +115,7 @@ function triggerNext(triggerList) {
     } else if (next = triggerList.length){
     	$('#skip-intro').trigger('click');
     }
-    console.log(next + ', ' + parseInt($('#' + next).offset().top + 130));
+    //console.log(next + ', ' + parseInt($('#' + next).offset().top + 130));
 }
 
 function triggerPrev(triggerList) {
@@ -127,7 +127,7 @@ function triggerPrev(triggerList) {
           scrollTop: parseInt($('#' + prev).offset().top - 100)
         }, 1500);
     }
-    console.log(prev + ', ' + parseInt($('#' + prev).offset().top - 100));
+    //console.log(prev + ', ' + parseInt($('#' + prev).offset().top - 100));
 }
 
 function stringDuration(duration){
