@@ -13,15 +13,17 @@ if __name__ == '__main__':
     download_data()
     print "Prep officer data"
     prep_officer_data()
+    """
     print "Geocoding addresses..."
     geocode_addresses()
     try:
         print "Get boundaries for points..."
-        boundaries_for_points()
+        #boundaries_for_points()
     except:
         print "ERROR: Unable to get boundaries for points. Is the boundary service running?"
         print "Exiting..."
         exit()
+    """
     print "Rendering cases and officer front-end json..."
     render_cases_json()
     render_officers_json()

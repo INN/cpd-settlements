@@ -45,11 +45,15 @@ class Case(BaseModel):
         'narrative': 'Narrative',
         # Tags
         'interaction_type': 'interaction_type',
-        'officers_tags': 'officers',
-        'victims_tags': 'victims',
+        #'officers_tags': 'officers_tags',
+        #'victims_tags': 'victims_tags',
         'misconduct_type': 'misconduct_type',
         'weapons_used': 'weapons_used',
         'outcome': 'outcome',
+        # mk
+        'latitude': 'Latitude',
+        'longitude': 'Longitude',
+        #'neighborhood': 'Neighborhood'
     }
 
     def get_slug(self):
@@ -73,7 +77,7 @@ class Victims(BaseModel):
     type = 'victims'
 
     field_map = {
-        'timestamp': "Timestamp",
+        #'timestamp': "Timestamp",
         'case_number': "Case number",
         'victim_1': "Victim 1",
         'victim_1_race': "Victim 1 Race",
@@ -142,7 +146,10 @@ for filename, model in to_load.items():
     if filename in ['officers.json', 'cases.geocoded.boundaries.json']:
         model.objects = NonMappedModelList(filepath, model)
     else:
-        model.objects = ModelList(filepath, model, model.field_map)
+        try:
+            model.objects = ModelList(filepath, model, model.field_map)
+        except Exception,e:
+            import ipdb; ipdb.set_trace()
 
 # Do some heavy lifting up-front so this stuff gets stashed in memory
 for case in Case.objects:

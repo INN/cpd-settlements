@@ -29,7 +29,7 @@ def render_cases_json():
             'badge_number': officer.badge_number,
             'slug': officer.get_slug()
         } for officer in case.get_related_officers()]
-
+        
         delete_these = [
             'city_attorney',
             'city_attorney_firm',
@@ -41,12 +41,13 @@ def render_cases_json():
             'police_beat_id',
             'police_district',
             'police_district_id',
-            'interaction_type',
-            'officers_tags',
-            'victims_tags',
-            'misconduct_type',
-            'weapons_used',
-            'outcome'
+            #mk
+            #'interaction_type',
+            #'officers_tags',
+            #'victims_tags',
+            #'misconduct_type',
+            #'weapons_used',
+            #'outcome'
         ]
 
         for key in delete_these:
@@ -56,7 +57,6 @@ def render_cases_json():
                 pass
 
         cases.append(case_dict)
-
     with open('assets/data/cases.js', 'w+') as f:
         f.write("var cases_json = %s;" % json.dumps(cases))
 

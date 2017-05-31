@@ -19,8 +19,8 @@ Refer to the steps outlined in DEPLOY.md for information to help with the initia
 ## Installing the CPD project
 
 After you've installed Tarbell, you can install the CPD project with the following command:
-
-    tarbell install git@bitbucket.org:projectlargo/cpd-settlements.git
+    
+    tarbell install https://github.com/INN/cpd-settlements
 
 Tarbell will prompt you: "Where would you like to create this project? [/Users/yourusernamegoeshere/tarbell/cpd-settlements]"
 
@@ -39,7 +39,11 @@ This project uses npm (grunt) and bower for its pre-deployment build process and
     npm install
     bower install
 
-Once you've installed the npm and bower requirements, run the build process:
+Once you've installed the npm and bower requirements, install grunt if necessary:
+
+    npm install -g grunt-cli
+    
+Then run the build process:
 
     grunt build
 

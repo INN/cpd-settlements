@@ -14,7 +14,7 @@ def main():
 def geocode_addresses():
     cases = ModelList('data/cases.json', Case, Case.field_map)
     cases_dicts = [case for case in cases]
-
+    """
     geocoder = GoogleV3(timeout=30)
 
     for case in cases_dicts:
@@ -30,7 +30,8 @@ def geocode_addresses():
             print "No address for case: %s" % case.get('case_number')
 
         time.sleep(1)
-
+    """
+    import ipdb; ipdb.set_trace()
     with open('data/cases.geocoded.json', 'wb') as f:
         f.write(json.dumps(cases_dicts))
 
