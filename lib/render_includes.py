@@ -49,13 +49,18 @@ def render_includes():
         except IndexError:
             pass
 
-        for category in tags.keys():
-            category_vals_for_case = case.get(category)
+        try:
+            for category in tags.keys():
+                category_vals_for_case = case.get(category)
 
-            for val in category_vals_for_case.split('|'):
-                if val:
-                    tags[category]['tags'].add(val)
-
+                #mk
+                if not category_vals_for_case:
+                    continue
+                for val in category_vals_for_case.split('|'):
+                    if val:
+                        tags[category]['tags'].add(val)
+        except Exception, e:
+            import ipdb; ipdb.set_trace()
     template = env.get_template('templates/_case_search_form.html')
 
     with open('templates/_case_search_form.html', 'w+') as f:
