@@ -4,7 +4,7 @@ from urlparse import urlparse
 from titlecase import titlecase
 
 from .inc.models import Case, Officer, Payment
-from .inc.helpers import format_currency, total_for_payments
+from .inc.helpers import format_currency, total_for_payments, total_for_payments_wrapper
 
 blueprint = Blueprint(
     __name__,
@@ -47,7 +47,7 @@ def search(init_view='cases'):
     context.update({
         'init_view': init_view,
         'cases': sorted(
-            cases, key=lambda x: total_for_payments(x.payments, False), reverse=True),
+            cases, key=lambda x: total_for_payments_wrapper(x, False), reverse=True),
         'neighborhoods': sorted(
             neighborhoods.values(), key=lambda x: x.get('neighborhood')),
         'officers': Officer.objects,
