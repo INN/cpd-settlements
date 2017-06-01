@@ -154,15 +154,20 @@ for filename, model in to_load.items():
             import ipdb; ipdb.set_trace()
 
 # Do some heavy lifting up-front so this stuff gets stashed in memory
-for case in Case.objects:
-    case.payments = case.get_related(Payment)
-    case.officers = case.get_related_officers()
-    case.victims = case.get_related(Victims)
-    case.slug = case.get_slug()
+try:
+    for case in Case.objects:
+        case.payments = case.get_related(Payment)
+        case.officers = case.get_related_officers()
+        case.victims = case.get_related(Victims)
+        case.slug = case.get_slug()
 
-for officer in Officer.objects:
-    officer_payments = []
-    for case_no in officer.case_numbers:
-        officer_payments += Payment.objects.filter(case_number=case_no)
-    officer.total_payments = total_for_payments(officer_payments, False)
-    officer.slug = officer.get_slug()
+    for officer in Officer.objects:
+        officer_payments = []
+        for case_no in officer.case_numbers:
+            officer_payments += Payment.objects.filter(case_number=case_no)
+        officer.total_payments = total_for_payments(officer_payments, False)
+        officer.slug = officer.get_slug()
+except AttributeError:
+    """I think that this means that the initial data was empty"""
+    print( "If this is your first time running get_data.py, ignore this error." )
+    print( "If this is not, something has gone wrong in the case and officer objects." )
