@@ -41,6 +41,8 @@ def search(init_view='cases'):
             primary_causes.append(case.primary_cause)
         except IndexError:
             pass
+        except AttributeError:
+            pass
 
     context.update({
         'init_view': init_view,
