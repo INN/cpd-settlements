@@ -48,6 +48,8 @@ def render_includes():
             primary_causes.append(case.primary_cause)
         except IndexError:
             pass
+        except AttributeError:
+            pass
 
         try:
             for category in tags.keys():
