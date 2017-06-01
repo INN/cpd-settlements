@@ -42,6 +42,7 @@ def render_includes():
             if (case.neighborhood and case.neighborhood.strip() != ''):
                 neighborhoods.append(case.neighborhood_id)
         except AttributeError:
+            print( case.slug + " has no neighborhood ID" )
             pass
 
         try:
@@ -49,6 +50,7 @@ def render_includes():
         except IndexError:
             pass
         except AttributeError:
+            print( case.slug + " has no primary causes" )
             pass
 
         try:
