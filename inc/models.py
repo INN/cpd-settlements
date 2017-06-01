@@ -63,11 +63,13 @@ class Case(BaseModel):
         result = []
 
         for officer in Officer.objects:
-            if self.case_number in officer.case_numbers:
-                result.append(officer)
+            if hasattr(officer, 'case_number'):
+                if self.case_number in officer.case_numbers:
+                    result.append(officer)
 
-        if len(result) < 2 and result[0].first == 'Unnamed' and result[0].last == 'Officers':
-            result = []
+        if len(result) < 2 and len(result) > 0:
+            if result[0].first == 'Unnamed' and result[0].last == 'Officers':
+                result = []
 
         return result
 
