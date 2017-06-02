@@ -41,7 +41,6 @@ from tarbell.settings import Settings
 from tarbell.hooks import register_hook
 
 sys.path.append(Settings().config.get('projects_path'))
-sys.path.append('/home/matt/chicago-reporter/cpd')
 
 from cpd_settlements import blueprint
 from cpd_settlements.inc.models import Officer, Case
