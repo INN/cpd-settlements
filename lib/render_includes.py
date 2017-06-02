@@ -40,10 +40,14 @@ def render_includes():
             neighborhoods.index(case.neighborhood_id)
         except ValueError:
             if (case.neighborhood and case.neighborhood.strip() != ''):
-                neighborhoods.append(case.neighborhood_id)
+                neighborhoods.append(case.neighborhood)
         except AttributeError:
-            print( case.slug + " has no neighborhood ID" )
-            pass
+            try:
+                if (case.neighborhood and case.neighborhood.strip() != ''):
+                    neighborhoods.append(case.neighborhood)
+            except:
+                print( case.slug + " has no neighborhood_id or neighborhood!" )
+                pass
 
         try:
             primary_causes.append(case.primary_cause)
@@ -60,11 +64,13 @@ def render_includes():
                 #mk
                 if not category_vals_for_case:
                     continue
-                for val in category_vals_for_case.split('|'):
-                    if val:
-                        tags[category]['tags'].add(val)
+                for comma in category_vals_for_case.split(','):
+                    for val in comma.split('|'):
+                        if val:
+                            tags[category]['tags'].add(val)
         except Exception, e:
             import ipdb; ipdb.set_trace()
+
     template = env.get_template('templates/_case_search_form.html')
 
     with open('templates/_case_search_form.html', 'w+') as f:
