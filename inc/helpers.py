@@ -138,11 +138,23 @@ def format_currency(amount):
 
 
 def total_for_payments(payments, format=True):
-    payouts = [p.payment for p in payments if p.payment is not None]
-    fees = [p.fees for p in payments if p.fees is not None]
-    total = sum(payouts + fees)
+    if payments:
+        payouts = [p.payment for p in payments if p.payment is not None]
+        fees = [p.fees for p in payments if p.fees is not None]
+        total = sum(payouts + fees)
+    else:
+        total = 0
 
     if format:
         return format_currency(total)
     else:
         return total
+
+def total_for_payments_wrapper(x, format=True):
+    """totals_for_payments wrapper with error handling if x.payments does not exist."""
+    debug = 0
+    try:
+        return total_for_payments(x.payments, format)
+    except AttributeError:
+        print("This case had no payments: " + x.case_number)
+        return 0

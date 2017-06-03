@@ -29,7 +29,7 @@ def render_cases_json():
             'badge_number': officer.badge_number,
             'slug': officer.get_slug()
         } for officer in case.get_related_officers()]
-
+        
         delete_these = [
             'city_attorney',
             'city_attorney_firm',
@@ -56,7 +56,6 @@ def render_cases_json():
                 pass
 
         cases.append(case_dict)
-
     with open('assets/data/cases.js', 'w+') as f:
         f.write("var cases_json = %s;" % json.dumps(cases))
 

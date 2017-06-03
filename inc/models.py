@@ -45,11 +45,15 @@ class Case(BaseModel):
         'narrative': 'Narrative',
         # Tags
         'interaction_type': 'interaction_type',
-        'officers_tags': 'officers',
-        'victims_tags': 'victims',
+        #'officers_tags': 'officers_tags',
+        #'victims_tags': 'victims_tags',
         'misconduct_type': 'misconduct_type',
         'weapons_used': 'weapons_used',
         'outcome': 'outcome',
+        # mk
+        'latitude': 'Latitude',
+        'longitude': 'Longitude',
+        #'neighborhood': 'Neighborhood'
     }
 
     def get_slug(self):
@@ -59,11 +63,13 @@ class Case(BaseModel):
         result = []
 
         for officer in Officer.objects:
-            if self.case_number in officer.case_numbers:
-                result.append(officer)
+            if hasattr(officer, 'case_number'):
+                if self.case_number in officer.case_numbers:
+                    result.append(officer)
 
-        if len(result) < 2 and result[0].first == 'Unnamed' and result[0].last == 'Officers':
-            result = []
+        if len(result) < 2 and len(result) > 0:
+            if result[0].first == 'Unnamed' and result[0].last == 'Officers':
+                result = []
 
         return result
 
@@ -73,7 +79,7 @@ class Victims(BaseModel):
     type = 'victims'
 
     field_map = {
-        'timestamp': "Timestamp",
+        #'timestamp': "Timestamp",
         'case_number': "Case number",
         'victim_1': "Victim 1",
         'victim_1_race': "Victim 1 Race",
@@ -142,18 +148,26 @@ for filename, model in to_load.items():
     if filename in ['officers.json', 'cases.geocoded.boundaries.json']:
         model.objects = NonMappedModelList(filepath, model)
     else:
-        model.objects = ModelList(filepath, model, model.field_map)
+        try:
+            model.objects = ModelList(filepath, model, model.field_map)
+        except Exception,e:
+            import ipdb; ipdb.set_trace()
 
 # Do some heavy lifting up-front so this stuff gets stashed in memory
-for case in Case.objects:
-    case.payments = case.get_related(Payment)
-    case.officers = case.get_related_officers()
-    case.victims = case.get_related(Victims)
-    case.slug = case.get_slug()
+try:
+    for case in Case.objects:
+        case.payments = case.get_related(Payment)
+        case.officers = case.get_related_officers()
+        case.victims = case.get_related(Victims)
+        case.slug = case.get_slug()
 
-for officer in Officer.objects:
-    officer_payments = []
-    for case_no in officer.case_numbers:
-        officer_payments += Payment.objects.filter(case_number=case_no)
-    officer.total_payments = total_for_payments(officer_payments, False)
-    officer.slug = officer.get_slug()
+    for officer in Officer.objects:
+        officer_payments = []
+        for case_no in officer.case_numbers:
+            officer_payments += Payment.objects.filter(case_number=case_no)
+        officer.total_payments = total_for_payments(officer_payments, False)
+        officer.slug = officer.get_slug()
+except AttributeError:
+    """I think that this means that the initial data was empty"""
+    print( "If this is your first time running get_data.py, ignore this error." )
+    print( "If this is not, something has gone wrong in the case and officer objects." )

@@ -30,8 +30,10 @@ S3_BUCKETS = {
     # Provide target -> s3 url pairs, such as:
     #     "mytarget": "mys3url.bucket.url/some/path"
     # then use tarbell publish mytarget to publish to it
-    "production": "projects.chicagoreporter.com/settlements",
-    "staging": "stage-apps.inn.org/settlements",
+    #"production": "projects.chicagoreporter.com/settlements",
+    "production": "",
+    #"staging": "stage-apps.inn.org/settlements",
+    "staging": "projects.chicagoreporter.com/sandbox"
 }
 
 import sys
@@ -57,4 +59,7 @@ def app_setup(site, output_root, extra_context):
             yield 'cpd_settlements.case', {'slug': case.slug}
 
     site.app.config['FREEZER_IGNORE_404_NOT_FOUND'] = True
-    site.project.DEFAULT_CONTEXT['ROOT_URL'] = extra_context['ROOT_URL']
+    try:
+        site.project.DEFAULT_CONTEXT['ROOT_URL'] = extra_context['ROOT_URL']
+    except Exception, e:
+        import ipdb; ipdb.set_trace()

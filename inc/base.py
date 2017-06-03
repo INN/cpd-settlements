@@ -79,8 +79,16 @@ class BaseModel(dict):
         """
         # Make sure both objects have the attribute we're looking for.
         # Raises an exception if one model is missing the attribute we're looking to match on.
-        getattr(self, attribute)
-        getattr(model.objects[0], attribute)
+        try:
+            getattr(self, attribute)
+            getattr(model.objects[0], attribute)
+        except IndexError:
+            if len(model.objects) == 0:
+                # awful hard to compare if there are no objects yet?
+                pass
+            else:
+                print( u'This is the attribute we look to match on: ' + attribute )
+                raise IndexError( u'One of the models is missing the attribute we\'re looking to match on.' )
 
         result = model.objects.filter(**{attribute: getattr(self, attribute)})
         return result
