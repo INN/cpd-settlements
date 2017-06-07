@@ -57,7 +57,7 @@ def render_cases_json():
 
         cases.append(case_dict)
 
-    with open('assets/data/cases.js', 'w+') as f:
+    with open('assets/data/cases.js', 'wb') as f:
         f.write("var cases_json = %s;" % json.dumps(cases))
 
 
