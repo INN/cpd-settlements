@@ -144,7 +144,7 @@ def context_processor():
             '/assets/cpd_settlements/images/02-IMG_9158.jpg'
         ),
         'opengraph_description': (
-            'Between 2012 and 2015, the City of Chicago paid $210 million '
+            'Between 2011 and 2016, the City of Chicago paid $280 million '
             'in settlements in police misconduct cases.'
         )
     }
