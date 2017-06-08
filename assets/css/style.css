@@ -1880,6 +1880,12 @@ body.not-nested {
   cursor: pointer;
   background-color: #df382e;
 }
+#muslim + label {
+  text-transform: capitalize;
+}
+.clickable.tag[data-val="muslim"] {
+  text-transform: capitalize;
+}
 /* ==========================================================================
 Media Queries
 ========================================================================== */

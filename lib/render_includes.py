@@ -37,10 +37,10 @@ def render_includes():
 
     for case in cases:
         try:
-            neighborhoods.index(case.neighborhood_id)
+            neighborhoods.index(case.neighborhood)
         except ValueError:
             if (case.neighborhood and case.neighborhood.strip() != ''):
-                neighborhoods.append(case.neighborhood_id)
+                neighborhoods.append(case.neighborhood)
         except AttributeError:
             pass
 
@@ -52,7 +52,7 @@ def render_includes():
         for category in tags.keys():
             category_vals_for_case = case.get(category)
 
-            for val in category_vals_for_case.split('|'):
+            for val in category_vals_for_case.replace(', ', '|').split('|'):
                 if val:
                     tags[category]['tags'].add(val)
 

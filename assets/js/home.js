@@ -1,6 +1,7 @@
 function loadText(){
 	// ID of the Google Spreadsheet
-	var spreadsheetID = "1z59WxmAKbePMXrAOQ3-bbcYlJfQUC95V1sRKM_m1WT0";
+	// var spreadsheetID = "1z59WxmAKbePMXrAOQ3-bbcYlJfQUC95V1sRKM_m1WT0"; // original
+	var spreadsheetID = "1wgAaqh2dPJHiqNx3TjW4EwxF8zaE_p_aHpn64tGAY4w";
 
 	// Make sure it is public or set to Anyone with link can view
 	var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";

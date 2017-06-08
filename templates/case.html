@@ -146,10 +146,10 @@ $(document).ready(function(){
 	var tag_html = "";
 	for (var i=0; i< tags.length; i++){
 		var tag = tags[i];
-		if (tag !== 'LGBT') {
-	      tag_html += "<span class='display-tag'>" + tag.toLowerCase() + "</span>";
-	    } else {
+		if ( (tag == 'LGBT') || (tag == 'Muslim') ) {
 	      tag_html += "<span class='display-tag'>" + tag + "</span>";
+	    } else {	      
+	      tag_html += "<span class='display-tag'>" + tag.toLowerCase() + "</span>";
 	    } 
 	}
 	tag_area.empty().html(tag_html);
