@@ -135,10 +135,10 @@ function split_tags(tags){
   var tag_html = "";
   for (var i=0; i< tags.length; i++){
     var tag = tags[i];
-    if (tag !== 'LGBT') {
-      tag_html += "<span class='display-tag'>" + tag.toLowerCase() + "</span>";
-    } else {
+    if ( (tag == 'LGBT') || (tag == 'Muslim') ) {
       tag_html += "<span class='display-tag'>" + tag + "</span>";
+    } else {
+      tag_html += "<span class='display-tag'>" + tag.toLowerCase() + "</span>";
     }    
   }
   return tag_html;
